@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2025-06-18)
+
+Full Changelog: [v0.1.4...v0.2.0](https://github.com/Klavis-AI/python-sdk/compare/v0.1.4...v0.2.0)
+
+### Features
+
+* **api:** update via SDK Studio ([ed74a2d](https://github.com/Klavis-AI/python-sdk/commit/ed74a2d12a0c3f543184047bd57f68ea6c8e2152))
+* **api:** update via SDK Studio ([413adec](https://github.com/Klavis-AI/python-sdk/commit/413adecc14d3491afe3df530a31d94ba3224594b))
+
 ## 0.1.4 (2025-06-18)
 
 Full Changelog: [v0.1.3...v0.1.4](https://github.com/Klavis-AI/python-sdk/compare/v0.1.3...v0.1.4)
