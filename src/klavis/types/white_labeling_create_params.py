@@ -34,7 +34,6 @@ class WhiteLabelingCreateParams(TypedDict, total=False):
             "Linear",
             "Asana",
             "Close",
-            "ClickUp",
         ]
     ]
     """Optional. The name of the server"""
