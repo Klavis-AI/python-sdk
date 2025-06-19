@@ -1,12 +1,9 @@
-# Klavis Python API library
+# Klavis Python Library
 
-[![PyPI version](<https://img.shields.io/pypi/v/klavis.svg?label=pypi%20(stable)>)](https://pypi.org/project/klavis/)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FKlavis-AI%2Fpython-sdk)
+[![pypi](https://img.shields.io/pypi/v/klavis)](https://pypi.python.org/pypi/klavis)
 
-The Klavis Python library provides convenient access to the Klavis REST API from any Python 3.8+
-application. The library includes type definitions for all request params and response fields,
-and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
-
-It is generated with [Stainless](https://www.stainless.com/).
+The Klavis Python library provides convenient access to the Klavis API from Python.
 
 ## Documentation
 
@@ -15,34 +12,28 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from PyPI
 pip install klavis
 ```
 
+## Reference
+
+A full reference for this library is available [here](https://github.com/Klavis-AI/python-sdk/blob/HEAD/./reference.md).
+
 ## Usage
 
-The full API of this library can be found in [api.md](api.md).
+Instantiate and use the client with the following:
 
 ```python
-import os
 from klavis import Klavis
 
 client = Klavis(
-    api_key=os.environ.get("KLAVIS_API_KEY"),  # This is the default and can be omitted
+    token="YOUR_TOKEN",
 )
-
-instance = client.mcp_server.instance.create(
-    platform_name="x",
-    server_name="Markdown2doc",
-    user_id="x",
+client.mcp_server.call_server_tool(
+    server_url="serverUrl",
+    tool_name="toolName",
 )
-print(instance.instance_id)
 ```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `KLAVIS_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -182,151 +173,130 @@ On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
 
+## Async Client
+
+The SDK also exports an `async` client so that you can make non-blocking calls to our API.
+
+```python
+import asyncio
+
+from klavis import AsyncKlavis
+
+client = AsyncKlavis(
+    token="YOUR_TOKEN",
+)
+
+
+async def main() -> None:
+    await client.mcp_server.call_server_tool(
+        server_url="serverUrl",
+        tool_name="toolName",
+    )
+
+
+asyncio.run(main())
+```
+
+## Exception Handling
+
+When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
+will be thrown.
+
+```python
+from klavis.core.api_error import ApiError
+
+try:
+    client.mcp_server.call_server_tool(...)
+except ApiError as e:
+    print(e.status_code)
+    print(e.body)
+```
+
 ## Advanced
 
-### Logging
+### Access Raw Response Data
 
-We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
+The SDK provides access to raw response data, including headers, through the `.with_raw_response` property.
+The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
 
-You can enable logging by setting the environment variable `KLAVIS_LOG` to `info`.
-
-```shell
-$ export KLAVIS_LOG=info
-```
-
-Or to `debug` for more verbose logging.
-
-### How to tell whether `None` means `null` or missing
-
-In an API response, a field may be explicitly `null`, or missing entirely; in either case, its value is `None` in this library. You can differentiate the two cases with `.model_fields_set`:
-
-```py
-if response.my_field is None:
-  if 'my_field' not in response.model_fields_set:
-    print('Got json like {}, without a "my_field" key present at all.')
-  else:
-    print('Got json like {"my_field": null}.')
-```
-
-### Accessing raw response data (e.g. headers)
-
-The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
-
-```py
+```python
 from klavis import Klavis
 
-client = Klavis()
-response = client.mcp_server.instance.with_raw_response.create(
-    platform_name="x",
-    server_name="Markdown2doc",
-    user_id="x",
+client = Klavis(
+    ...,
 )
-print(response.headers.get('X-My-Header'))
-
-instance = response.parse()  # get the object that `mcp_server.instance.create()` would have returned
-print(instance.instance_id)
+response = client.mcp_server.with_raw_response.call_server_tool(...)
+print(response.headers)  # access the response headers
+print(response.data)  # access the underlying object
 ```
 
-These methods return an [`APIResponse`](https://github.com/Klavis-AI/python-sdk/tree/main/src/klavis/_response.py) object.
+### Retries
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/Klavis-AI/python-sdk/tree/main/src/klavis/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
 
-#### `.with_streaming_response`
+A request is deemed retryable when any of the following HTTP status codes is returned:
 
-The above interface eagerly reads the full response body when you make the request, which may not always be what you want.
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
 
-To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
+Use the `max_retries` request option to configure this behavior.
 
 ```python
-with client.mcp_server.instance.with_streaming_response.create(
-    platform_name="x",
-    server_name="Markdown2doc",
-    user_id="x",
-) as response:
-    print(response.headers.get("X-My-Header"))
-
-    for line in response.iter_lines():
-        print(line)
+client.mcp_server.call_server_tool(..., request_options={
+    "max_retries": 1
+})
 ```
 
-The context manager is required so that the response will reliably be closed.
+### Timeouts
 
-### Making custom/undocumented requests
-
-This library is typed for convenient access to the documented API.
-
-If you need to access undocumented endpoints, params, or response properties, the library can still be used.
-
-#### Undocumented endpoints
-
-To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
-http verbs. Options on the client will be respected (such as retries) when making this request.
-
-```py
-import httpx
-
-response = client.post(
-    "/foo",
-    cast_to=httpx.Response,
-    body={"my_param": True},
-)
-
-print(response.headers.get("x-foo"))
-```
-
-#### Undocumented request params
-
-If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request
-options.
-
-#### Undocumented response properties
-
-To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You
-can also get all the extra fields on the Pydantic model as a dict with
-[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).
-
-### Configuring the HTTP client
-
-You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
-
-- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)
-- Custom [transports](https://www.python-httpx.org/advanced/transports/)
-- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
+The SDK defaults to a 60 second timeout. You can configure this with a timeout option at the client or request level.
 
 ```python
-import httpx
-from klavis import Klavis, DefaultHttpxClient
+
+from klavis import Klavis
 
 client = Klavis(
-    # Or use the `KLAVIS_BASE_URL` env var
-    base_url="http://my.test.server.example.com:8083",
-    http_client=DefaultHttpxClient(
-        proxy="http://my.test.proxy.example.com",
+    ...,
+    timeout=20.0,
+)
+
+
+# Override timeout for a specific method
+client.mcp_server.call_server_tool(..., request_options={
+    "timeout_in_seconds": 1
+})
+```
+
+### Custom Client
+
+You can override the `httpx` client to customize it for your use-case. Some common use-cases include support for proxies
+and transports.
+
+```python
+import httpx
+from klavis import Klavis
+
+client = Klavis(
+    ...,
+    httpx_client=httpx.Client(
+        proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
 )
 ```
 
-You can also customize the client on a per-request basis by using `with_options()`:
+## Contributing
 
-```python
-client.with_options(http_client=DefaultHttpxClient(...))
-```
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
 
-### Managing HTTP resources
-
-By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
-
-```py
-from klavis import Klavis
-
-with Klavis() as client:
-  # make requests here
-  ...
-
-# HTTP client is now closed
-```
-
+On the other hand, contributions to the README are always very welcome!
 ## Versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
@@ -354,6 +324,3 @@ print(klavis.__version__)
 
 Python 3.8 or higher.
 
-## Contributing
-
-See [the contributing documentation](./CONTRIBUTING.md).
