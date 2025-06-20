@@ -73,7 +73,7 @@ class SalesforceOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.salesforce_oauth.authorize_salesforce(
             instance_id="instance_id",
@@ -128,7 +128,7 @@ class SalesforceOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.salesforce_oauth.salesforce_o_auth_callback()
         """
@@ -167,7 +167,7 @@ class SalesforceOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.salesforce_oauth.refresh_salesforce_token(
             instance_id="instance_id",
@@ -244,7 +244,7 @@ class AsyncSalesforceOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -307,7 +307,7 @@ class AsyncSalesforceOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -354,7 +354,7 @@ class AsyncSalesforceOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

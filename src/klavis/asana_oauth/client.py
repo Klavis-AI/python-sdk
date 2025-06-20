@@ -68,7 +68,7 @@ class AsanaOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.asana_oauth.authorize_asana(
             instance_id="instance_id",
@@ -118,7 +118,7 @@ class AsanaOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.asana_oauth.asana_o_auth_callback()
         """
@@ -157,7 +157,7 @@ class AsanaOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.asana_oauth.refresh_asana_token(
             instance_id="instance_id",
@@ -229,7 +229,7 @@ class AsyncAsanaOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -287,7 +287,7 @@ class AsyncAsanaOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -334,7 +334,7 @@ class AsyncAsanaOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

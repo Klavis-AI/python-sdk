@@ -30,7 +30,7 @@ while preserving all original query parameters
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.redirect_to_jira_callback_redirect_get()
 
@@ -92,7 +92,7 @@ Under the hood, Klavis will instantiates an MCP client and establishes a connect
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.call_server_tool(
     server_url="serverUrl",
@@ -191,7 +191,7 @@ with the remote MCP server to retrieve available tools.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.list_server_tools(
     server_url="serverUrl",
@@ -262,6 +262,7 @@ client.mcp_server.list_server_tools(
 Creates a URL for a specified MCP server,
 validating the request with an API key and user details.
 Returns the existing server URL if it already exists for the user.
+If OAuth is configured for the server, also returns the base OAuth authorization URL.
 </dd>
 </dl>
 </dd>
@@ -279,7 +280,7 @@ Returns the existing server URL if it already exists for the user.
 from klavis import Klavis, McpServerName
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.create_server_instance(
     server_name=McpServerName.MARKDOWN2DOC,
@@ -376,7 +377,7 @@ returning server details like authentication status and associated server/platfo
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_server_instance(
     instance_id="instance_id",
@@ -446,7 +447,7 @@ Deletes authentication metadata for a specific server connection instance.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_instance_auth(
     instance_id="instance_id",
@@ -517,7 +518,7 @@ deleting all associated data from the system.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_server_instance(
     instance_id="instance_id",
@@ -588,7 +589,7 @@ Mainly used for querying metadata about the MCP server.
 from klavis import Klavis, McpServerName
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_server_tools(
     server_name=McpServerName.MARKDOWN2DOC,
@@ -658,7 +659,7 @@ Get all MCP servers with their basic information including id, name, description
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_all_mcp_servers()
 
@@ -719,7 +720,7 @@ This updates the auth_metadata for the specified instance.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.set_instance_auth_token(
     instance_id="instanceId",
@@ -799,7 +800,7 @@ Returns the complete OAuth URL with the instance ID as a query parameter.
 from klavis import Klavis, McpServerName
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_o_auth_url(
     server_name=McpServerName.MARKDOWN2DOC,
@@ -903,7 +904,7 @@ Saves OAuth white labeling information, or updates existing information if the `
 from klavis import Klavis, OAuthServerName
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.white_labeling.create_white_labeling(
     client_id="client_id",
@@ -1007,7 +1008,7 @@ Retrieves white labeling information for a specific OAuth client ID.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.white_labeling.get_white_labeling_by_client_id(
     client_id="client_id",
@@ -1078,7 +1079,7 @@ Get all MCP server instances information by user ID and platform name.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.user.get_server_instances_by_user(
     user_id="user_id",
@@ -1165,7 +1166,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.slack_oauth.authorize_slack(
     instance_id="instance_id",
@@ -1267,7 +1268,7 @@ Handles the callback from Slack OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.slack_oauth.slack_o_auth_callback()
 
@@ -1358,7 +1359,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.github_oauth.authorize_github(
     instance_id="instance_id",
@@ -1452,7 +1453,7 @@ Handles the callback from GitHub OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.github_oauth.github_o_auth_callback()
 
@@ -1550,7 +1551,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.supabase_oauth.authorize_supabase(
     instance_id="instance_id",
@@ -1636,7 +1637,7 @@ Handles the callback from Supabase OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.supabase_oauth.supabase_o_auth_callback()
 
@@ -1734,7 +1735,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.supabase_oauth.refresh_supabase_token(
     instance_id="instance_id",
@@ -1811,7 +1812,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.notion_oauth.authorize_notion(
     instance_id="instance_id",
@@ -1905,7 +1906,7 @@ Handles the callback from Notion OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.notion_oauth.notion_o_auth_callback()
 
@@ -1996,7 +1997,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.jira_oauth.authorize_jira(
     instance_id="instance_id",
@@ -2090,7 +2091,7 @@ Handles the callback from Jira OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.jira_oauth.jira_o_auth_callback()
 
@@ -2188,7 +2189,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.jira_oauth.refresh_jira_token(
     instance_id="instance_id",
@@ -2265,7 +2266,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.confluence_oauth.authorize_confluence(
     instance_id="instance_id",
@@ -2359,7 +2360,7 @@ Handles the callback from Confluence OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.confluence_oauth.confluence_o_auth_callback()
 
@@ -2457,7 +2458,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.confluence_oauth.refresh_confluence_token(
     instance_id="instance_id",
@@ -2534,7 +2535,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.wordpress_oauth.authorize_wordpress(
     instance_id="instance_id",
@@ -2628,7 +2629,7 @@ Handles the callback from WordPress OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.wordpress_oauth.wordpress_o_auth_callback()
 
@@ -2727,7 +2728,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gmail_oauth.authorize_gmail(
     instance_id="instance_id",
@@ -2821,7 +2822,7 @@ Handles the callback from Gmail OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gmail_oauth.gmail_o_auth_callback()
 
@@ -2919,7 +2920,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gmail_oauth.refresh_gmail_token(
     instance_id="instance_id",
@@ -2996,7 +2997,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdrive_oauth.authorize_g_drive(
     instance_id="instance_id",
@@ -3090,7 +3091,7 @@ Handles the callback from Google Drive OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdrive_oauth.gdrive_o_auth_callback()
 
@@ -3188,7 +3189,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdrive_oauth.refresh_gdrive_token(
     instance_id="instance_id",
@@ -3258,7 +3259,7 @@ Serve the Google Drive picker page with the appropriate credentials
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdrive_oauth.gdrive_picker_page()
 
@@ -3349,7 +3350,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gcalendar_oauth.authorize_g_calendar(
     instance_id="instance_id",
@@ -3443,7 +3444,7 @@ Handles the callback from Google Calendar OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gcalendar_oauth.gcalendar_o_auth_callback()
 
@@ -3541,7 +3542,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gcalendar_oauth.refresh_gcalendar_token(
     instance_id="instance_id",
@@ -3618,7 +3619,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gsheets_oauth.authorize_g_sheets(
     instance_id="instance_id",
@@ -3712,7 +3713,7 @@ Handles the callback from Google Sheets OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gsheets_oauth.gsheets_o_auth_callback()
 
@@ -3810,7 +3811,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gsheets_oauth.refresh_gsheets_token(
     instance_id="instance_id",
@@ -3887,7 +3888,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdocs_oauth.authorize_g_docs(
     instance_id="instance_id",
@@ -3981,7 +3982,7 @@ Handles the callback from Google Docs OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdocs_oauth.gdocs_o_auth_callback()
 
@@ -4079,7 +4080,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.gdocs_oauth.refresh_gdocs_token(
     instance_id="instance_id",
@@ -4155,7 +4156,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.attio_oauth.authorize_attio(
     instance_id="instance_id",
@@ -4241,7 +4242,7 @@ Handles the callback from Attio OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.attio_oauth.attio_o_auth_callback()
 
@@ -4341,7 +4342,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.salesforce_oauth.authorize_salesforce(
     instance_id="instance_id",
@@ -4443,7 +4444,7 @@ Handles the callback from Salesforce OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.salesforce_oauth.salesforce_o_auth_callback()
 
@@ -4541,7 +4542,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.salesforce_oauth.refresh_salesforce_token(
     instance_id="instance_id",
@@ -4618,7 +4619,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.asana_oauth.authorize_asana(
     instance_id="instance_id",
@@ -4712,7 +4713,7 @@ Handles the callback from Asana OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.asana_oauth.asana_o_auth_callback()
 
@@ -4802,7 +4803,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.asana_oauth.refresh_asana_token(
     instance_id="instance_id",
@@ -4879,7 +4880,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.linear_oauth.authorize_linear(
     instance_id="instance_id",
@@ -4973,7 +4974,7 @@ Handles the callback from Linear OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.linear_oauth.linear_o_auth_callback()
 
@@ -5072,7 +5073,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.close_oauth.authorize_close(
     instance_id="instance_id",
@@ -5166,7 +5167,7 @@ Handles the callback from Close OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.close_oauth.close_o_auth_callback()
 
@@ -5256,7 +5257,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.close_oauth.refresh_close_token(
     instance_id="instance_id",
@@ -5332,7 +5333,7 @@ Returns:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.close_oauth.revoke_close_token(
     instance_id="instance_id",
@@ -5408,7 +5409,7 @@ Parameters:
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.clickup_oauth.authorize_click_up(
     instance_id="instance_id",
@@ -5494,7 +5495,7 @@ Handles the callback from ClickUp OAuth authorization.
 from klavis import Klavis
 
 client = Klavis(
-    token="YOUR_TOKEN",
+    api_key="YOUR_API_KEY",
 )
 client.clickup_oauth.click_up_o_auth_callback()
 

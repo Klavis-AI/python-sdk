@@ -48,7 +48,7 @@ class Klavis:
 
 
 
-    token : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
+    api_key : str
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -63,7 +63,7 @@ class Klavis:
     from klavis import Klavis
 
     client = Klavis(
-        token="YOUR_TOKEN",
+        api_key="YOUR_API_KEY",
     )
     """
 
@@ -72,7 +72,7 @@ class Klavis:
         *,
         base_url: typing.Optional[str] = None,
         environment: KlavisEnvironment = KlavisEnvironment.DEFAULT,
-        token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
+        api_key: str,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -82,7 +82,7 @@ class Klavis:
         )
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
-            token=token,
+            api_key=api_key,
             httpx_client=httpx_client
             if httpx_client is not None
             else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -146,7 +146,7 @@ class Klavis:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.redirect_to_jira_callback_redirect_get()
         """
@@ -172,7 +172,7 @@ class AsyncKlavis:
 
 
 
-    token : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
+    api_key : str
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -187,7 +187,7 @@ class AsyncKlavis:
     from klavis import AsyncKlavis
 
     client = AsyncKlavis(
-        token="YOUR_TOKEN",
+        api_key="YOUR_API_KEY",
     )
     """
 
@@ -196,7 +196,7 @@ class AsyncKlavis:
         *,
         base_url: typing.Optional[str] = None,
         environment: KlavisEnvironment = KlavisEnvironment.DEFAULT,
-        token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
+        api_key: str,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -206,7 +206,7 @@ class AsyncKlavis:
         )
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
-            token=token,
+            api_key=api_key,
             httpx_client=httpx_client
             if httpx_client is not None
             else httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -272,7 +272,7 @@ class AsyncKlavis:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

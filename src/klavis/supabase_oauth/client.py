@@ -63,7 +63,7 @@ class SupabaseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.supabase_oauth.authorize_supabase(
             instance_id="instance_id",
@@ -113,7 +113,7 @@ class SupabaseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.supabase_oauth.supabase_o_auth_callback()
         """
@@ -152,7 +152,7 @@ class SupabaseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.supabase_oauth.refresh_supabase_token(
             instance_id="instance_id",
@@ -219,7 +219,7 @@ class AsyncSupabaseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -277,7 +277,7 @@ class AsyncSupabaseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -324,7 +324,7 @@ class AsyncSupabaseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

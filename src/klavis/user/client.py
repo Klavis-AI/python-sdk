@@ -50,7 +50,7 @@ class UserClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.user.get_server_instances_by_user(
             user_id="user_id",
@@ -107,7 +107,7 @@ class AsyncUserClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

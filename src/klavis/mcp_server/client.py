@@ -76,7 +76,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.call_server_tool(
             server_url="serverUrl",
@@ -131,7 +131,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.list_server_tools(
             server_url="serverUrl",
@@ -155,6 +155,7 @@ class McpServerClient:
         Creates a URL for a specified MCP server,
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
+        If OAuth is configured for the server, also returns the base OAuth authorization URL.
 
         Parameters
         ----------
@@ -183,7 +184,7 @@ class McpServerClient:
         from klavis import Klavis, McpServerName
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.create_server_instance(
             server_name=McpServerName.MARKDOWN2DOC,
@@ -225,7 +226,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_server_instance(
             instance_id="instance_id",
@@ -258,7 +259,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_instance_auth(
             instance_id="instance_id",
@@ -292,7 +293,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_server_instance(
             instance_id="instance_id",
@@ -326,7 +327,7 @@ class McpServerClient:
         from klavis import Klavis, McpServerName
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_server_tools(
             server_name=McpServerName.MARKDOWN2DOC,
@@ -354,7 +355,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_all_mcp_servers()
         """
@@ -389,7 +390,7 @@ class McpServerClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.set_instance_auth_token(
             instance_id="instanceId",
@@ -445,7 +446,7 @@ class McpServerClient:
         from klavis import Klavis, McpServerName
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_o_auth_url(
             server_name=McpServerName.MARKDOWN2DOC,
@@ -520,7 +521,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -583,7 +584,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -613,6 +614,7 @@ class AsyncMcpServerClient:
         Creates a URL for a specified MCP server,
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
+        If OAuth is configured for the server, also returns the base OAuth authorization URL.
 
         Parameters
         ----------
@@ -643,7 +645,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -693,7 +695,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -734,7 +736,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -776,7 +778,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -818,7 +820,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -856,7 +858,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -899,7 +901,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -963,7 +965,7 @@ class AsyncMcpServerClient:
         from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

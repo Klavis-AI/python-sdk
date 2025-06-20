@@ -67,7 +67,7 @@ class GithubOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.github_oauth.authorize_github(
             instance_id="instance_id",
@@ -121,7 +121,7 @@ class GithubOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.github_oauth.github_o_auth_callback()
         """
@@ -193,7 +193,7 @@ class AsyncGithubOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -255,7 +255,7 @@ class AsyncGithubOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

@@ -68,7 +68,7 @@ class CloseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.close_oauth.authorize_close(
             instance_id="instance_id",
@@ -118,7 +118,7 @@ class CloseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.close_oauth.close_o_auth_callback()
         """
@@ -157,7 +157,7 @@ class CloseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.close_oauth.refresh_close_token(
             instance_id="instance_id",
@@ -196,7 +196,7 @@ class CloseOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.close_oauth.revoke_close_token(
             instance_id="instance_id",
@@ -268,7 +268,7 @@ class AsyncCloseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -326,7 +326,7 @@ class AsyncCloseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -373,7 +373,7 @@ class AsyncCloseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -420,7 +420,7 @@ class AsyncCloseOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

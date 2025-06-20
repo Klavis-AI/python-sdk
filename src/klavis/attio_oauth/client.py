@@ -63,7 +63,7 @@ class AttioOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.attio_oauth.authorize_attio(
             instance_id="instance_id",
@@ -113,7 +113,7 @@ class AttioOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.attio_oauth.attio_o_auth_callback()
         """
@@ -180,7 +180,7 @@ class AsyncAttioOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -238,7 +238,7 @@ class AsyncAttioOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

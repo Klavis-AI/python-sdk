@@ -70,7 +70,7 @@ class WhiteLabelingClient:
         from klavis import Klavis, OAuthServerName
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.white_labeling.create_white_labeling(
             client_id="client_id",
@@ -111,7 +111,7 @@ class WhiteLabelingClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.white_labeling.get_white_labeling_by_client_id(
             client_id="client_id",
@@ -181,7 +181,7 @@ class AsyncWhiteLabelingClient:
         from klavis import AsyncKlavis, OAuthServerName
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -230,7 +230,7 @@ class AsyncWhiteLabelingClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

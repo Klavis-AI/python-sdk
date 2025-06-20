@@ -68,7 +68,7 @@ class NotionOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.notion_oauth.authorize_notion(
             instance_id="instance_id",
@@ -118,7 +118,7 @@ class NotionOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.notion_oauth.notion_o_auth_callback()
         """
@@ -190,7 +190,7 @@ class AsyncNotionOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -248,7 +248,7 @@ class AsyncNotionOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

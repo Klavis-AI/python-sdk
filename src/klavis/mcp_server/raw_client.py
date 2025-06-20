@@ -194,6 +194,7 @@ class RawMcpServerClient:
         Creates a URL for a specified MCP server,
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
+        If OAuth is configured for the server, also returns the base OAuth authorization URL.
 
         Parameters
         ----------
@@ -808,6 +809,7 @@ class AsyncRawMcpServerClient:
         Creates a URL for a specified MCP server,
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
+        If OAuth is configured for the server, also returns the base OAuth authorization URL.
 
         Parameters
         ----------

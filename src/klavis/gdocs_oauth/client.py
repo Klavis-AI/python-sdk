@@ -68,7 +68,7 @@ class GdocsOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdocs_oauth.authorize_g_docs(
             instance_id="instance_id",
@@ -122,7 +122,7 @@ class GdocsOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdocs_oauth.gdocs_o_auth_callback()
         """
@@ -161,7 +161,7 @@ class GdocsOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdocs_oauth.refresh_gdocs_token(
             instance_id="instance_id",
@@ -233,7 +233,7 @@ class AsyncGdocsOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -295,7 +295,7 @@ class AsyncGdocsOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -342,7 +342,7 @@ class AsyncGdocsOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

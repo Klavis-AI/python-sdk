@@ -68,7 +68,7 @@ class GdriveOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdrive_oauth.authorize_g_drive(
             instance_id="instance_id",
@@ -122,7 +122,7 @@ class GdriveOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdrive_oauth.gdrive_o_auth_callback()
         """
@@ -161,7 +161,7 @@ class GdriveOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdrive_oauth.refresh_gdrive_token(
             instance_id="instance_id",
@@ -205,7 +205,7 @@ class GdriveOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.gdrive_oauth.gdrive_picker_page()
         """
@@ -277,7 +277,7 @@ class AsyncGdriveOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -339,7 +339,7 @@ class AsyncGdriveOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -386,7 +386,7 @@ class AsyncGdriveOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -440,7 +440,7 @@ class AsyncGdriveOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

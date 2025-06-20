@@ -63,7 +63,7 @@ class ClickupOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.clickup_oauth.authorize_click_up(
             instance_id="instance_id",
@@ -113,7 +113,7 @@ class ClickupOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.clickup_oauth.click_up_o_auth_callback()
         """
@@ -180,7 +180,7 @@ class AsyncClickupOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -238,7 +238,7 @@ class AsyncClickupOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

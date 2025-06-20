@@ -68,7 +68,7 @@ class WordpressOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.wordpress_oauth.authorize_wordpress(
             instance_id="instance_id",
@@ -122,7 +122,7 @@ class WordpressOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.wordpress_oauth.wordpress_o_auth_callback()
         """
@@ -194,7 +194,7 @@ class AsyncWordpressOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -256,7 +256,7 @@ class AsyncWordpressOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

@@ -68,7 +68,7 @@ class LinearOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.linear_oauth.authorize_linear(
             instance_id="instance_id",
@@ -122,7 +122,7 @@ class LinearOauthClient:
         from klavis import Klavis
 
         client = Klavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
         client.linear_oauth.linear_o_auth_callback()
         """
@@ -194,7 +194,7 @@ class AsyncLinearOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 
@@ -256,7 +256,7 @@ class AsyncLinearOauthClient:
         from klavis import AsyncKlavis
 
         client = AsyncKlavis(
-            token="YOUR_TOKEN",
+            api_key="YOUR_API_KEY",
         )
 
 

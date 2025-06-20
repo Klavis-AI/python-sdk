@@ -19,6 +19,13 @@ class CreateServerResponse(UniversalBaseModel):
     The unique identifier for this specific server connection instance.
     """
 
+    oauth_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="oauthUrl")] = pydantic.Field(
+        default=None
+    )
+    """
+    The OAuth authorization URL for the specified server, if OAuth is configured.
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:
