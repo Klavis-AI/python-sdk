@@ -11,13 +11,13 @@ class McpServerName(str, enum.Enum):
     SLACK = "Slack"
     SUPABASE = "Supabase"
     POSTGRES = "Postgres"
-    YOU_TUBE = "YouTube"
+    YOUTUBE = "YouTube"
     DOC2MARKDOWN = "Doc2markdown"
     KLAVIS_REPORT_GEN = "Klavis ReportGen"
     RESEND = "Resend"
     DISCORD = "Discord"
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
-    GIT_HUB = "GitHub"
+    GITHUB = "GitHub"
     FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
     JIRA = "Jira"
     CONFLUENCE = "Confluence"
@@ -42,13 +42,13 @@ class McpServerName(str, enum.Enum):
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
-        you_tube: typing.Callable[[], T_Result],
+        youtube: typing.Callable[[], T_Result],
         doc2markdown: typing.Callable[[], T_Result],
         klavis_report_gen: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         discord: typing.Callable[[], T_Result],
         firecrawl_web_search: typing.Callable[[], T_Result],
-        git_hub: typing.Callable[[], T_Result],
+        github: typing.Callable[[], T_Result],
         firecrawl_deep_research: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         confluence: typing.Callable[[], T_Result],
@@ -75,8 +75,8 @@ class McpServerName(str, enum.Enum):
             return supabase()
         if self is McpServerName.POSTGRES:
             return postgres()
-        if self is McpServerName.YOU_TUBE:
-            return you_tube()
+        if self is McpServerName.YOUTUBE:
+            return youtube()
         if self is McpServerName.DOC2MARKDOWN:
             return doc2markdown()
         if self is McpServerName.KLAVIS_REPORT_GEN:
@@ -87,8 +87,8 @@ class McpServerName(str, enum.Enum):
             return discord()
         if self is McpServerName.FIRECRAWL_WEB_SEARCH:
             return firecrawl_web_search()
-        if self is McpServerName.GIT_HUB:
-            return git_hub()
+        if self is McpServerName.GITHUB:
+            return github()
         if self is McpServerName.FIRECRAWL_DEEP_RESEARCH:
             return firecrawl_deep_research()
         if self is McpServerName.JIRA:
