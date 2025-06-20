@@ -9,6 +9,7 @@ from ..types.connection_type import ConnectionType
 from ..types.create_server_response import CreateServerResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
+from ..types.get_o_auth_url_response import GetOAuthUrlResponse
 from ..types.get_tools_response import GetToolsResponse
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
@@ -397,6 +398,67 @@ class McpServerClient:
         """
         _response = self._raw_client.set_instance_auth_token(
             instance_id=instance_id, auth_token=auth_token, request_options=request_options
+        )
+        return _response.data
+
+    def get_o_auth_url(
+        self,
+        *,
+        server_name: McpServerName,
+        instance_id: str,
+        client_id: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        redirect_url: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetOAuthUrlResponse:
+        """
+        Gets the OAuth authorization URL for a specific MCP server and instance.
+        Returns the complete OAuth URL with the instance ID as a query parameter.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server.
+
+        instance_id : str
+            The unique identifier for the connection instance.
+
+        client_id : typing.Optional[str]
+            Optional client ID for white labeling. If not provided, will use default credentials.
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string).
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetOAuthUrlResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis, McpServerName
+
+        client = Klavis(
+            token="YOUR_TOKEN",
+        )
+        client.mcp_server.get_o_auth_url(
+            server_name=McpServerName.MARKDOWN2DOC,
+            instance_id="instanceId",
+        )
+        """
+        _response = self._raw_client.get_o_auth_url(
+            server_name=server_name,
+            instance_id=instance_id,
+            client_id=client_id,
+            scope=scope,
+            redirect_url=redirect_url,
+            request_options=request_options,
         )
         return _response.data
 
@@ -852,5 +914,74 @@ class AsyncMcpServerClient:
         """
         _response = await self._raw_client.set_instance_auth_token(
             instance_id=instance_id, auth_token=auth_token, request_options=request_options
+        )
+        return _response.data
+
+    async def get_o_auth_url(
+        self,
+        *,
+        server_name: McpServerName,
+        instance_id: str,
+        client_id: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        redirect_url: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetOAuthUrlResponse:
+        """
+        Gets the OAuth authorization URL for a specific MCP server and instance.
+        Returns the complete OAuth URL with the instance ID as a query parameter.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server.
+
+        instance_id : str
+            The unique identifier for the connection instance.
+
+        client_id : typing.Optional[str]
+            Optional client ID for white labeling. If not provided, will use default credentials.
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string).
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetOAuthUrlResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis, McpServerName
+
+        client = AsyncKlavis(
+            token="YOUR_TOKEN",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.get_o_auth_url(
+                server_name=McpServerName.MARKDOWN2DOC,
+                instance_id="instanceId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_o_auth_url(
+            server_name=server_name,
+            instance_id=instance_id,
+            client_id=client_id,
+            scope=scope,
+            redirect_url=redirect_url,
+            request_options=request_options,
         )
         return _response.data

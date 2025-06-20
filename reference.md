@@ -768,6 +768,110 @@ client.mcp_server.set_instance_auth_token(
 </dl>
 </details>
 
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_o_auth_url</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets the OAuth authorization URL for a specific MCP server and instance.
+Returns the complete OAuth URL with the instance ID as a query parameter.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis, McpServerName
+
+client = Klavis(
+    token="YOUR_TOKEN",
+)
+client.mcp_server.get_o_auth_url(
+    server_name=McpServerName.MARKDOWN2DOC,
+    instance_id="instanceId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**server_name:** `McpServerName` — The name of the target MCP server.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — The unique identifier for the connection instance.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Optional client ID for white labeling. If not provided, will use default credentials.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## WhiteLabeling
 <details><summary><code>client.white_labeling.<a href="src/klavis/white_labeling/client.py">create_white_labeling</a>(...)</code></summary>
 <dl>

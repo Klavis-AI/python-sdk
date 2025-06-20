@@ -35,6 +35,30 @@ client.mcp_server.call_server_tool(
 )
 ```
 
+## Async Client
+
+The SDK also exports an `async` client so that you can make non-blocking calls to our API.
+
+```python
+import asyncio
+
+from klavis import AsyncKlavis
+
+client = AsyncKlavis(
+    token="YOUR_TOKEN",
+)
+
+
+async def main() -> None:
+    await client.mcp_server.call_server_tool(
+        server_url="serverUrl",
+        tool_name="toolName",
+    )
+
+
+asyncio.run(main())
+```
+
 ## Async usage
 
 Simply import `AsyncKlavis` instead of `Klavis` and use `await` with each API call:
@@ -173,30 +197,6 @@ On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
 
-## Async Client
-
-The SDK also exports an `async` client so that you can make non-blocking calls to our API.
-
-```python
-import asyncio
-
-from klavis import AsyncKlavis
-
-client = AsyncKlavis(
-    token="YOUR_TOKEN",
-)
-
-
-async def main() -> None:
-    await client.mcp_server.call_server_tool(
-        server_url="serverUrl",
-        tool_name="toolName",
-    )
-
-
-asyncio.run(main())
-```
-
 ## Exception Handling
 
 When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
@@ -297,6 +297,15 @@ a proof of concept, but know that we will not be able to merge it as-is. We sugg
 an issue first to discuss with us!
 
 On the other hand, contributions to the README are always very welcome!
+## Contributing
+
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!
 ## Versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
@@ -319,8 +328,4 @@ You can determine the version that is being used at runtime with:
 import klavis
 print(klavis.__version__)
 ```
-
-## Requirements
-
-Python 3.8 or higher.
 

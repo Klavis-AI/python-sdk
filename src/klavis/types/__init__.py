@@ -27,6 +27,7 @@ from .g_sheets_o_auth_error_response import GSheetsOAuthErrorResponse
 from .g_sheets_o_auth_success_response import GSheetsOAuthSuccessResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
+from .get_o_auth_url_response import GetOAuthUrlResponse
 from .get_server_instances_response import GetServerInstancesResponse
 from .get_tools_response import GetToolsResponse
 from .git_hub_o_auth_error_response import GitHubOAuthErrorResponse
@@ -84,6 +85,7 @@ __all__ = [
     "GSheetsOAuthSuccessResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
+    "GetOAuthUrlResponse",
     "GetServerInstancesResponse",
     "GetToolsResponse",
     "GitHubOAuthErrorResponse",

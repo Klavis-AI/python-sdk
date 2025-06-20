@@ -15,6 +15,7 @@ from ..types.connection_type import ConnectionType
 from ..types.create_server_response import CreateServerResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
+from ..types.get_o_auth_url_response import GetOAuthUrlResponse
 from ..types.get_tools_response import GetToolsResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.list_tools_response import ListToolsResponse
@@ -558,6 +559,87 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def get_o_auth_url(
+        self,
+        *,
+        server_name: McpServerName,
+        instance_id: str,
+        client_id: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        redirect_url: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[GetOAuthUrlResponse]:
+        """
+        Gets the OAuth authorization URL for a specific MCP server and instance.
+        Returns the complete OAuth URL with the instance ID as a query parameter.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server.
+
+        instance_id : str
+            The unique identifier for the connection instance.
+
+        client_id : typing.Optional[str]
+            Optional client ID for white labeling. If not provided, will use default credentials.
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string).
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetOAuthUrlResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/oauth-url",
+            method="POST",
+            json={
+                "serverName": server_name,
+                "instanceId": instance_id,
+                "clientId": client_id,
+                "scope": scope,
+                "redirectUrl": redirect_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetOAuthUrlResponse,
+                    parse_obj_as(
+                        type_=GetOAuthUrlResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawMcpServerClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -1071,6 +1153,87 @@ class AsyncRawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_o_auth_url(
+        self,
+        *,
+        server_name: McpServerName,
+        instance_id: str,
+        client_id: typing.Optional[str] = OMIT,
+        scope: typing.Optional[str] = OMIT,
+        redirect_url: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[GetOAuthUrlResponse]:
+        """
+        Gets the OAuth authorization URL for a specific MCP server and instance.
+        Returns the complete OAuth URL with the instance ID as a query parameter.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server.
+
+        instance_id : str
+            The unique identifier for the connection instance.
+
+        client_id : typing.Optional[str]
+            Optional client ID for white labeling. If not provided, will use default credentials.
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string).
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetOAuthUrlResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/oauth-url",
+            method="POST",
+            json={
+                "serverName": server_name,
+                "instanceId": instance_id,
+                "clientId": client_id,
+                "scope": scope,
+                "redirectUrl": redirect_url,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetOAuthUrlResponse,
+                    parse_obj_as(
+                        type_=GetOAuthUrlResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
