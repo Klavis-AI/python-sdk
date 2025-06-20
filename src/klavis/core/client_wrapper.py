@@ -7,20 +7,34 @@ from .http_client import AsyncHttpClient, HttpClient
 
 
 class BaseClientWrapper:
-    def __init__(self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None):
-        self.api_key = api_key
+    def __init__(
+        self,
+        *,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+    ):
+        self._api_key = api_key
         self._base_url = base_url
         self._timeout = timeout
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "klavis/0.1.8",
+            "User-Agent": "klavis/0.1.9",
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "klavis",
-            "X-Fern-SDK-Version": "0.1.8",
+            "X-Fern-SDK-Version": "0.1.9",
         }
-        headers["Authorization"] = self.api_key
+        api_key = self._get_api_key()
+        if api_key is not None:
+            headers["Authorization"] = f"Bearer {api_key}"
         return headers
+
+    def _get_api_key(self) -> typing.Optional[str]:
+        if isinstance(self._api_key, str) or self._api_key is None:
+            return self._api_key
+        else:
+            return self._api_key()
 
     def get_base_url(self) -> str:
         return self._base_url
@@ -31,7 +45,12 @@ class BaseClientWrapper:
 
 class SyncClientWrapper(BaseClientWrapper):
     def __init__(
-        self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None, httpx_client: httpx.Client
+        self,
+        *,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+        httpx_client: httpx.Client,
     ):
         super().__init__(api_key=api_key, base_url=base_url, timeout=timeout)
         self.httpx_client = HttpClient(
@@ -44,7 +63,12 @@ class SyncClientWrapper(BaseClientWrapper):
 
 class AsyncClientWrapper(BaseClientWrapper):
     def __init__(
-        self, *, api_key: str, base_url: str, timeout: typing.Optional[float] = None, httpx_client: httpx.AsyncClient
+        self,
+        *,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
+        base_url: str,
+        timeout: typing.Optional[float] = None,
+        httpx_client: httpx.AsyncClient,
     ):
         super().__init__(api_key=api_key, base_url=base_url, timeout=timeout)
         self.httpx_client = AsyncHttpClient(

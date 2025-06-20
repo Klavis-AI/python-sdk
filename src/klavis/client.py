@@ -9,7 +9,6 @@ from .clickup_oauth.client import AsyncClickupOauthClient, ClickupOauthClient
 from .close_oauth.client import AsyncCloseOauthClient, CloseOauthClient
 from .confluence_oauth.client import AsyncConfluenceOauthClient, ConfluenceOauthClient
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .core.request_options import RequestOptions
 from .environment import KlavisEnvironment
 from .gcalendar_oauth.client import AsyncGcalendarOauthClient, GcalendarOauthClient
 from .gdocs_oauth.client import AsyncGdocsOauthClient, GdocsOauthClient
@@ -21,7 +20,6 @@ from .jira_oauth.client import AsyncJiraOauthClient, JiraOauthClient
 from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
 from .notion_oauth.client import AsyncNotionOauthClient, NotionOauthClient
-from .raw_client import AsyncRawKlavis, RawKlavis
 from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauthClient
 from .slack_oauth.client import AsyncSlackOauthClient, SlackOauthClient
 from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
@@ -48,7 +46,7 @@ class Klavis:
 
 
 
-    api_key : str
+    api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -72,7 +70,7 @@ class Klavis:
         *,
         base_url: typing.Optional[str] = None,
         environment: KlavisEnvironment = KlavisEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -90,7 +88,6 @@ class Klavis:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self._raw_client = RawKlavis(client_wrapper=self._client_wrapper)
         self.mcp_server = McpServerClient(client_wrapper=self._client_wrapper)
         self.white_labeling = WhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = UserClient(client_wrapper=self._client_wrapper)
@@ -113,46 +110,6 @@ class Klavis:
         self.close_oauth = CloseOauthClient(client_wrapper=self._client_wrapper)
         self.clickup_oauth = ClickupOauthClient(client_wrapper=self._client_wrapper)
 
-    @property
-    def with_raw_response(self) -> RawKlavis:
-        """
-        Retrieves a raw implementation of this client that returns raw responses.
-
-        Returns
-        -------
-        RawKlavis
-        """
-        return self._raw_client
-
-    def redirect_to_jira_callback_redirect_get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
-        """
-        Simple redirect endpoint that forwards to the Jira OAuth callback URL
-        while preserving all original query parameters
-
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.redirect_to_jira_callback_redirect_get()
-        """
-        _response = self._raw_client.redirect_to_jira_callback_redirect_get(request_options=request_options)
-        return _response.data
-
 
 class AsyncKlavis:
     """
@@ -172,7 +129,7 @@ class AsyncKlavis:
 
 
 
-    api_key : str
+    api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -196,7 +153,7 @@ class AsyncKlavis:
         *,
         base_url: typing.Optional[str] = None,
         environment: KlavisEnvironment = KlavisEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -214,7 +171,6 @@ class AsyncKlavis:
             else httpx.AsyncClient(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self._raw_client = AsyncRawKlavis(client_wrapper=self._client_wrapper)
         self.mcp_server = AsyncMcpServerClient(client_wrapper=self._client_wrapper)
         self.white_labeling = AsyncWhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = AsyncUserClient(client_wrapper=self._client_wrapper)
@@ -236,54 +192,6 @@ class AsyncKlavis:
         self.linear_oauth = AsyncLinearOauthClient(client_wrapper=self._client_wrapper)
         self.close_oauth = AsyncCloseOauthClient(client_wrapper=self._client_wrapper)
         self.clickup_oauth = AsyncClickupOauthClient(client_wrapper=self._client_wrapper)
-
-    @property
-    def with_raw_response(self) -> AsyncRawKlavis:
-        """
-        Retrieves a raw implementation of this client that returns raw responses.
-
-        Returns
-        -------
-        AsyncRawKlavis
-        """
-        return self._raw_client
-
-    async def redirect_to_jira_callback_redirect_get(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
-        """
-        Simple redirect endpoint that forwards to the Jira OAuth callback URL
-        while preserving all original query parameters
-
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.redirect_to_jira_callback_redirect_get()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.redirect_to_jira_callback_redirect_get(request_options=request_options)
-        return _response.data
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:
