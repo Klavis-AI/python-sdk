@@ -1,6 +1,6 @@
 # Reference
 ## McpServer
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">call_server_tool</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">call_tools</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -33,7 +33,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.call_server_tool(
+client.mcp_server.call_tools(
     server_url="serverUrl",
     tool_name="toolName",
 )
@@ -96,7 +96,7 @@ client.mcp_server.call_server_tool(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">list_server_tools</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">list_tools</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -132,7 +132,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.list_server_tools(
+client.mcp_server.list_tools(
     server_url="serverUrl",
 )
 
@@ -497,7 +497,7 @@ client.mcp_server.delete_server_instance(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_server_tools</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_tools</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -530,7 +530,7 @@ from klavis import Klavis, McpServerName
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_server_tools(
+client.mcp_server.get_tools(
     server_name=McpServerName.MARKDOWN2DOC,
 )
 

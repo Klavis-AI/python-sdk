@@ -25,7 +25,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.call_server_tool(
+client.mcp_server.call_tools(
     server_url="serverUrl",
     tool_name="toolName",
 )
@@ -46,7 +46,7 @@ client = AsyncKlavis(
 
 
 async def main() -> None:
-    await client.mcp_server.call_server_tool(
+    await client.mcp_server.call_tools(
         server_url="serverUrl",
         tool_name="toolName",
     )
@@ -64,7 +64,7 @@ will be thrown.
 from klavis.core.api_error import ApiError
 
 try:
-    client.mcp_server.call_server_tool(...)
+    client.mcp_server.call_tools(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -83,7 +83,7 @@ from klavis import Klavis
 client = Klavis(
     ...,
 )
-response = client.mcp_server.with_raw_response.call_server_tool(...)
+response = client.mcp_server.with_raw_response.call_tools(...)
 print(response.headers)  # access the response headers
 print(response.data)  # access the underlying object
 ```
@@ -103,7 +103,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.mcp_server.call_server_tool(..., request_options={
+client.mcp_server.call_tools(..., request_options={
     "max_retries": 1
 })
 ```
@@ -123,7 +123,7 @@ client = Klavis(
 
 
 # Override timeout for a specific method
-client.mcp_server.call_server_tool(..., request_options={
+client.mcp_server.call_tools(..., request_options={
     "timeout_in_seconds": 1
 })
 ```

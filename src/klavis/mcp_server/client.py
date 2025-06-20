@@ -36,7 +36,7 @@ class McpServerClient:
         """
         return self._raw_client
 
-    def call_server_tool(
+    def call_tools(
         self,
         *,
         server_url: str,
@@ -78,12 +78,12 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.call_server_tool(
+        client.mcp_server.call_tools(
             server_url="serverUrl",
             tool_name="toolName",
         )
         """
-        _response = self._raw_client.call_server_tool(
+        _response = self._raw_client.call_tools(
             server_url=server_url,
             tool_name=tool_name,
             tool_args=tool_args,
@@ -92,7 +92,7 @@ class McpServerClient:
         )
         return _response.data
 
-    def list_server_tools(
+    def list_tools(
         self,
         *,
         server_url: str,
@@ -133,11 +133,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.list_server_tools(
+        client.mcp_server.list_tools(
             server_url="serverUrl",
         )
         """
-        _response = self._raw_client.list_server_tools(
+        _response = self._raw_client.list_tools(
             server_url=server_url, connection_type=connection_type, format=format, request_options=request_options
         )
         return _response.data
@@ -302,7 +302,7 @@ class McpServerClient:
         _response = self._raw_client.delete_server_instance(instance_id, request_options=request_options)
         return _response.data
 
-    def get_server_tools(
+    def get_tools(
         self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetToolsResponse:
         """
@@ -329,11 +329,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_server_tools(
+        client.mcp_server.get_tools(
             server_name=McpServerName.MARKDOWN2DOC,
         )
         """
-        _response = self._raw_client.get_server_tools(server_name, request_options=request_options)
+        _response = self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
@@ -479,7 +479,7 @@ class AsyncMcpServerClient:
         """
         return self._raw_client
 
-    async def call_server_tool(
+    async def call_tools(
         self,
         *,
         server_url: str,
@@ -526,7 +526,7 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.call_server_tool(
+            await client.mcp_server.call_tools(
                 server_url="serverUrl",
                 tool_name="toolName",
             )
@@ -534,7 +534,7 @@ class AsyncMcpServerClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.call_server_tool(
+        _response = await self._raw_client.call_tools(
             server_url=server_url,
             tool_name=tool_name,
             tool_args=tool_args,
@@ -543,7 +543,7 @@ class AsyncMcpServerClient:
         )
         return _response.data
 
-    async def list_server_tools(
+    async def list_tools(
         self,
         *,
         server_url: str,
@@ -589,14 +589,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.list_server_tools(
+            await client.mcp_server.list_tools(
                 server_url="serverUrl",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list_server_tools(
+        _response = await self._raw_client.list_tools(
             server_url=server_url, connection_type=connection_type, format=format, request_options=request_options
         )
         return _response.data
@@ -793,7 +793,7 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.delete_server_instance(instance_id, request_options=request_options)
         return _response.data
 
-    async def get_server_tools(
+    async def get_tools(
         self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetToolsResponse:
         """
@@ -825,14 +825,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_server_tools(
+            await client.mcp_server.get_tools(
                 server_name=McpServerName.MARKDOWN2DOC,
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_server_tools(server_name, request_options=request_options)
+        _response = await self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     async def get_all_mcp_servers(

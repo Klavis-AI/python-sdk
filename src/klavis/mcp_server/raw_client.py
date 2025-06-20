@@ -31,7 +31,7 @@ class RawMcpServerClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def call_server_tool(
+    def call_tools(
         self,
         *,
         server_url: str,
@@ -107,7 +107,7 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def list_server_tools(
+    def list_tools(
         self,
         *,
         server_url: str,
@@ -411,7 +411,7 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_server_tools(
+    def get_tools(
         self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetToolsResponse]:
         """
@@ -646,7 +646,7 @@ class AsyncRawMcpServerClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def call_server_tool(
+    async def call_tools(
         self,
         *,
         server_url: str,
@@ -722,7 +722,7 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def list_server_tools(
+    async def list_tools(
         self,
         *,
         server_url: str,
@@ -1026,7 +1026,7 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_server_tools(
+    async def get_tools(
         self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetToolsResponse]:
         """
