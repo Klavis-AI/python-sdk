@@ -56,7 +56,7 @@ class RawMcpServerClient:
             The input parameters for the tool
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -128,7 +128,7 @@ class RawMcpServerClient:
             The full URL for connecting to the MCP server
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -208,7 +208,7 @@ class RawMcpServerClient:
             The name of the platform associated with the user.
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -671,7 +671,7 @@ class AsyncRawMcpServerClient:
             The input parameters for the tool
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -743,7 +743,7 @@ class AsyncRawMcpServerClient:
             The full URL for connecting to the MCP server
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -823,7 +823,7 @@ class AsyncRawMcpServerClient:
             The name of the platform associated with the user.
 
         connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is SSE.
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

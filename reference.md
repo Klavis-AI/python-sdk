@@ -76,7 +76,7 @@ client.mcp_server.call_tools(
 <dl>
 <dd>
 
-**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is SSE.
+**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
     
 </dd>
 </dl>
@@ -158,7 +158,7 @@ client.mcp_server.list_tools(
 <dl>
 <dd>
 
-**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is SSE.
+**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
     
 </dd>
 </dl>
@@ -265,7 +265,7 @@ client.mcp_server.create_server_instance(
 <dl>
 <dd>
 
-**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is SSE.
+**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
     
 </dd>
 </dl>
