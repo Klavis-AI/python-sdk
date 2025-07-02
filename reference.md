@@ -222,7 +222,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.create_server_instance(
-    server_name=McpServerName.MARKDOWN2DOC,
+    server_name=McpServerName.AFFINITY,
     user_id="userId",
     platform_name="platformName",
 )
@@ -531,7 +531,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_tools(
-    server_name=McpServerName.MARKDOWN2DOC,
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -742,7 +742,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_o_auth_url(
-    server_name=McpServerName.MARKDOWN2DOC,
+    server_name=McpServerName.AFFINITY,
     instance_id="instanceId",
 )
 
@@ -848,7 +848,7 @@ client = Klavis(
 client.white_labeling.create_white_labeling(
     client_id="client_id",
     client_secret="client_secret",
-    server_name=OAuthServerName.SLACK,
+    server_name=OAuthServerName.AIRTABLE,
 )
 
 ```
@@ -5477,6 +5477,544 @@ client.clickup_oauth.click_up_o_auth_callback()
 <dd>
 
 **error_description:** `typing.Optional[str]` — Detailed error description from ClickUp, if any
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AirtableOauth
+<details><summary><code>client.airtable_oauth.<a href="src/klavis/airtable_oauth/client.py">authorize_airtable</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Airtable OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (space-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.airtable_oauth.authorize_airtable(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.airtable_oauth.<a href="src/klavis/airtable_oauth/client.py">airtable_o_auth_callback</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handles the callback from Airtable OAuth authorization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.airtable_oauth.airtable_o_auth_callback()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `typing.Optional[str]` — Authorization code returned by Airtable
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `typing.Optional[str]` — State parameter containing encoded authorization data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**error:** `typing.Optional[str]` — Error code returned by Airtable, if any
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**error_description:** `typing.Optional[str]` — Detailed error description from Airtable, if any
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.airtable_oauth.<a href="src/klavis/airtable_oauth/client.py">refresh_airtable_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Refresh an expired Airtable access token using the stored refresh token
+
+Parameters:
+- instance_id: Identifier for the instance requesting token refresh
+
+Returns:
+- Success response if token was refreshed successfully, error response otherwise
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.airtable_oauth.refresh_airtable_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting token refresh
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## HubspotOauth
+<details><summary><code>client.hubspot_oauth.<a href="src/klavis/hubspot_oauth/client.py">authorize_hubspot</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start HubSpot OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (space-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.hubspot_oauth.authorize_hubspot(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.hubspot_oauth.<a href="src/klavis/hubspot_oauth/client.py">hubspot_o_auth_callback</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Handles the callback from HubSpot OAuth authorization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.hubspot_oauth.hubspot_o_auth_callback()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `typing.Optional[str]` — Authorization code returned by HubSpot
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `typing.Optional[str]` — State parameter containing encoded authorization data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**error:** `typing.Optional[str]` — Error code returned by HubSpot, if any
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**error_description:** `typing.Optional[str]` — Detailed error description from HubSpot, if any
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.hubspot_oauth.<a href="src/klavis/hubspot_oauth/client.py">refresh_hubspot_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Refresh an expired HubSpot access token using the stored refresh token
+
+Parameters:
+- instance_id: Identifier for the instance requesting token refresh
+
+Returns:
+- Success response if token was refreshed successfully, error response otherwise
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.hubspot_oauth.refresh_hubspot_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting token refresh
     
 </dd>
 </dl>

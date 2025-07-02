@@ -75,7 +75,7 @@ class WhiteLabelingClient:
         client.white_labeling.create_white_labeling(
             client_id="client_id",
             client_secret="client_secret",
-            server_name=OAuthServerName.SLACK,
+            server_name=OAuthServerName.AIRTABLE,
         )
         """
         _response = self._raw_client.create_white_labeling(
@@ -189,7 +189,7 @@ class AsyncWhiteLabelingClient:
             await client.white_labeling.create_white_labeling(
                 client_id="client_id",
                 client_secret="client_secret",
-                server_name=OAuthServerName.SLACK,
+                server_name=OAuthServerName.AIRTABLE,
             )
 
 

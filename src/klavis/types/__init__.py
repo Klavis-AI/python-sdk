@@ -2,6 +2,8 @@
 
 # isort: skip_file
 
+from .airtable_o_auth_error_response import AirtableOAuthErrorResponse
+from .airtable_o_auth_success_response import AirtableOAuthSuccessResponse
 from .asana_o_auth_error_response import AsanaOAuthErrorResponse
 from .asana_o_auth_success_response import AsanaOAuthSuccessResponse
 from .attio_o_auth_error_response import AttioOAuthErrorResponse
@@ -34,6 +36,8 @@ from .git_hub_o_auth_error_response import GitHubOAuthErrorResponse
 from .gmail_o_auth_error_response import GmailOAuthErrorResponse
 from .gmail_o_auth_success_response import GmailOAuthSuccessResponse
 from .http_validation_error import HttpValidationError
+from .hub_spot_o_auth_error_response import HubSpotOAuthErrorResponse
+from .hub_spot_o_auth_success_response import HubSpotOAuthSuccessResponse
 from .jira_o_auth_error_response import JiraOAuthErrorResponse
 from .jira_o_auth_success_response import JiraOAuthSuccessResponse
 from .linear_o_auth_error_response import LinearOAuthErrorResponse
@@ -60,6 +64,8 @@ from .word_press_o_auth_error_response import WordPressOAuthErrorResponse
 from .word_press_o_auth_success_response import WordPressOAuthSuccessResponse
 
 __all__ = [
+    "AirtableOAuthErrorResponse",
+    "AirtableOAuthSuccessResponse",
     "AsanaOAuthErrorResponse",
     "AsanaOAuthSuccessResponse",
     "AttioOAuthErrorResponse",
@@ -92,6 +98,8 @@ __all__ = [
     "GmailOAuthErrorResponse",
     "GmailOAuthSuccessResponse",
     "HttpValidationError",
+    "HubSpotOAuthErrorResponse",
+    "HubSpotOAuthSuccessResponse",
     "JiraOAuthErrorResponse",
     "JiraOAuthSuccessResponse",
     "LinearOAuthErrorResponse",

@@ -187,7 +187,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.create_server_instance(
-            server_name=McpServerName.MARKDOWN2DOC,
+            server_name=McpServerName.AFFINITY,
             user_id="userId",
             platform_name="platformName",
         )
@@ -330,7 +330,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_tools(
-            server_name=McpServerName.MARKDOWN2DOC,
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.get_tools(server_name, request_options=request_options)
@@ -449,7 +449,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_o_auth_url(
-            server_name=McpServerName.MARKDOWN2DOC,
+            server_name=McpServerName.AFFINITY,
             instance_id="instanceId",
         )
         """
@@ -651,7 +651,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.create_server_instance(
-                server_name=McpServerName.MARKDOWN2DOC,
+                server_name=McpServerName.AFFINITY,
                 user_id="userId",
                 platform_name="platformName",
             )
@@ -826,7 +826,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_tools(
-                server_name=McpServerName.MARKDOWN2DOC,
+                server_name=McpServerName.AFFINITY,
             )
 
 
@@ -971,7 +971,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_o_auth_url(
-                server_name=McpServerName.MARKDOWN2DOC,
+                server_name=McpServerName.AFFINITY,
                 instance_id="instanceId",
             )
 

@@ -7,79 +7,87 @@ T_Result = typing.TypeVar("T_Result")
 
 
 class OAuthServerName(str, enum.Enum):
+    AIRTABLE = "Airtable"
+    ASANA = "Asana"
+    ATTIO = "Attio"
+    CLICK_UP = "ClickUp"
+    CLOSE = "Close"
+    CONFLUENCE = "Confluence"
+    GIT_HUB = "GitHub"
+    GMAIL = "Gmail"
+    GOOGLE_CALENDAR = "Google Calendar"
+    GOOGLE_DOCS = "Google Docs"
+    GOOGLE_DRIVE = "Google Drive"
+    GOOGLE_SHEETS = "Google Sheets"
+    HUB_SPOT = "HubSpot"
+    JIRA = "Jira"
+    LINEAR = "Linear"
+    NOTION = "Notion"
+    SALESFORCE = "Salesforce"
     SLACK = "Slack"
     SUPABASE = "Supabase"
-    NOTION = "Notion"
-    GIT_HUB = "GitHub"
-    JIRA = "Jira"
-    CONFLUENCE = "Confluence"
     WORD_PRESS = "WordPress"
-    GMAIL = "Gmail"
-    GOOGLE_DRIVE = "Google Drive"
-    GOOGLE_CALENDAR = "Google Calendar"
-    GOOGLE_SHEETS = "Google Sheets"
-    GOOGLE_DOCS = "Google Docs"
-    ATTIO = "Attio"
-    SALESFORCE = "Salesforce"
-    LINEAR = "Linear"
-    ASANA = "Asana"
-    CLOSE = "Close"
-    CLICK_UP = "ClickUp"
 
     def visit(
         self,
+        airtable: typing.Callable[[], T_Result],
+        asana: typing.Callable[[], T_Result],
+        attio: typing.Callable[[], T_Result],
+        click_up: typing.Callable[[], T_Result],
+        close: typing.Callable[[], T_Result],
+        confluence: typing.Callable[[], T_Result],
+        git_hub: typing.Callable[[], T_Result],
+        gmail: typing.Callable[[], T_Result],
+        google_calendar: typing.Callable[[], T_Result],
+        google_docs: typing.Callable[[], T_Result],
+        google_drive: typing.Callable[[], T_Result],
+        google_sheets: typing.Callable[[], T_Result],
+        hub_spot: typing.Callable[[], T_Result],
+        jira: typing.Callable[[], T_Result],
+        linear: typing.Callable[[], T_Result],
+        notion: typing.Callable[[], T_Result],
+        salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
-        notion: typing.Callable[[], T_Result],
-        git_hub: typing.Callable[[], T_Result],
-        jira: typing.Callable[[], T_Result],
-        confluence: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
-        gmail: typing.Callable[[], T_Result],
-        google_drive: typing.Callable[[], T_Result],
-        google_calendar: typing.Callable[[], T_Result],
-        google_sheets: typing.Callable[[], T_Result],
-        google_docs: typing.Callable[[], T_Result],
-        attio: typing.Callable[[], T_Result],
-        salesforce: typing.Callable[[], T_Result],
-        linear: typing.Callable[[], T_Result],
-        asana: typing.Callable[[], T_Result],
-        close: typing.Callable[[], T_Result],
-        click_up: typing.Callable[[], T_Result],
     ) -> T_Result:
+        if self is OAuthServerName.AIRTABLE:
+            return airtable()
+        if self is OAuthServerName.ASANA:
+            return asana()
+        if self is OAuthServerName.ATTIO:
+            return attio()
+        if self is OAuthServerName.CLICK_UP:
+            return click_up()
+        if self is OAuthServerName.CLOSE:
+            return close()
+        if self is OAuthServerName.CONFLUENCE:
+            return confluence()
+        if self is OAuthServerName.GIT_HUB:
+            return git_hub()
+        if self is OAuthServerName.GMAIL:
+            return gmail()
+        if self is OAuthServerName.GOOGLE_CALENDAR:
+            return google_calendar()
+        if self is OAuthServerName.GOOGLE_DOCS:
+            return google_docs()
+        if self is OAuthServerName.GOOGLE_DRIVE:
+            return google_drive()
+        if self is OAuthServerName.GOOGLE_SHEETS:
+            return google_sheets()
+        if self is OAuthServerName.HUB_SPOT:
+            return hub_spot()
+        if self is OAuthServerName.JIRA:
+            return jira()
+        if self is OAuthServerName.LINEAR:
+            return linear()
+        if self is OAuthServerName.NOTION:
+            return notion()
+        if self is OAuthServerName.SALESFORCE:
+            return salesforce()
         if self is OAuthServerName.SLACK:
             return slack()
         if self is OAuthServerName.SUPABASE:
             return supabase()
-        if self is OAuthServerName.NOTION:
-            return notion()
-        if self is OAuthServerName.GIT_HUB:
-            return git_hub()
-        if self is OAuthServerName.JIRA:
-            return jira()
-        if self is OAuthServerName.CONFLUENCE:
-            return confluence()
         if self is OAuthServerName.WORD_PRESS:
             return word_press()
-        if self is OAuthServerName.GMAIL:
-            return gmail()
-        if self is OAuthServerName.GOOGLE_DRIVE:
-            return google_drive()
-        if self is OAuthServerName.GOOGLE_CALENDAR:
-            return google_calendar()
-        if self is OAuthServerName.GOOGLE_SHEETS:
-            return google_sheets()
-        if self is OAuthServerName.GOOGLE_DOCS:
-            return google_docs()
-        if self is OAuthServerName.ATTIO:
-            return attio()
-        if self is OAuthServerName.SALESFORCE:
-            return salesforce()
-        if self is OAuthServerName.LINEAR:
-            return linear()
-        if self is OAuthServerName.ASANA:
-            return asana()
-        if self is OAuthServerName.CLOSE:
-            return close()
-        if self is OAuthServerName.CLICK_UP:
-            return click_up()

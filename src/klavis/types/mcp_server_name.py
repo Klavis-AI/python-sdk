@@ -7,119 +7,139 @@ T_Result = typing.TypeVar("T_Result")
 
 
 class McpServerName(str, enum.Enum):
-    MARKDOWN2DOC = "Markdown2doc"
-    SLACK = "Slack"
-    SUPABASE = "Supabase"
-    POSTGRES = "Postgres"
-    YOUTUBE = "YouTube"
-    DOC2MARKDOWN = "Doc2markdown"
-    KLAVIS_REPORT_GEN = "Klavis ReportGen"
-    RESEND = "Resend"
+    AFFINITY = "Affinity"
+    AIRTABLE = "Airtable"
+    ASANA = "Asana"
+    ATTIO = "Attio"
+    CLICK_UP = "ClickUp"
+    CLOSE = "Close"
+    CONFLUENCE = "Confluence"
     DISCORD = "Discord"
+    DOC2MARKDOWN = "Doc2markdown"
+    FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
     GITHUB = "GitHub"
-    FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
-    JIRA = "Jira"
-    CONFLUENCE = "Confluence"
-    WORD_PRESS = "WordPress"
-    NOTION = "Notion"
     GMAIL = "Gmail"
-    GOOGLE_DRIVE = "Google Drive"
-    GOOGLE_CALENDAR = "Google Calendar"
-    GOOGLE_SHEETS = "Google Sheets"
-    GOOGLE_DOCS = "Google Docs"
-    ATTIO = "Attio"
-    SALESFORCE = "Salesforce"
-    LINEAR = "Linear"
-    ASANA = "Asana"
-    CLOSE = "Close"
     GONG = "Gong"
-    CLICK_UP = "ClickUp"
+    GOOGLE_CALENDAR = "Google Calendar"
+    GOOGLE_DOCS = "Google Docs"
+    GOOGLE_DRIVE = "Google Drive"
+    GOOGLE_SHEETS = "Google Sheets"
+    HUB_SPOT = "HubSpot"
+    JIRA = "Jira"
+    KLAVIS_REPORT_GEN = "Klavis ReportGen"
+    LINEAR = "Linear"
+    MARKDOWN2DOC = "Markdown2doc"
+    NOTION = "Notion"
+    PLAI = "Plai"
+    POSTGRES = "Postgres"
+    RESEND = "Resend"
+    SALESFORCE = "Salesforce"
+    SLACK = "Slack"
+    SUPABASE = "Supabase"
+    WHATS_APP = "WhatsApp"
+    WORD_PRESS = "WordPress"
+    YOUTUBE = "YouTube"
 
     def visit(
         self,
-        markdown2doc: typing.Callable[[], T_Result],
-        slack: typing.Callable[[], T_Result],
-        supabase: typing.Callable[[], T_Result],
-        postgres: typing.Callable[[], T_Result],
-        youtube: typing.Callable[[], T_Result],
-        doc2markdown: typing.Callable[[], T_Result],
-        klavis_report_gen: typing.Callable[[], T_Result],
-        resend: typing.Callable[[], T_Result],
+        affinity: typing.Callable[[], T_Result],
+        airtable: typing.Callable[[], T_Result],
+        asana: typing.Callable[[], T_Result],
+        attio: typing.Callable[[], T_Result],
+        click_up: typing.Callable[[], T_Result],
+        close: typing.Callable[[], T_Result],
+        confluence: typing.Callable[[], T_Result],
         discord: typing.Callable[[], T_Result],
+        doc2markdown: typing.Callable[[], T_Result],
+        firecrawl_deep_research: typing.Callable[[], T_Result],
         firecrawl_web_search: typing.Callable[[], T_Result],
         github: typing.Callable[[], T_Result],
-        firecrawl_deep_research: typing.Callable[[], T_Result],
-        jira: typing.Callable[[], T_Result],
-        confluence: typing.Callable[[], T_Result],
-        word_press: typing.Callable[[], T_Result],
-        notion: typing.Callable[[], T_Result],
         gmail: typing.Callable[[], T_Result],
-        google_drive: typing.Callable[[], T_Result],
-        google_calendar: typing.Callable[[], T_Result],
-        google_sheets: typing.Callable[[], T_Result],
-        google_docs: typing.Callable[[], T_Result],
-        attio: typing.Callable[[], T_Result],
-        salesforce: typing.Callable[[], T_Result],
-        linear: typing.Callable[[], T_Result],
-        asana: typing.Callable[[], T_Result],
-        close: typing.Callable[[], T_Result],
         gong: typing.Callable[[], T_Result],
-        click_up: typing.Callable[[], T_Result],
+        google_calendar: typing.Callable[[], T_Result],
+        google_docs: typing.Callable[[], T_Result],
+        google_drive: typing.Callable[[], T_Result],
+        google_sheets: typing.Callable[[], T_Result],
+        hub_spot: typing.Callable[[], T_Result],
+        jira: typing.Callable[[], T_Result],
+        klavis_report_gen: typing.Callable[[], T_Result],
+        linear: typing.Callable[[], T_Result],
+        markdown2doc: typing.Callable[[], T_Result],
+        notion: typing.Callable[[], T_Result],
+        plai: typing.Callable[[], T_Result],
+        postgres: typing.Callable[[], T_Result],
+        resend: typing.Callable[[], T_Result],
+        salesforce: typing.Callable[[], T_Result],
+        slack: typing.Callable[[], T_Result],
+        supabase: typing.Callable[[], T_Result],
+        whats_app: typing.Callable[[], T_Result],
+        word_press: typing.Callable[[], T_Result],
+        youtube: typing.Callable[[], T_Result],
     ) -> T_Result:
-        if self is McpServerName.MARKDOWN2DOC:
-            return markdown2doc()
-        if self is McpServerName.SLACK:
-            return slack()
-        if self is McpServerName.SUPABASE:
-            return supabase()
-        if self is McpServerName.POSTGRES:
-            return postgres()
-        if self is McpServerName.YOUTUBE:
-            return youtube()
-        if self is McpServerName.DOC2MARKDOWN:
-            return doc2markdown()
-        if self is McpServerName.KLAVIS_REPORT_GEN:
-            return klavis_report_gen()
-        if self is McpServerName.RESEND:
-            return resend()
+        if self is McpServerName.AFFINITY:
+            return affinity()
+        if self is McpServerName.AIRTABLE:
+            return airtable()
+        if self is McpServerName.ASANA:
+            return asana()
+        if self is McpServerName.ATTIO:
+            return attio()
+        if self is McpServerName.CLICK_UP:
+            return click_up()
+        if self is McpServerName.CLOSE:
+            return close()
+        if self is McpServerName.CONFLUENCE:
+            return confluence()
         if self is McpServerName.DISCORD:
             return discord()
+        if self is McpServerName.DOC2MARKDOWN:
+            return doc2markdown()
+        if self is McpServerName.FIRECRAWL_DEEP_RESEARCH:
+            return firecrawl_deep_research()
         if self is McpServerName.FIRECRAWL_WEB_SEARCH:
             return firecrawl_web_search()
         if self is McpServerName.GITHUB:
             return github()
-        if self is McpServerName.FIRECRAWL_DEEP_RESEARCH:
-            return firecrawl_deep_research()
-        if self is McpServerName.JIRA:
-            return jira()
-        if self is McpServerName.CONFLUENCE:
-            return confluence()
-        if self is McpServerName.WORD_PRESS:
-            return word_press()
-        if self is McpServerName.NOTION:
-            return notion()
         if self is McpServerName.GMAIL:
             return gmail()
-        if self is McpServerName.GOOGLE_DRIVE:
-            return google_drive()
-        if self is McpServerName.GOOGLE_CALENDAR:
-            return google_calendar()
-        if self is McpServerName.GOOGLE_SHEETS:
-            return google_sheets()
-        if self is McpServerName.GOOGLE_DOCS:
-            return google_docs()
-        if self is McpServerName.ATTIO:
-            return attio()
-        if self is McpServerName.SALESFORCE:
-            return salesforce()
-        if self is McpServerName.LINEAR:
-            return linear()
-        if self is McpServerName.ASANA:
-            return asana()
-        if self is McpServerName.CLOSE:
-            return close()
         if self is McpServerName.GONG:
             return gong()
-        if self is McpServerName.CLICK_UP:
-            return click_up()
+        if self is McpServerName.GOOGLE_CALENDAR:
+            return google_calendar()
+        if self is McpServerName.GOOGLE_DOCS:
+            return google_docs()
+        if self is McpServerName.GOOGLE_DRIVE:
+            return google_drive()
+        if self is McpServerName.GOOGLE_SHEETS:
+            return google_sheets()
+        if self is McpServerName.HUB_SPOT:
+            return hub_spot()
+        if self is McpServerName.JIRA:
+            return jira()
+        if self is McpServerName.KLAVIS_REPORT_GEN:
+            return klavis_report_gen()
+        if self is McpServerName.LINEAR:
+            return linear()
+        if self is McpServerName.MARKDOWN2DOC:
+            return markdown2doc()
+        if self is McpServerName.NOTION:
+            return notion()
+        if self is McpServerName.PLAI:
+            return plai()
+        if self is McpServerName.POSTGRES:
+            return postgres()
+        if self is McpServerName.RESEND:
+            return resend()
+        if self is McpServerName.SALESFORCE:
+            return salesforce()
+        if self is McpServerName.SLACK:
+            return slack()
+        if self is McpServerName.SUPABASE:
+            return supabase()
+        if self is McpServerName.WHATS_APP:
+            return whats_app()
+        if self is McpServerName.WORD_PRESS:
+            return word_press()
+        if self is McpServerName.YOUTUBE:
+            return youtube()

@@ -3,6 +3,7 @@
 import typing
 
 import httpx
+from .airtable_oauth.client import AirtableOauthClient, AsyncAirtableOauthClient
 from .asana_oauth.client import AsanaOauthClient, AsyncAsanaOauthClient
 from .attio_oauth.client import AsyncAttioOauthClient, AttioOauthClient
 from .clickup_oauth.client import AsyncClickupOauthClient, ClickupOauthClient
@@ -16,6 +17,7 @@ from .gdrive_oauth.client import AsyncGdriveOauthClient, GdriveOauthClient
 from .github_oauth.client import AsyncGithubOauthClient, GithubOauthClient
 from .gmail_oauth.client import AsyncGmailOauthClient, GmailOauthClient
 from .gsheets_oauth.client import AsyncGsheetsOauthClient, GsheetsOauthClient
+from .hubspot_oauth.client import AsyncHubspotOauthClient, HubspotOauthClient
 from .jira_oauth.client import AsyncJiraOauthClient, JiraOauthClient
 from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
@@ -109,6 +111,8 @@ class Klavis:
         self.linear_oauth = LinearOauthClient(client_wrapper=self._client_wrapper)
         self.close_oauth = CloseOauthClient(client_wrapper=self._client_wrapper)
         self.clickup_oauth = ClickupOauthClient(client_wrapper=self._client_wrapper)
+        self.airtable_oauth = AirtableOauthClient(client_wrapper=self._client_wrapper)
+        self.hubspot_oauth = HubspotOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -192,6 +196,8 @@ class AsyncKlavis:
         self.linear_oauth = AsyncLinearOauthClient(client_wrapper=self._client_wrapper)
         self.close_oauth = AsyncCloseOauthClient(client_wrapper=self._client_wrapper)
         self.clickup_oauth = AsyncClickupOauthClient(client_wrapper=self._client_wrapper)
+        self.airtable_oauth = AsyncAirtableOauthClient(client_wrapper=self._client_wrapper)
+        self.hubspot_oauth = AsyncHubspotOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

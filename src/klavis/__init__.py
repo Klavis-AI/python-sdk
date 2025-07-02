@@ -3,6 +3,8 @@
 # isort: skip_file
 
 from .types import (
+    AirtableOAuthErrorResponse,
+    AirtableOAuthSuccessResponse,
     AsanaOAuthErrorResponse,
     AsanaOAuthSuccessResponse,
     AttioOAuthErrorResponse,
@@ -35,6 +37,8 @@ from .types import (
     GmailOAuthErrorResponse,
     GmailOAuthSuccessResponse,
     HttpValidationError,
+    HubSpotOAuthErrorResponse,
+    HubSpotOAuthSuccessResponse,
     JiraOAuthErrorResponse,
     JiraOAuthSuccessResponse,
     LinearOAuthErrorResponse,
@@ -62,6 +66,7 @@ from .types import (
 )
 from .errors import BadRequestError, UnprocessableEntityError
 from . import (
+    airtable_oauth,
     asana_oauth,
     attio_oauth,
     clickup_oauth,
@@ -73,6 +78,7 @@ from . import (
     github_oauth,
     gmail_oauth,
     gsheets_oauth,
+    hubspot_oauth,
     jira_oauth,
     linear_oauth,
     mcp_server,
@@ -89,6 +95,8 @@ from .environment import KlavisEnvironment
 from .version import __version__
 
 __all__ = [
+    "AirtableOAuthErrorResponse",
+    "AirtableOAuthSuccessResponse",
     "AsanaOAuthErrorResponse",
     "AsanaOAuthSuccessResponse",
     "AsyncKlavis",
@@ -123,6 +131,8 @@ __all__ = [
     "GmailOAuthErrorResponse",
     "GmailOAuthSuccessResponse",
     "HttpValidationError",
+    "HubSpotOAuthErrorResponse",
+    "HubSpotOAuthSuccessResponse",
     "JiraOAuthErrorResponse",
     "JiraOAuthSuccessResponse",
     "Klavis",
@@ -151,6 +161,7 @@ __all__ = [
     "WordPressOAuthErrorResponse",
     "WordPressOAuthSuccessResponse",
     "__version__",
+    "airtable_oauth",
     "asana_oauth",
     "attio_oauth",
     "clickup_oauth",
@@ -162,6 +173,7 @@ __all__ = [
     "github_oauth",
     "gmail_oauth",
     "gsheets_oauth",
+    "hubspot_oauth",
     "jira_oauth",
     "linear_oauth",
     "mcp_server",
