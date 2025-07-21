@@ -241,7 +241,7 @@ client.mcp_server.create_server_instance(
 <dl>
 <dd>
 
-**server_name:** `McpServerName` — The name of the target MCP server.
+**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
     
 </dd>
 </dl>
@@ -548,7 +548,7 @@ client.mcp_server.get_tools(
 <dl>
 <dd>
 
-**server_name:** `McpServerName` — The name of the target MCP server.
+**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
     
 </dd>
 </dl>
@@ -708,6 +708,80 @@ client.mcp_server.set_instance_auth_token(
 </dl>
 </details>
 
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_instance_auth_metadata</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the auth metadata for a specific instance that the API key owner controls.
+Includes access token, refresh token, and other authentication metadata.
+
+This endpoint includes proper ownership verification to ensure users can only access
+authentication data for instances they own. It also handles token refresh if needed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.get_instance_auth_metadata(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — The ID of the connection instance to get auth metadata for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_o_auth_url</a>(...)</code></summary>
 <dl>
 <dd>
@@ -760,7 +834,7 @@ client.mcp_server.get_o_auth_url(
 <dl>
 <dd>
 
-**server_name:** `McpServerName` — The name of the target MCP server.
+**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
     
 </dd>
 </dl>

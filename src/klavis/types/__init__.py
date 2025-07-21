@@ -27,6 +27,7 @@ from .g_drive_o_auth_error_response import GDriveOAuthErrorResponse
 from .g_drive_o_auth_success_response import GDriveOAuthSuccessResponse
 from .g_sheets_o_auth_error_response import GSheetsOAuthErrorResponse
 from .g_sheets_o_auth_success_response import GSheetsOAuthSuccessResponse
+from .get_auth_metadata_response import GetAuthMetadataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
 from .get_o_auth_url_response import GetOAuthUrlResponse
@@ -89,6 +90,7 @@ __all__ = [
     "GDriveOAuthSuccessResponse",
     "GSheetsOAuthErrorResponse",
     "GSheetsOAuthSuccessResponse",
+    "GetAuthMetadataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
     "GetOAuthUrlResponse",

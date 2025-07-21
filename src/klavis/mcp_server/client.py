@@ -7,6 +7,7 @@ from ..core.request_options import RequestOptions
 from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
 from ..types.create_server_response import CreateServerResponse
+from ..types.get_auth_metadata_response import GetAuthMetadataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.get_o_auth_url_response import GetOAuthUrlResponse
@@ -160,7 +161,7 @@ class McpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
             The identifier for the user requesting the server URL.
@@ -312,7 +313,7 @@ class McpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -402,6 +403,43 @@ class McpServerClient:
         )
         return _response.data
 
+    def get_instance_auth_metadata(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetAuthMetadataResponse:
+        """
+        Retrieves the auth metadata for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication metadata.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to get auth metadata for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAuthMetadataResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.get_instance_auth_metadata(
+            instance_id="instance_id",
+        )
+        """
+        _response = self._raw_client.get_instance_auth_metadata(instance_id, request_options=request_options)
+        return _response.data
+
     def get_o_auth_url(
         self,
         *,
@@ -419,7 +457,7 @@ class McpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         instance_id : str
             The unique identifier for the connection instance.
@@ -619,7 +657,7 @@ class AsyncMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
             The identifier for the user requesting the server URL.
@@ -803,7 +841,7 @@ class AsyncMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -919,6 +957,51 @@ class AsyncMcpServerClient:
         )
         return _response.data
 
+    async def get_instance_auth_metadata(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetAuthMetadataResponse:
+        """
+        Retrieves the auth metadata for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication metadata.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to get auth metadata for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAuthMetadataResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.get_instance_auth_metadata(
+                instance_id="instance_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_instance_auth_metadata(instance_id, request_options=request_options)
+        return _response.data
+
     async def get_o_auth_url(
         self,
         *,
@@ -936,7 +1019,7 @@ class AsyncMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         instance_id : str
             The unique identifier for the connection instance.

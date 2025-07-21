@@ -13,6 +13,7 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
 from ..types.create_server_response import CreateServerResponse
+from ..types.get_auth_metadata_response import GetAuthMetadataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.get_o_auth_url_response import GetOAuthUrlResponse
@@ -199,7 +200,7 @@ class RawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
             The identifier for the user requesting the server URL.
@@ -421,7 +422,7 @@ class RawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -560,6 +561,60 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def get_instance_auth_metadata(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GetAuthMetadataResponse]:
+        """
+        Retrieves the auth metadata for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication metadata.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to get auth metadata for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetAuthMetadataResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/get-auth/{jsonable_encoder(instance_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAuthMetadataResponse,
+                    parse_obj_as(
+                        type_=GetAuthMetadataResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def get_o_auth_url(
         self,
         *,
@@ -577,7 +632,7 @@ class RawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         instance_id : str
             The unique identifier for the connection instance.
@@ -814,7 +869,7 @@ class AsyncRawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
             The identifier for the user requesting the server URL.
@@ -1036,7 +1091,7 @@ class AsyncRawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1175,6 +1230,60 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def get_instance_auth_metadata(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GetAuthMetadataResponse]:
+        """
+        Retrieves the auth metadata for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication metadata.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to get auth metadata for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetAuthMetadataResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/get-auth/{jsonable_encoder(instance_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAuthMetadataResponse,
+                    parse_obj_as(
+                        type_=GetAuthMetadataResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def get_o_auth_url(
         self,
         *,
@@ -1192,7 +1301,7 @@ class AsyncRawMcpServerClient:
         Parameters
         ----------
         server_name : McpServerName
-            The name of the target MCP server.
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         instance_id : str
             The unique identifier for the connection instance.
