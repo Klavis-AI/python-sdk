@@ -6,6 +6,7 @@ import httpx
 from .airtable_oauth.client import AirtableOauthClient, AsyncAirtableOauthClient
 from .asana_oauth.client import AsanaOauthClient, AsyncAsanaOauthClient
 from .attio_oauth.client import AsyncAttioOauthClient, AttioOauthClient
+from .canva_oauth.client import AsyncCanvaOauthClient, CanvaOauthClient
 from .clickup_oauth.client import AsyncClickupOauthClient, ClickupOauthClient
 from .close_oauth.client import AsyncCloseOauthClient, CloseOauthClient
 from .confluence_oauth.client import AsyncConfluenceOauthClient, ConfluenceOauthClient
@@ -20,6 +21,7 @@ from .gsheets_oauth.client import AsyncGsheetsOauthClient, GsheetsOauthClient
 from .hubspot_oauth.client import AsyncHubspotOauthClient, HubspotOauthClient
 from .jira_oauth.client import AsyncJiraOauthClient, JiraOauthClient
 from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
+from .linkedin_oauth.client import AsyncLinkedinOauthClient, LinkedinOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
 from .notion_oauth.client import AsyncNotionOauthClient, NotionOauthClient
 from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauthClient
@@ -28,6 +30,7 @@ from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
 from .user.client import AsyncUserClient, UserClient
 from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
 from .wordpress_oauth.client import AsyncWordpressOauthClient, WordpressOauthClient
+from .xero_oauth.client import AsyncXeroOauthClient, XeroOauthClient
 
 
 class Klavis:
@@ -113,6 +116,9 @@ class Klavis:
         self.clickup_oauth = ClickupOauthClient(client_wrapper=self._client_wrapper)
         self.airtable_oauth = AirtableOauthClient(client_wrapper=self._client_wrapper)
         self.hubspot_oauth = HubspotOauthClient(client_wrapper=self._client_wrapper)
+        self.linkedin_oauth = LinkedinOauthClient(client_wrapper=self._client_wrapper)
+        self.canva_oauth = CanvaOauthClient(client_wrapper=self._client_wrapper)
+        self.xero_oauth = XeroOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -198,6 +204,9 @@ class AsyncKlavis:
         self.clickup_oauth = AsyncClickupOauthClient(client_wrapper=self._client_wrapper)
         self.airtable_oauth = AsyncAirtableOauthClient(client_wrapper=self._client_wrapper)
         self.hubspot_oauth = AsyncHubspotOauthClient(client_wrapper=self._client_wrapper)
+        self.linkedin_oauth = AsyncLinkedinOauthClient(client_wrapper=self._client_wrapper)
+        self.canva_oauth = AsyncCanvaOauthClient(client_wrapper=self._client_wrapper)
+        self.xero_oauth = AsyncXeroOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

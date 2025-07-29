@@ -10,6 +10,8 @@ from .attio_o_auth_error_response import AttioOAuthErrorResponse
 from .attio_o_auth_success_response import AttioOAuthSuccessResponse
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
+from .canva_o_auth_error_response import CanvaOAuthErrorResponse
+from .canva_o_auth_success_response import CanvaOAuthSuccessResponse
 from .click_up_o_auth_error_response import ClickUpOAuthErrorResponse
 from .click_up_o_auth_success_response import ClickUpOAuthSuccessResponse
 from .close_o_auth_error_response import CloseOAuthErrorResponse
@@ -43,6 +45,7 @@ from .jira_o_auth_error_response import JiraOAuthErrorResponse
 from .jira_o_auth_success_response import JiraOAuthSuccessResponse
 from .linear_o_auth_error_response import LinearOAuthErrorResponse
 from .linear_o_auth_success_response import LinearOAuthSuccessResponse
+from .linked_in_o_auth_error_response import LinkedInOAuthErrorResponse
 from .list_tools_response import ListToolsResponse
 from .mcp_server import McpServer
 from .mcp_server_name import McpServerName
@@ -63,6 +66,8 @@ from .validation_error_loc_item import ValidationErrorLocItem
 from .white_labeling_response import WhiteLabelingResponse
 from .word_press_o_auth_error_response import WordPressOAuthErrorResponse
 from .word_press_o_auth_success_response import WordPressOAuthSuccessResponse
+from .xero_o_auth_error_response import XeroOAuthErrorResponse
+from .xero_o_auth_success_response import XeroOAuthSuccessResponse
 
 __all__ = [
     "AirtableOAuthErrorResponse",
@@ -73,6 +78,8 @@ __all__ = [
     "AttioOAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
+    "CanvaOAuthErrorResponse",
+    "CanvaOAuthSuccessResponse",
     "ClickUpOAuthErrorResponse",
     "ClickUpOAuthSuccessResponse",
     "CloseOAuthErrorResponse",
@@ -106,6 +113,7 @@ __all__ = [
     "JiraOAuthSuccessResponse",
     "LinearOAuthErrorResponse",
     "LinearOAuthSuccessResponse",
+    "LinkedInOAuthErrorResponse",
     "ListToolsResponse",
     "McpServer",
     "McpServerName",
@@ -126,4 +134,6 @@ __all__ = [
     "WhiteLabelingResponse",
     "WordPressOAuthErrorResponse",
     "WordPressOAuthSuccessResponse",
+    "XeroOAuthErrorResponse",
+    "XeroOAuthSuccessResponse",
 ]

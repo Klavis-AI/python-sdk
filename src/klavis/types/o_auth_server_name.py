@@ -10,6 +10,7 @@ class OAuthServerName(str, enum.Enum):
     AIRTABLE = "Airtable"
     ASANA = "Asana"
     ATTIO = "Attio"
+    CANVA = "Canva"
     CLICK_UP = "ClickUp"
     CLOSE = "Close"
     CONFLUENCE = "Confluence"
@@ -22,10 +23,12 @@ class OAuthServerName(str, enum.Enum):
     HUB_SPOT = "HubSpot"
     JIRA = "Jira"
     LINEAR = "Linear"
+    LINKED_IN = "LinkedIn"
     NOTION = "Notion"
     SALESFORCE = "Salesforce"
     SLACK = "Slack"
     SUPABASE = "Supabase"
+    XERO = "Xero"
     WORD_PRESS = "WordPress"
 
     def visit(
@@ -33,6 +36,7 @@ class OAuthServerName(str, enum.Enum):
         airtable: typing.Callable[[], T_Result],
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
+        canva: typing.Callable[[], T_Result],
         click_up: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         confluence: typing.Callable[[], T_Result],
@@ -45,10 +49,12 @@ class OAuthServerName(str, enum.Enum):
         hub_spot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
+        linked_in: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
+        xero: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is OAuthServerName.AIRTABLE:
@@ -57,6 +63,8 @@ class OAuthServerName(str, enum.Enum):
             return asana()
         if self is OAuthServerName.ATTIO:
             return attio()
+        if self is OAuthServerName.CANVA:
+            return canva()
         if self is OAuthServerName.CLICK_UP:
             return click_up()
         if self is OAuthServerName.CLOSE:
@@ -81,6 +89,8 @@ class OAuthServerName(str, enum.Enum):
             return jira()
         if self is OAuthServerName.LINEAR:
             return linear()
+        if self is OAuthServerName.LINKED_IN:
+            return linked_in()
         if self is OAuthServerName.NOTION:
             return notion()
         if self is OAuthServerName.SALESFORCE:
@@ -89,5 +99,7 @@ class OAuthServerName(str, enum.Enum):
             return slack()
         if self is OAuthServerName.SUPABASE:
             return supabase()
+        if self is OAuthServerName.XERO:
+            return xero()
         if self is OAuthServerName.WORD_PRESS:
             return word_press()
