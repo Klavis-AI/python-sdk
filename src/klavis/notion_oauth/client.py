@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.notion_o_auth_success_response import NotionOAuthSuccessResponse
 from .raw_client import AsyncRawNotionOauthClient, RawNotionOauthClient
 
 
@@ -80,50 +79,6 @@ class NotionOauthClient:
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    def notion_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> NotionOAuthSuccessResponse:
-        """
-        Handles the callback from Notion OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Notion
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Notion, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        NotionOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.notion_oauth.notion_o_auth_callback()
-        """
-        _response = self._raw_client.notion_o_auth_callback(
-            code=code, state=state, error=error, request_options=request_options
         )
         return _response.data
 
@@ -208,57 +163,5 @@ class AsyncNotionOauthClient:
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def notion_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> NotionOAuthSuccessResponse:
-        """
-        Handles the callback from Notion OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Notion
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Notion, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        NotionOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.notion_oauth.notion_o_auth_callback()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.notion_o_auth_callback(
-            code=code, state=state, error=error, request_options=request_options
         )
         return _response.data

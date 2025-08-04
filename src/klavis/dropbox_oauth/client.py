@@ -4,25 +4,25 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from .raw_client import AsyncRawCanvaOauthClient, RawCanvaOauthClient
+from .raw_client import AsyncRawDropboxOauthClient, RawDropboxOauthClient
 
 
-class CanvaOauthClient:
+class DropboxOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawCanvaOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = RawDropboxOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawCanvaOauthClient:
+    def with_raw_response(self) -> RawDropboxOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawCanvaOauthClient
+        RawDropboxOauthClient
         """
         return self._raw_client
 
-    def authorize_canva(
+    def authorize_dropbox(
         self,
         *,
         instance_id: str,
@@ -32,12 +32,12 @@ class CanvaOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
-        Start Canva OAuth flow with PKCE
+        Start Dropbox OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
         - client_id: Optional client ID for white labeling
-        - scope: Optional scopes to request (space-separated, e.g., "design:meta:read profile:read")
+        - scope: Optional scopes to request (space-separated)
         - redirect_url: Optional URL to redirect to after authorization completes
 
         Parameters
@@ -69,11 +69,11 @@ class CanvaOauthClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.canva_oauth.authorize_canva(
+        client.dropbox_oauth.authorize_dropbox(
             instance_id="instance_id",
         )
         """
-        _response = self._raw_client.authorize_canva(
+        _response = self._raw_client.authorize_dropbox(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,
@@ -83,22 +83,22 @@ class CanvaOauthClient:
         return _response.data
 
 
-class AsyncCanvaOauthClient:
+class AsyncDropboxOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawCanvaOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawDropboxOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawCanvaOauthClient:
+    def with_raw_response(self) -> AsyncRawDropboxOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawCanvaOauthClient
+        AsyncRawDropboxOauthClient
         """
         return self._raw_client
 
-    async def authorize_canva(
+    async def authorize_dropbox(
         self,
         *,
         instance_id: str,
@@ -108,12 +108,12 @@ class AsyncCanvaOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
-        Start Canva OAuth flow with PKCE
+        Start Dropbox OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
         - client_id: Optional client ID for white labeling
-        - scope: Optional scopes to request (space-separated, e.g., "design:meta:read profile:read")
+        - scope: Optional scopes to request (space-separated)
         - redirect_url: Optional URL to redirect to after authorization completes
 
         Parameters
@@ -150,14 +150,14 @@ class AsyncCanvaOauthClient:
 
 
         async def main() -> None:
-            await client.canva_oauth.authorize_canva(
+            await client.dropbox_oauth.authorize_dropbox(
                 instance_id="instance_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.authorize_canva(
+        _response = await self._raw_client.authorize_dropbox(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,

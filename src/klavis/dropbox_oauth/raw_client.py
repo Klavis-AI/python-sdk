@@ -12,11 +12,11 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 
 
-class RawHubspotOauthClient:
+class RawDropboxOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def authorize_hubspot(
+    def authorize_dropbox(
         self,
         *,
         instance_id: str,
@@ -26,7 +26,7 @@ class RawHubspotOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
-        Start HubSpot OAuth flow
+        Start Dropbox OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -57,7 +57,7 @@ class RawHubspotOauthClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/hubspot/authorize",
+            "oauth/dropbox/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -96,11 +96,11 @@ class RawHubspotOauthClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawHubspotOauthClient:
+class AsyncRawDropboxOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def authorize_hubspot(
+    async def authorize_dropbox(
         self,
         *,
         instance_id: str,
@@ -110,7 +110,7 @@ class AsyncRawHubspotOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
-        Start HubSpot OAuth flow
+        Start Dropbox OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -141,7 +141,7 @@ class AsyncRawHubspotOauthClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/hubspot/authorize",
+            "oauth/dropbox/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,

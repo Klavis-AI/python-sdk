@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.slack_o_auth_success_response import SlackOAuthSuccessResponse
 from .raw_client import AsyncRawSlackOauthClient, RawSlackOauthClient
 
 
@@ -86,50 +85,6 @@ class SlackOauthClient:
             user_scope=user_scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    def slack_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SlackOAuthSuccessResponse:
-        """
-        Handles the callback from Slack OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Slack
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Slack, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SlackOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.slack_oauth.slack_o_auth_callback()
-        """
-        _response = self._raw_client.slack_o_auth_callback(
-            code=code, state=state, error=error, request_options=request_options
         )
         return _response.data
 
@@ -220,57 +175,5 @@ class AsyncSlackOauthClient:
             user_scope=user_scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def slack_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SlackOAuthSuccessResponse:
-        """
-        Handles the callback from Slack OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Slack
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Slack, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SlackOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.slack_oauth.slack_o_auth_callback()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.slack_o_auth_callback(
-            code=code, state=state, error=error, request_options=request_options
         )
         return _response.data

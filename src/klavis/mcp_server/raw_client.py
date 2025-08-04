@@ -260,6 +260,78 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def create_unified_mcp_server_instance(
+        self,
+        *,
+        user_id: str,
+        platform_name: str,
+        connection_type: typing.Optional[ConnectionType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[CreateServerResponse]:
+        """
+        Creates a URL for the Unified MCP server,
+        validating the request with an API key and user details.
+        Returns the existing server URL if it already exists for the user.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        platform_name : str
+            The name of the platform associated with the user.
+
+        connection_type : typing.Optional[ConnectionType]
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[CreateServerResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/unified/instance/create",
+            method="POST",
+            json={
+                "userId": user_id,
+                "platformName": platform_name,
+                "connectionType": connection_type,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    CreateServerResponse,
+                    parse_obj_as(
+                        type_=CreateServerResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def get_server_instance(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetInstanceResponse]:
@@ -893,6 +965,78 @@ class AsyncRawMcpServerClient:
             method="POST",
             json={
                 "serverName": server_name,
+                "userId": user_id,
+                "platformName": platform_name,
+                "connectionType": connection_type,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    CreateServerResponse,
+                    parse_obj_as(
+                        type_=CreateServerResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create_unified_mcp_server_instance(
+        self,
+        *,
+        user_id: str,
+        platform_name: str,
+        connection_type: typing.Optional[ConnectionType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[CreateServerResponse]:
+        """
+        Creates a URL for the Unified MCP server,
+        validating the request with an API key and user details.
+        Returns the existing server URL if it already exists for the user.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        platform_name : str
+            The name of the platform associated with the user.
+
+        connection_type : typing.Optional[ConnectionType]
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[CreateServerResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/unified/instance/create",
+            method="POST",
+            json={
                 "userId": user_id,
                 "platformName": platform_name,
                 "connectionType": connection_type,

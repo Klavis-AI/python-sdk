@@ -82,54 +82,6 @@ class GithubOauthClient:
         )
         return _response.data
 
-    def github_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
-        """
-        Handles the callback from GitHub OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by GitHub
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by GitHub, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from GitHub, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.github_oauth.github_o_auth_callback()
-        """
-        _response = self._raw_client.github_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
-        )
-        return _response.data
-
 
 class AsyncGithubOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -211,61 +163,5 @@ class AsyncGithubOauthClient:
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def github_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
-        """
-        Handles the callback from GitHub OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by GitHub
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by GitHub, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from GitHub, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.github_oauth.github_o_auth_callback()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.github_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
         )
         return _response.data

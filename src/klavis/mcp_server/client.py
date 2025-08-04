@@ -202,6 +202,58 @@ class McpServerClient:
         )
         return _response.data
 
+    def create_unified_mcp_server_instance(
+        self,
+        *,
+        user_id: str,
+        platform_name: str,
+        connection_type: typing.Optional[ConnectionType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateServerResponse:
+        """
+        Creates a URL for the Unified MCP server,
+        validating the request with an API key and user details.
+        Returns the existing server URL if it already exists for the user.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        platform_name : str
+            The name of the platform associated with the user.
+
+        connection_type : typing.Optional[ConnectionType]
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateServerResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.create_unified_mcp_server_instance(
+            user_id="userId",
+            platform_name="platformName",
+        )
+        """
+        _response = self._raw_client.create_unified_mcp_server_instance(
+            user_id=user_id,
+            platform_name=platform_name,
+            connection_type=connection_type,
+            request_options=request_options,
+        )
+        return _response.data
+
     def get_server_instance(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetInstanceResponse:
@@ -699,6 +751,66 @@ class AsyncMcpServerClient:
         """
         _response = await self._raw_client.create_server_instance(
             server_name=server_name,
+            user_id=user_id,
+            platform_name=platform_name,
+            connection_type=connection_type,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def create_unified_mcp_server_instance(
+        self,
+        *,
+        user_id: str,
+        platform_name: str,
+        connection_type: typing.Optional[ConnectionType] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateServerResponse:
+        """
+        Creates a URL for the Unified MCP server,
+        validating the request with an API key and user details.
+        Returns the existing server URL if it already exists for the user.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        platform_name : str
+            The name of the platform associated with the user.
+
+        connection_type : typing.Optional[ConnectionType]
+            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateServerResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.create_unified_mcp_server_instance(
+                user_id="userId",
+                platform_name="platformName",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_unified_mcp_server_instance(
             user_id=user_id,
             platform_name=platform_name,
             connection_type=connection_type,

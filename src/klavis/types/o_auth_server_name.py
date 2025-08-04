@@ -30,6 +30,7 @@ class OAuthServerName(str, enum.Enum):
     SUPABASE = "Supabase"
     XERO = "Xero"
     WORD_PRESS = "WordPress"
+    DROPBOX = "Dropbox"
 
     def visit(
         self,
@@ -56,6 +57,7 @@ class OAuthServerName(str, enum.Enum):
         supabase: typing.Callable[[], T_Result],
         xero: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
+        dropbox: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is OAuthServerName.AIRTABLE:
             return airtable()
@@ -103,3 +105,5 @@ class OAuthServerName(str, enum.Enum):
             return xero()
         if self is OAuthServerName.WORD_PRESS:
             return word_press()
+        if self is OAuthServerName.DROPBOX:
+            return dropbox()

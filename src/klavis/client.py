@@ -11,6 +11,7 @@ from .clickup_oauth.client import AsyncClickupOauthClient, ClickupOauthClient
 from .close_oauth.client import AsyncCloseOauthClient, CloseOauthClient
 from .confluence_oauth.client import AsyncConfluenceOauthClient, ConfluenceOauthClient
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .dropbox_oauth.client import AsyncDropboxOauthClient, DropboxOauthClient
 from .environment import KlavisEnvironment
 from .gcalendar_oauth.client import AsyncGcalendarOauthClient, GcalendarOauthClient
 from .gdocs_oauth.client import AsyncGdocsOauthClient, GdocsOauthClient
@@ -119,6 +120,7 @@ class Klavis:
         self.linkedin_oauth = LinkedinOauthClient(client_wrapper=self._client_wrapper)
         self.canva_oauth = CanvaOauthClient(client_wrapper=self._client_wrapper)
         self.xero_oauth = XeroOauthClient(client_wrapper=self._client_wrapper)
+        self.dropbox_oauth = DropboxOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -207,6 +209,7 @@ class AsyncKlavis:
         self.linkedin_oauth = AsyncLinkedinOauthClient(client_wrapper=self._client_wrapper)
         self.canva_oauth = AsyncCanvaOauthClient(client_wrapper=self._client_wrapper)
         self.xero_oauth = AsyncXeroOauthClient(client_wrapper=self._client_wrapper)
+        self.dropbox_oauth = AsyncDropboxOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

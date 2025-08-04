@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.click_up_o_auth_success_response import ClickUpOAuthSuccessResponse
 from .raw_client import AsyncRawClickupOauthClient, RawClickupOauthClient
 
 
@@ -71,54 +70,6 @@ class ClickupOauthClient:
         """
         _response = self._raw_client.authorize_click_up(
             instance_id=instance_id, client_id=client_id, redirect_url=redirect_url, request_options=request_options
-        )
-        return _response.data
-
-    def click_up_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ClickUpOAuthSuccessResponse:
-        """
-        Handles the callback from ClickUp OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by ClickUp
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by ClickUp, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from ClickUp, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ClickUpOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.clickup_oauth.click_up_o_auth_callback()
-        """
-        _response = self._raw_client.click_up_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
         )
         return _response.data
 
@@ -194,61 +145,5 @@ class AsyncClickupOauthClient:
         """
         _response = await self._raw_client.authorize_click_up(
             instance_id=instance_id, client_id=client_id, redirect_url=redirect_url, request_options=request_options
-        )
-        return _response.data
-
-    async def click_up_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> ClickUpOAuthSuccessResponse:
-        """
-        Handles the callback from ClickUp OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by ClickUp
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by ClickUp, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from ClickUp, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        ClickUpOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.clickup_oauth.click_up_o_auth_callback()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.click_up_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
         )
         return _response.data

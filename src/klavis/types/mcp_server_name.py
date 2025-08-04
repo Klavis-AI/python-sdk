@@ -11,6 +11,7 @@ class McpServerName(str, enum.Enum):
     AIRTABLE = "Airtable"
     ASANA = "Asana"
     ATTIO = "Attio"
+    BRAVE_SEARCH = "Brave Search"
     CLICK_UP = "ClickUp"
     CLOSE = "Close"
     CONFLUENCE = "Confluence"
@@ -31,6 +32,7 @@ class McpServerName(str, enum.Enum):
     LINEAR = "Linear"
     LINKED_IN = "LinkedIn"
     MARKDOWN2DOC = "Markdown2doc"
+    MOTION = "Motion"
     NOTION = "Notion"
     PLAI = "Plai"
     POSTGRES = "Postgres"
@@ -48,6 +50,7 @@ class McpServerName(str, enum.Enum):
         airtable: typing.Callable[[], T_Result],
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
+        brave_search: typing.Callable[[], T_Result],
         click_up: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         confluence: typing.Callable[[], T_Result],
@@ -68,6 +71,7 @@ class McpServerName(str, enum.Enum):
         linear: typing.Callable[[], T_Result],
         linked_in: typing.Callable[[], T_Result],
         markdown2doc: typing.Callable[[], T_Result],
+        motion: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
@@ -87,6 +91,8 @@ class McpServerName(str, enum.Enum):
             return asana()
         if self is McpServerName.ATTIO:
             return attio()
+        if self is McpServerName.BRAVE_SEARCH:
+            return brave_search()
         if self is McpServerName.CLICK_UP:
             return click_up()
         if self is McpServerName.CLOSE:
@@ -127,6 +133,8 @@ class McpServerName(str, enum.Enum):
             return linked_in()
         if self is McpServerName.MARKDOWN2DOC:
             return markdown2doc()
+        if self is McpServerName.MOTION:
+            return motion()
         if self is McpServerName.NOTION:
             return notion()
         if self is McpServerName.PLAI:

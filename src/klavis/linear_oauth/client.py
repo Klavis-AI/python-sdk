@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.linear_o_auth_success_response import LinearOAuthSuccessResponse
 from .raw_client import AsyncRawLinearOauthClient, RawLinearOauthClient
 
 
@@ -80,54 +79,6 @@ class LinearOauthClient:
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    def linear_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> LinearOAuthSuccessResponse:
-        """
-        Handles the callback from Linear OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Linear
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Linear, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from Linear, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        LinearOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.linear_oauth.linear_o_auth_callback()
-        """
-        _response = self._raw_client.linear_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
         )
         return _response.data
 
@@ -212,61 +163,5 @@ class AsyncLinearOauthClient:
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def linear_o_auth_callback(
-        self,
-        *,
-        code: typing.Optional[str] = None,
-        state: typing.Optional[str] = None,
-        error: typing.Optional[str] = None,
-        error_description: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> LinearOAuthSuccessResponse:
-        """
-        Handles the callback from Linear OAuth authorization.
-
-        Parameters
-        ----------
-        code : typing.Optional[str]
-            Authorization code returned by Linear
-
-        state : typing.Optional[str]
-            State parameter containing encoded authorization data
-
-        error : typing.Optional[str]
-            Error code returned by Linear, if any
-
-        error_description : typing.Optional[str]
-            Detailed error description from Linear, if any
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        LinearOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.linear_oauth.linear_o_auth_callback()
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.linear_o_auth_callback(
-            code=code, state=state, error=error, error_description=error_description, request_options=request_options
         )
         return _response.data

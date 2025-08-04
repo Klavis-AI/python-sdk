@@ -2,138 +2,50 @@
 
 # isort: skip_file
 
-from .airtable_o_auth_error_response import AirtableOAuthErrorResponse
-from .airtable_o_auth_success_response import AirtableOAuthSuccessResponse
-from .asana_o_auth_error_response import AsanaOAuthErrorResponse
-from .asana_o_auth_success_response import AsanaOAuthSuccessResponse
-from .attio_o_auth_error_response import AttioOAuthErrorResponse
-from .attio_o_auth_success_response import AttioOAuthSuccessResponse
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
-from .canva_o_auth_error_response import CanvaOAuthErrorResponse
-from .canva_o_auth_success_response import CanvaOAuthSuccessResponse
-from .click_up_o_auth_error_response import ClickUpOAuthErrorResponse
-from .click_up_o_auth_success_response import ClickUpOAuthSuccessResponse
-from .close_o_auth_error_response import CloseOAuthErrorResponse
-from .close_o_auth_success_response import CloseOAuthSuccessResponse
-from .confluence_o_auth_error_response import ConfluenceOAuthErrorResponse
-from .confluence_o_auth_success_response import ConfluenceOAuthSuccessResponse
 from .connection_type import ConnectionType
 from .create_server_response import CreateServerResponse
 from .extended_mcp_server import ExtendedMcpServer
-from .g_calendar_o_auth_error_response import GCalendarOAuthErrorResponse
-from .g_calendar_o_auth_success_response import GCalendarOAuthSuccessResponse
-from .g_docs_o_auth_error_response import GDocsOAuthErrorResponse
-from .g_docs_o_auth_success_response import GDocsOAuthSuccessResponse
-from .g_drive_o_auth_error_response import GDriveOAuthErrorResponse
-from .g_drive_o_auth_success_response import GDriveOAuthSuccessResponse
-from .g_sheets_o_auth_error_response import GSheetsOAuthErrorResponse
-from .g_sheets_o_auth_success_response import GSheetsOAuthSuccessResponse
 from .get_auth_metadata_response import GetAuthMetadataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
 from .get_o_auth_url_response import GetOAuthUrlResponse
 from .get_server_instances_response import GetServerInstancesResponse
 from .get_tools_response import GetToolsResponse
-from .git_hub_o_auth_error_response import GitHubOAuthErrorResponse
-from .gmail_o_auth_error_response import GmailOAuthErrorResponse
-from .gmail_o_auth_success_response import GmailOAuthSuccessResponse
 from .http_validation_error import HttpValidationError
-from .hub_spot_o_auth_error_response import HubSpotOAuthErrorResponse
-from .hub_spot_o_auth_success_response import HubSpotOAuthSuccessResponse
-from .jira_o_auth_error_response import JiraOAuthErrorResponse
-from .jira_o_auth_success_response import JiraOAuthSuccessResponse
-from .linear_o_auth_error_response import LinearOAuthErrorResponse
-from .linear_o_auth_success_response import LinearOAuthSuccessResponse
-from .linked_in_o_auth_error_response import LinkedInOAuthErrorResponse
 from .list_tools_response import ListToolsResponse
 from .mcp_server import McpServer
 from .mcp_server_name import McpServerName
-from .notion_o_auth_error_response import NotionOAuthErrorResponse
-from .notion_o_auth_success_response import NotionOAuthSuccessResponse
 from .o_auth_server_name import OAuthServerName
-from .salesforce_o_auth_error_response import SalesforceOAuthErrorResponse
-from .salesforce_o_auth_success_response import SalesforceOAuthSuccessResponse
 from .server_tool import ServerTool
-from .slack_o_auth_error_response import SlackOAuthErrorResponse
-from .slack_o_auth_success_response import SlackOAuthSuccessResponse
 from .status_response import StatusResponse
-from .supabase_o_auth_error_response import SupabaseOAuthErrorResponse
-from .supabase_o_auth_success_response import SupabaseOAuthSuccessResponse
 from .tool_format import ToolFormat
 from .validation_error import ValidationError
 from .validation_error_loc_item import ValidationErrorLocItem
 from .white_labeling_response import WhiteLabelingResponse
-from .word_press_o_auth_error_response import WordPressOAuthErrorResponse
-from .word_press_o_auth_success_response import WordPressOAuthSuccessResponse
-from .xero_o_auth_error_response import XeroOAuthErrorResponse
-from .xero_o_auth_success_response import XeroOAuthSuccessResponse
 
 __all__ = [
-    "AirtableOAuthErrorResponse",
-    "AirtableOAuthSuccessResponse",
-    "AsanaOAuthErrorResponse",
-    "AsanaOAuthSuccessResponse",
-    "AttioOAuthErrorResponse",
-    "AttioOAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
-    "CanvaOAuthErrorResponse",
-    "CanvaOAuthSuccessResponse",
-    "ClickUpOAuthErrorResponse",
-    "ClickUpOAuthSuccessResponse",
-    "CloseOAuthErrorResponse",
-    "CloseOAuthSuccessResponse",
-    "ConfluenceOAuthErrorResponse",
-    "ConfluenceOAuthSuccessResponse",
     "ConnectionType",
     "CreateServerResponse",
     "ExtendedMcpServer",
-    "GCalendarOAuthErrorResponse",
-    "GCalendarOAuthSuccessResponse",
-    "GDocsOAuthErrorResponse",
-    "GDocsOAuthSuccessResponse",
-    "GDriveOAuthErrorResponse",
-    "GDriveOAuthSuccessResponse",
-    "GSheetsOAuthErrorResponse",
-    "GSheetsOAuthSuccessResponse",
     "GetAuthMetadataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
     "GetOAuthUrlResponse",
     "GetServerInstancesResponse",
     "GetToolsResponse",
-    "GitHubOAuthErrorResponse",
-    "GmailOAuthErrorResponse",
-    "GmailOAuthSuccessResponse",
     "HttpValidationError",
-    "HubSpotOAuthErrorResponse",
-    "HubSpotOAuthSuccessResponse",
-    "JiraOAuthErrorResponse",
-    "JiraOAuthSuccessResponse",
-    "LinearOAuthErrorResponse",
-    "LinearOAuthSuccessResponse",
-    "LinkedInOAuthErrorResponse",
     "ListToolsResponse",
     "McpServer",
     "McpServerName",
-    "NotionOAuthErrorResponse",
-    "NotionOAuthSuccessResponse",
     "OAuthServerName",
-    "SalesforceOAuthErrorResponse",
-    "SalesforceOAuthSuccessResponse",
     "ServerTool",
-    "SlackOAuthErrorResponse",
-    "SlackOAuthSuccessResponse",
     "StatusResponse",
-    "SupabaseOAuthErrorResponse",
-    "SupabaseOAuthSuccessResponse",
     "ToolFormat",
     "ValidationError",
     "ValidationErrorLocItem",
     "WhiteLabelingResponse",
-    "WordPressOAuthErrorResponse",
-    "WordPressOAuthSuccessResponse",
-    "XeroOAuthErrorResponse",
-    "XeroOAuthSuccessResponse",
 ]
