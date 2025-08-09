@@ -36,6 +36,7 @@ class McpServerName(str, enum.Enum):
     NOTION = "Notion"
     PLAI = "Plai"
     POSTGRES = "Postgres"
+    QUICK_BOOKS = "QuickBooks"
     RESEND = "Resend"
     SALESFORCE = "Salesforce"
     SLACK = "Slack"
@@ -75,6 +76,7 @@ class McpServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
+        quick_books: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
@@ -141,6 +143,8 @@ class McpServerName(str, enum.Enum):
             return plai()
         if self is McpServerName.POSTGRES:
             return postgres()
+        if self is McpServerName.QUICK_BOOKS:
+            return quick_books()
         if self is McpServerName.RESEND:
             return resend()
         if self is McpServerName.SALESFORCE:

@@ -6,6 +6,7 @@ from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
 from .create_server_response import CreateServerResponse
+from .delete_user_response import DeleteUserResponse
 from .extended_mcp_server import ExtendedMcpServer
 from .get_auth_metadata_response import GetAuthMetadataResponse
 from .get_instance_response import GetInstanceResponse
@@ -30,6 +31,7 @@ __all__ = [
     "CallToolResult",
     "ConnectionType",
     "CreateServerResponse",
+    "DeleteUserResponse",
     "ExtendedMcpServer",
     "GetAuthMetadataResponse",
     "GetInstanceResponse",

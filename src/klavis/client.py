@@ -25,6 +25,7 @@ from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
 from .linkedin_oauth.client import AsyncLinkedinOauthClient, LinkedinOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
 from .notion_oauth.client import AsyncNotionOauthClient, NotionOauthClient
+from .quickbooks_oauth.client import AsyncQuickbooksOauthClient, QuickbooksOauthClient
 from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauthClient
 from .slack_oauth.client import AsyncSlackOauthClient, SlackOauthClient
 from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
@@ -121,6 +122,7 @@ class Klavis:
         self.canva_oauth = CanvaOauthClient(client_wrapper=self._client_wrapper)
         self.xero_oauth = XeroOauthClient(client_wrapper=self._client_wrapper)
         self.dropbox_oauth = DropboxOauthClient(client_wrapper=self._client_wrapper)
+        self.quickbooks_oauth = QuickbooksOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -210,6 +212,7 @@ class AsyncKlavis:
         self.canva_oauth = AsyncCanvaOauthClient(client_wrapper=self._client_wrapper)
         self.xero_oauth = AsyncXeroOauthClient(client_wrapper=self._client_wrapper)
         self.dropbox_oauth = AsyncDropboxOauthClient(client_wrapper=self._client_wrapper)
+        self.quickbooks_oauth = AsyncQuickbooksOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

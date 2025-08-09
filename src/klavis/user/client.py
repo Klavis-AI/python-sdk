@@ -4,6 +4,7 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.delete_user_response import DeleteUserResponse
 from ..types.get_server_instances_response import GetServerInstancesResponse
 from .raw_client import AsyncRawUserClient, RawUserClient
 
@@ -60,6 +61,41 @@ class UserClient:
         _response = self._raw_client.get_server_instances_by_user(
             user_id=user_id, platform_name=platform_name, request_options=request_options
         )
+        return _response.data
+
+    def delete_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DeleteUserResponse:
+        """
+        Delete a user and all associated data by user_id.
+        Users cannot delete their own accounts.
+        This operation will permanently remove all user data.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to delete.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteUserResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.user.delete_user_by_user_id(
+            user_id="user_id",
+        )
+        """
+        _response = self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
         return _response.data
 
 
@@ -123,4 +159,47 @@ class AsyncUserClient:
         _response = await self._raw_client.get_server_instances_by_user(
             user_id=user_id, platform_name=platform_name, request_options=request_options
         )
+        return _response.data
+
+    async def delete_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DeleteUserResponse:
+        """
+        Delete a user and all associated data by user_id.
+        Users cannot delete their own accounts.
+        This operation will permanently remove all user data.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to delete.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteUserResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.user.delete_user_by_user_id(
+                user_id="user_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
         return _response.data
