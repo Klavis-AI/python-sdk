@@ -12,8 +12,9 @@ from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
+from ..types.create_self_hosted_server_response import CreateSelfHostedServerResponse
 from ..types.create_server_response import CreateServerResponse
-from ..types.get_auth_metadata_response import GetAuthMetadataResponse
+from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.get_o_auth_url_response import GetOAuthUrlResponse
@@ -332,6 +333,71 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def create_self_hosted_server_instance(
+        self, *, server_name: McpServerName, user_id: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[CreateSelfHostedServerResponse]:
+        """
+        Creates an instance id for a self-hosted MCP server,
+        validating the request with an API key and user details.
+        The main purpose of this endpoint is to create an instance id for a self-hosted MCP server.
+        The instance id is used to identify and store the auth metadata in the database.
+        Returns the existing instance id if it already exists for the user.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[CreateSelfHostedServerResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/self-hosted/instance/create",
+            method="POST",
+            json={
+                "serverName": server_name,
+                "userId": user_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    CreateSelfHostedServerResponse,
+                    parse_obj_as(
+                        type_=CreateSelfHostedServerResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def get_server_instance(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetInstanceResponse]:
@@ -387,7 +453,7 @@ class RawMcpServerClient:
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StatusResponse]:
         """
-        Deletes authentication metadata for a specific server connection instance.
+        Deletes authentication data for a specific server connection instance.
 
         Parameters
         ----------
@@ -633,12 +699,12 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_instance_auth_metadata(
+    def get_instance_auth_data(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[GetAuthMetadataResponse]:
+    ) -> HttpResponse[GetAuthDataResponse]:
         """
-        Retrieves the auth metadata for a specific instance that the API key owner controls.
-        Includes access token, refresh token, and other authentication metadata.
+        Retrieves the auth data for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication data.
 
         This endpoint includes proper ownership verification to ensure users can only access
         authentication data for instances they own. It also handles token refresh if needed.
@@ -646,14 +712,14 @@ class RawMcpServerClient:
         Parameters
         ----------
         instance_id : str
-            The ID of the connection instance to get auth metadata for.
+            The ID of the connection instance to get auth data for.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[GetAuthMetadataResponse]
+        HttpResponse[GetAuthDataResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -664,9 +730,9 @@ class RawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetAuthMetadataResponse,
+                    GetAuthDataResponse,
                     parse_obj_as(
-                        type_=GetAuthMetadataResponse,  # type: ignore
+                        type_=GetAuthDataResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1073,6 +1139,71 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def create_self_hosted_server_instance(
+        self, *, server_name: McpServerName, user_id: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[CreateSelfHostedServerResponse]:
+        """
+        Creates an instance id for a self-hosted MCP server,
+        validating the request with an API key and user details.
+        The main purpose of this endpoint is to create an instance id for a self-hosted MCP server.
+        The instance id is used to identify and store the auth metadata in the database.
+        Returns the existing instance id if it already exists for the user.
+
+        Parameters
+        ----------
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+
+        user_id : str
+            The identifier for the user requesting the server URL.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[CreateSelfHostedServerResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/self-hosted/instance/create",
+            method="POST",
+            json={
+                "serverName": server_name,
+                "userId": user_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    CreateSelfHostedServerResponse,
+                    parse_obj_as(
+                        type_=CreateSelfHostedServerResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def get_server_instance(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetInstanceResponse]:
@@ -1128,7 +1259,7 @@ class AsyncRawMcpServerClient:
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StatusResponse]:
         """
-        Deletes authentication metadata for a specific server connection instance.
+        Deletes authentication data for a specific server connection instance.
 
         Parameters
         ----------
@@ -1374,12 +1505,12 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_instance_auth_metadata(
+    async def get_instance_auth_data(
         self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[GetAuthMetadataResponse]:
+    ) -> AsyncHttpResponse[GetAuthDataResponse]:
         """
-        Retrieves the auth metadata for a specific instance that the API key owner controls.
-        Includes access token, refresh token, and other authentication metadata.
+        Retrieves the auth data for a specific instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication data.
 
         This endpoint includes proper ownership verification to ensure users can only access
         authentication data for instances they own. It also handles token refresh if needed.
@@ -1387,14 +1518,14 @@ class AsyncRawMcpServerClient:
         Parameters
         ----------
         instance_id : str
-            The ID of the connection instance to get auth metadata for.
+            The ID of the connection instance to get auth data for.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[GetAuthMetadataResponse]
+        AsyncHttpResponse[GetAuthDataResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1405,9 +1536,9 @@ class AsyncRawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetAuthMetadataResponse,
+                    GetAuthDataResponse,
                     parse_obj_as(
-                        type_=GetAuthMetadataResponse,  # type: ignore
+                        type_=GetAuthDataResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

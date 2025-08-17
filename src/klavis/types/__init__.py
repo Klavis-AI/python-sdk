@@ -5,10 +5,11 @@
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
+from .create_self_hosted_server_response import CreateSelfHostedServerResponse
 from .create_server_response import CreateServerResponse
 from .delete_user_response import DeleteUserResponse
 from .extended_mcp_server import ExtendedMcpServer
-from .get_auth_metadata_response import GetAuthMetadataResponse
+from .get_auth_data_response import GetAuthDataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
 from .get_o_auth_url_response import GetOAuthUrlResponse
@@ -30,10 +31,11 @@ __all__ = [
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
+    "CreateSelfHostedServerResponse",
     "CreateServerResponse",
     "DeleteUserResponse",
     "ExtendedMcpServer",
-    "GetAuthMetadataResponse",
+    "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
     "GetOAuthUrlResponse",

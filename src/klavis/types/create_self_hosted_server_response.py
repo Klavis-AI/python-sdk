@@ -8,22 +8,17 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 
 
-class GetAuthMetadataResponse(UniversalBaseModel):
-    success: bool = pydantic.Field()
+class CreateSelfHostedServerResponse(UniversalBaseModel):
+    instance_id: typing_extensions.Annotated[str, FieldMetadata(alias="instanceId")] = pydantic.Field()
     """
-    Whether the request was successful
-    """
-
-    auth_data: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="authData")
-    ] = pydantic.Field(default=None)
-    """
-    Complete authentication metadata including access token, refresh token, scope, expiration, and platform-specific data
+    The unique identifier for this specific server connection instance.
     """
 
-    error: typing.Optional[str] = pydantic.Field(default=None)
+    oauth_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="oauthUrl")] = pydantic.Field(
+        default=None
+    )
     """
-    Error message if the request failed
+    The OAuth authorization URL for the specified server, if OAuth is configured.
     """
 
     if IS_PYDANTIC_V2:

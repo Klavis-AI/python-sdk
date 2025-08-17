@@ -374,6 +374,89 @@ client.mcp_server.create_unified_mcp_server_instance(
 </dl>
 </details>
 
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">create_self_hosted_server_instance</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates an instance id for a self-hosted MCP server,
+validating the request with an API key and user details.
+The main purpose of this endpoint is to create an instance id for a self-hosted MCP server.
+The instance id is used to identify and store the auth metadata in the database.
+Returns the existing instance id if it already exists for the user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis, McpServerName
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.create_self_hosted_server_instance(
+    server_name=McpServerName.AFFINITY,
+    user_id="userId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The identifier for the user requesting the server URL.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_server_instance</a>(...)</code></summary>
 <dl>
 <dd>
@@ -457,7 +540,7 @@ client.mcp_server.get_server_instance(
 <dl>
 <dd>
 
-Deletes authentication metadata for a specific server connection instance.
+Deletes authentication data for a specific server connection instance.
 </dd>
 </dl>
 </dd>
@@ -797,7 +880,7 @@ client.mcp_server.set_instance_auth_token(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_instance_auth_metadata</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_instance_auth_data</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -809,8 +892,8 @@ client.mcp_server.set_instance_auth_token(
 <dl>
 <dd>
 
-Retrieves the auth metadata for a specific instance that the API key owner controls.
-Includes access token, refresh token, and other authentication metadata.
+Retrieves the auth data for a specific instance that the API key owner controls.
+Includes access token, refresh token, and other authentication data.
 
 This endpoint includes proper ownership verification to ensure users can only access
 authentication data for instances they own. It also handles token refresh if needed.
@@ -833,7 +916,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_instance_auth_metadata(
+client.mcp_server.get_instance_auth_data(
     instance_id="instance_id",
 )
 
@@ -851,7 +934,7 @@ client.mcp_server.get_instance_auth_metadata(
 <dl>
 <dd>
 
-**instance_id:** `str` — The ID of the connection instance to get auth metadata for.
+**instance_id:** `str` — The ID of the connection instance to get auth data for.
     
 </dd>
 </dl>

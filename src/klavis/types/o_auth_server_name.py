@@ -24,7 +24,10 @@ class OAuthServerName(str, enum.Enum):
     JIRA = "Jira"
     LINEAR = "Linear"
     LINKED_IN = "LinkedIn"
+    MONDAY = "Monday"
+    MONEYBIRD = "Moneybird"
     NOTION = "Notion"
+    ONEDRIVE = "Onedrive"
     SALESFORCE = "Salesforce"
     SLACK = "Slack"
     SUPABASE = "Supabase"
@@ -52,7 +55,10 @@ class OAuthServerName(str, enum.Enum):
         jira: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
         linked_in: typing.Callable[[], T_Result],
+        monday: typing.Callable[[], T_Result],
+        moneybird: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
+        onedrive: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
@@ -95,8 +101,14 @@ class OAuthServerName(str, enum.Enum):
             return linear()
         if self is OAuthServerName.LINKED_IN:
             return linked_in()
+        if self is OAuthServerName.MONDAY:
+            return monday()
+        if self is OAuthServerName.MONEYBIRD:
+            return moneybird()
         if self is OAuthServerName.NOTION:
             return notion()
+        if self is OAuthServerName.ONEDRIVE:
+            return onedrive()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
         if self is OAuthServerName.SLACK:
