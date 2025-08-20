@@ -2,6 +2,7 @@
 
 # isort: skip_file
 
+from .api_key_auth import ApiKeyAuth
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
@@ -9,6 +10,7 @@ from .create_self_hosted_server_response import CreateSelfHostedServerResponse
 from .create_server_response import CreateServerResponse
 from .delete_user_response import DeleteUserResponse
 from .extended_mcp_server import ExtendedMcpServer
+from .general_auth import GeneralAuth
 from .get_auth_data_response import GetAuthDataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
@@ -28,6 +30,7 @@ from .validation_error_loc_item import ValidationErrorLocItem
 from .white_labeling_response import WhiteLabelingResponse
 
 __all__ = [
+    "ApiKeyAuth",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -35,6 +38,7 @@ __all__ = [
     "CreateServerResponse",
     "DeleteUserResponse",
     "ExtendedMcpServer",
+    "GeneralAuth",
     "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",

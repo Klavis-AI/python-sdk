@@ -9,6 +9,7 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
@@ -24,6 +25,7 @@ from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
 from ..types.tool_format import ToolFormat
+from .types.authdata import Authdata
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -637,11 +639,12 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def set_instance_auth_token(
-        self, *, instance_id: str, auth_token: str, request_options: typing.Optional[RequestOptions] = None
+    def set_instance_auth(
+        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StatusResponse]:
         """
-        Sets an authentication token for a specific instance.
+        Sets authentication data for a specific instance.
+        Accepts either API key authentication or general authentication data.
         This updates the auth_metadata for the specified instance.
 
         Parameters
@@ -649,8 +652,8 @@ class RawMcpServerClient:
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_token : str
-            The authentication token to save
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -661,11 +664,13 @@ class RawMcpServerClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "mcp-server/instance/set-auth-token",
+            "mcp-server/instance/set-auth",
             method="POST",
             json={
                 "instanceId": instance_id,
-                "authToken": auth_token,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",
@@ -1443,11 +1448,12 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def set_instance_auth_token(
-        self, *, instance_id: str, auth_token: str, request_options: typing.Optional[RequestOptions] = None
+    async def set_instance_auth(
+        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StatusResponse]:
         """
-        Sets an authentication token for a specific instance.
+        Sets authentication data for a specific instance.
+        Accepts either API key authentication or general authentication data.
         This updates the auth_metadata for the specified instance.
 
         Parameters
@@ -1455,8 +1461,8 @@ class AsyncRawMcpServerClient:
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_token : str
-            The authentication token to save
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1467,11 +1473,13 @@ class AsyncRawMcpServerClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "mcp-server/instance/set-auth-token",
+            "mcp-server/instance/set-auth",
             method="POST",
             json={
                 "instanceId": instance_id,
-                "authToken": auth_token,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
             },
             headers={
                 "content-type": "application/json",

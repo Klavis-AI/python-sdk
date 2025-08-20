@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from .types import Authdata
+from .authdata import Authdata
 
 __all__ = ["Authdata"]

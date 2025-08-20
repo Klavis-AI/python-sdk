@@ -800,7 +800,7 @@ client.mcp_server.get_all_mcp_servers()
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">set_instance_auth_token</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">set_instance_auth</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -812,7 +812,8 @@ client.mcp_server.get_all_mcp_servers()
 <dl>
 <dd>
 
-Sets an authentication token for a specific instance.
+Sets authentication data for a specific instance.
+Accepts either API key authentication or general authentication data.
 This updates the auth_metadata for the specified instance.
 </dd>
 </dl>
@@ -828,14 +829,16 @@ This updates the auth_metadata for the specified instance.
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import ApiKeyAuth, Klavis
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.set_instance_auth_token(
+client.mcp_server.set_instance_auth(
     instance_id="instanceId",
-    auth_token="authToken",
+    auth_data=ApiKeyAuth(
+        token="token",
+    ),
 )
 
 ```
@@ -860,7 +863,7 @@ client.mcp_server.set_instance_auth_token(
 <dl>
 <dd>
 
-**auth_token:** `str` — The authentication token to save
+**auth_data:** `Authdata` — Authentication data
     
 </dd>
 </dl>

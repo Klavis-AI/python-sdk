@@ -18,6 +18,7 @@ from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
 from ..types.tool_format import ToolFormat
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
+from .types.authdata import Authdata
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -459,11 +460,12 @@ class McpServerClient:
         _response = self._raw_client.get_all_mcp_servers(request_options=request_options)
         return _response.data
 
-    def set_instance_auth_token(
-        self, *, instance_id: str, auth_token: str, request_options: typing.Optional[RequestOptions] = None
+    def set_instance_auth(
+        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
-        Sets an authentication token for a specific instance.
+        Sets authentication data for a specific instance.
+        Accepts either API key authentication or general authentication data.
         This updates the auth_metadata for the specified instance.
 
         Parameters
@@ -471,8 +473,8 @@ class McpServerClient:
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_token : str
-            The authentication token to save
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -484,18 +486,20 @@ class McpServerClient:
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import ApiKeyAuth, Klavis
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.set_instance_auth_token(
+        client.mcp_server.set_instance_auth(
             instance_id="instanceId",
-            auth_token="authToken",
+            auth_data=ApiKeyAuth(
+                token="token",
+            ),
         )
         """
-        _response = self._raw_client.set_instance_auth_token(
-            instance_id=instance_id, auth_token=auth_token, request_options=request_options
+        _response = self._raw_client.set_instance_auth(
+            instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
         return _response.data
 
@@ -1116,11 +1120,12 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.get_all_mcp_servers(request_options=request_options)
         return _response.data
 
-    async def set_instance_auth_token(
-        self, *, instance_id: str, auth_token: str, request_options: typing.Optional[RequestOptions] = None
+    async def set_instance_auth(
+        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
-        Sets an authentication token for a specific instance.
+        Sets authentication data for a specific instance.
+        Accepts either API key authentication or general authentication data.
         This updates the auth_metadata for the specified instance.
 
         Parameters
@@ -1128,8 +1133,8 @@ class AsyncMcpServerClient:
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_token : str
-            The authentication token to save
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1143,7 +1148,7 @@ class AsyncMcpServerClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import ApiKeyAuth, AsyncKlavis
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1151,16 +1156,18 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.set_instance_auth_token(
+            await client.mcp_server.set_instance_auth(
                 instance_id="instanceId",
-                auth_token="authToken",
+                auth_data=ApiKeyAuth(
+                    token="token",
+                ),
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.set_instance_auth_token(
-            instance_id=instance_id, auth_token=auth_token, request_options=request_options
+        _response = await self._raw_client.set_instance_auth(
+            instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
         return _response.data
 

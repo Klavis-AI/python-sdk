@@ -29,6 +29,7 @@ class OAuthServerName(str, enum.Enum):
     NOTION = "Notion"
     ONEDRIVE = "Onedrive"
     SALESFORCE = "Salesforce"
+    SHOPIFY = "Shopify"
     SLACK = "Slack"
     SUPABASE = "Supabase"
     XERO = "Xero"
@@ -60,6 +61,7 @@ class OAuthServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
+        shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         xero: typing.Callable[[], T_Result],
@@ -111,6 +113,8 @@ class OAuthServerName(str, enum.Enum):
             return onedrive()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
+        if self is OAuthServerName.SHOPIFY:
+            return shopify()
         if self is OAuthServerName.SLACK:
             return slack()
         if self is OAuthServerName.SUPABASE:
