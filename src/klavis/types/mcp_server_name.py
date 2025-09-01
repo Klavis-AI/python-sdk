@@ -12,6 +12,7 @@ class McpServerName(str, enum.Enum):
     ASANA = "Asana"
     ATTIO = "Attio"
     BRAVE_SEARCH = "Brave Search"
+    CAL_COM = "Cal.com"
     CLICK_UP = "ClickUp"
     CLOSE = "Close"
     COINBASE = "Coinbase"
@@ -24,6 +25,7 @@ class McpServerName(str, enum.Enum):
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
     FRESHDESK = "Freshdesk"
     GITHUB = "GitHub"
+    GIT_LAB = "GitLab"
     GMAIL = "Gmail"
     GONG = "Gong"
     GOOGLE_CALENDAR = "Google Calendar"
@@ -56,6 +58,7 @@ class McpServerName(str, enum.Enum):
     SLACK = "Slack"
     SUPABASE = "Supabase"
     TAVILY = "Tavily"
+    VERCEL = "Vercel"
     WHATS_APP = "WhatsApp"
     WORD_PRESS = "WordPress"
     YOUTUBE = "YouTube"
@@ -67,6 +70,7 @@ class McpServerName(str, enum.Enum):
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
         brave_search: typing.Callable[[], T_Result],
+        cal_com: typing.Callable[[], T_Result],
         click_up: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         coinbase: typing.Callable[[], T_Result],
@@ -79,6 +83,7 @@ class McpServerName(str, enum.Enum):
         firecrawl_web_search: typing.Callable[[], T_Result],
         freshdesk: typing.Callable[[], T_Result],
         github: typing.Callable[[], T_Result],
+        git_lab: typing.Callable[[], T_Result],
         gmail: typing.Callable[[], T_Result],
         gong: typing.Callable[[], T_Result],
         google_calendar: typing.Callable[[], T_Result],
@@ -111,6 +116,7 @@ class McpServerName(str, enum.Enum):
         slack: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         tavily: typing.Callable[[], T_Result],
+        vercel: typing.Callable[[], T_Result],
         whats_app: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
         youtube: typing.Callable[[], T_Result],
@@ -125,6 +131,8 @@ class McpServerName(str, enum.Enum):
             return attio()
         if self is McpServerName.BRAVE_SEARCH:
             return brave_search()
+        if self is McpServerName.CAL_COM:
+            return cal_com()
         if self is McpServerName.CLICK_UP:
             return click_up()
         if self is McpServerName.CLOSE:
@@ -149,6 +157,8 @@ class McpServerName(str, enum.Enum):
             return freshdesk()
         if self is McpServerName.GITHUB:
             return github()
+        if self is McpServerName.GIT_LAB:
+            return git_lab()
         if self is McpServerName.GMAIL:
             return gmail()
         if self is McpServerName.GONG:
@@ -213,6 +223,8 @@ class McpServerName(str, enum.Enum):
             return supabase()
         if self is McpServerName.TAVILY:
             return tavily()
+        if self is McpServerName.VERCEL:
+            return vercel()
         if self is McpServerName.WHATS_APP:
             return whats_app()
         if self is McpServerName.WORD_PRESS:

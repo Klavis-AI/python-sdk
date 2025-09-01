@@ -25,7 +25,11 @@ class UserClient:
         return self._raw_client
 
     def get_server_instances_by_user(
-        self, *, user_id: str, platform_name: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        user_id: str,
+        platform_name: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> GetServerInstancesResponse:
         """
         Get all MCP server instances information by user ID and platform name.
@@ -35,8 +39,8 @@ class UserClient:
         user_id : str
             The external user ID
 
-        platform_name : str
-            The platform name
+        platform_name : typing.Optional[str]
+            The platform name (optional)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -55,7 +59,6 @@ class UserClient:
         )
         client.user.get_server_instances_by_user(
             user_id="user_id",
-            platform_name="platform_name",
         )
         """
         _response = self._raw_client.get_server_instances_by_user(
@@ -115,7 +118,11 @@ class AsyncUserClient:
         return self._raw_client
 
     async def get_server_instances_by_user(
-        self, *, user_id: str, platform_name: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        user_id: str,
+        platform_name: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> GetServerInstancesResponse:
         """
         Get all MCP server instances information by user ID and platform name.
@@ -125,8 +132,8 @@ class AsyncUserClient:
         user_id : str
             The external user ID
 
-        platform_name : str
-            The platform name
+        platform_name : typing.Optional[str]
+            The platform name (optional)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -150,7 +157,6 @@ class AsyncUserClient:
         async def main() -> None:
             await client.user.get_server_instances_by_user(
                 user_id="user_id",
-                platform_name="platform_name",
             )
 
 

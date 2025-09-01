@@ -20,7 +20,11 @@ class RawUserClient:
         self._client_wrapper = client_wrapper
 
     def get_server_instances_by_user(
-        self, *, user_id: str, platform_name: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        user_id: str,
+        platform_name: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetServerInstancesResponse]:
         """
         Get all MCP server instances information by user ID and platform name.
@@ -30,8 +34,8 @@ class RawUserClient:
         user_id : str
             The external user ID
 
-        platform_name : str
-            The platform name
+        platform_name : typing.Optional[str]
+            The platform name (optional)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -134,7 +138,11 @@ class AsyncRawUserClient:
         self._client_wrapper = client_wrapper
 
     async def get_server_instances_by_user(
-        self, *, user_id: str, platform_name: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        user_id: str,
+        platform_name: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetServerInstancesResponse]:
         """
         Get all MCP server instances information by user ID and platform name.
@@ -144,8 +152,8 @@ class AsyncRawUserClient:
         user_id : str
             The external user ID
 
-        platform_name : str
-            The platform name
+        platform_name : typing.Optional[str]
+            The platform name (optional)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

@@ -3,7 +3,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FKlavis-AI%2Fpython-sdk)
 [![pypi](https://img.shields.io/pypi/v/klavis)](https://pypi.python.org/pypi/klavis)
 
-The Klavis Python library provides convenient access to the Klavis API from Python.
+The Klavis Python library provides convenient access to the Klavis APIs from Python.
 
 ## Installation
 

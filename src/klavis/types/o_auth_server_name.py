@@ -10,11 +10,17 @@ class OAuthServerName(str, enum.Enum):
     AIRTABLE = "Airtable"
     ASANA = "Asana"
     ATTIO = "Attio"
+    BOX = "Box"
+    CAL_COM = "Cal.com"
     CANVA = "Canva"
     CLICK_UP = "ClickUp"
     CLOSE = "Close"
     CONFLUENCE = "Confluence"
+    DIALPAD = "Dialpad"
+    DOCU_SIGN = "DocuSign"
+    FIGMA = "Figma"
     GIT_HUB = "GitHub"
+    GIT_LAB = "GitLab"
     GMAIL = "Gmail"
     GOOGLE_CALENDAR = "Google Calendar"
     GOOGLE_DOCS = "Google Docs"
@@ -22,16 +28,20 @@ class OAuthServerName(str, enum.Enum):
     GOOGLE_SHEETS = "Google Sheets"
     HUB_SPOT = "HubSpot"
     JIRA = "Jira"
+    KLAVIYO = "Klaviyo"
     LINEAR = "Linear"
     LINKED_IN = "LinkedIn"
     MONDAY = "Monday"
     MONEYBIRD = "Moneybird"
     NOTION = "Notion"
     ONEDRIVE = "Onedrive"
+    PAGER_DUTY = "PagerDuty"
     SALESFORCE = "Salesforce"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
+    STRIPE = "Stripe"
     SUPABASE = "Supabase"
+    VERCEL = "Vercel"
     XERO = "Xero"
     WORD_PRESS = "WordPress"
     DROPBOX = "Dropbox"
@@ -42,11 +52,17 @@ class OAuthServerName(str, enum.Enum):
         airtable: typing.Callable[[], T_Result],
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
+        box: typing.Callable[[], T_Result],
+        cal_com: typing.Callable[[], T_Result],
         canva: typing.Callable[[], T_Result],
         click_up: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         confluence: typing.Callable[[], T_Result],
+        dialpad: typing.Callable[[], T_Result],
+        docu_sign: typing.Callable[[], T_Result],
+        figma: typing.Callable[[], T_Result],
         git_hub: typing.Callable[[], T_Result],
+        git_lab: typing.Callable[[], T_Result],
         gmail: typing.Callable[[], T_Result],
         google_calendar: typing.Callable[[], T_Result],
         google_docs: typing.Callable[[], T_Result],
@@ -54,16 +70,20 @@ class OAuthServerName(str, enum.Enum):
         google_sheets: typing.Callable[[], T_Result],
         hub_spot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
+        klaviyo: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
         linked_in: typing.Callable[[], T_Result],
         monday: typing.Callable[[], T_Result],
         moneybird: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
+        pager_duty: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
+        stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
+        vercel: typing.Callable[[], T_Result],
         xero: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
         dropbox: typing.Callable[[], T_Result],
@@ -75,6 +95,10 @@ class OAuthServerName(str, enum.Enum):
             return asana()
         if self is OAuthServerName.ATTIO:
             return attio()
+        if self is OAuthServerName.BOX:
+            return box()
+        if self is OAuthServerName.CAL_COM:
+            return cal_com()
         if self is OAuthServerName.CANVA:
             return canva()
         if self is OAuthServerName.CLICK_UP:
@@ -83,8 +107,16 @@ class OAuthServerName(str, enum.Enum):
             return close()
         if self is OAuthServerName.CONFLUENCE:
             return confluence()
+        if self is OAuthServerName.DIALPAD:
+            return dialpad()
+        if self is OAuthServerName.DOCU_SIGN:
+            return docu_sign()
+        if self is OAuthServerName.FIGMA:
+            return figma()
         if self is OAuthServerName.GIT_HUB:
             return git_hub()
+        if self is OAuthServerName.GIT_LAB:
+            return git_lab()
         if self is OAuthServerName.GMAIL:
             return gmail()
         if self is OAuthServerName.GOOGLE_CALENDAR:
@@ -99,6 +131,8 @@ class OAuthServerName(str, enum.Enum):
             return hub_spot()
         if self is OAuthServerName.JIRA:
             return jira()
+        if self is OAuthServerName.KLAVIYO:
+            return klaviyo()
         if self is OAuthServerName.LINEAR:
             return linear()
         if self is OAuthServerName.LINKED_IN:
@@ -111,14 +145,20 @@ class OAuthServerName(str, enum.Enum):
             return notion()
         if self is OAuthServerName.ONEDRIVE:
             return onedrive()
+        if self is OAuthServerName.PAGER_DUTY:
+            return pager_duty()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
         if self is OAuthServerName.SHOPIFY:
             return shopify()
         if self is OAuthServerName.SLACK:
             return slack()
+        if self is OAuthServerName.STRIPE:
+            return stripe()
         if self is OAuthServerName.SUPABASE:
             return supabase()
+        if self is OAuthServerName.VERCEL:
+            return vercel()
         if self is OAuthServerName.XERO:
             return xero()
         if self is OAuthServerName.WORD_PRESS:

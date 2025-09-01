@@ -12,7 +12,6 @@ from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.get_o_auth_url_response import GetOAuthUrlResponse
-from ..types.get_tools_response import GetToolsResponse
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
@@ -150,7 +149,7 @@ class McpServerClient:
         *,
         server_name: McpServerName,
         user_id: str,
-        platform_name: str,
+        platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
@@ -168,8 +167,8 @@ class McpServerClient:
         user_id : str
             The identifier for the user requesting the server URL.
 
-        platform_name : str
-            The name of the platform associated with the user.
+        platform_name : typing.Optional[str]
+            The name of the platform associated with the user. Optional.
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
@@ -192,7 +191,6 @@ class McpServerClient:
         client.mcp_server.create_server_instance(
             server_name=McpServerName.AFFINITY,
             user_id="userId",
-            platform_name="platformName",
         )
         """
         _response = self._raw_client.create_server_instance(
@@ -208,8 +206,9 @@ class McpServerClient:
         self,
         *,
         user_id: str,
-        platform_name: str,
+        platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        is_hierarchical: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
         """
@@ -222,11 +221,14 @@ class McpServerClient:
         user_id : str
             The identifier for the user requesting the server URL.
 
-        platform_name : str
-            The name of the platform associated with the user.
+        platform_name : typing.Optional[str]
+            The name of the platform associated with the user. Optional.
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        is_hierarchical : typing.Optional[bool]
+            Whether the server is hierarchical. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -245,13 +247,13 @@ class McpServerClient:
         )
         client.mcp_server.create_unified_mcp_server_instance(
             user_id="userId",
-            platform_name="platformName",
         )
         """
         _response = self._raw_client.create_unified_mcp_server_instance(
             user_id=user_id,
             platform_name=platform_name,
             connection_type=connection_type,
+            is_hierarchical=is_hierarchical,
             request_options=request_options,
         )
         return _response.data
@@ -401,23 +403,29 @@ class McpServerClient:
         return _response.data
 
     def get_tools(
-        self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> GetToolsResponse:
+        self,
+        server_name: McpServerName,
+        *,
+        format: typing.Optional[ToolFormat] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ListToolsResponse:
         """
-        Get list of tool names for a specific MCP server.
-        Mainly used for querying metadata about the MCP server.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
         server_name : McpServerName
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
+        format : typing.Optional[ToolFormat]
+            The format to return tools in. Default is MCP Native format for maximum compatibility.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetToolsResponse
+        ListToolsResponse
             Successful Response
 
         Examples
@@ -431,7 +439,7 @@ class McpServerClient:
             server_name=McpServerName.AFFINITY,
         )
         """
-        _response = self._raw_client.get_tools(server_name, request_options=request_options)
+        _response = self._raw_client.get_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
@@ -744,7 +752,7 @@ class AsyncMcpServerClient:
         *,
         server_name: McpServerName,
         user_id: str,
-        platform_name: str,
+        platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
@@ -762,8 +770,8 @@ class AsyncMcpServerClient:
         user_id : str
             The identifier for the user requesting the server URL.
 
-        platform_name : str
-            The name of the platform associated with the user.
+        platform_name : typing.Optional[str]
+            The name of the platform associated with the user. Optional.
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
@@ -791,7 +799,6 @@ class AsyncMcpServerClient:
             await client.mcp_server.create_server_instance(
                 server_name=McpServerName.AFFINITY,
                 user_id="userId",
-                platform_name="platformName",
             )
 
 
@@ -810,8 +817,9 @@ class AsyncMcpServerClient:
         self,
         *,
         user_id: str,
-        platform_name: str,
+        platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        is_hierarchical: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
         """
@@ -824,11 +832,14 @@ class AsyncMcpServerClient:
         user_id : str
             The identifier for the user requesting the server URL.
 
-        platform_name : str
-            The name of the platform associated with the user.
+        platform_name : typing.Optional[str]
+            The name of the platform associated with the user. Optional.
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        is_hierarchical : typing.Optional[bool]
+            Whether the server is hierarchical. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -852,7 +863,6 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.create_unified_mcp_server_instance(
                 user_id="userId",
-                platform_name="platformName",
             )
 
 
@@ -862,6 +872,7 @@ class AsyncMcpServerClient:
             user_id=user_id,
             platform_name=platform_name,
             connection_type=connection_type,
+            is_hierarchical=is_hierarchical,
             request_options=request_options,
         )
         return _response.data
@@ -1043,23 +1054,29 @@ class AsyncMcpServerClient:
         return _response.data
 
     async def get_tools(
-        self, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> GetToolsResponse:
+        self,
+        server_name: McpServerName,
+        *,
+        format: typing.Optional[ToolFormat] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ListToolsResponse:
         """
-        Get list of tool names for a specific MCP server.
-        Mainly used for querying metadata about the MCP server.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
         server_name : McpServerName
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
+        format : typing.Optional[ToolFormat]
+            The format to return tools in. Default is MCP Native format for maximum compatibility.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetToolsResponse
+        ListToolsResponse
             Successful Response
 
         Examples
@@ -1081,7 +1098,7 @@ class AsyncMcpServerClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_tools(server_name, request_options=request_options)
+        _response = await self._raw_client.get_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     async def get_all_mcp_servers(

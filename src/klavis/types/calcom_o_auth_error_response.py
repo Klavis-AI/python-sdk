@@ -4,13 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .server_tool import ServerTool
 
 
-class GetToolsResponse(UniversalBaseModel):
-    tools: typing.Optional[typing.List[ServerTool]] = pydantic.Field(default=None)
+class CalcomOAuthErrorResponse(UniversalBaseModel):
+    error: str = pydantic.Field()
     """
-    List of available tools with their descriptions
+    Error message from the OAuth process
+    """
+
+    message: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Additional error details
     """
 
     if IS_PYDANTIC_V2:

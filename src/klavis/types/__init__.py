@@ -3,6 +3,8 @@
 # isort: skip_file
 
 from .api_key_auth import ApiKeyAuth
+from .calcom_o_auth_error_response import CalcomOAuthErrorResponse
+from .calcom_o_auth_success_response import CalcomOAuthSuccessResponse
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
@@ -16,7 +18,6 @@ from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
 from .get_o_auth_url_response import GetOAuthUrlResponse
 from .get_server_instances_response import GetServerInstancesResponse
-from .get_tools_response import GetToolsResponse
 from .http_validation_error import HttpValidationError
 from .list_tools_response import ListToolsResponse
 from .mcp_server import McpServer
@@ -31,6 +32,8 @@ from .white_labeling_response import WhiteLabelingResponse
 
 __all__ = [
     "ApiKeyAuth",
+    "CalcomOAuthErrorResponse",
+    "CalcomOAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -44,7 +47,6 @@ __all__ = [
     "GetMcpServersResponse",
     "GetOAuthUrlResponse",
     "GetServerInstancesResponse",
-    "GetToolsResponse",
     "HttpValidationError",
     "ListToolsResponse",
     "McpServer",

@@ -16,6 +16,7 @@ class ExtendedMcpServer(UniversalBaseModel):
     tools: typing.Optional[typing.List[ServerTool]] = None
     auth_needed: typing_extensions.Annotated[typing.Optional[bool], FieldMetadata(alias="authNeeded")] = None
     is_authenticated: typing_extensions.Annotated[typing.Optional[bool], FieldMetadata(alias="isAuthenticated")] = None
+    server_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="serverUrl")] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
