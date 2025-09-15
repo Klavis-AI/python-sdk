@@ -3,5 +3,6 @@
 # isort: skip_file
 
 from .authdata import Authdata
+from .servers import Servers
 
-__all__ = ["Authdata"]
+__all__ = ["Authdata", "Servers"]

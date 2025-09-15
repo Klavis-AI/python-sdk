@@ -186,6 +186,340 @@ client.mcp_server.list_tools(
 </dl>
 </details>
 
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">create_strata_server</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a Strata MCP server.
+
+Parameters:
+- servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+- externalServers: Optional list of external MCP servers to validate and add
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.create_strata_server(
+    user_id="userId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The identifier for the user
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**servers:** `typing.Optional[Servers]` — List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_servers:** `typing.Optional[typing.Sequence[ExternalServerRequest]]` — Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">add_servers_to_strata</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add servers to an existing Strata MCP server.
+
+Parameters:
+- servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
+- externalServers: Optional list of external MCP servers to validate and add
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.add_servers_to_strata(
+    strata_id="strataId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` — The strata server ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**servers:** `typing.Optional[Servers]` — List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_servers:** `typing.Optional[typing.Sequence[ExternalServerRequest]]` — Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">delete_servers_from_strata</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete servers from an existing Strata MCP server.
+
+Parameters:
+- servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
+- externalServers: Optional list of external server names to delete
+
+Returns separate lists for deleted Klavis servers and deleted external servers.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.delete_servers_from_strata(
+    strata_id="strataId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` — The strata server ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**servers:** `typing.Optional[Servers]` — List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_servers:** `typing.Optional[typing.Sequence[str]]` — Optional list of external server names to delete. These are the names of previously added external MCP servers.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_instance</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get information about an existing Strata MCP server instance.
+Returns the strata URL, connected klavis servers, connected external servers (with URLs), 
+and authentication URLs for klavis servers.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.get_strata_instance()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">create_server_instance</a>(...)</code></summary>
 <dl>
 <dd>
@@ -265,102 +599,6 @@ client.mcp_server.create_server_instance(
 <dd>
 
 **connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">create_unified_mcp_server_instance</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a URL for the Unified MCP server,
-validating the request with an API key and user details.
-Returns the existing server URL if it already exists for the user.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mcp_server.create_unified_mcp_server_instance(
-    user_id="userId",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**user_id:** `str` — The identifier for the user requesting the server URL.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**platform_name:** `typing.Optional[str]` — The name of the platform associated with the user. Optional.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**is_hierarchical:** `typing.Optional[bool]` — Whether the server is hierarchical. Default is False.
     
 </dd>
 </dl>
@@ -4781,107 +5019,6 @@ client.figma_oauth.authorize_figma(
 <dd>
 
 **scope:** `typing.Optional[str]` — Optional OAuth scopes to request
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## TwitterOauth
-<details><summary><code>client.twitter_oauth.<a href="src/klavis/twitter_oauth/client.py">authorize_twitter</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Twitter OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (space-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.twitter_oauth.authorize_twitter(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
     
 </dd>
 </dl>

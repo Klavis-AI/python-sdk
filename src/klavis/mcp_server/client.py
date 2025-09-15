@@ -8,6 +8,7 @@ from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
 from ..types.create_self_hosted_server_response import CreateSelfHostedServerResponse
 from ..types.create_server_response import CreateServerResponse
+from ..types.external_server_request import ExternalServerRequest
 from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
@@ -15,9 +16,14 @@ from ..types.get_o_auth_url_response import GetOAuthUrlResponse
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
+from ..types.strata_add_servers_response import StrataAddServersResponse
+from ..types.strata_create_response import StrataCreateResponse
+from ..types.strata_delete_servers_response import StrataDeleteServersResponse
+from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
 from .types.authdata import Authdata
+from .types.servers import Servers
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -144,6 +150,186 @@ class McpServerClient:
         )
         return _response.data
 
+    def create_strata_server(
+        self,
+        *,
+        user_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataCreateResponse:
+        """
+        Create a Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataCreateResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.create_strata_server(
+            user_id="userId",
+        )
+        """
+        _response = self._raw_client.create_strata_server(
+            user_id=user_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    def add_servers_to_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataAddServersResponse:
+        """
+        Add servers to an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataAddServersResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.add_servers_to_strata(
+            strata_id="strataId",
+        )
+        """
+        _response = self._raw_client.add_servers_to_strata(
+            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    def delete_servers_from_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataDeleteServersResponse:
+        """
+        Delete servers from an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Optional list of external server names to delete
+
+        Returns separate lists for deleted Klavis servers and deleted external servers.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+
+        external_servers : typing.Optional[typing.Sequence[str]]
+            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataDeleteServersResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.delete_servers_from_strata(
+            strata_id="strataId",
+        )
+        """
+        _response = self._raw_client.delete_servers_from_strata(
+            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    def get_strata_instance(self, *, request_options: typing.Optional[RequestOptions] = None) -> StrataGetResponse:
+        """
+        Get information about an existing Strata MCP server instance.
+        Returns the strata URL, connected klavis servers, connected external servers (with URLs),
+        and authentication URLs for klavis servers.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataGetResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.get_strata_instance()
+        """
+        _response = self._raw_client.get_strata_instance(request_options=request_options)
+        return _response.data
+
     def create_server_instance(
         self,
         *,
@@ -198,62 +384,6 @@ class McpServerClient:
             user_id=user_id,
             platform_name=platform_name,
             connection_type=connection_type,
-            request_options=request_options,
-        )
-        return _response.data
-
-    def create_unified_mcp_server_instance(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = OMIT,
-        connection_type: typing.Optional[ConnectionType] = OMIT,
-        is_hierarchical: typing.Optional[bool] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateServerResponse:
-        """
-        Creates a URL for the Unified MCP server,
-        validating the request with an API key and user details.
-        Returns the existing server URL if it already exists for the user.
-
-        Parameters
-        ----------
-        user_id : str
-            The identifier for the user requesting the server URL.
-
-        platform_name : typing.Optional[str]
-            The name of the platform associated with the user. Optional.
-
-        connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-
-        is_hierarchical : typing.Optional[bool]
-            Whether the server is hierarchical. Default is False.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CreateServerResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.mcp_server.create_unified_mcp_server_instance(
-            user_id="userId",
-        )
-        """
-        _response = self._raw_client.create_unified_mcp_server_instance(
-            user_id=user_id,
-            platform_name=platform_name,
-            connection_type=connection_type,
-            is_hierarchical=is_hierarchical,
             request_options=request_options,
         )
         return _response.data
@@ -747,6 +877,220 @@ class AsyncMcpServerClient:
         )
         return _response.data
 
+    async def create_strata_server(
+        self,
+        *,
+        user_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataCreateResponse:
+        """
+        Create a Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataCreateResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.create_strata_server(
+                user_id="userId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_strata_server(
+            user_id=user_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    async def add_servers_to_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataAddServersResponse:
+        """
+        Add servers to an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataAddServersResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.add_servers_to_strata(
+                strata_id="strataId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.add_servers_to_strata(
+            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    async def delete_servers_from_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StrataDeleteServersResponse:
+        """
+        Delete servers from an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Optional list of external server names to delete
+
+        Returns separate lists for deleted Klavis servers and deleted external servers.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+
+        external_servers : typing.Optional[typing.Sequence[str]]
+            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataDeleteServersResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.delete_servers_from_strata(
+                strata_id="strataId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_servers_from_strata(
+            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+        )
+        return _response.data
+
+    async def get_strata_instance(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StrataGetResponse:
+        """
+        Get information about an existing Strata MCP server instance.
+        Returns the strata URL, connected klavis servers, connected external servers (with URLs),
+        and authentication URLs for klavis servers.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataGetResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.get_strata_instance()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_strata_instance(request_options=request_options)
+        return _response.data
+
     async def create_server_instance(
         self,
         *,
@@ -809,70 +1153,6 @@ class AsyncMcpServerClient:
             user_id=user_id,
             platform_name=platform_name,
             connection_type=connection_type,
-            request_options=request_options,
-        )
-        return _response.data
-
-    async def create_unified_mcp_server_instance(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = OMIT,
-        connection_type: typing.Optional[ConnectionType] = OMIT,
-        is_hierarchical: typing.Optional[bool] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CreateServerResponse:
-        """
-        Creates a URL for the Unified MCP server,
-        validating the request with an API key and user details.
-        Returns the existing server URL if it already exists for the user.
-
-        Parameters
-        ----------
-        user_id : str
-            The identifier for the user requesting the server URL.
-
-        platform_name : typing.Optional[str]
-            The name of the platform associated with the user. Optional.
-
-        connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-
-        is_hierarchical : typing.Optional[bool]
-            Whether the server is hierarchical. Default is False.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CreateServerResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.mcp_server.create_unified_mcp_server_instance(
-                user_id="userId",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.create_unified_mcp_server_instance(
-            user_id=user_id,
-            platform_name=platform_name,
-            connection_type=connection_type,
-            is_hierarchical=is_hierarchical,
             request_options=request_options,
         )
         return _response.data

@@ -15,6 +15,7 @@ from ..types.call_tool_response import CallToolResponse
 from ..types.connection_type import ConnectionType
 from ..types.create_self_hosted_server_response import CreateSelfHostedServerResponse
 from ..types.create_server_response import CreateServerResponse
+from ..types.external_server_request import ExternalServerRequest
 from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
@@ -23,8 +24,13 @@ from ..types.http_validation_error import HttpValidationError
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
+from ..types.strata_add_servers_response import StrataAddServersResponse
+from ..types.strata_create_response import StrataCreateResponse
+from ..types.strata_delete_servers_response import StrataDeleteServersResponse
+from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
 from .types.authdata import Authdata
+from .types.servers import Servers
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -184,6 +190,289 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def create_strata_server(
+        self,
+        *,
+        user_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StrataCreateResponse]:
+        """
+        Create a Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataCreateResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/create",
+            method="POST",
+            json={
+                "userId": user_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": convert_and_respect_annotation_metadata(
+                    object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataCreateResponse,
+                    parse_obj_as(
+                        type_=StrataCreateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def add_servers_to_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StrataAddServersResponse]:
+        """
+        Add servers to an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataAddServersResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/add",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": convert_and_respect_annotation_metadata(
+                    object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataAddServersResponse,
+                    parse_obj_as(
+                        type_=StrataAddServersResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_servers_from_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StrataDeleteServersResponse]:
+        """
+        Delete servers from an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Optional list of external server names to delete
+
+        Returns separate lists for deleted Klavis servers and deleted external servers.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+
+        external_servers : typing.Optional[typing.Sequence[str]]
+            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataDeleteServersResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/delete",
+            method="DELETE",
+            json={
+                "strataId": strata_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": external_servers,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataDeleteServersResponse,
+                    parse_obj_as(
+                        type_=StrataDeleteServersResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_strata_instance(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StrataGetResponse]:
+        """
+        Get information about an existing Strata MCP server instance.
+        Returns the strata URL, connected klavis servers, connected external servers (with URLs),
+        and authentication URLs for klavis servers.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataGetResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/get",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataGetResponse,
+                    parse_obj_as(
+                        type_=StrataGetResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def create_server_instance(
         self,
         *,
@@ -229,83 +518,6 @@ class RawMcpServerClient:
                 "userId": user_id,
                 "platformName": platform_name,
                 "connectionType": connection_type,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    CreateServerResponse,
-                    parse_obj_as(
-                        type_=CreateServerResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_unified_mcp_server_instance(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = OMIT,
-        connection_type: typing.Optional[ConnectionType] = OMIT,
-        is_hierarchical: typing.Optional[bool] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateServerResponse]:
-        """
-        Creates a URL for the Unified MCP server,
-        validating the request with an API key and user details.
-        Returns the existing server URL if it already exists for the user.
-
-        Parameters
-        ----------
-        user_id : str
-            The identifier for the user requesting the server URL.
-
-        platform_name : typing.Optional[str]
-            The name of the platform associated with the user. Optional.
-
-        connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-
-        is_hierarchical : typing.Optional[bool]
-            Whether the server is hierarchical. Default is False.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[CreateServerResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "mcp-server/unified/instance/create",
-            method="POST",
-            json={
-                "userId": user_id,
-                "platformName": platform_name,
-                "connectionType": connection_type,
-                "isHierarchical": is_hierarchical,
             },
             headers={
                 "content-type": "application/json",
@@ -1007,6 +1219,289 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def create_strata_server(
+        self,
+        *,
+        user_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StrataCreateResponse]:
+        """
+        Create a Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataCreateResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/create",
+            method="POST",
+            json={
+                "userId": user_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": convert_and_respect_annotation_metadata(
+                    object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataCreateResponse,
+                    parse_obj_as(
+                        type_=StrataCreateResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def add_servers_to_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StrataAddServersResponse]:
+        """
+        Add servers to an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
+        - externalServers: Optional list of external MCP servers to validate and add
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+
+        external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
+            Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataAddServersResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/add",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": convert_and_respect_annotation_metadata(
+                    object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataAddServersResponse,
+                    parse_obj_as(
+                        type_=StrataAddServersResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_servers_from_strata(
+        self,
+        *,
+        strata_id: str,
+        servers: typing.Optional[Servers] = OMIT,
+        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StrataDeleteServersResponse]:
+        """
+        Delete servers from an existing Strata MCP server.
+
+        Parameters:
+        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Optional list of external server names to delete
+
+        Returns separate lists for deleted Klavis servers and deleted external servers.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        servers : typing.Optional[Servers]
+            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+
+        external_servers : typing.Optional[typing.Sequence[str]]
+            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataDeleteServersResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/delete",
+            method="DELETE",
+            json={
+                "strataId": strata_id,
+                "servers": convert_and_respect_annotation_metadata(
+                    object_=servers, annotation=Servers, direction="write"
+                ),
+                "externalServers": external_servers,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataDeleteServersResponse,
+                    parse_obj_as(
+                        type_=StrataDeleteServersResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_strata_instance(
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StrataGetResponse]:
+        """
+        Get information about an existing Strata MCP server instance.
+        Returns the strata URL, connected klavis servers, connected external servers (with URLs),
+        and authentication URLs for klavis servers.
+
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataGetResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/get",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataGetResponse,
+                    parse_obj_as(
+                        type_=StrataGetResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def create_server_instance(
         self,
         *,
@@ -1052,83 +1547,6 @@ class AsyncRawMcpServerClient:
                 "userId": user_id,
                 "platformName": platform_name,
                 "connectionType": connection_type,
-            },
-            headers={
-                "content-type": "application/json",
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    CreateServerResponse,
-                    parse_obj_as(
-                        type_=CreateServerResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def create_unified_mcp_server_instance(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = OMIT,
-        connection_type: typing.Optional[ConnectionType] = OMIT,
-        is_hierarchical: typing.Optional[bool] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateServerResponse]:
-        """
-        Creates a URL for the Unified MCP server,
-        validating the request with an API key and user details.
-        Returns the existing server URL if it already exists for the user.
-
-        Parameters
-        ----------
-        user_id : str
-            The identifier for the user requesting the server URL.
-
-        platform_name : typing.Optional[str]
-            The name of the platform associated with the user. Optional.
-
-        connection_type : typing.Optional[ConnectionType]
-            The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
-
-        is_hierarchical : typing.Optional[bool]
-            Whether the server is hierarchical. Default is False.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[CreateServerResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "mcp-server/unified/instance/create",
-            method="POST",
-            json={
-                "userId": user_id,
-                "platformName": platform_name,
-                "connectionType": connection_type,
-                "isHierarchical": is_hierarchical,
             },
             headers={
                 "content-type": "application/json",

@@ -12,6 +12,8 @@ from .create_self_hosted_server_response import CreateSelfHostedServerResponse
 from .create_server_response import CreateServerResponse
 from .delete_user_response import DeleteUserResponse
 from .extended_mcp_server import ExtendedMcpServer
+from .external_server_info import ExternalServerInfo
+from .external_server_request import ExternalServerRequest
 from .general_auth import GeneralAuth
 from .get_auth_data_response import GetAuthDataResponse
 from .get_instance_response import GetInstanceResponse
@@ -25,6 +27,11 @@ from .mcp_server_name import McpServerName
 from .o_auth_server_name import OAuthServerName
 from .server_tool import ServerTool
 from .status_response import StatusResponse
+from .strata_add_servers_response import StrataAddServersResponse
+from .strata_create_response import StrataCreateResponse
+from .strata_delete_servers_response import StrataDeleteServersResponse
+from .strata_get_request import StrataGetRequest
+from .strata_get_response import StrataGetResponse
 from .tool_format import ToolFormat
 from .validation_error import ValidationError
 from .validation_error_loc_item import ValidationErrorLocItem
@@ -41,6 +48,8 @@ __all__ = [
     "CreateServerResponse",
     "DeleteUserResponse",
     "ExtendedMcpServer",
+    "ExternalServerInfo",
+    "ExternalServerRequest",
     "GeneralAuth",
     "GetAuthDataResponse",
     "GetInstanceResponse",
@@ -54,6 +63,11 @@ __all__ = [
     "OAuthServerName",
     "ServerTool",
     "StatusResponse",
+    "StrataAddServersResponse",
+    "StrataCreateResponse",
+    "StrataDeleteServersResponse",
+    "StrataGetRequest",
+    "StrataGetResponse",
     "ToolFormat",
     "ValidationError",
     "ValidationErrorLocItem",

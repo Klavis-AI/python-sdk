@@ -36,6 +36,7 @@ class OAuthServerName(str, enum.Enum):
     NOTION = "Notion"
     ONEDRIVE = "Onedrive"
     PAGER_DUTY = "PagerDuty"
+    PIPEDRIVE = "Pipedrive"
     SALESFORCE = "Salesforce"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
@@ -78,6 +79,7 @@ class OAuthServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
         pager_duty: typing.Callable[[], T_Result],
+        pipedrive: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
@@ -147,6 +149,8 @@ class OAuthServerName(str, enum.Enum):
             return onedrive()
         if self is OAuthServerName.PAGER_DUTY:
             return pager_duty()
+        if self is OAuthServerName.PIPEDRIVE:
+            return pipedrive()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
         if self is OAuthServerName.SHOPIFY:

@@ -13,6 +13,8 @@ from .types import (
     CreateServerResponse,
     DeleteUserResponse,
     ExtendedMcpServer,
+    ExternalServerInfo,
+    ExternalServerRequest,
     GeneralAuth,
     GetAuthDataResponse,
     GetInstanceResponse,
@@ -26,6 +28,11 @@ from .types import (
     OAuthServerName,
     ServerTool,
     StatusResponse,
+    StrataAddServersResponse,
+    StrataCreateResponse,
+    StrataDeleteServersResponse,
+    StrataGetRequest,
+    StrataGetResponse,
     ToolFormat,
     ValidationError,
     ValidationErrorLocItem,
@@ -67,7 +74,6 @@ from . import (
     slack_oauth,
     stripe_connect_oauth,
     supabase_oauth,
-    twitter_oauth,
     user,
     vercel_oauth,
     white_labeling,
@@ -77,7 +83,7 @@ from . import (
 )
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
-from .mcp_server import Authdata
+from .mcp_server import Authdata, Servers
 from .version import __version__
 
 __all__ = [
@@ -94,6 +100,8 @@ __all__ = [
     "CreateServerResponse",
     "DeleteUserResponse",
     "ExtendedMcpServer",
+    "ExternalServerInfo",
+    "ExternalServerRequest",
     "GeneralAuth",
     "GetAuthDataResponse",
     "GetInstanceResponse",
@@ -108,7 +116,13 @@ __all__ = [
     "McpServerName",
     "OAuthServerName",
     "ServerTool",
+    "Servers",
     "StatusResponse",
+    "StrataAddServersResponse",
+    "StrataCreateResponse",
+    "StrataDeleteServersResponse",
+    "StrataGetRequest",
+    "StrataGetResponse",
     "ToolFormat",
     "UnprocessableEntityError",
     "ValidationError",
@@ -149,7 +163,6 @@ __all__ = [
     "slack_oauth",
     "stripe_connect_oauth",
     "supabase_oauth",
-    "twitter_oauth",
     "user",
     "vercel_oauth",
     "white_labeling",

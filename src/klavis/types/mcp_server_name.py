@@ -47,7 +47,7 @@ class McpServerName(str, enum.Enum):
     MONEYBIRD = "Moneybird"
     MOTION = "Motion"
     NOTION = "Notion"
-    ONEDRIVE = "Onedrive"
+    ONE_DRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
     PLAI = "Plai"
     POSTGRES = "Postgres"
@@ -62,6 +62,18 @@ class McpServerName(str, enum.Enum):
     WHATS_APP = "WhatsApp"
     WORD_PRESS = "WordPress"
     YOUTUBE = "YouTube"
+    CLOUDFLARE = "Cloudflare"
+    STRIPE = "Stripe"
+    FIGMA = "Figma"
+    PIPEDRIVE = "Pipedrive"
+    KLAVIYO = "Klaviyo"
+    BOX = "Box"
+    DIALPAD = "Dialpad"
+    DOCU_SIGN = "DocuSign"
+    ELEVEN_LABS = "ElevenLabs"
+    PAGER_DUTY = "PagerDuty"
+    POST_HOG = "PostHog"
+    SEND_GRID = "SendGrid"
 
     def visit(
         self,
@@ -105,7 +117,7 @@ class McpServerName(str, enum.Enum):
         moneybird: typing.Callable[[], T_Result],
         motion: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
-        onedrive: typing.Callable[[], T_Result],
+        one_drive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
@@ -120,6 +132,18 @@ class McpServerName(str, enum.Enum):
         whats_app: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
         youtube: typing.Callable[[], T_Result],
+        cloudflare: typing.Callable[[], T_Result],
+        stripe: typing.Callable[[], T_Result],
+        figma: typing.Callable[[], T_Result],
+        pipedrive: typing.Callable[[], T_Result],
+        klaviyo: typing.Callable[[], T_Result],
+        box: typing.Callable[[], T_Result],
+        dialpad: typing.Callable[[], T_Result],
+        docu_sign: typing.Callable[[], T_Result],
+        eleven_labs: typing.Callable[[], T_Result],
+        pager_duty: typing.Callable[[], T_Result],
+        post_hog: typing.Callable[[], T_Result],
+        send_grid: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
@@ -201,8 +225,8 @@ class McpServerName(str, enum.Enum):
             return motion()
         if self is McpServerName.NOTION:
             return notion()
-        if self is McpServerName.ONEDRIVE:
-            return onedrive()
+        if self is McpServerName.ONE_DRIVE:
+            return one_drive()
         if self is McpServerName.OPENROUTER:
             return openrouter()
         if self is McpServerName.PLAI:
@@ -231,3 +255,27 @@ class McpServerName(str, enum.Enum):
             return word_press()
         if self is McpServerName.YOUTUBE:
             return youtube()
+        if self is McpServerName.CLOUDFLARE:
+            return cloudflare()
+        if self is McpServerName.STRIPE:
+            return stripe()
+        if self is McpServerName.FIGMA:
+            return figma()
+        if self is McpServerName.PIPEDRIVE:
+            return pipedrive()
+        if self is McpServerName.KLAVIYO:
+            return klaviyo()
+        if self is McpServerName.BOX:
+            return box()
+        if self is McpServerName.DIALPAD:
+            return dialpad()
+        if self is McpServerName.DOCU_SIGN:
+            return docu_sign()
+        if self is McpServerName.ELEVEN_LABS:
+            return eleven_labs()
+        if self is McpServerName.PAGER_DUTY:
+            return pager_duty()
+        if self is McpServerName.POST_HOG:
+            return post_hog()
+        if self is McpServerName.SEND_GRID:
+            return send_grid()

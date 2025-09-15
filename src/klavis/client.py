@@ -39,7 +39,6 @@ from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauth
 from .slack_oauth.client import AsyncSlackOauthClient, SlackOauthClient
 from .stripe_connect_oauth.client import AsyncStripeConnectOauthClient, StripeConnectOauthClient
 from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
-from .twitter_oauth.client import AsyncTwitterOauthClient, TwitterOauthClient
 from .user.client import AsyncUserClient, UserClient
 from .vercel_oauth.client import AsyncVercelOauthClient, VercelOauthClient
 from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
@@ -144,7 +143,6 @@ class Klavis:
         self.vercel_oauth = VercelOauthClient(client_wrapper=self._client_wrapper)
         self.pipedrive_oauth = PipedriveOauthClient(client_wrapper=self._client_wrapper)
         self.figma_oauth = FigmaOauthClient(client_wrapper=self._client_wrapper)
-        self.twitter_oauth = TwitterOauthClient(client_wrapper=self._client_wrapper)
         self.klaviyo_oauth = KlaviyoOauthClient(client_wrapper=self._client_wrapper)
         self.pagerduty_oauth = PagerdutyOauthClient(client_wrapper=self._client_wrapper)
         self.docusign_oauth = DocusignOauthClient(client_wrapper=self._client_wrapper)
@@ -247,7 +245,6 @@ class AsyncKlavis:
         self.vercel_oauth = AsyncVercelOauthClient(client_wrapper=self._client_wrapper)
         self.pipedrive_oauth = AsyncPipedriveOauthClient(client_wrapper=self._client_wrapper)
         self.figma_oauth = AsyncFigmaOauthClient(client_wrapper=self._client_wrapper)
-        self.twitter_oauth = AsyncTwitterOauthClient(client_wrapper=self._client_wrapper)
         self.klaviyo_oauth = AsyncKlaviyoOauthClient(client_wrapper=self._client_wrapper)
         self.pagerduty_oauth = AsyncPagerdutyOauthClient(client_wrapper=self._client_wrapper)
         self.docusign_oauth = AsyncDocusignOauthClient(client_wrapper=self._client_wrapper)
