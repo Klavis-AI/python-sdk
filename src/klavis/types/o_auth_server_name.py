@@ -18,6 +18,7 @@ class OAuthServerName(str, enum.Enum):
     CONFLUENCE = "Confluence"
     DIALPAD = "Dialpad"
     DOCU_SIGN = "DocuSign"
+    DROPBOX = "Dropbox"
     FIGMA = "Figma"
     GIT_HUB = "GitHub"
     GIT_LAB = "GitLab"
@@ -37,16 +38,16 @@ class OAuthServerName(str, enum.Enum):
     ONEDRIVE = "Onedrive"
     PAGER_DUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
+    QUICK_BOOKS = "QuickBooks"
     SALESFORCE = "Salesforce"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
     VERCEL = "Vercel"
-    XERO = "Xero"
     WORD_PRESS = "WordPress"
-    DROPBOX = "Dropbox"
-    QUICK_BOOKS = "QuickBooks"
+    XERO = "Xero"
+    ZENDESK = "Zendesk"
 
     def visit(
         self,
@@ -61,6 +62,7 @@ class OAuthServerName(str, enum.Enum):
         confluence: typing.Callable[[], T_Result],
         dialpad: typing.Callable[[], T_Result],
         docu_sign: typing.Callable[[], T_Result],
+        dropbox: typing.Callable[[], T_Result],
         figma: typing.Callable[[], T_Result],
         git_hub: typing.Callable[[], T_Result],
         git_lab: typing.Callable[[], T_Result],
@@ -80,16 +82,16 @@ class OAuthServerName(str, enum.Enum):
         onedrive: typing.Callable[[], T_Result],
         pager_duty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
+        quick_books: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         vercel: typing.Callable[[], T_Result],
-        xero: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
-        dropbox: typing.Callable[[], T_Result],
-        quick_books: typing.Callable[[], T_Result],
+        xero: typing.Callable[[], T_Result],
+        zendesk: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is OAuthServerName.AIRTABLE:
             return airtable()
@@ -113,6 +115,8 @@ class OAuthServerName(str, enum.Enum):
             return dialpad()
         if self is OAuthServerName.DOCU_SIGN:
             return docu_sign()
+        if self is OAuthServerName.DROPBOX:
+            return dropbox()
         if self is OAuthServerName.FIGMA:
             return figma()
         if self is OAuthServerName.GIT_HUB:
@@ -151,6 +155,8 @@ class OAuthServerName(str, enum.Enum):
             return pager_duty()
         if self is OAuthServerName.PIPEDRIVE:
             return pipedrive()
+        if self is OAuthServerName.QUICK_BOOKS:
+            return quick_books()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
         if self is OAuthServerName.SHOPIFY:
@@ -163,11 +169,9 @@ class OAuthServerName(str, enum.Enum):
             return supabase()
         if self is OAuthServerName.VERCEL:
             return vercel()
-        if self is OAuthServerName.XERO:
-            return xero()
         if self is OAuthServerName.WORD_PRESS:
             return word_press()
-        if self is OAuthServerName.DROPBOX:
-            return dropbox()
-        if self is OAuthServerName.QUICK_BOOKS:
-            return quick_books()
+        if self is OAuthServerName.XERO:
+            return xero()
+        if self is OAuthServerName.ZENDESK:
+            return zendesk()

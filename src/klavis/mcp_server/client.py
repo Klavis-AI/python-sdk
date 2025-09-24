@@ -23,6 +23,9 @@ from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
 from .types.authdata import Authdata
+from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
+    DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+)
 from .types.servers import Servers
 
 # this is used as the default value for optional parameters
@@ -51,6 +54,7 @@ class McpServerClient:
         tool_name: str,
         tool_args: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CallToolResponse:
         """
@@ -70,6 +74,9 @@ class McpServerClient:
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+            Optional HTTP headers to include when connecting to the server
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -96,6 +103,7 @@ class McpServerClient:
             tool_name=tool_name,
             tool_args=tool_args,
             connection_type=connection_type,
+            headers=headers,
             request_options=request_options,
         )
         return _response.data
@@ -106,6 +114,7 @@ class McpServerClient:
         server_url: str,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         format: typing.Optional[ToolFormat] = OMIT,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListToolsResponse:
         """
@@ -125,6 +134,9 @@ class McpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+            Optional HTTP headers to include when connecting to the server
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -146,7 +158,11 @@ class McpServerClient:
         )
         """
         _response = self._raw_client.list_tools(
-            server_url=server_url, connection_type=connection_type, format=format, request_options=request_options
+            server_url=server_url,
+            connection_type=connection_type,
+            format=format,
+            headers=headers,
+            request_options=request_options,
         )
         return _response.data
 
@@ -156,6 +172,7 @@ class McpServerClient:
         user_id: str,
         servers: typing.Optional[Servers] = OMIT,
         external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        enable_auth_handling: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StrataCreateResponse:
         """
@@ -168,13 +185,16 @@ class McpServerClient:
         Parameters
         ----------
         user_id : str
-            The identifier for the user
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         servers : typing.Optional[Servers]
             List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        enable_auth_handling : typing.Optional[bool]
+            Whether to enable authentication handling. Default is True.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -196,7 +216,11 @@ class McpServerClient:
         )
         """
         _response = self._raw_client.create_strata_server(
-            user_id=user_id, servers=servers, external_servers=external_servers, request_options=request_options
+            user_id=user_id,
+            servers=servers,
+            external_servers=external_servers,
+            enable_auth_handling=enable_auth_handling,
+            request_options=request_options,
         )
         return _response.data
 
@@ -210,6 +234,8 @@ class McpServerClient:
     ) -> StrataAddServersResponse:
         """
         Add servers to an existing Strata MCP server.
+
+        Note: After adding servers, you need to reconnect the MCP server so that list_tool can be updated with the new servers.
 
         Parameters:
         - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
@@ -252,31 +278,38 @@ class McpServerClient:
 
     def delete_servers_from_strata(
         self,
-        *,
         strata_id: str,
-        servers: typing.Optional[Servers] = OMIT,
-        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        *,
+        servers: typing.Optional[
+            typing.Union[
+                DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+                typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem],
+            ]
+        ] = None,
+        external_servers: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StrataDeleteServersResponse:
         """
         Delete servers from an existing Strata MCP server.
 
+        Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
+
         Parameters:
-        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
-        - externalServers: Optional list of external server names to delete
+        - strataId: The strata server ID (path parameter)
+        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
 
         Parameters
         ----------
         strata_id : str
-            The strata server ID
 
-        servers : typing.Optional[Servers]
+        servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
             List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
 
-        external_servers : typing.Optional[typing.Sequence[str]]
-            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+        external_servers : typing.Optional[str]
+            Comma-separated list of external server names to delete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -298,11 +331,13 @@ class McpServerClient:
         )
         """
         _response = self._raw_client.delete_servers_from_strata(
-            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+            strata_id, servers=servers, external_servers=external_servers, request_options=request_options
         )
         return _response.data
 
-    def get_strata_instance(self, *, request_options: typing.Optional[RequestOptions] = None) -> StrataGetResponse:
+    def get_strata_instance(
+        self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StrataGetResponse:
         """
         Get information about an existing Strata MCP server instance.
         Returns the strata URL, connected klavis servers, connected external servers (with URLs),
@@ -310,6 +345,8 @@ class McpServerClient:
 
         Parameters
         ----------
+        strata_id : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -325,9 +362,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_strata_instance()
+        client.mcp_server.get_strata_instance(
+            strata_id="strataId",
+        )
         """
-        _response = self._raw_client.get_strata_instance(request_options=request_options)
+        _response = self._raw_client.get_strata_instance(strata_id, request_options=request_options)
         return _response.data
 
     def create_server_instance(
@@ -351,7 +390,7 @@ class McpServerClient:
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
-            The identifier for the user requesting the server URL.
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         platform_name : typing.Optional[str]
             The name of the platform associated with the user. Optional.
@@ -404,7 +443,7 @@ class McpServerClient:
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
-            The identifier for the user requesting the server URL.
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -762,6 +801,7 @@ class AsyncMcpServerClient:
         tool_name: str,
         tool_args: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CallToolResponse:
         """
@@ -781,6 +821,9 @@ class AsyncMcpServerClient:
 
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+            Optional HTTP headers to include when connecting to the server
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -815,6 +858,7 @@ class AsyncMcpServerClient:
             tool_name=tool_name,
             tool_args=tool_args,
             connection_type=connection_type,
+            headers=headers,
             request_options=request_options,
         )
         return _response.data
@@ -825,6 +869,7 @@ class AsyncMcpServerClient:
         server_url: str,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         format: typing.Optional[ToolFormat] = OMIT,
+        headers: typing.Optional[typing.Dict[str, typing.Optional[str]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListToolsResponse:
         """
@@ -844,6 +889,9 @@ class AsyncMcpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        headers : typing.Optional[typing.Dict[str, typing.Optional[str]]]
+            Optional HTTP headers to include when connecting to the server
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -873,7 +921,11 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list_tools(
-            server_url=server_url, connection_type=connection_type, format=format, request_options=request_options
+            server_url=server_url,
+            connection_type=connection_type,
+            format=format,
+            headers=headers,
+            request_options=request_options,
         )
         return _response.data
 
@@ -883,6 +935,7 @@ class AsyncMcpServerClient:
         user_id: str,
         servers: typing.Optional[Servers] = OMIT,
         external_servers: typing.Optional[typing.Sequence[ExternalServerRequest]] = OMIT,
+        enable_auth_handling: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StrataCreateResponse:
         """
@@ -895,13 +948,16 @@ class AsyncMcpServerClient:
         Parameters
         ----------
         user_id : str
-            The identifier for the user
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         servers : typing.Optional[Servers]
             List of Klavis MCP servers to enable (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+
+        enable_auth_handling : typing.Optional[bool]
+            Whether to enable authentication handling. Default is True.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -931,7 +987,11 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create_strata_server(
-            user_id=user_id, servers=servers, external_servers=external_servers, request_options=request_options
+            user_id=user_id,
+            servers=servers,
+            external_servers=external_servers,
+            enable_auth_handling=enable_auth_handling,
+            request_options=request_options,
         )
         return _response.data
 
@@ -945,6 +1005,8 @@ class AsyncMcpServerClient:
     ) -> StrataAddServersResponse:
         """
         Add servers to an existing Strata MCP server.
+
+        Note: After adding servers, you need to reconnect the MCP server so that list_tool can be updated with the new servers.
 
         Parameters:
         - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
@@ -995,31 +1057,38 @@ class AsyncMcpServerClient:
 
     async def delete_servers_from_strata(
         self,
-        *,
         strata_id: str,
-        servers: typing.Optional[Servers] = OMIT,
-        external_servers: typing.Optional[typing.Sequence[str]] = OMIT,
+        *,
+        servers: typing.Optional[
+            typing.Union[
+                DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+                typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem],
+            ]
+        ] = None,
+        external_servers: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StrataDeleteServersResponse:
         """
         Delete servers from an existing Strata MCP server.
 
+        Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
+
         Parameters:
-        - servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
-        - externalServers: Optional list of external server names to delete
+        - strataId: The strata server ID (path parameter)
+        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
 
         Parameters
         ----------
         strata_id : str
-            The strata server ID
 
-        servers : typing.Optional[Servers]
+        servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
             List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
 
-        external_servers : typing.Optional[typing.Sequence[str]]
-            Optional list of external server names to delete. These are the names of previously added external MCP servers.
+        external_servers : typing.Optional[str]
+            Comma-separated list of external server names to delete
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1049,12 +1118,12 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_servers_from_strata(
-            strata_id=strata_id, servers=servers, external_servers=external_servers, request_options=request_options
+            strata_id, servers=servers, external_servers=external_servers, request_options=request_options
         )
         return _response.data
 
     async def get_strata_instance(
-        self, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetResponse:
         """
         Get information about an existing Strata MCP server instance.
@@ -1063,6 +1132,8 @@ class AsyncMcpServerClient:
 
         Parameters
         ----------
+        strata_id : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1083,12 +1154,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_strata_instance()
+            await client.mcp_server.get_strata_instance(
+                strata_id="strataId",
+            )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_strata_instance(request_options=request_options)
+        _response = await self._raw_client.get_strata_instance(strata_id, request_options=request_options)
         return _response.data
 
     async def create_server_instance(
@@ -1112,7 +1185,7 @@ class AsyncMcpServerClient:
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
-            The identifier for the user requesting the server URL.
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         platform_name : typing.Optional[str]
             The name of the platform associated with the user. Optional.
@@ -1173,7 +1246,7 @@ class AsyncMcpServerClient:
             The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         user_id : str
-            The identifier for the user requesting the server URL.
+            The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

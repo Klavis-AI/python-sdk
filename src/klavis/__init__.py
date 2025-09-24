@@ -31,7 +31,6 @@ from .types import (
     StrataAddServersResponse,
     StrataCreateResponse,
     StrataDeleteServersResponse,
-    StrataGetRequest,
     StrataGetResponse,
     ToolFormat,
     ValidationError,
@@ -83,7 +82,7 @@ from . import (
 )
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
-from .mcp_server import Authdata, Servers
+from .mcp_server import Authdata, DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, Servers
 from .version import __version__
 
 __all__ = [
@@ -98,6 +97,7 @@ __all__ = [
     "ConnectionType",
     "CreateSelfHostedServerResponse",
     "CreateServerResponse",
+    "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
     "DeleteUserResponse",
     "ExtendedMcpServer",
     "ExternalServerInfo",
@@ -121,7 +121,6 @@ __all__ = [
     "StrataAddServersResponse",
     "StrataCreateResponse",
     "StrataDeleteServersResponse",
-    "StrataGetRequest",
     "StrataGetResponse",
     "ToolFormat",
     "UnprocessableEntityError",

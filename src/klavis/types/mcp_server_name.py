@@ -11,16 +11,22 @@ class McpServerName(str, enum.Enum):
     AIRTABLE = "Airtable"
     ASANA = "Asana"
     ATTIO = "Attio"
+    BOX = "Box"
     BRAVE_SEARCH = "Brave Search"
     CAL_COM = "Cal.com"
     CLICK_UP = "ClickUp"
     CLOSE = "Close"
+    CLOUDFLARE = "Cloudflare"
     COINBASE = "Coinbase"
     CONFLUENCE = "Confluence"
+    DIALPAD = "Dialpad"
     DISCORD = "Discord"
-    DROPBOX = "Dropbox"
     DOC2MARKDOWN = "Doc2markdown"
+    DOCU_SIGN = "DocuSign"
+    DROPBOX = "Dropbox"
+    ELEVEN_LABS = "ElevenLabs"
     EXA = "Exa"
+    FIGMA = "Figma"
     FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
     FRESHDESK = "Freshdesk"
@@ -37,6 +43,7 @@ class McpServerName(str, enum.Enum):
     HEYGEN = "Heygen"
     HUB_SPOT = "HubSpot"
     JIRA = "Jira"
+    KLAVIYO = "Klaviyo"
     KLAVIS_REPORT_GEN = "Klavis ReportGen"
     LINEAR = "Linear"
     LINKED_IN = "LinkedIn"
@@ -49,31 +56,25 @@ class McpServerName(str, enum.Enum):
     NOTION = "Notion"
     ONE_DRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
+    PAGER_DUTY = "PagerDuty"
+    PIPEDRIVE = "Pipedrive"
     PLAI = "Plai"
     POSTGRES = "Postgres"
+    POST_HOG = "PostHog"
     QUICK_BOOKS = "QuickBooks"
     RESEND = "Resend"
     SALESFORCE = "Salesforce"
+    SEND_GRID = "SendGrid"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
+    STRIPE = "Stripe"
     SUPABASE = "Supabase"
     TAVILY = "Tavily"
     VERCEL = "Vercel"
     WHATS_APP = "WhatsApp"
     WORD_PRESS = "WordPress"
     YOUTUBE = "YouTube"
-    CLOUDFLARE = "Cloudflare"
-    STRIPE = "Stripe"
-    FIGMA = "Figma"
-    PIPEDRIVE = "Pipedrive"
-    KLAVIYO = "Klaviyo"
-    BOX = "Box"
-    DIALPAD = "Dialpad"
-    DOCU_SIGN = "DocuSign"
-    ELEVEN_LABS = "ElevenLabs"
-    PAGER_DUTY = "PagerDuty"
-    POST_HOG = "PostHog"
-    SEND_GRID = "SendGrid"
+    ZENDESK = "Zendesk"
 
     def visit(
         self,
@@ -81,16 +82,22 @@ class McpServerName(str, enum.Enum):
         airtable: typing.Callable[[], T_Result],
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
+        box: typing.Callable[[], T_Result],
         brave_search: typing.Callable[[], T_Result],
         cal_com: typing.Callable[[], T_Result],
         click_up: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
+        cloudflare: typing.Callable[[], T_Result],
         coinbase: typing.Callable[[], T_Result],
         confluence: typing.Callable[[], T_Result],
+        dialpad: typing.Callable[[], T_Result],
         discord: typing.Callable[[], T_Result],
-        dropbox: typing.Callable[[], T_Result],
         doc2markdown: typing.Callable[[], T_Result],
+        docu_sign: typing.Callable[[], T_Result],
+        dropbox: typing.Callable[[], T_Result],
+        eleven_labs: typing.Callable[[], T_Result],
         exa: typing.Callable[[], T_Result],
+        figma: typing.Callable[[], T_Result],
         firecrawl_deep_research: typing.Callable[[], T_Result],
         firecrawl_web_search: typing.Callable[[], T_Result],
         freshdesk: typing.Callable[[], T_Result],
@@ -107,6 +114,7 @@ class McpServerName(str, enum.Enum):
         heygen: typing.Callable[[], T_Result],
         hub_spot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
+        klaviyo: typing.Callable[[], T_Result],
         klavis_report_gen: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
         linked_in: typing.Callable[[], T_Result],
@@ -119,31 +127,25 @@ class McpServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         one_drive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
+        pager_duty: typing.Callable[[], T_Result],
+        pipedrive: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
+        post_hog: typing.Callable[[], T_Result],
         quick_books: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
+        send_grid: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
+        stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         tavily: typing.Callable[[], T_Result],
         vercel: typing.Callable[[], T_Result],
         whats_app: typing.Callable[[], T_Result],
         word_press: typing.Callable[[], T_Result],
         youtube: typing.Callable[[], T_Result],
-        cloudflare: typing.Callable[[], T_Result],
-        stripe: typing.Callable[[], T_Result],
-        figma: typing.Callable[[], T_Result],
-        pipedrive: typing.Callable[[], T_Result],
-        klaviyo: typing.Callable[[], T_Result],
-        box: typing.Callable[[], T_Result],
-        dialpad: typing.Callable[[], T_Result],
-        docu_sign: typing.Callable[[], T_Result],
-        eleven_labs: typing.Callable[[], T_Result],
-        pager_duty: typing.Callable[[], T_Result],
-        post_hog: typing.Callable[[], T_Result],
-        send_grid: typing.Callable[[], T_Result],
+        zendesk: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
@@ -153,6 +155,8 @@ class McpServerName(str, enum.Enum):
             return asana()
         if self is McpServerName.ATTIO:
             return attio()
+        if self is McpServerName.BOX:
+            return box()
         if self is McpServerName.BRAVE_SEARCH:
             return brave_search()
         if self is McpServerName.CAL_COM:
@@ -161,18 +165,28 @@ class McpServerName(str, enum.Enum):
             return click_up()
         if self is McpServerName.CLOSE:
             return close()
+        if self is McpServerName.CLOUDFLARE:
+            return cloudflare()
         if self is McpServerName.COINBASE:
             return coinbase()
         if self is McpServerName.CONFLUENCE:
             return confluence()
+        if self is McpServerName.DIALPAD:
+            return dialpad()
         if self is McpServerName.DISCORD:
             return discord()
-        if self is McpServerName.DROPBOX:
-            return dropbox()
         if self is McpServerName.DOC2MARKDOWN:
             return doc2markdown()
+        if self is McpServerName.DOCU_SIGN:
+            return docu_sign()
+        if self is McpServerName.DROPBOX:
+            return dropbox()
+        if self is McpServerName.ELEVEN_LABS:
+            return eleven_labs()
         if self is McpServerName.EXA:
             return exa()
+        if self is McpServerName.FIGMA:
+            return figma()
         if self is McpServerName.FIRECRAWL_DEEP_RESEARCH:
             return firecrawl_deep_research()
         if self is McpServerName.FIRECRAWL_WEB_SEARCH:
@@ -205,6 +219,8 @@ class McpServerName(str, enum.Enum):
             return hub_spot()
         if self is McpServerName.JIRA:
             return jira()
+        if self is McpServerName.KLAVIYO:
+            return klaviyo()
         if self is McpServerName.KLAVIS_REPORT_GEN:
             return klavis_report_gen()
         if self is McpServerName.LINEAR:
@@ -229,20 +245,30 @@ class McpServerName(str, enum.Enum):
             return one_drive()
         if self is McpServerName.OPENROUTER:
             return openrouter()
+        if self is McpServerName.PAGER_DUTY:
+            return pager_duty()
+        if self is McpServerName.PIPEDRIVE:
+            return pipedrive()
         if self is McpServerName.PLAI:
             return plai()
         if self is McpServerName.POSTGRES:
             return postgres()
+        if self is McpServerName.POST_HOG:
+            return post_hog()
         if self is McpServerName.QUICK_BOOKS:
             return quick_books()
         if self is McpServerName.RESEND:
             return resend()
         if self is McpServerName.SALESFORCE:
             return salesforce()
+        if self is McpServerName.SEND_GRID:
+            return send_grid()
         if self is McpServerName.SHOPIFY:
             return shopify()
         if self is McpServerName.SLACK:
             return slack()
+        if self is McpServerName.STRIPE:
+            return stripe()
         if self is McpServerName.SUPABASE:
             return supabase()
         if self is McpServerName.TAVILY:
@@ -255,27 +281,5 @@ class McpServerName(str, enum.Enum):
             return word_press()
         if self is McpServerName.YOUTUBE:
             return youtube()
-        if self is McpServerName.CLOUDFLARE:
-            return cloudflare()
-        if self is McpServerName.STRIPE:
-            return stripe()
-        if self is McpServerName.FIGMA:
-            return figma()
-        if self is McpServerName.PIPEDRIVE:
-            return pipedrive()
-        if self is McpServerName.KLAVIYO:
-            return klaviyo()
-        if self is McpServerName.BOX:
-            return box()
-        if self is McpServerName.DIALPAD:
-            return dialpad()
-        if self is McpServerName.DOCU_SIGN:
-            return docu_sign()
-        if self is McpServerName.ELEVEN_LABS:
-            return eleven_labs()
-        if self is McpServerName.PAGER_DUTY:
-            return pager_duty()
-        if self is McpServerName.POST_HOG:
-            return post_hog()
-        if self is McpServerName.SEND_GRID:
-            return send_grid()
+        if self is McpServerName.ZENDESK:
+            return zendesk()

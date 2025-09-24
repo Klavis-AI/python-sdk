@@ -84,6 +84,14 @@ client.mcp_server.call_tools(
 <dl>
 <dd>
 
+**headers:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` — Optional HTTP headers to include when connecting to the server
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -174,6 +182,14 @@ client.mcp_server.list_tools(
 <dl>
 <dd>
 
+**headers:** `typing.Optional[typing.Dict[str, typing.Optional[str]]]` — Optional HTTP headers to include when connecting to the server
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -240,7 +256,7 @@ client.mcp_server.create_strata_server(
 <dl>
 <dd>
 
-**user_id:** `str` — The identifier for the user
+**user_id:** `str` — The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
     
 </dd>
 </dl>
@@ -257,6 +273,14 @@ client.mcp_server.create_strata_server(
 <dd>
 
 **external_servers:** `typing.Optional[typing.Sequence[ExternalServerRequest]]` — Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enable_auth_handling:** `typing.Optional[bool]` — Whether to enable authentication handling. Default is True.
     
 </dd>
 </dl>
@@ -289,6 +313,8 @@ client.mcp_server.create_strata_server(
 <dd>
 
 Add servers to an existing Strata MCP server.
+
+Note: After adding servers, you need to reconnect the MCP server so that list_tool can be updated with the new servers.
 
 Parameters:
 - servers: Can be 'ALL' to add all available servers, a list of specific server names, or null to add no servers
@@ -380,9 +406,12 @@ client.mcp_server.add_servers_to_strata(
 
 Delete servers from an existing Strata MCP server.
 
+Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
+
 Parameters:
-- servers: Can be 'ALL' to delete all Klavis MCP servers, a list of specific server names, or null to delete no servers
-- externalServers: Optional list of external server names to delete
+- strataId: The strata server ID (path parameter)
+- servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+- externalServers: Query parameter - comma-separated list of external server names to delete
 
 Returns separate lists for deleted Klavis servers and deleted external servers.
 </dd>
@@ -422,7 +451,7 @@ client.mcp_server.delete_servers_from_strata(
 <dl>
 <dd>
 
-**strata_id:** `str` — The strata server ID
+**strata_id:** `str` 
     
 </dd>
 </dl>
@@ -430,7 +459,14 @@ client.mcp_server.delete_servers_from_strata(
 <dl>
 <dd>
 
-**servers:** `typing.Optional[Servers]` — List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+**servers:** `typing.Optional[
+    typing.Union[
+        DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+        typing.Sequence[
+            DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem
+        ],
+    ]
+]` — List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
     
 </dd>
 </dl>
@@ -438,7 +474,7 @@ client.mcp_server.delete_servers_from_strata(
 <dl>
 <dd>
 
-**external_servers:** `typing.Optional[typing.Sequence[str]]` — Optional list of external server names to delete. These are the names of previously added external MCP servers.
+**external_servers:** `typing.Optional[str]` — Comma-separated list of external server names to delete
     
 </dd>
 </dl>
@@ -458,7 +494,7 @@ client.mcp_server.delete_servers_from_strata(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_instance</a>()</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_instance</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -492,7 +528,9 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_strata_instance()
+client.mcp_server.get_strata_instance(
+    strata_id="strataId",
+)
 
 ```
 </dd>
@@ -504,6 +542,14 @@ client.mcp_server.get_strata_instance()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -582,7 +628,7 @@ client.mcp_server.create_server_instance(
 <dl>
 <dd>
 
-**user_id:** `str` — The identifier for the user requesting the server URL.
+**user_id:** `str` — The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
     
 </dd>
 </dl>
@@ -681,7 +727,7 @@ client.mcp_server.create_self_hosted_server_instance(
 <dl>
 <dd>
 
-**user_id:** `str` — The identifier for the user requesting the server URL.
+**user_id:** `str` — The unique identifier for the user. The server instance along with the all the authentication data will belong to that specific user only. It can be a UUID from the database, a unique email address from the user, etc.
     
 </dd>
 </dl>

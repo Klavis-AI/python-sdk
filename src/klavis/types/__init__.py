@@ -30,7 +30,6 @@ from .status_response import StatusResponse
 from .strata_add_servers_response import StrataAddServersResponse
 from .strata_create_response import StrataCreateResponse
 from .strata_delete_servers_response import StrataDeleteServersResponse
-from .strata_get_request import StrataGetRequest
 from .strata_get_response import StrataGetResponse
 from .tool_format import ToolFormat
 from .validation_error import ValidationError
@@ -66,7 +65,6 @@ __all__ = [
     "StrataAddServersResponse",
     "StrataCreateResponse",
     "StrataDeleteServersResponse",
-    "StrataGetRequest",
     "StrataGetResponse",
     "ToolFormat",
     "ValidationError",

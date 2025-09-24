@@ -3,6 +3,9 @@
 # isort: skip_file
 
 from .authdata import Authdata
+from .delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
+    DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+)
 from .servers import Servers
 
-__all__ = ["Authdata", "Servers"]
+__all__ = ["Authdata", "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem", "Servers"]
