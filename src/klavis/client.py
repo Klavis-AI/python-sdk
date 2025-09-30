@@ -32,10 +32,13 @@ from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
 from .linkedin_oauth.client import AsyncLinkedinOauthClient, LinkedinOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
 from .notion_oauth.client import AsyncNotionOauthClient, NotionOauthClient
+from .onedrive_oauth.client import AsyncOnedriveOauthClient, OnedriveOauthClient
+from .outlook_oauth.client import AsyncOutlookOauthClient, OutlookOauthClient
 from .pagerduty_oauth.client import AsyncPagerdutyOauthClient, PagerdutyOauthClient
 from .pipedrive_oauth.client import AsyncPipedriveOauthClient, PipedriveOauthClient
 from .quickbooks_oauth.client import AsyncQuickbooksOauthClient, QuickbooksOauthClient
 from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauthClient
+from .shopify_oauth.client import AsyncShopifyOauthClient, ShopifyOauthClient
 from .slack_oauth.client import AsyncSlackOauthClient, SlackOauthClient
 from .stripe_connect_oauth.client import AsyncStripeConnectOauthClient, StripeConnectOauthClient
 from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
@@ -147,6 +150,9 @@ class Klavis:
         self.pagerduty_oauth = PagerdutyOauthClient(client_wrapper=self._client_wrapper)
         self.docusign_oauth = DocusignOauthClient(client_wrapper=self._client_wrapper)
         self.dialpad_oauth = DialpadOauthClient(client_wrapper=self._client_wrapper)
+        self.shopify_oauth = ShopifyOauthClient(client_wrapper=self._client_wrapper)
+        self.onedrive_oauth = OnedriveOauthClient(client_wrapper=self._client_wrapper)
+        self.outlook_oauth = OutlookOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -249,6 +255,9 @@ class AsyncKlavis:
         self.pagerduty_oauth = AsyncPagerdutyOauthClient(client_wrapper=self._client_wrapper)
         self.docusign_oauth = AsyncDocusignOauthClient(client_wrapper=self._client_wrapper)
         self.dialpad_oauth = AsyncDialpadOauthClient(client_wrapper=self._client_wrapper)
+        self.shopify_oauth = AsyncShopifyOauthClient(client_wrapper=self._client_wrapper)
+        self.onedrive_oauth = AsyncOnedriveOauthClient(client_wrapper=self._client_wrapper)
+        self.outlook_oauth = AsyncOutlookOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

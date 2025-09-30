@@ -56,6 +56,7 @@ class McpServerName(str, enum.Enum):
     NOTION = "Notion"
     ONE_DRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
+    OUTLOOK = "Outlook"
     PAGER_DUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     PLAI = "Plai"
@@ -127,6 +128,7 @@ class McpServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         one_drive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
+        outlook: typing.Callable[[], T_Result],
         pager_duty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
@@ -245,6 +247,8 @@ class McpServerName(str, enum.Enum):
             return one_drive()
         if self is McpServerName.OPENROUTER:
             return openrouter()
+        if self is McpServerName.OUTLOOK:
+            return outlook()
         if self is McpServerName.PAGER_DUTY:
             return pager_duty()
         if self is McpServerName.PIPEDRIVE:

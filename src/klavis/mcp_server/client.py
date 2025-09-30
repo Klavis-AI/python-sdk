@@ -340,6 +340,7 @@ class McpServerClient:
     ) -> StrataGetResponse:
         """
         Get information about an existing Strata MCP server instance.
+
         Returns the strata URL, connected klavis servers, connected external servers (with URLs),
         and authentication URLs for klavis servers.
 
@@ -367,6 +368,58 @@ class McpServerClient:
         )
         """
         _response = self._raw_client.get_strata_instance(strata_id, request_options=request_options)
+        return _response.data
+
+    def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import ApiKeyAuth, Klavis, McpServerName
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.set_strata_auth(
+            strata_id="strataId",
+            server_name=McpServerName.AFFINITY,
+            auth_data=ApiKeyAuth(
+                token="token",
+            ),
+        )
+        """
+        _response = self._raw_client.set_strata_auth(
+            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
         return _response.data
 
     def create_server_instance(
@@ -1127,6 +1180,7 @@ class AsyncMcpServerClient:
     ) -> StrataGetResponse:
         """
         Get information about an existing Strata MCP server instance.
+
         Returns the strata URL, connected klavis servers, connected external servers (with URLs),
         and authentication URLs for klavis servers.
 
@@ -1162,6 +1216,66 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_strata_instance(strata_id, request_options=request_options)
+        return _response.data
+
+    async def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import ApiKeyAuth, AsyncKlavis, McpServerName
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.set_strata_auth(
+                strata_id="strataId",
+                server_name=McpServerName.AFFINITY,
+                auth_data=ApiKeyAuth(
+                    token="token",
+                ),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.set_strata_auth(
+            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
         return _response.data
 
     async def create_server_instance(

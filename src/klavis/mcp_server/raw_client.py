@@ -449,6 +449,7 @@ class RawMcpServerClient:
     ) -> HttpResponse[StrataGetResponse]:
         """
         Get information about an existing Strata MCP server instance.
+
         Returns the strata URL, connected klavis servers, connected external servers (with URLs),
         and authentication URLs for klavis servers.
 
@@ -475,6 +476,80 @@ class RawMcpServerClient:
                     StrataGetResponse,
                     parse_obj_as(
                         type_=StrataGetResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StatusResponse]:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/set-auth",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1497,6 +1572,7 @@ class AsyncRawMcpServerClient:
     ) -> AsyncHttpResponse[StrataGetResponse]:
         """
         Get information about an existing Strata MCP server instance.
+
         Returns the strata URL, connected klavis servers, connected external servers (with URLs),
         and authentication URLs for klavis servers.
 
@@ -1523,6 +1599,80 @@ class AsyncRawMcpServerClient:
                     StrataGetResponse,
                     parse_obj_as(
                         type_=StrataGetResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StatusResponse]:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "mcp-server/strata/set-auth",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

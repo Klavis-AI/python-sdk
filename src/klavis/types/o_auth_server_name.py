@@ -36,6 +36,7 @@ class OAuthServerName(str, enum.Enum):
     MONEYBIRD = "Moneybird"
     NOTION = "Notion"
     ONEDRIVE = "Onedrive"
+    OUTLOOK = "Outlook"
     PAGER_DUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     QUICK_BOOKS = "QuickBooks"
@@ -80,6 +81,7 @@ class OAuthServerName(str, enum.Enum):
         moneybird: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
+        outlook: typing.Callable[[], T_Result],
         pager_duty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         quick_books: typing.Callable[[], T_Result],
@@ -151,6 +153,8 @@ class OAuthServerName(str, enum.Enum):
             return notion()
         if self is OAuthServerName.ONEDRIVE:
             return onedrive()
+        if self is OAuthServerName.OUTLOOK:
+            return outlook()
         if self is OAuthServerName.PAGER_DUTY:
             return pager_duty()
         if self is OAuthServerName.PIPEDRIVE:
