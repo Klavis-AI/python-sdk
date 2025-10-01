@@ -605,7 +605,7 @@ client.mcp_server.set_strata_auth(
     strata_id="strataId",
     server_name=McpServerName.AFFINITY,
     auth_data=ApiKeyAuth(
-        token="token",
+        api_key="api_key",
     ),
 )
 
@@ -1227,7 +1227,7 @@ client = Klavis(
 client.mcp_server.set_instance_auth(
     instance_id="instanceId",
     auth_data=ApiKeyAuth(
-        token="token",
+        api_key="api_key",
     ),
 )
 
@@ -4406,6 +4406,7 @@ Start QuickBooks OAuth flow
 Parameters:
 - instance_id: Identifier for the instance requesting authorization
 - client_id: Optional client ID for white labeling
+- environment: QuickBooks environment to authorize ('sandbox' default)
 - scope: Optional scopes to request (space-separated). Default is 'com.intuit.quickbooks.accounting'
 - redirect_url: Optional URL to redirect to after authorization completes
 </dd>
@@ -4461,6 +4462,14 @@ client.quickbooks_oauth.authorize_quick_books(
 <dl>
 <dd>
 
+**environment:** `typing.Optional[Environment]` — QuickBooks environment to authorize ('sandbox' or 'production')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
     
 </dd>
@@ -4509,6 +4518,7 @@ Parameters:
 - client_id: Optional client ID for white labeling
 - scope: Optional scopes to request (space-separated)
 - redirect_url: Optional URL to redirect to after authorization completes
+- subdomain: Zendesk subdomain for the account being connected
 </dd>
 </dl>
 </dd>
@@ -4530,6 +4540,7 @@ client = Klavis(
 )
 client.zendesk_oauth.authorize_zendesk(
     instance_id="instance_id",
+    subdomain="subdomain",
 )
 
 ```
@@ -4547,6 +4558,14 @@ client.zendesk_oauth.authorize_zendesk(
 <dd>
 
 **instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subdomain:** `str` — Zendesk subdomain for the account being connected (e.g., 'mycompany' for mycompany.zendesk.com)
     
 </dd>
 </dl>
@@ -4764,105 +4783,6 @@ client.calcom_oauth.authorize_calcom(
 <dd>
 
 **redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.calcom_oauth.<a href="src/klavis/calcom_oauth/client.py">calcom_client_credentials_auth</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Authenticate using Cal.com OAuth client credentials flow for platform-level API access
-
-This endpoint is used for:
-- Managing managed users
-- Creating OAuth client webhooks
-- Refreshing managed user tokens
-- Managing organization teams and memberships
-
-Parameters:
-- instance_id: Identifier for the instance requesting authentication
-- x-cal-client-id: OAuth client ID (header)
-- x-cal-secret-key: OAuth client secret (header)
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.calcom_oauth.calcom_client_credentials_auth(
-    cal_client_id="x-cal-client-id",
-    cal_secret_key="x-cal-secret-key",
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**cal_client_id:** `str` — Cal.com OAuth client ID
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**cal_secret_key:** `str` — Cal.com OAuth client secret
     
 </dd>
 </dl>

@@ -4,8 +4,6 @@
 
 from .types import (
     ApiKeyAuth,
-    CalcomOAuthErrorResponse,
-    CalcomOAuthSuccessResponse,
     CallToolResponse,
     CallToolResult,
     ConnectionType,
@@ -37,7 +35,7 @@ from .types import (
     ValidationErrorLocItem,
     WhiteLabelingResponse,
 )
-from .errors import BadRequestError, UnprocessableEntityError
+from .errors import UnprocessableEntityError
 from . import (
     airtable_oauth,
     asana_oauth,
@@ -86,15 +84,13 @@ from . import (
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
 from .mcp_server import Authdata, DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, Servers
+from .quickbooks_oauth import Environment
 from .version import __version__
 
 __all__ = [
     "ApiKeyAuth",
     "AsyncKlavis",
     "Authdata",
-    "BadRequestError",
-    "CalcomOAuthErrorResponse",
-    "CalcomOAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -102,6 +98,7 @@ __all__ = [
     "CreateServerResponse",
     "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
     "DeleteUserResponse",
+    "Environment",
     "ExtendedMcpServer",
     "ExternalServerInfo",
     "ExternalServerRequest",

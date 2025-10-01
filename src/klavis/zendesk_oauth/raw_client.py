@@ -20,6 +20,7 @@ class RawZendeskOauthClient:
         self,
         *,
         instance_id: str,
+        subdomain: str,
         client_id: typing.Optional[str] = None,
         scope: typing.Optional[str] = None,
         redirect_url: typing.Optional[str] = None,
@@ -33,11 +34,15 @@ class RawZendeskOauthClient:
         - client_id: Optional client ID for white labeling
         - scope: Optional scopes to request (space-separated)
         - redirect_url: Optional URL to redirect to after authorization completes
+        - subdomain: Zendesk subdomain for the account being connected
 
         Parameters
         ----------
         instance_id : str
             Unique identifier for the client instance requesting authorization
+
+        subdomain : str
+            Zendesk subdomain for the account being connected (e.g., 'mycompany' for mycompany.zendesk.com)
 
         client_id : typing.Optional[str]
             Client ID for white labeling, if not provided will use default credentials
@@ -61,6 +66,7 @@ class RawZendeskOauthClient:
             method="GET",
             params={
                 "instance_id": instance_id,
+                "subdomain": subdomain,
                 "client_id": client_id,
                 "scope": scope,
                 "redirect_url": redirect_url,
@@ -104,6 +110,7 @@ class AsyncRawZendeskOauthClient:
         self,
         *,
         instance_id: str,
+        subdomain: str,
         client_id: typing.Optional[str] = None,
         scope: typing.Optional[str] = None,
         redirect_url: typing.Optional[str] = None,
@@ -117,11 +124,15 @@ class AsyncRawZendeskOauthClient:
         - client_id: Optional client ID for white labeling
         - scope: Optional scopes to request (space-separated)
         - redirect_url: Optional URL to redirect to after authorization completes
+        - subdomain: Zendesk subdomain for the account being connected
 
         Parameters
         ----------
         instance_id : str
             Unique identifier for the client instance requesting authorization
+
+        subdomain : str
+            Zendesk subdomain for the account being connected (e.g., 'mycompany' for mycompany.zendesk.com)
 
         client_id : typing.Optional[str]
             Client ID for white labeling, if not provided will use default credentials
@@ -145,6 +156,7 @@ class AsyncRawZendeskOauthClient:
             method="GET",
             params={
                 "instance_id": instance_id,
+                "subdomain": subdomain,
                 "client_id": client_id,
                 "scope": scope,
                 "redirect_url": redirect_url,

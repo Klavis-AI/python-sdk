@@ -413,7 +413,7 @@ class McpServerClient:
             strata_id="strataId",
             server_name=McpServerName.AFFINITY,
             auth_data=ApiKeyAuth(
-                token="token",
+                api_key="api_key",
             ),
         )
         """
@@ -724,7 +724,7 @@ class McpServerClient:
         client.mcp_server.set_instance_auth(
             instance_id="instanceId",
             auth_data=ApiKeyAuth(
-                token="token",
+                api_key="api_key",
             ),
         )
         """
@@ -1266,7 +1266,7 @@ class AsyncMcpServerClient:
                 strata_id="strataId",
                 server_name=McpServerName.AFFINITY,
                 auth_data=ApiKeyAuth(
-                    token="token",
+                    api_key="api_key",
                 ),
             )
 
@@ -1643,7 +1643,7 @@ class AsyncMcpServerClient:
             await client.mcp_server.set_instance_auth(
                 instance_id="instanceId",
                 auth_data=ApiKeyAuth(
-                    token="token",
+                    api_key="api_key",
                 ),
             )
 

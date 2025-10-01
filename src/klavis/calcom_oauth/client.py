@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.calcom_o_auth_success_response import CalcomOAuthSuccessResponse
 from .raw_client import AsyncRawCalcomOauthClient, RawCalcomOauthClient
 
 
@@ -71,68 +70,6 @@ class CalcomOauthClient:
         """
         _response = self._raw_client.authorize_calcom(
             instance_id=instance_id, client_id=client_id, redirect_url=redirect_url, request_options=request_options
-        )
-        return _response.data
-
-    def calcom_client_credentials_auth(
-        self,
-        *,
-        instance_id: str,
-        cal_client_id: str,
-        cal_secret_key: str,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CalcomOAuthSuccessResponse:
-        """
-        Authenticate using Cal.com OAuth client credentials flow for platform-level API access
-
-        This endpoint is used for:
-        - Managing managed users
-        - Creating OAuth client webhooks
-        - Refreshing managed user tokens
-        - Managing organization teams and memberships
-
-        Parameters:
-        - instance_id: Identifier for the instance requesting authentication
-        - x-cal-client-id: OAuth client ID (header)
-        - x-cal-secret-key: OAuth client secret (header)
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance
-
-        cal_client_id : str
-            Cal.com OAuth client ID
-
-        cal_secret_key : str
-            Cal.com OAuth client secret
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CalcomOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.calcom_oauth.calcom_client_credentials_auth(
-            cal_client_id="x-cal-client-id",
-            cal_secret_key="x-cal-secret-key",
-            instance_id="instance_id",
-        )
-        """
-        _response = self._raw_client.calcom_client_credentials_auth(
-            instance_id=instance_id,
-            cal_client_id=cal_client_id,
-            cal_secret_key=cal_secret_key,
-            request_options=request_options,
         )
         return _response.data
 
@@ -208,75 +145,5 @@ class AsyncCalcomOauthClient:
         """
         _response = await self._raw_client.authorize_calcom(
             instance_id=instance_id, client_id=client_id, redirect_url=redirect_url, request_options=request_options
-        )
-        return _response.data
-
-    async def calcom_client_credentials_auth(
-        self,
-        *,
-        instance_id: str,
-        cal_client_id: str,
-        cal_secret_key: str,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> CalcomOAuthSuccessResponse:
-        """
-        Authenticate using Cal.com OAuth client credentials flow for platform-level API access
-
-        This endpoint is used for:
-        - Managing managed users
-        - Creating OAuth client webhooks
-        - Refreshing managed user tokens
-        - Managing organization teams and memberships
-
-        Parameters:
-        - instance_id: Identifier for the instance requesting authentication
-        - x-cal-client-id: OAuth client ID (header)
-        - x-cal-secret-key: OAuth client secret (header)
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance
-
-        cal_client_id : str
-            Cal.com OAuth client ID
-
-        cal_secret_key : str
-            Cal.com OAuth client secret
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        CalcomOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.calcom_oauth.calcom_client_credentials_auth(
-                cal_client_id="x-cal-client-id",
-                cal_secret_key="x-cal-secret-key",
-                instance_id="instance_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.calcom_client_credentials_auth(
-            instance_id=instance_id,
-            cal_client_id=cal_client_id,
-            cal_secret_key=cal_secret_key,
-            request_options=request_options,
         )
         return _response.data

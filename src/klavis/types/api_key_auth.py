@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class ApiKeyAuth(UniversalBaseModel):
-    token: str = pydantic.Field()
+    api_key: str = pydantic.Field()
     """
     The API key to save
     """

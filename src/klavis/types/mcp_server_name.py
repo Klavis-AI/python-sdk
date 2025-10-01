@@ -14,7 +14,7 @@ class McpServerName(str, enum.Enum):
     BOX = "Box"
     BRAVE_SEARCH = "Brave Search"
     CAL_COM = "Cal.com"
-    CLICK_UP = "ClickUp"
+    CLICKUP = "ClickUp"
     CLOSE = "Close"
     CLOUDFLARE = "Cloudflare"
     COINBASE = "Coinbase"
@@ -22,7 +22,7 @@ class McpServerName(str, enum.Enum):
     DIALPAD = "Dialpad"
     DISCORD = "Discord"
     DOC2MARKDOWN = "Doc2markdown"
-    DOCU_SIGN = "DocuSign"
+    DOCUSIGN = "DocuSign"
     DROPBOX = "Dropbox"
     ELEVEN_LABS = "ElevenLabs"
     EXA = "Exa"
@@ -31,7 +31,7 @@ class McpServerName(str, enum.Enum):
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
     FRESHDESK = "Freshdesk"
     GITHUB = "GitHub"
-    GIT_LAB = "GitLab"
+    GITLAB = "GitLab"
     GMAIL = "Gmail"
     GONG = "Gong"
     GOOGLE_CALENDAR = "Google Calendar"
@@ -41,12 +41,12 @@ class McpServerName(str, enum.Enum):
     GOOGLE_SHEETS = "Google Sheets"
     HACKER_NEWS = "Hacker News"
     HEYGEN = "Heygen"
-    HUB_SPOT = "HubSpot"
+    HUBSPOT = "HubSpot"
     JIRA = "Jira"
     KLAVIYO = "Klaviyo"
     KLAVIS_REPORT_GEN = "Klavis ReportGen"
     LINEAR = "Linear"
-    LINKED_IN = "LinkedIn"
+    LINKEDIN = "LinkedIn"
     MARKDOWN2DOC = "Markdown2doc"
     MEM0 = "Mem0"
     MIXPANEL = "Mixpanel"
@@ -54,26 +54,26 @@ class McpServerName(str, enum.Enum):
     MONEYBIRD = "Moneybird"
     MOTION = "Motion"
     NOTION = "Notion"
-    ONE_DRIVE = "OneDrive"
+    ONEDRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
     OUTLOOK = "Outlook"
-    PAGER_DUTY = "PagerDuty"
+    PAGERDUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     PLAI = "Plai"
     POSTGRES = "Postgres"
-    POST_HOG = "PostHog"
-    QUICK_BOOKS = "QuickBooks"
+    POSTHOG = "PostHog"
+    QUICKBOOKS = "QuickBooks"
     RESEND = "Resend"
     SALESFORCE = "Salesforce"
-    SEND_GRID = "SendGrid"
+    SENDGRID = "SendGrid"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
     TAVILY = "Tavily"
     VERCEL = "Vercel"
-    WHATS_APP = "WhatsApp"
-    WORD_PRESS = "WordPress"
+    WHATSAPP = "WhatsApp"
+    WORDPRESS = "WordPress"
     YOUTUBE = "YouTube"
     ZENDESK = "Zendesk"
 
@@ -86,7 +86,7 @@ class McpServerName(str, enum.Enum):
         box: typing.Callable[[], T_Result],
         brave_search: typing.Callable[[], T_Result],
         cal_com: typing.Callable[[], T_Result],
-        click_up: typing.Callable[[], T_Result],
+        clickup: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         cloudflare: typing.Callable[[], T_Result],
         coinbase: typing.Callable[[], T_Result],
@@ -94,7 +94,7 @@ class McpServerName(str, enum.Enum):
         dialpad: typing.Callable[[], T_Result],
         discord: typing.Callable[[], T_Result],
         doc2markdown: typing.Callable[[], T_Result],
-        docu_sign: typing.Callable[[], T_Result],
+        docusign: typing.Callable[[], T_Result],
         dropbox: typing.Callable[[], T_Result],
         eleven_labs: typing.Callable[[], T_Result],
         exa: typing.Callable[[], T_Result],
@@ -103,7 +103,7 @@ class McpServerName(str, enum.Enum):
         firecrawl_web_search: typing.Callable[[], T_Result],
         freshdesk: typing.Callable[[], T_Result],
         github: typing.Callable[[], T_Result],
-        git_lab: typing.Callable[[], T_Result],
+        gitlab: typing.Callable[[], T_Result],
         gmail: typing.Callable[[], T_Result],
         gong: typing.Callable[[], T_Result],
         google_calendar: typing.Callable[[], T_Result],
@@ -113,12 +113,12 @@ class McpServerName(str, enum.Enum):
         google_sheets: typing.Callable[[], T_Result],
         hacker_news: typing.Callable[[], T_Result],
         heygen: typing.Callable[[], T_Result],
-        hub_spot: typing.Callable[[], T_Result],
+        hubspot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         klaviyo: typing.Callable[[], T_Result],
         klavis_report_gen: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
-        linked_in: typing.Callable[[], T_Result],
+        linkedin: typing.Callable[[], T_Result],
         markdown2doc: typing.Callable[[], T_Result],
         mem0: typing.Callable[[], T_Result],
         mixpanel: typing.Callable[[], T_Result],
@@ -126,26 +126,26 @@ class McpServerName(str, enum.Enum):
         moneybird: typing.Callable[[], T_Result],
         motion: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
-        one_drive: typing.Callable[[], T_Result],
+        onedrive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
         outlook: typing.Callable[[], T_Result],
-        pager_duty: typing.Callable[[], T_Result],
+        pagerduty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
-        post_hog: typing.Callable[[], T_Result],
-        quick_books: typing.Callable[[], T_Result],
+        posthog: typing.Callable[[], T_Result],
+        quickbooks: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
-        send_grid: typing.Callable[[], T_Result],
+        sendgrid: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         tavily: typing.Callable[[], T_Result],
         vercel: typing.Callable[[], T_Result],
-        whats_app: typing.Callable[[], T_Result],
-        word_press: typing.Callable[[], T_Result],
+        whatsapp: typing.Callable[[], T_Result],
+        wordpress: typing.Callable[[], T_Result],
         youtube: typing.Callable[[], T_Result],
         zendesk: typing.Callable[[], T_Result],
     ) -> T_Result:
@@ -163,8 +163,8 @@ class McpServerName(str, enum.Enum):
             return brave_search()
         if self is McpServerName.CAL_COM:
             return cal_com()
-        if self is McpServerName.CLICK_UP:
-            return click_up()
+        if self is McpServerName.CLICKUP:
+            return clickup()
         if self is McpServerName.CLOSE:
             return close()
         if self is McpServerName.CLOUDFLARE:
@@ -179,8 +179,8 @@ class McpServerName(str, enum.Enum):
             return discord()
         if self is McpServerName.DOC2MARKDOWN:
             return doc2markdown()
-        if self is McpServerName.DOCU_SIGN:
-            return docu_sign()
+        if self is McpServerName.DOCUSIGN:
+            return docusign()
         if self is McpServerName.DROPBOX:
             return dropbox()
         if self is McpServerName.ELEVEN_LABS:
@@ -197,8 +197,8 @@ class McpServerName(str, enum.Enum):
             return freshdesk()
         if self is McpServerName.GITHUB:
             return github()
-        if self is McpServerName.GIT_LAB:
-            return git_lab()
+        if self is McpServerName.GITLAB:
+            return gitlab()
         if self is McpServerName.GMAIL:
             return gmail()
         if self is McpServerName.GONG:
@@ -217,8 +217,8 @@ class McpServerName(str, enum.Enum):
             return hacker_news()
         if self is McpServerName.HEYGEN:
             return heygen()
-        if self is McpServerName.HUB_SPOT:
-            return hub_spot()
+        if self is McpServerName.HUBSPOT:
+            return hubspot()
         if self is McpServerName.JIRA:
             return jira()
         if self is McpServerName.KLAVIYO:
@@ -227,8 +227,8 @@ class McpServerName(str, enum.Enum):
             return klavis_report_gen()
         if self is McpServerName.LINEAR:
             return linear()
-        if self is McpServerName.LINKED_IN:
-            return linked_in()
+        if self is McpServerName.LINKEDIN:
+            return linkedin()
         if self is McpServerName.MARKDOWN2DOC:
             return markdown2doc()
         if self is McpServerName.MEM0:
@@ -243,30 +243,30 @@ class McpServerName(str, enum.Enum):
             return motion()
         if self is McpServerName.NOTION:
             return notion()
-        if self is McpServerName.ONE_DRIVE:
-            return one_drive()
+        if self is McpServerName.ONEDRIVE:
+            return onedrive()
         if self is McpServerName.OPENROUTER:
             return openrouter()
         if self is McpServerName.OUTLOOK:
             return outlook()
-        if self is McpServerName.PAGER_DUTY:
-            return pager_duty()
+        if self is McpServerName.PAGERDUTY:
+            return pagerduty()
         if self is McpServerName.PIPEDRIVE:
             return pipedrive()
         if self is McpServerName.PLAI:
             return plai()
         if self is McpServerName.POSTGRES:
             return postgres()
-        if self is McpServerName.POST_HOG:
-            return post_hog()
-        if self is McpServerName.QUICK_BOOKS:
-            return quick_books()
+        if self is McpServerName.POSTHOG:
+            return posthog()
+        if self is McpServerName.QUICKBOOKS:
+            return quickbooks()
         if self is McpServerName.RESEND:
             return resend()
         if self is McpServerName.SALESFORCE:
             return salesforce()
-        if self is McpServerName.SEND_GRID:
-            return send_grid()
+        if self is McpServerName.SENDGRID:
+            return sendgrid()
         if self is McpServerName.SHOPIFY:
             return shopify()
         if self is McpServerName.SLACK:
@@ -279,10 +279,10 @@ class McpServerName(str, enum.Enum):
             return tavily()
         if self is McpServerName.VERCEL:
             return vercel()
-        if self is McpServerName.WHATS_APP:
-            return whats_app()
-        if self is McpServerName.WORD_PRESS:
-            return word_press()
+        if self is McpServerName.WHATSAPP:
+            return whatsapp()
+        if self is McpServerName.WORDPRESS:
+            return wordpress()
         if self is McpServerName.YOUTUBE:
             return youtube()
         if self is McpServerName.ZENDESK:

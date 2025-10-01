@@ -3,8 +3,6 @@
 # isort: skip_file
 
 from .api_key_auth import ApiKeyAuth
-from .calcom_o_auth_error_response import CalcomOAuthErrorResponse
-from .calcom_o_auth_success_response import CalcomOAuthSuccessResponse
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
@@ -38,8 +36,6 @@ from .white_labeling_response import WhiteLabelingResponse
 
 __all__ = [
     "ApiKeyAuth",
-    "CalcomOAuthErrorResponse",
-    "CalcomOAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",

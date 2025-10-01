@@ -10,6 +10,7 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from .types.environment import Environment
 
 
 class RawQuickbooksOauthClient:
@@ -21,6 +22,7 @@ class RawQuickbooksOauthClient:
         *,
         instance_id: str,
         client_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         scope: typing.Optional[str] = None,
         redirect_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -31,6 +33,7 @@ class RawQuickbooksOauthClient:
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
         - client_id: Optional client ID for white labeling
+        - environment: QuickBooks environment to authorize ('sandbox' default)
         - scope: Optional scopes to request (space-separated). Default is 'com.intuit.quickbooks.accounting'
         - redirect_url: Optional URL to redirect to after authorization completes
 
@@ -41,6 +44,9 @@ class RawQuickbooksOauthClient:
 
         client_id : typing.Optional[str]
             Client ID for white labeling, if not provided will use default credentials
+
+        environment : typing.Optional[Environment]
+            QuickBooks environment to authorize ('sandbox' or 'production')
 
         scope : typing.Optional[str]
             Optional OAuth scopes to request (space-separated string)
@@ -62,6 +68,7 @@ class RawQuickbooksOauthClient:
             params={
                 "instance_id": instance_id,
                 "client_id": client_id,
+                "environment": environment,
                 "scope": scope,
                 "redirect_url": redirect_url,
             },
@@ -105,6 +112,7 @@ class AsyncRawQuickbooksOauthClient:
         *,
         instance_id: str,
         client_id: typing.Optional[str] = None,
+        environment: typing.Optional[Environment] = None,
         scope: typing.Optional[str] = None,
         redirect_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -115,6 +123,7 @@ class AsyncRawQuickbooksOauthClient:
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
         - client_id: Optional client ID for white labeling
+        - environment: QuickBooks environment to authorize ('sandbox' default)
         - scope: Optional scopes to request (space-separated). Default is 'com.intuit.quickbooks.accounting'
         - redirect_url: Optional URL to redirect to after authorization completes
 
@@ -125,6 +134,9 @@ class AsyncRawQuickbooksOauthClient:
 
         client_id : typing.Optional[str]
             Client ID for white labeling, if not provided will use default credentials
+
+        environment : typing.Optional[Environment]
+            QuickBooks environment to authorize ('sandbox' or 'production')
 
         scope : typing.Optional[str]
             Optional OAuth scopes to request (space-separated string)
@@ -146,6 +158,7 @@ class AsyncRawQuickbooksOauthClient:
             params={
                 "instance_id": instance_id,
                 "client_id": client_id,
+                "environment": environment,
                 "scope": scope,
                 "redirect_url": redirect_url,
             },

@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from .types import Environment
+from .environment import Environment
 
 __all__ = ["Environment"]
