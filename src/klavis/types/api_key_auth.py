@@ -7,9 +7,14 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class ApiKeyAuth(UniversalBaseModel):
-    api_key: str = pydantic.Field()
+    token: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The API key to save
+    The API key to save (token field)
+    """
+
+    api_key: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    The API key to save (api_key field)
     """
 
     if IS_PYDANTIC_V2:

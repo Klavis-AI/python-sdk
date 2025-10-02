@@ -412,9 +412,7 @@ class McpServerClient:
         client.mcp_server.set_strata_auth(
             strata_id="strataId",
             server_name=McpServerName.AFFINITY,
-            auth_data=ApiKeyAuth(
-                api_key="api_key",
-            ),
+            auth_data=ApiKeyAuth(),
         )
         """
         _response = self._raw_client.set_strata_auth(
@@ -723,9 +721,7 @@ class McpServerClient:
         )
         client.mcp_server.set_instance_auth(
             instance_id="instanceId",
-            auth_data=ApiKeyAuth(
-                api_key="api_key",
-            ),
+            auth_data=ApiKeyAuth(),
         )
         """
         _response = self._raw_client.set_instance_auth(
@@ -1265,9 +1261,7 @@ class AsyncMcpServerClient:
             await client.mcp_server.set_strata_auth(
                 strata_id="strataId",
                 server_name=McpServerName.AFFINITY,
-                auth_data=ApiKeyAuth(
-                    api_key="api_key",
-                ),
+                auth_data=ApiKeyAuth(),
             )
 
 
@@ -1642,9 +1636,7 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.set_instance_auth(
                 instance_id="instanceId",
-                auth_data=ApiKeyAuth(
-                    api_key="api_key",
-                ),
+                auth_data=ApiKeyAuth(),
             )
 
 

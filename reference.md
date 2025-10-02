@@ -604,9 +604,7 @@ client = Klavis(
 client.mcp_server.set_strata_auth(
     strata_id="strataId",
     server_name=McpServerName.AFFINITY,
-    auth_data=ApiKeyAuth(
-        api_key="api_key",
-    ),
+    auth_data=ApiKeyAuth(),
 )
 
 ```
@@ -1226,9 +1224,7 @@ client = Klavis(
 )
 client.mcp_server.set_instance_auth(
     instance_id="instanceId",
-    auth_data=ApiKeyAuth(
-        api_key="api_key",
-    ),
+    auth_data=ApiKeyAuth(),
 )
 
 ```
