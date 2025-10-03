@@ -1080,7 +1080,7 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_o_auth_url(
+    def get_oauth_url(
         self,
         *,
         server_name: McpServerName,
@@ -2203,7 +2203,7 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_o_auth_url(
+    async def get_oauth_url(
         self,
         *,
         server_name: McpServerName,

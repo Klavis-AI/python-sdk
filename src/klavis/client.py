@@ -3,51 +3,12 @@
 import typing
 
 import httpx
-from .airtable_oauth.client import AirtableOauthClient, AsyncAirtableOauthClient
-from .asana_oauth.client import AsanaOauthClient, AsyncAsanaOauthClient
-from .attio_oauth.client import AsyncAttioOauthClient, AttioOauthClient
-from .box_oauth.client import AsyncBoxOauthClient, BoxOauthClient
-from .calcom_oauth.client import AsyncCalcomOauthClient, CalcomOauthClient
-from .canva_oauth.client import AsyncCanvaOauthClient, CanvaOauthClient
-from .clickup_oauth.client import AsyncClickupOauthClient, ClickupOauthClient
-from .close_oauth.client import AsyncCloseOauthClient, CloseOauthClient
-from .confluence_oauth.client import AsyncConfluenceOauthClient, ConfluenceOauthClient
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .dialpad_oauth.client import AsyncDialpadOauthClient, DialpadOauthClient
-from .docusign_oauth.client import AsyncDocusignOauthClient, DocusignOauthClient
-from .dropbox_oauth.client import AsyncDropboxOauthClient, DropboxOauthClient
 from .environment import KlavisEnvironment
-from .figma_oauth.client import AsyncFigmaOauthClient, FigmaOauthClient
-from .gcalendar_oauth.client import AsyncGcalendarOauthClient, GcalendarOauthClient
-from .gdocs_oauth.client import AsyncGdocsOauthClient, GdocsOauthClient
-from .gdrive_oauth.client import AsyncGdriveOauthClient, GdriveOauthClient
-from .github_oauth.client import AsyncGithubOauthClient, GithubOauthClient
-from .gitlab_oauth.client import AsyncGitlabOauthClient, GitlabOauthClient
-from .gmail_oauth.client import AsyncGmailOauthClient, GmailOauthClient
-from .gsheets_oauth.client import AsyncGsheetsOauthClient, GsheetsOauthClient
-from .hubspot_oauth.client import AsyncHubspotOauthClient, HubspotOauthClient
-from .jira_oauth.client import AsyncJiraOauthClient, JiraOauthClient
-from .klaviyo_oauth.client import AsyncKlaviyoOauthClient, KlaviyoOauthClient
-from .linear_oauth.client import AsyncLinearOauthClient, LinearOauthClient
-from .linkedin_oauth.client import AsyncLinkedinOauthClient, LinkedinOauthClient
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
-from .notion_oauth.client import AsyncNotionOauthClient, NotionOauthClient
-from .onedrive_oauth.client import AsyncOnedriveOauthClient, OnedriveOauthClient
-from .outlook_oauth.client import AsyncOutlookOauthClient, OutlookOauthClient
-from .pagerduty_oauth.client import AsyncPagerdutyOauthClient, PagerdutyOauthClient
-from .pipedrive_oauth.client import AsyncPipedriveOauthClient, PipedriveOauthClient
-from .quickbooks_oauth.client import AsyncQuickbooksOauthClient, QuickbooksOauthClient
-from .salesforce_oauth.client import AsyncSalesforceOauthClient, SalesforceOauthClient
-from .shopify_oauth.client import AsyncShopifyOauthClient, ShopifyOauthClient
-from .slack_oauth.client import AsyncSlackOauthClient, SlackOauthClient
-from .stripe_connect_oauth.client import AsyncStripeConnectOauthClient, StripeConnectOauthClient
-from .supabase_oauth.client import AsyncSupabaseOauthClient, SupabaseOauthClient
+from .oauth.client import AsyncOauthClient, OauthClient
 from .user.client import AsyncUserClient, UserClient
-from .vercel_oauth.client import AsyncVercelOauthClient, VercelOauthClient
 from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
-from .wordpress_oauth.client import AsyncWordpressOauthClient, WordpressOauthClient
-from .xero_oauth.client import AsyncXeroOauthClient, XeroOauthClient
-from .zendesk_oauth.client import AsyncZendeskOauthClient, ZendeskOauthClient
 
 
 class Klavis:
@@ -113,46 +74,7 @@ class Klavis:
         self.mcp_server = McpServerClient(client_wrapper=self._client_wrapper)
         self.white_labeling = WhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = UserClient(client_wrapper=self._client_wrapper)
-        self.slack_oauth = SlackOauthClient(client_wrapper=self._client_wrapper)
-        self.github_oauth = GithubOauthClient(client_wrapper=self._client_wrapper)
-        self.gitlab_oauth = GitlabOauthClient(client_wrapper=self._client_wrapper)
-        self.supabase_oauth = SupabaseOauthClient(client_wrapper=self._client_wrapper)
-        self.notion_oauth = NotionOauthClient(client_wrapper=self._client_wrapper)
-        self.jira_oauth = JiraOauthClient(client_wrapper=self._client_wrapper)
-        self.confluence_oauth = ConfluenceOauthClient(client_wrapper=self._client_wrapper)
-        self.wordpress_oauth = WordpressOauthClient(client_wrapper=self._client_wrapper)
-        self.gmail_oauth = GmailOauthClient(client_wrapper=self._client_wrapper)
-        self.gdrive_oauth = GdriveOauthClient(client_wrapper=self._client_wrapper)
-        self.gcalendar_oauth = GcalendarOauthClient(client_wrapper=self._client_wrapper)
-        self.gsheets_oauth = GsheetsOauthClient(client_wrapper=self._client_wrapper)
-        self.gdocs_oauth = GdocsOauthClient(client_wrapper=self._client_wrapper)
-        self.attio_oauth = AttioOauthClient(client_wrapper=self._client_wrapper)
-        self.salesforce_oauth = SalesforceOauthClient(client_wrapper=self._client_wrapper)
-        self.asana_oauth = AsanaOauthClient(client_wrapper=self._client_wrapper)
-        self.linear_oauth = LinearOauthClient(client_wrapper=self._client_wrapper)
-        self.close_oauth = CloseOauthClient(client_wrapper=self._client_wrapper)
-        self.clickup_oauth = ClickupOauthClient(client_wrapper=self._client_wrapper)
-        self.airtable_oauth = AirtableOauthClient(client_wrapper=self._client_wrapper)
-        self.hubspot_oauth = HubspotOauthClient(client_wrapper=self._client_wrapper)
-        self.linkedin_oauth = LinkedinOauthClient(client_wrapper=self._client_wrapper)
-        self.canva_oauth = CanvaOauthClient(client_wrapper=self._client_wrapper)
-        self.xero_oauth = XeroOauthClient(client_wrapper=self._client_wrapper)
-        self.dropbox_oauth = DropboxOauthClient(client_wrapper=self._client_wrapper)
-        self.box_oauth = BoxOauthClient(client_wrapper=self._client_wrapper)
-        self.quickbooks_oauth = QuickbooksOauthClient(client_wrapper=self._client_wrapper)
-        self.zendesk_oauth = ZendeskOauthClient(client_wrapper=self._client_wrapper)
-        self.stripe_connect_oauth = StripeConnectOauthClient(client_wrapper=self._client_wrapper)
-        self.calcom_oauth = CalcomOauthClient(client_wrapper=self._client_wrapper)
-        self.vercel_oauth = VercelOauthClient(client_wrapper=self._client_wrapper)
-        self.pipedrive_oauth = PipedriveOauthClient(client_wrapper=self._client_wrapper)
-        self.figma_oauth = FigmaOauthClient(client_wrapper=self._client_wrapper)
-        self.klaviyo_oauth = KlaviyoOauthClient(client_wrapper=self._client_wrapper)
-        self.pagerduty_oauth = PagerdutyOauthClient(client_wrapper=self._client_wrapper)
-        self.docusign_oauth = DocusignOauthClient(client_wrapper=self._client_wrapper)
-        self.dialpad_oauth = DialpadOauthClient(client_wrapper=self._client_wrapper)
-        self.shopify_oauth = ShopifyOauthClient(client_wrapper=self._client_wrapper)
-        self.onedrive_oauth = OnedriveOauthClient(client_wrapper=self._client_wrapper)
-        self.outlook_oauth = OutlookOauthClient(client_wrapper=self._client_wrapper)
+        self.oauth = OauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -218,46 +140,7 @@ class AsyncKlavis:
         self.mcp_server = AsyncMcpServerClient(client_wrapper=self._client_wrapper)
         self.white_labeling = AsyncWhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = AsyncUserClient(client_wrapper=self._client_wrapper)
-        self.slack_oauth = AsyncSlackOauthClient(client_wrapper=self._client_wrapper)
-        self.github_oauth = AsyncGithubOauthClient(client_wrapper=self._client_wrapper)
-        self.gitlab_oauth = AsyncGitlabOauthClient(client_wrapper=self._client_wrapper)
-        self.supabase_oauth = AsyncSupabaseOauthClient(client_wrapper=self._client_wrapper)
-        self.notion_oauth = AsyncNotionOauthClient(client_wrapper=self._client_wrapper)
-        self.jira_oauth = AsyncJiraOauthClient(client_wrapper=self._client_wrapper)
-        self.confluence_oauth = AsyncConfluenceOauthClient(client_wrapper=self._client_wrapper)
-        self.wordpress_oauth = AsyncWordpressOauthClient(client_wrapper=self._client_wrapper)
-        self.gmail_oauth = AsyncGmailOauthClient(client_wrapper=self._client_wrapper)
-        self.gdrive_oauth = AsyncGdriveOauthClient(client_wrapper=self._client_wrapper)
-        self.gcalendar_oauth = AsyncGcalendarOauthClient(client_wrapper=self._client_wrapper)
-        self.gsheets_oauth = AsyncGsheetsOauthClient(client_wrapper=self._client_wrapper)
-        self.gdocs_oauth = AsyncGdocsOauthClient(client_wrapper=self._client_wrapper)
-        self.attio_oauth = AsyncAttioOauthClient(client_wrapper=self._client_wrapper)
-        self.salesforce_oauth = AsyncSalesforceOauthClient(client_wrapper=self._client_wrapper)
-        self.asana_oauth = AsyncAsanaOauthClient(client_wrapper=self._client_wrapper)
-        self.linear_oauth = AsyncLinearOauthClient(client_wrapper=self._client_wrapper)
-        self.close_oauth = AsyncCloseOauthClient(client_wrapper=self._client_wrapper)
-        self.clickup_oauth = AsyncClickupOauthClient(client_wrapper=self._client_wrapper)
-        self.airtable_oauth = AsyncAirtableOauthClient(client_wrapper=self._client_wrapper)
-        self.hubspot_oauth = AsyncHubspotOauthClient(client_wrapper=self._client_wrapper)
-        self.linkedin_oauth = AsyncLinkedinOauthClient(client_wrapper=self._client_wrapper)
-        self.canva_oauth = AsyncCanvaOauthClient(client_wrapper=self._client_wrapper)
-        self.xero_oauth = AsyncXeroOauthClient(client_wrapper=self._client_wrapper)
-        self.dropbox_oauth = AsyncDropboxOauthClient(client_wrapper=self._client_wrapper)
-        self.box_oauth = AsyncBoxOauthClient(client_wrapper=self._client_wrapper)
-        self.quickbooks_oauth = AsyncQuickbooksOauthClient(client_wrapper=self._client_wrapper)
-        self.zendesk_oauth = AsyncZendeskOauthClient(client_wrapper=self._client_wrapper)
-        self.stripe_connect_oauth = AsyncStripeConnectOauthClient(client_wrapper=self._client_wrapper)
-        self.calcom_oauth = AsyncCalcomOauthClient(client_wrapper=self._client_wrapper)
-        self.vercel_oauth = AsyncVercelOauthClient(client_wrapper=self._client_wrapper)
-        self.pipedrive_oauth = AsyncPipedriveOauthClient(client_wrapper=self._client_wrapper)
-        self.figma_oauth = AsyncFigmaOauthClient(client_wrapper=self._client_wrapper)
-        self.klaviyo_oauth = AsyncKlaviyoOauthClient(client_wrapper=self._client_wrapper)
-        self.pagerduty_oauth = AsyncPagerdutyOauthClient(client_wrapper=self._client_wrapper)
-        self.docusign_oauth = AsyncDocusignOauthClient(client_wrapper=self._client_wrapper)
-        self.dialpad_oauth = AsyncDialpadOauthClient(client_wrapper=self._client_wrapper)
-        self.shopify_oauth = AsyncShopifyOauthClient(client_wrapper=self._client_wrapper)
-        self.onedrive_oauth = AsyncOnedriveOauthClient(client_wrapper=self._client_wrapper)
-        self.outlook_oauth = AsyncOutlookOauthClient(client_wrapper=self._client_wrapper)
+        self.oauth = AsyncOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

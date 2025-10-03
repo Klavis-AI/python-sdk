@@ -1343,7 +1343,7 @@ client.mcp_server.get_instance_auth_data(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_o_auth_url</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_oauth_url</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1376,7 +1376,7 @@ from klavis import Klavis, McpServerName
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_o_auth_url(
+client.mcp_server.get_oauth_url(
     server_name=McpServerName.AFFINITY,
     instance_id="instanceId",
 )
@@ -1773,8 +1773,8 @@ client.user.delete_user_by_user_id(
 </dl>
 </details>
 
-## SlackOauth
-<details><summary><code>client.slack_oauth.<a href="src/klavis/slack_oauth/client.py">authorize_slack</a>(...)</code></summary>
+## Oauth
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_slack</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1813,7 +1813,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.slack_oauth.authorize_slack(
+client.oauth.authorize_slack(
     instance_id="instance_id",
 )
 
@@ -1883,8 +1883,7 @@ client.slack_oauth.authorize_slack(
 </dl>
 </details>
 
-## GithubOauth
-<details><summary><code>client.github_oauth.<a href="src/klavis/github_oauth/client.py">authorize_github</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_github</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1922,7 +1921,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.github_oauth.authorize_github(
+client.oauth.authorize_github(
     instance_id="instance_id",
 )
 
@@ -1984,8 +1983,7 @@ client.github_oauth.authorize_github(
 </dl>
 </details>
 
-## GitlabOauth
-<details><summary><code>client.gitlab_oauth.<a href="src/klavis/gitlab_oauth/client.py">authorize_gitlab</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gitlab</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2023,7 +2021,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gitlab_oauth.authorize_gitlab(
+client.oauth.authorize_gitlab(
     instance_id="instance_id",
 )
 
@@ -2085,8 +2083,7 @@ client.gitlab_oauth.authorize_gitlab(
 </dl>
 </details>
 
-## SupabaseOauth
-<details><summary><code>client.supabase_oauth.<a href="src/klavis/supabase_oauth/client.py">authorize_supabase</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_supabase</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2123,7 +2120,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.supabase_oauth.authorize_supabase(
+client.oauth.authorize_supabase(
     instance_id="instance_id",
 )
 
@@ -2177,8 +2174,7 @@ client.supabase_oauth.authorize_supabase(
 </dl>
 </details>
 
-## NotionOauth
-<details><summary><code>client.notion_oauth.<a href="src/klavis/notion_oauth/client.py">authorize_notion</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_notion</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2216,7 +2212,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.notion_oauth.authorize_notion(
+client.oauth.authorize_notion(
     instance_id="instance_id",
 )
 
@@ -2278,8 +2274,7 @@ client.notion_oauth.authorize_notion(
 </dl>
 </details>
 
-## JiraOauth
-<details><summary><code>client.jira_oauth.<a href="src/klavis/jira_oauth/client.py">authorize_jira</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_jira</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2317,7 +2312,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.jira_oauth.authorize_jira(
+client.oauth.authorize_jira(
     instance_id="instance_id",
 )
 
@@ -2379,8 +2374,7 @@ client.jira_oauth.authorize_jira(
 </dl>
 </details>
 
-## ConfluenceOauth
-<details><summary><code>client.confluence_oauth.<a href="src/klavis/confluence_oauth/client.py">authorize_confluence</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_confluence</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2418,7 +2412,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.confluence_oauth.authorize_confluence(
+client.oauth.authorize_confluence(
     instance_id="instance_id",
 )
 
@@ -2480,8 +2474,7 @@ client.confluence_oauth.authorize_confluence(
 </dl>
 </details>
 
-## WordpressOauth
-<details><summary><code>client.wordpress_oauth.<a href="src/klavis/wordpress_oauth/client.py">authorize_wordpress</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_wordpress</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2519,7 +2512,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.wordpress_oauth.authorize_wordpress(
+client.oauth.authorize_wordpress(
     instance_id="instance_id",
 )
 
@@ -2581,8 +2574,7 @@ client.wordpress_oauth.authorize_wordpress(
 </dl>
 </details>
 
-## GmailOauth
-<details><summary><code>client.gmail_oauth.<a href="src/klavis/gmail_oauth/client.py">authorize_gmail</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gmail</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2620,7 +2612,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gmail_oauth.authorize_gmail(
+client.oauth.authorize_gmail(
     instance_id="instance_id",
 )
 
@@ -2682,8 +2674,7 @@ client.gmail_oauth.authorize_gmail(
 </dl>
 </details>
 
-## GdriveOauth
-<details><summary><code>client.gdrive_oauth.<a href="src/klavis/gdrive_oauth/client.py">authorize_g_drive</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gdrive</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2721,7 +2712,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gdrive_oauth.authorize_g_drive(
+client.oauth.authorize_gdrive(
     instance_id="instance_id",
 )
 
@@ -2783,8 +2774,7 @@ client.gdrive_oauth.authorize_g_drive(
 </dl>
 </details>
 
-## GcalendarOauth
-<details><summary><code>client.gcalendar_oauth.<a href="src/klavis/gcalendar_oauth/client.py">authorize_g_calendar</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gcalendar</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2822,7 +2812,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gcalendar_oauth.authorize_g_calendar(
+client.oauth.authorize_gcalendar(
     instance_id="instance_id",
 )
 
@@ -2884,8 +2874,7 @@ client.gcalendar_oauth.authorize_g_calendar(
 </dl>
 </details>
 
-## GsheetsOauth
-<details><summary><code>client.gsheets_oauth.<a href="src/klavis/gsheets_oauth/client.py">authorize_g_sheets</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gsheets</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2923,7 +2912,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gsheets_oauth.authorize_g_sheets(
+client.oauth.authorize_gsheets(
     instance_id="instance_id",
 )
 
@@ -2985,8 +2974,7 @@ client.gsheets_oauth.authorize_g_sheets(
 </dl>
 </details>
 
-## GdocsOauth
-<details><summary><code>client.gdocs_oauth.<a href="src/klavis/gdocs_oauth/client.py">authorize_g_docs</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_gdocs</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3024,7 +3012,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.gdocs_oauth.authorize_g_docs(
+client.oauth.authorize_gdocs(
     instance_id="instance_id",
 )
 
@@ -3086,8 +3074,7 @@ client.gdocs_oauth.authorize_g_docs(
 </dl>
 </details>
 
-## AttioOauth
-<details><summary><code>client.attio_oauth.<a href="src/klavis/attio_oauth/client.py">authorize_attio</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_attio</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3124,7 +3111,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.attio_oauth.authorize_attio(
+client.oauth.authorize_attio(
     instance_id="instance_id",
 )
 
@@ -3178,8 +3165,7 @@ client.attio_oauth.authorize_attio(
 </dl>
 </details>
 
-## SalesforceOauth
-<details><summary><code>client.salesforce_oauth.<a href="src/klavis/salesforce_oauth/client.py">authorize_salesforce</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_salesforce</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3218,7 +3204,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.salesforce_oauth.authorize_salesforce(
+client.oauth.authorize_salesforce(
     instance_id="instance_id",
 )
 
@@ -3288,8 +3274,7 @@ client.salesforce_oauth.authorize_salesforce(
 </dl>
 </details>
 
-## AsanaOauth
-<details><summary><code>client.asana_oauth.<a href="src/klavis/asana_oauth/client.py">authorize_asana</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_asana</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3327,7 +3312,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.asana_oauth.authorize_asana(
+client.oauth.authorize_asana(
     instance_id="instance_id",
 )
 
@@ -3389,8 +3374,7 @@ client.asana_oauth.authorize_asana(
 </dl>
 </details>
 
-## LinearOauth
-<details><summary><code>client.linear_oauth.<a href="src/klavis/linear_oauth/client.py">authorize_linear</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_linear</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3428,7 +3412,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.linear_oauth.authorize_linear(
+client.oauth.authorize_linear(
     instance_id="instance_id",
 )
 
@@ -3490,8 +3474,7 @@ client.linear_oauth.authorize_linear(
 </dl>
 </details>
 
-## CloseOauth
-<details><summary><code>client.close_oauth.<a href="src/klavis/close_oauth/client.py">authorize_close</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_close</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3529,7 +3512,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.close_oauth.authorize_close(
+client.oauth.authorize_close(
     instance_id="instance_id",
 )
 
@@ -3591,8 +3574,7 @@ client.close_oauth.authorize_close(
 </dl>
 </details>
 
-## ClickupOauth
-<details><summary><code>client.clickup_oauth.<a href="src/klavis/clickup_oauth/client.py">authorize_click_up</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_clickup</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3629,7 +3611,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.clickup_oauth.authorize_click_up(
+client.oauth.authorize_clickup(
     instance_id="instance_id",
 )
 
@@ -3683,8 +3665,7 @@ client.clickup_oauth.authorize_click_up(
 </dl>
 </details>
 
-## AirtableOauth
-<details><summary><code>client.airtable_oauth.<a href="src/klavis/airtable_oauth/client.py">authorize_airtable</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_airtable</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3722,7 +3703,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.airtable_oauth.authorize_airtable(
+client.oauth.authorize_airtable(
     instance_id="instance_id",
 )
 
@@ -3784,8 +3765,7 @@ client.airtable_oauth.authorize_airtable(
 </dl>
 </details>
 
-## HubspotOauth
-<details><summary><code>client.hubspot_oauth.<a href="src/klavis/hubspot_oauth/client.py">authorize_hubspot</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_hubspot</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3823,7 +3803,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.hubspot_oauth.authorize_hubspot(
+client.oauth.authorize_hubspot(
     instance_id="instance_id",
 )
 
@@ -3885,8 +3865,7 @@ client.hubspot_oauth.authorize_hubspot(
 </dl>
 </details>
 
-## LinkedinOauth
-<details><summary><code>client.linkedin_oauth.<a href="src/klavis/linkedin_oauth/client.py">authorize_linked_in</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_linkedin</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3924,7 +3903,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.linkedin_oauth.authorize_linked_in(
+client.oauth.authorize_linkedin(
     instance_id="instance_id",
 )
 
@@ -3986,8 +3965,7 @@ client.linkedin_oauth.authorize_linked_in(
 </dl>
 </details>
 
-## CanvaOauth
-<details><summary><code>client.canva_oauth.<a href="src/klavis/canva_oauth/client.py">authorize_canva</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_canva</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4025,7 +4003,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.canva_oauth.authorize_canva(
+client.oauth.authorize_canva(
     instance_id="instance_id",
 )
 
@@ -4087,8 +4065,7 @@ client.canva_oauth.authorize_canva(
 </dl>
 </details>
 
-## XeroOauth
-<details><summary><code>client.xero_oauth.<a href="src/klavis/xero_oauth/client.py">authorize_xero</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_xero</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4126,7 +4103,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.xero_oauth.authorize_xero(
+client.oauth.authorize_xero(
     instance_id="instance_id",
 )
 
@@ -4188,8 +4165,7 @@ client.xero_oauth.authorize_xero(
 </dl>
 </details>
 
-## DropboxOauth
-<details><summary><code>client.dropbox_oauth.<a href="src/klavis/dropbox_oauth/client.py">authorize_dropbox</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_dropbox</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4227,7 +4203,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.dropbox_oauth.authorize_dropbox(
+client.oauth.authorize_dropbox(
     instance_id="instance_id",
 )
 
@@ -4289,8 +4265,7 @@ client.dropbox_oauth.authorize_dropbox(
 </dl>
 </details>
 
-## BoxOauth
-<details><summary><code>client.box_oauth.<a href="src/klavis/box_oauth/client.py">authorize_box</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_box</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4322,7 +4297,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.box_oauth.authorize_box(
+client.oauth.authorize_box(
     instance_id="instance_id",
 )
 
@@ -4384,8 +4359,7 @@ client.box_oauth.authorize_box(
 </dl>
 </details>
 
-## QuickbooksOauth
-<details><summary><code>client.quickbooks_oauth.<a href="src/klavis/quickbooks_oauth/client.py">authorize_quick_books</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_quickbooks</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4424,7 +4398,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.quickbooks_oauth.authorize_quick_books(
+client.oauth.authorize_quickbooks(
     instance_id="instance_id",
 )
 
@@ -4494,8 +4468,7 @@ client.quickbooks_oauth.authorize_quick_books(
 </dl>
 </details>
 
-## ZendeskOauth
-<details><summary><code>client.zendesk_oauth.<a href="src/klavis/zendesk_oauth/client.py">authorize_zendesk</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_zendesk</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4534,7 +4507,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.zendesk_oauth.authorize_zendesk(
+client.oauth.authorize_zendesk(
     instance_id="instance_id",
     subdomain="subdomain",
 )
@@ -4605,8 +4578,7 @@ client.zendesk_oauth.authorize_zendesk(
 </dl>
 </details>
 
-## StripeConnectOauth
-<details><summary><code>client.stripe_connect_oauth.<a href="src/klavis/stripe_connect_oauth/client.py">authorize_stripe_connect</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_stripe</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4644,7 +4616,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.stripe_connect_oauth.authorize_stripe_connect(
+client.oauth.authorize_stripe(
     instance_id="instance_id",
 )
 
@@ -4706,8 +4678,7 @@ client.stripe_connect_oauth.authorize_stripe_connect(
 </dl>
 </details>
 
-## CalcomOauth
-<details><summary><code>client.calcom_oauth.<a href="src/klavis/calcom_oauth/client.py">authorize_calcom</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_calcom</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4744,7 +4715,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.calcom_oauth.authorize_calcom(
+client.oauth.authorize_calcom(
     instance_id="instance_id",
 )
 
@@ -4798,8 +4769,7 @@ client.calcom_oauth.authorize_calcom(
 </dl>
 </details>
 
-## VercelOauth
-<details><summary><code>client.vercel_oauth.<a href="src/klavis/vercel_oauth/client.py">authorize_vercel</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_vercel</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4837,7 +4807,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.vercel_oauth.authorize_vercel(
+client.oauth.authorize_vercel(
     instance_id="instance_id",
 )
 
@@ -4899,8 +4869,7 @@ client.vercel_oauth.authorize_vercel(
 </dl>
 </details>
 
-## PipedriveOauth
-<details><summary><code>client.pipedrive_oauth.<a href="src/klavis/pipedrive_oauth/client.py">authorize_pipedrive</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_pipedrive</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4938,7 +4907,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.pipedrive_oauth.authorize_pipedrive(
+client.oauth.authorize_pipedrive(
     instance_id="instance_id",
 )
 
@@ -5000,8 +4969,7 @@ client.pipedrive_oauth.authorize_pipedrive(
 </dl>
 </details>
 
-## FigmaOauth
-<details><summary><code>client.figma_oauth.<a href="src/klavis/figma_oauth/client.py">authorize_figma</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_figma</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5039,7 +5007,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.figma_oauth.authorize_figma(
+client.oauth.authorize_figma(
     instance_id="instance_id",
 )
 
@@ -5101,8 +5069,7 @@ client.figma_oauth.authorize_figma(
 </dl>
 </details>
 
-## KlaviyoOauth
-<details><summary><code>client.klaviyo_oauth.<a href="src/klavis/klaviyo_oauth/client.py">authorize_klaviyo</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_klaviyo</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5120,7 +5087,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.klaviyo_oauth.authorize_klaviyo(
+client.oauth.authorize_klaviyo(
     instance_id="instance_id",
 )
 
@@ -5182,8 +5149,7 @@ client.klaviyo_oauth.authorize_klaviyo(
 </dl>
 </details>
 
-## PagerdutyOauth
-<details><summary><code>client.pagerduty_oauth.<a href="src/klavis/pagerduty_oauth/client.py">authorize_pager_duty</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_pagerduty</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5221,7 +5187,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.pagerduty_oauth.authorize_pager_duty(
+client.oauth.authorize_pagerduty(
     instance_id="instance_id",
 )
 
@@ -5283,8 +5249,7 @@ client.pagerduty_oauth.authorize_pager_duty(
 </dl>
 </details>
 
-## DocusignOauth
-<details><summary><code>client.docusign_oauth.<a href="src/klavis/docusign_oauth/client.py">authorize_docu_sign</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_docusign</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5322,7 +5287,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.docusign_oauth.authorize_docu_sign(
+client.oauth.authorize_docusign(
     instance_id="instance_id",
 )
 
@@ -5384,8 +5349,7 @@ client.docusign_oauth.authorize_docu_sign(
 </dl>
 </details>
 
-## DialpadOauth
-<details><summary><code>client.dialpad_oauth.<a href="src/klavis/dialpad_oauth/client.py">authorize_dialpad</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_dialpad</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5425,7 +5389,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.dialpad_oauth.authorize_dialpad(
+client.oauth.authorize_dialpad(
     instance_id="instance_id",
 )
 
@@ -5503,8 +5467,7 @@ client.dialpad_oauth.authorize_dialpad(
 </dl>
 </details>
 
-## ShopifyOauth
-<details><summary><code>client.shopify_oauth.<a href="src/klavis/shopify_oauth/client.py">authorize_shopify</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_shopify</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5543,7 +5506,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.shopify_oauth.authorize_shopify(
+client.oauth.authorize_shopify(
     instance_id="instance_id",
     shop="shop",
 )
@@ -5614,8 +5577,7 @@ client.shopify_oauth.authorize_shopify(
 </dl>
 </details>
 
-## OnedriveOauth
-<details><summary><code>client.onedrive_oauth.<a href="src/klavis/onedrive_oauth/client.py">authorize_one_drive</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_onedrive</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5633,7 +5595,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.onedrive_oauth.authorize_one_drive(
+client.oauth.authorize_onedrive(
     instance_id="instance_id",
 )
 
@@ -5695,8 +5657,7 @@ client.onedrive_oauth.authorize_one_drive(
 </dl>
 </details>
 
-## OutlookOauth
-<details><summary><code>client.outlook_oauth.<a href="src/klavis/outlook_oauth/client.py">authorize_outlook</a>(...)</code></summary>
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_outlook</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5714,7 +5675,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.outlook_oauth.authorize_outlook(
+client.oauth.authorize_outlook(
     instance_id="instance_id",
 )
 

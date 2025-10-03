@@ -766,7 +766,7 @@ class McpServerClient:
         _response = self._raw_client.get_instance_auth_data(instance_id, request_options=request_options)
         return _response.data
 
-    def get_o_auth_url(
+    def get_oauth_url(
         self,
         *,
         server_name: McpServerName,
@@ -812,12 +812,12 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_o_auth_url(
+        client.mcp_server.get_oauth_url(
             server_name=McpServerName.AFFINITY,
             instance_id="instanceId",
         )
         """
-        _response = self._raw_client.get_o_auth_url(
+        _response = self._raw_client.get_oauth_url(
             server_name=server_name,
             instance_id=instance_id,
             client_id=client_id,
@@ -1692,7 +1692,7 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.get_instance_auth_data(instance_id, request_options=request_options)
         return _response.data
 
-    async def get_o_auth_url(
+    async def get_oauth_url(
         self,
         *,
         server_name: McpServerName,
@@ -1743,7 +1743,7 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_o_auth_url(
+            await client.mcp_server.get_oauth_url(
                 server_name=McpServerName.AFFINITY,
                 instance_id="instanceId",
             )
@@ -1751,7 +1751,7 @@ class AsyncMcpServerClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_o_auth_url(
+        _response = await self._raw_client.get_oauth_url(
             server_name=server_name,
             instance_id=instance_id,
             client_id=client_id,
