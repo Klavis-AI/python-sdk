@@ -12,7 +12,6 @@ from ..types.external_server_request import ExternalServerRequest
 from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
-from ..types.get_o_auth_url_response import GetOAuthUrlResponse
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
 from ..types.status_response import StatusResponse
@@ -179,7 +178,7 @@ class McpServerClient:
         Create a Strata MCP server.
 
         Parameters:
-        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - servers: Can be 'ALL' to add all available Klavis integration, a list of specific server names, or null to add no servers
         - externalServers: Optional list of external MCP servers to validate and add
 
         Parameters
@@ -247,7 +246,7 @@ class McpServerClient:
             The strata server ID
 
         servers : typing.Optional[Servers]
-            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+            List of Klavis integration to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis integration, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
@@ -296,7 +295,7 @@ class McpServerClient:
 
         Parameters:
         - strataId: The strata server ID (path parameter)
-        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
@@ -306,7 +305,7 @@ class McpServerClient:
         strata_id : str
 
         servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
-            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+            List of Klavis integration to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis integration, or null to delete no servers.
 
         external_servers : typing.Optional[str]
             Comma-separated list of external server names to delete
@@ -766,65 +765,27 @@ class McpServerClient:
         _response = self._raw_client.get_instance_auth_data(instance_id, request_options=request_options)
         return _response.data
 
-    def get_oauth_url(
-        self,
-        *,
-        server_name: McpServerName,
-        instance_id: str,
-        client_id: typing.Optional[str] = OMIT,
-        scope: typing.Optional[str] = OMIT,
-        redirect_url: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetOAuthUrlResponse:
+    def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Gets the OAuth authorization URL for a specific MCP server and instance.
-        Returns the complete OAuth URL with the instance ID as a query parameter.
-
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
-
-        instance_id : str
-            The unique identifier for the connection instance.
-
-        client_id : typing.Optional[str]
-            Optional client ID for white labeling. If not provided, will use default credentials.
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string).
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetOAuthUrlResponse
-            Successful Response
+        None
 
         Examples
         --------
-        from klavis import Klavis, McpServerName
+        from klavis import Klavis
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_oauth_url(
-            server_name=McpServerName.AFFINITY,
-            instance_id="instanceId",
-        )
+        client.mcp_server.get_oauth_url()
         """
-        _response = self._raw_client.get_oauth_url(
-            server_name=server_name,
-            instance_id=instance_id,
-            client_id=client_id,
-            scope=scope,
-            redirect_url=redirect_url,
-            request_options=request_options,
-        )
+        _response = self._raw_client.get_oauth_url(request_options=request_options)
         return _response.data
 
 
@@ -991,7 +952,7 @@ class AsyncMcpServerClient:
         Create a Strata MCP server.
 
         Parameters:
-        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - servers: Can be 'ALL' to add all available Klavis integration, a list of specific server names, or null to add no servers
         - externalServers: Optional list of external MCP servers to validate and add
 
         Parameters
@@ -1067,7 +1028,7 @@ class AsyncMcpServerClient:
             The strata server ID
 
         servers : typing.Optional[Servers]
-            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+            List of Klavis integration to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis integration, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
@@ -1124,7 +1085,7 @@ class AsyncMcpServerClient:
 
         Parameters:
         - strataId: The strata server ID (path parameter)
-        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
@@ -1134,7 +1095,7 @@ class AsyncMcpServerClient:
         strata_id : str
 
         servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
-            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+            List of Klavis integration to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis integration, or null to delete no servers.
 
         external_servers : typing.Optional[str]
             Comma-separated list of external server names to delete
@@ -1692,50 +1653,22 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.get_instance_auth_data(instance_id, request_options=request_options)
         return _response.data
 
-    async def get_oauth_url(
-        self,
-        *,
-        server_name: McpServerName,
-        instance_id: str,
-        client_id: typing.Optional[str] = OMIT,
-        scope: typing.Optional[str] = OMIT,
-        redirect_url: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetOAuthUrlResponse:
+    async def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Gets the OAuth authorization URL for a specific MCP server and instance.
-        Returns the complete OAuth URL with the instance ID as a query parameter.
-
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
-
-        instance_id : str
-            The unique identifier for the connection instance.
-
-        client_id : typing.Optional[str]
-            Optional client ID for white labeling. If not provided, will use default credentials.
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string).
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetOAuthUrlResponse
-            Successful Response
+        None
 
         Examples
         --------
         import asyncio
 
-        from klavis import AsyncKlavis, McpServerName
+        from klavis import AsyncKlavis
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1743,20 +1676,10 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_oauth_url(
-                server_name=McpServerName.AFFINITY,
-                instance_id="instanceId",
-            )
+            await client.mcp_server.get_oauth_url()
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_oauth_url(
-            server_name=server_name,
-            instance_id=instance_id,
-            client_id=client_id,
-            scope=scope,
-            redirect_url=redirect_url,
-            request_options=request_options,
-        )
+        _response = await self._raw_client.get_oauth_url(request_options=request_options)
         return _response.data

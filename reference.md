@@ -217,7 +217,7 @@ client.mcp_server.list_tools(
 Create a Strata MCP server.
 
 Parameters:
-- servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+- servers: Can be 'ALL' to add all available Klavis integration, a list of specific server names, or null to add no servers
 - externalServers: Optional list of external MCP servers to validate and add
 </dd>
 </dl>
@@ -364,7 +364,7 @@ client.mcp_server.add_servers_to_strata(
 <dl>
 <dd>
 
-**servers:** `typing.Optional[Servers]` — List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+**servers:** `typing.Optional[Servers]` — List of Klavis integration to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis integration, or null to add no servers.
     
 </dd>
 </dl>
@@ -410,7 +410,7 @@ Note: After deleting servers, you need to reconnect the MCP server so that list_
 
 Parameters:
 - strataId: The strata server ID (path parameter)
-- servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+- servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
 - externalServers: Query parameter - comma-separated list of external server names to delete
 
 Returns separate lists for deleted Klavis servers and deleted external servers.
@@ -466,7 +466,7 @@ client.mcp_server.delete_servers_from_strata(
             DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem
         ],
     ]
-]` — List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+]` — List of Klavis integration to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis integration, or null to delete no servers.
     
 </dd>
 </dl>
@@ -1343,24 +1343,9 @@ client.mcp_server.get_instance_auth_data(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_oauth_url</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_oauth_url</a>()</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Gets the OAuth authorization URL for a specific MCP server and instance.
-Returns the complete OAuth URL with the instance ID as a query parameter.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -1371,15 +1356,12 @@ Returns the complete OAuth URL with the instance ID as a query parameter.
 <dd>
 
 ```python
-from klavis import Klavis, McpServerName
+from klavis import Klavis
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_oauth_url(
-    server_name=McpServerName.AFFINITY,
-    instance_id="instanceId",
-)
+client.mcp_server.get_oauth_url()
 
 ```
 </dd>
@@ -1391,46 +1373,6 @@ client.mcp_server.get_oauth_url(
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — The unique identifier for the connection instance.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Optional client ID for white labeling. If not provided, will use default credentials.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string).
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes.
-    
-</dd>
-</dl>
 
 <dl>
 <dd>

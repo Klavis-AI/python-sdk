@@ -24,7 +24,7 @@ class StrataGetResponse(UniversalBaseModel):
         pydantic.Field()
     )
     """
-    List of Klavis MCP servers currently connected to this strata
+    List of available integration currently connected to this strata
     """
 
     connected_external_servers: typing_extensions.Annotated[
@@ -38,14 +38,14 @@ class StrataGetResponse(UniversalBaseModel):
         typing.Optional[typing.Dict[str, str]], FieldMetadata(alias="oauthUrls")
     ] = pydantic.Field(default=None)
     """
-    Mapping of Klavis MCP server name to OAuth URL
+    Map of connected integration to OAuth URL, supports white labeling if configured
     """
 
     api_key_urls: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, str]], FieldMetadata(alias="apiKeyUrls")
     ] = pydantic.Field(default=None)
     """
-    Mapping of Klavis MCP server name to API key setup URL
+    Map of connected integration to API key setup URL
     """
 
     if IS_PYDANTIC_V2:

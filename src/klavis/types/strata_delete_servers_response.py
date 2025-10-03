@@ -13,7 +13,7 @@ class StrataDeleteServersResponse(UniversalBaseModel):
         pydantic.Field()
     )
     """
-    List of Klavis MCP server names that were deleted
+    List of integration that were deleted
     """
 
     deleted_external_servers: typing_extensions.Annotated[

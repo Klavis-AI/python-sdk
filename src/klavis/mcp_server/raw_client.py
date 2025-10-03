@@ -19,7 +19,6 @@ from ..types.external_server_request import ExternalServerRequest
 from ..types.get_auth_data_response import GetAuthDataResponse
 from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
-from ..types.get_o_auth_url_response import GetOAuthUrlResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
@@ -216,7 +215,7 @@ class RawMcpServerClient:
         Create a Strata MCP server.
 
         Parameters:
-        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - servers: Can be 'ALL' to add all available Klavis integration, a list of specific server names, or null to add no servers
         - externalServers: Optional list of external MCP servers to validate and add
 
         Parameters
@@ -309,7 +308,7 @@ class RawMcpServerClient:
             The strata server ID
 
         servers : typing.Optional[Servers]
-            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+            List of Klavis integration to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis integration, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
@@ -386,7 +385,7 @@ class RawMcpServerClient:
 
         Parameters:
         - strataId: The strata server ID (path parameter)
-        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
@@ -396,7 +395,7 @@ class RawMcpServerClient:
         strata_id : str
 
         servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
-            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+            List of Klavis integration to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis integration, or null to delete no servers.
 
         external_servers : typing.Optional[str]
             Comma-separated list of external server names to delete
@@ -1080,82 +1079,25 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_oauth_url(
-        self,
-        *,
-        server_name: McpServerName,
-        instance_id: str,
-        client_id: typing.Optional[str] = OMIT,
-        scope: typing.Optional[str] = OMIT,
-        redirect_url: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GetOAuthUrlResponse]:
+    def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> HttpResponse[None]:
         """
-        Gets the OAuth authorization URL for a specific MCP server and instance.
-        Returns the complete OAuth URL with the instance ID as a query parameter.
-
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
-
-        instance_id : str
-            The unique identifier for the connection instance.
-
-        client_id : typing.Optional[str]
-            Optional client ID for white labeling. If not provided, will use default credentials.
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string).
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[GetOAuthUrlResponse]
-            Successful Response
+        HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
             "mcp-server/oauth-url",
             method="POST",
-            json={
-                "serverName": server_name,
-                "instanceId": instance_id,
-                "clientId": client_id,
-                "scope": scope,
-                "redirectUrl": redirect_url,
-            },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GetOAuthUrlResponse,
-                    parse_obj_as(
-                        type_=GetOAuthUrlResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
+                return HttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -1339,7 +1281,7 @@ class AsyncRawMcpServerClient:
         Create a Strata MCP server.
 
         Parameters:
-        - servers: Can be 'ALL' to add all available Klavis MCP servers, a list of specific server names, or null to add no servers
+        - servers: Can be 'ALL' to add all available Klavis integration, a list of specific server names, or null to add no servers
         - externalServers: Optional list of external MCP servers to validate and add
 
         Parameters
@@ -1432,7 +1374,7 @@ class AsyncRawMcpServerClient:
             The strata server ID
 
         servers : typing.Optional[Servers]
-            List of Klavis MCP servers to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis MCP servers, or null to add no servers.
+            List of Klavis integration to add (e.g., 'jira', 'linear'), 'ALL' to add all Klavis integration, or null to add no servers.
 
         external_servers : typing.Optional[typing.Sequence[ExternalServerRequest]]
             Optional list of external MCP servers to add with their URLs. Each server will be validated before being added.
@@ -1509,7 +1451,7 @@ class AsyncRawMcpServerClient:
 
         Parameters:
         - strataId: The strata server ID (path parameter)
-        - servers: Can be 'ALL' to delete all available Klavis MCP servers, a list of specific server names, or null to delete no servers
+        - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
         Returns separate lists for deleted Klavis servers and deleted external servers.
@@ -1519,7 +1461,7 @@ class AsyncRawMcpServerClient:
         strata_id : str
 
         servers : typing.Optional[typing.Union[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, typing.Sequence[DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem]]]
-            List of Klavis MCP servers to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis MCP servers, or null to delete no servers.
+            List of Klavis integration to delete (e.g., 'jira', 'linear'), 'ALL' to delete all Klavis integration, or null to delete no servers.
 
         external_servers : typing.Optional[str]
             Comma-separated list of external server names to delete
@@ -2204,81 +2146,26 @@ class AsyncRawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_oauth_url(
-        self,
-        *,
-        server_name: McpServerName,
-        instance_id: str,
-        client_id: typing.Optional[str] = OMIT,
-        scope: typing.Optional[str] = OMIT,
-        redirect_url: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GetOAuthUrlResponse]:
+        self, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
         """
-        Gets the OAuth authorization URL for a specific MCP server and instance.
-        Returns the complete OAuth URL with the instance ID as a query parameter.
-
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
-
-        instance_id : str
-            The unique identifier for the connection instance.
-
-        client_id : typing.Optional[str]
-            Optional client ID for white labeling. If not provided, will use default credentials.
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string).
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes.
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[GetOAuthUrlResponse]
-            Successful Response
+        AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
             "mcp-server/oauth-url",
             method="POST",
-            json={
-                "serverName": server_name,
-                "instanceId": instance_id,
-                "clientId": client_id,
-                "scope": scope,
-                "redirectUrl": redirect_url,
-            },
-            headers={
-                "content-type": "application/json",
-            },
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GetOAuthUrlResponse,
-                    parse_obj_as(
-                        type_=GetOAuthUrlResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
+                return AsyncHttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

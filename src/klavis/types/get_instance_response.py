@@ -49,6 +49,13 @@ class GetInstanceResponse(UniversalBaseModel):
     The user's identifier on the external platform.
     """
 
+    oauth_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="oauthUrl")] = pydantic.Field(
+        default=None
+    )
+    """
+    The OAuth URL for authentication if available, supports white label if configured.
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:

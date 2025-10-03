@@ -16,7 +16,6 @@ from .general_auth import GeneralAuth
 from .get_auth_data_response import GetAuthDataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
-from .get_o_auth_url_response import GetOAuthUrlResponse
 from .get_server_instances_response import GetServerInstancesResponse
 from .http_validation_error import HttpValidationError
 from .list_tools_response import ListToolsResponse
@@ -49,7 +48,6 @@ __all__ = [
     "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
-    "GetOAuthUrlResponse",
     "GetServerInstancesResponse",
     "HttpValidationError",
     "ListToolsResponse",
