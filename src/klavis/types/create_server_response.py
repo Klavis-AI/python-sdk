@@ -23,7 +23,7 @@ class CreateServerResponse(UniversalBaseModel):
         default=None
     )
     """
-    The OAuth authorization URL for the specified server, if OAuth is configured.
+    The OAuth URL for authentication if available, supports white label if configured.
     """
 
     if IS_PYDANTIC_V2:

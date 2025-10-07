@@ -2,6 +2,16 @@
 
 # isort: skip_file
 
-from .types import Authdata, DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, Servers
+from .types import (
+    Authdata,
+    DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+    McpServerGetToolsResponse,
+    Servers,
+)
 
-__all__ = ["Authdata", "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem", "Servers"]
+__all__ = [
+    "Authdata",
+    "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
+    "McpServerGetToolsResponse",
+    "Servers",
+]

@@ -25,6 +25,7 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
+from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
 from .types.servers import Servers
 
 # this is used as the default value for optional parameters
@@ -334,7 +335,7 @@ class McpServerClient:
         )
         return _response.data
 
-    def get_strata_instance(
+    def get_strata_server(
         self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetResponse:
         """
@@ -362,11 +363,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_strata_instance(
+        client.mcp_server.get_strata_server(
             strata_id="strataId",
         )
         """
-        _response = self._raw_client.get_strata_instance(strata_id, request_options=request_options)
+        _response = self._raw_client.get_strata_server(strata_id, request_options=request_options)
         return _response.data
 
     def set_strata_auth(
@@ -623,18 +624,18 @@ class McpServerClient:
 
     def get_tools(
         self,
-        server_name: McpServerName,
+        server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ListToolsResponse:
+    ) -> McpServerGetToolsResponse:
         """
-        Get tools information for any MCP server.
+        Get tools information for one or multiple MCP servers.
 
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+        server_name : str
+            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -644,18 +645,18 @@ class McpServerClient:
 
         Returns
         -------
-        ListToolsResponse
+        McpServerGetToolsResponse
             Successful Response
 
         Examples
         --------
-        from klavis import Klavis, McpServerName
+        from klavis import Klavis
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_tools(
-            server_name=McpServerName.AFFINITY,
+            server_name="server_name",
         )
         """
         _response = self._raw_client.get_tools(server_name, format=format, request_options=request_options)
@@ -663,7 +664,7 @@ class McpServerClient:
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
         """
-        Get all MCP servers with their basic information including id, name, description, and tools.
+        Get all MCP servers with their basic information including id, name, and description.
 
         Parameters
         ----------
@@ -1132,7 +1133,7 @@ class AsyncMcpServerClient:
         )
         return _response.data
 
-    async def get_strata_instance(
+    async def get_strata_server(
         self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetResponse:
         """
@@ -1165,14 +1166,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_strata_instance(
+            await client.mcp_server.get_strata_server(
                 strata_id="strataId",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_strata_instance(strata_id, request_options=request_options)
+        _response = await self._raw_client.get_strata_server(strata_id, request_options=request_options)
         return _response.data
 
     async def set_strata_auth(
@@ -1477,18 +1478,18 @@ class AsyncMcpServerClient:
 
     async def get_tools(
         self,
-        server_name: McpServerName,
+        server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ListToolsResponse:
+    ) -> McpServerGetToolsResponse:
         """
-        Get tools information for any MCP server.
+        Get tools information for one or multiple MCP servers.
 
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+        server_name : str
+            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -1498,14 +1499,14 @@ class AsyncMcpServerClient:
 
         Returns
         -------
-        ListToolsResponse
+        McpServerGetToolsResponse
             Successful Response
 
         Examples
         --------
         import asyncio
 
-        from klavis import AsyncKlavis, McpServerName
+        from klavis import AsyncKlavis
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1514,7 +1515,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_tools(
-                server_name=McpServerName.AFFINITY,
+                server_name="server_name",
             )
 
 
@@ -1527,7 +1528,7 @@ class AsyncMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetMcpServersResponse:
         """
-        Get all MCP servers with their basic information including id, name, description, and tools.
+        Get all MCP servers with their basic information including id, name, and description.
 
         Parameters
         ----------

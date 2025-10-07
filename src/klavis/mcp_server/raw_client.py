@@ -32,6 +32,7 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
+from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
 from .types.servers import Servers
 
 # this is used as the default value for optional parameters
@@ -443,7 +444,7 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_strata_instance(
+    def get_strata_server(
         self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StrataGetResponse]:
         """
@@ -866,18 +867,18 @@ class RawMcpServerClient:
 
     def get_tools(
         self,
-        server_name: McpServerName,
+        server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[ListToolsResponse]:
+    ) -> HttpResponse[McpServerGetToolsResponse]:
         """
-        Get tools information for any MCP server.
+        Get tools information for one or multiple MCP servers.
 
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+        server_name : str
+            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -887,7 +888,7 @@ class RawMcpServerClient:
 
         Returns
         -------
-        HttpResponse[ListToolsResponse]
+        HttpResponse[McpServerGetToolsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -901,9 +902,9 @@ class RawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ListToolsResponse,
+                    McpServerGetToolsResponse,
                     parse_obj_as(
-                        type_=ListToolsResponse,  # type: ignore
+                        type_=McpServerGetToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -928,7 +929,7 @@ class RawMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetMcpServersResponse]:
         """
-        Get all MCP servers with their basic information including id, name, description, and tools.
+        Get all MCP servers with their basic information including id, name, and description.
 
         Parameters
         ----------
@@ -1509,7 +1510,7 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_strata_instance(
+    async def get_strata_server(
         self, strata_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StrataGetResponse]:
         """
@@ -1932,18 +1933,18 @@ class AsyncRawMcpServerClient:
 
     async def get_tools(
         self,
-        server_name: McpServerName,
+        server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[ListToolsResponse]:
+    ) -> AsyncHttpResponse[McpServerGetToolsResponse]:
         """
-        Get tools information for any MCP server.
+        Get tools information for one or multiple MCP servers.
 
         Parameters
         ----------
-        server_name : McpServerName
-            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+        server_name : str
+            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -1953,7 +1954,7 @@ class AsyncRawMcpServerClient:
 
         Returns
         -------
-        AsyncHttpResponse[ListToolsResponse]
+        AsyncHttpResponse[McpServerGetToolsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -1967,9 +1968,9 @@ class AsyncRawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ListToolsResponse,
+                    McpServerGetToolsResponse,
                     parse_obj_as(
-                        type_=ListToolsResponse,  # type: ignore
+                        type_=McpServerGetToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1994,7 +1995,7 @@ class AsyncRawMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetMcpServersResponse]:
         """
-        Get all MCP servers with their basic information including id, name, description, and tools.
+        Get all MCP servers with their basic information including id, name, and description.
 
         Parameters
         ----------

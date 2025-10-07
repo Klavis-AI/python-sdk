@@ -22,8 +22,10 @@ from .types import (
     ListToolsResponse,
     McpServer,
     McpServerName,
+    MultiServerToolsResponse,
     OAuthServerName,
     ServerTool,
+    ServerToolsResult,
     StatusResponse,
     StrataAddServersResponse,
     StrataCreateResponse,
@@ -38,7 +40,12 @@ from .errors import UnprocessableEntityError
 from . import mcp_server, oauth, user, white_labeling
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
-from .mcp_server import Authdata, DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem, Servers
+from .mcp_server import (
+    Authdata,
+    DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+    McpServerGetToolsResponse,
+    Servers,
+)
 from .oauth import Environment
 from .version import __version__
 
@@ -67,9 +74,12 @@ __all__ = [
     "KlavisEnvironment",
     "ListToolsResponse",
     "McpServer",
+    "McpServerGetToolsResponse",
     "McpServerName",
+    "MultiServerToolsResponse",
     "OAuthServerName",
     "ServerTool",
+    "ServerToolsResult",
     "Servers",
     "StatusResponse",
     "StrataAddServersResponse",

@@ -494,7 +494,7 @@ client.mcp_server.delete_servers_from_strata(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_instance</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_server</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -529,7 +529,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_strata_instance(
+client.mcp_server.get_strata_server(
     strata_id="strataId",
 )
 
@@ -1062,7 +1062,7 @@ client.mcp_server.delete_server_instance(
 <dl>
 <dd>
 
-Get tools information for any MCP server.
+Get tools information for one or multiple MCP servers.
 </dd>
 </dl>
 </dd>
@@ -1077,13 +1077,13 @@ Get tools information for any MCP server.
 <dd>
 
 ```python
-from klavis import Klavis, McpServerName
+from klavis import Klavis
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_tools(
-    server_name=McpServerName.AFFINITY,
+    server_name="server_name",
 )
 
 ```
@@ -1100,7 +1100,7 @@ client.mcp_server.get_tools(
 <dl>
 <dd>
 
-**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
+**server_name:** `str` — The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
     
 </dd>
 </dl>
@@ -1140,7 +1140,7 @@ client.mcp_server.get_tools(
 <dl>
 <dd>
 
-Get all MCP servers with their basic information including id, name, description, and tools.
+Get all MCP servers with their basic information including id, name, and description.
 </dd>
 </dl>
 </dd>
