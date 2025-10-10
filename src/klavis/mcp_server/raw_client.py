@@ -33,7 +33,7 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
-from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
+from .types.get_server_tools_response import GetServerToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
 
@@ -254,7 +254,7 @@ class RawMcpServerClient:
                 "externalServers": convert_and_respect_annotation_metadata(
                     object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
                 ),
-                "enable_auth_handling": enable_auth_handling,
+                "enableAuthHandling": enable_auth_handling,
             },
             headers={
                 "content-type": "application/json",
@@ -499,7 +499,7 @@ class RawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StrataGetAuthResponse]:
         """
         Retrieves authentication data for a specific integration within a Strata MCP server.
@@ -511,7 +511,7 @@ class RawMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -554,7 +554,7 @@ class RawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StatusResponse]:
         """
         Deletes authentication data for a specific integration within a Strata MCP server.
@@ -566,7 +566,7 @@ class RawMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -1036,13 +1036,13 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_tools(
+    def get_server_tools(
         self,
         server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[McpServerGetToolsResponse]:
+    ) -> HttpResponse[GetServerToolsResponse]:
         """
         Get tools information for one or multiple MCP servers.
 
@@ -1059,7 +1059,7 @@ class RawMcpServerClient:
 
         Returns
         -------
-        HttpResponse[McpServerGetToolsResponse]
+        HttpResponse[GetServerToolsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -1073,9 +1073,9 @@ class RawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    McpServerGetToolsResponse,
+                    GetServerToolsResponse,
                     parse_obj_as(
-                        type_=McpServerGetToolsResponse,  # type: ignore
+                        type_=GetServerToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1196,6 +1196,34 @@ class RawMcpServerClient:
                         ),
                     ),
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_tools(
+        self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[None]:
+        """
+        Parameters
+        ----------
+        server_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[None]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/tools/{jsonable_encoder(server_name)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return HttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -1439,7 +1467,7 @@ class AsyncRawMcpServerClient:
                 "externalServers": convert_and_respect_annotation_metadata(
                     object_=external_servers, annotation=typing.Sequence[ExternalServerRequest], direction="write"
                 ),
-                "enable_auth_handling": enable_auth_handling,
+                "enableAuthHandling": enable_auth_handling,
             },
             headers={
                 "content-type": "application/json",
@@ -1684,7 +1712,7 @@ class AsyncRawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StrataGetAuthResponse]:
         """
         Retrieves authentication data for a specific integration within a Strata MCP server.
@@ -1696,7 +1724,7 @@ class AsyncRawMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -1739,7 +1767,7 @@ class AsyncRawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StatusResponse]:
         """
         Deletes authentication data for a specific integration within a Strata MCP server.
@@ -1751,7 +1779,7 @@ class AsyncRawMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -2221,13 +2249,13 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_tools(
+    async def get_server_tools(
         self,
         server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[McpServerGetToolsResponse]:
+    ) -> AsyncHttpResponse[GetServerToolsResponse]:
         """
         Get tools information for one or multiple MCP servers.
 
@@ -2244,7 +2272,7 @@ class AsyncRawMcpServerClient:
 
         Returns
         -------
-        AsyncHttpResponse[McpServerGetToolsResponse]
+        AsyncHttpResponse[GetServerToolsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -2258,9 +2286,9 @@ class AsyncRawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    McpServerGetToolsResponse,
+                    GetServerToolsResponse,
                     parse_obj_as(
-                        type_=McpServerGetToolsResponse,  # type: ignore
+                        type_=GetServerToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2381,6 +2409,34 @@ class AsyncRawMcpServerClient:
                         ),
                     ),
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_tools(
+        self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
+        """
+        Parameters
+        ----------
+        server_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[None]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/tools/{jsonable_encoder(server_name)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return AsyncHttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

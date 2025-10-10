@@ -60,7 +60,7 @@ class UserClient:
             api_key="YOUR_API_KEY",
         )
         client.user.get_user_integrations(
-            user_id="user_id",
+            user_id="userId",
         )
         """
         _response = self._raw_client.get_user_integrations(user_id, request_options=request_options)
@@ -93,7 +93,7 @@ class UserClient:
             api_key="YOUR_API_KEY",
         )
         client.user.get_user_by_user_id(
-            user_id="user_id",
+            user_id="userId",
         )
         """
         _response = self._raw_client.get_user_by_user_id(user_id, request_options=request_options)
@@ -128,7 +128,7 @@ class UserClient:
             api_key="YOUR_API_KEY",
         )
         client.user.delete_user_by_user_id(
-            user_id="user_id",
+            user_id="userId",
         )
         """
         _response = self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
@@ -186,7 +186,7 @@ class UserClient:
         return _response.data
 
     def get_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetUserAuthResponse:
         """
         Retrieves authentication data for a specific integration for a user.
@@ -199,7 +199,7 @@ class UserClient:
         user_id : str
             The identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -212,21 +212,21 @@ class UserClient:
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import Klavis, McpServerName
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.user.get_user_auth(
-            user_id="user_id",
-            server_name="server_name",
+            user_id="userId",
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.get_user_auth(user_id, server_name, request_options=request_options)
         return _response.data
 
     def delete_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
         Deletes authentication data for a specific integration for a user.
@@ -238,7 +238,7 @@ class UserClient:
         user_id : str
             The unique identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -251,14 +251,14 @@ class UserClient:
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import Klavis, McpServerName
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.user.delete_user_auth(
-            user_id="user_id",
-            server_name="server_name",
+            user_id="userId",
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.delete_user_auth(user_id, server_name, request_options=request_options)
@@ -313,7 +313,7 @@ class AsyncUserClient:
 
         async def main() -> None:
             await client.user.get_user_integrations(
-                user_id="user_id",
+                user_id="userId",
             )
 
 
@@ -354,7 +354,7 @@ class AsyncUserClient:
 
         async def main() -> None:
             await client.user.get_user_by_user_id(
-                user_id="user_id",
+                user_id="userId",
             )
 
 
@@ -397,7 +397,7 @@ class AsyncUserClient:
 
         async def main() -> None:
             await client.user.delete_user_by_user_id(
-                user_id="user_id",
+                user_id="userId",
             )
 
 
@@ -466,7 +466,7 @@ class AsyncUserClient:
         return _response.data
 
     async def get_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetUserAuthResponse:
         """
         Retrieves authentication data for a specific integration for a user.
@@ -479,7 +479,7 @@ class AsyncUserClient:
         user_id : str
             The identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -494,7 +494,7 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -503,8 +503,8 @@ class AsyncUserClient:
 
         async def main() -> None:
             await client.user.get_user_auth(
-                user_id="user_id",
-                server_name="server_name",
+                user_id="userId",
+                server_name=McpServerName.AFFINITY,
             )
 
 
@@ -514,7 +514,7 @@ class AsyncUserClient:
         return _response.data
 
     async def delete_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
         Deletes authentication data for a specific integration for a user.
@@ -526,7 +526,7 @@ class AsyncUserClient:
         user_id : str
             The unique identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -541,7 +541,7 @@ class AsyncUserClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -550,8 +550,8 @@ class AsyncUserClient:
 
         async def main() -> None:
             await client.user.delete_user_auth(
-                user_id="user_id",
-                server_name="server_name",
+                user_id="userId",
+                server_name=McpServerName.AFFINITY,
             )
 
 

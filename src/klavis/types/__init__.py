@@ -3,6 +3,8 @@
 # isort: skip_file
 
 from .api_key_auth import ApiKeyAuth
+from .azure_ado_auth_error_response import AzureAdoAuthErrorResponse
+from .azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from .call_tool_response import CallToolResponse
 from .call_tool_result import CallToolResult
 from .connection_type import ConnectionType
@@ -39,6 +41,8 @@ from .white_labeling_response import WhiteLabelingResponse
 
 __all__ = [
     "ApiKeyAuth",
+    "AzureAdoAuthErrorResponse",
+    "AzureAdoAuthSuccessResponse",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",

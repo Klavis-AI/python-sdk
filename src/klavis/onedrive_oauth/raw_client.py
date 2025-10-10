@@ -15,80 +15,9 @@ from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from ..types.http_validation_error import HttpValidationError
 
 
-class RawTeamsOauthClient:
+class RawOnedriveOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
-
-    def authorize_teams(
-        self,
-        *,
-        instance_id: str,
-        client_id: typing.Optional[str] = None,
-        scope: typing.Optional[str] = None,
-        redirect_url: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance requesting authorization
-
-        client_id : typing.Optional[str]
-            Client ID for white labeling, if not provided will use default credentials
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "oauth/teams/authorize",
-            method="GET",
-            params={
-                "instance_id": instance_id,
-                "client_id": client_id,
-                "scope": scope,
-                "redirect_url": redirect_url,
-            },
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
@@ -108,7 +37,7 @@ class RawTeamsOauthClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/teams/refresh_token",
+            "oauth/onedrive/refresh_token",
             method="POST",
             params={
                 "instance_id": instance_id,
@@ -153,80 +82,9 @@ class RawTeamsOauthClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawTeamsOauthClient:
+class AsyncRawOnedriveOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
-
-    async def authorize_teams(
-        self,
-        *,
-        instance_id: str,
-        client_id: typing.Optional[str] = None,
-        scope: typing.Optional[str] = None,
-        redirect_url: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance requesting authorization
-
-        client_id : typing.Optional[str]
-            Client ID for white labeling, if not provided will use default credentials
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "oauth/teams/authorize",
-            method="GET",
-            params={
-                "instance_id": instance_id,
-                "client_id": client_id,
-                "scope": scope,
-                "redirect_url": redirect_url,
-            },
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
@@ -246,7 +104,7 @@ class AsyncRawTeamsOauthClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/teams/refresh_token",
+            "oauth/onedrive/refresh_token",
             method="POST",
             params={
                 "instance_id": instance_id,

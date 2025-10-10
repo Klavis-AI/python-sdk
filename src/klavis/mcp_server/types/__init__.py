@@ -6,14 +6,14 @@ from .authdata import Authdata
 from .delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
-from .mcp_server_get_tools_response import McpServerGetToolsResponse
+from .get_server_tools_response import GetServerToolsResponse
 from .servers import Servers
 from .set_auth_request_auth_data import SetAuthRequestAuthData
 
 __all__ = [
     "Authdata",
     "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
-    "McpServerGetToolsResponse",
+    "GetServerToolsResponse",
     "Servers",
     "SetAuthRequestAuthData",
 ]

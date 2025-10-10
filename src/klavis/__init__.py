@@ -4,6 +4,8 @@
 
 from .types import (
     ApiKeyAuth,
+    AzureAdoAuthErrorResponse,
+    AzureAdoAuthSuccessResponse,
     CallToolResponse,
     CallToolResult,
     ConnectionType,
@@ -38,14 +40,14 @@ from .types import (
     ValidationErrorLocItem,
     WhiteLabelingResponse,
 )
-from .errors import UnprocessableEntityError
-from . import mcp_server, oauth, teams_oauth, user, white_labeling
+from .errors import BadRequestError, UnprocessableEntityError
+from . import mcp_server, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
 from .mcp_server import (
     Authdata,
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
-    McpServerGetToolsResponse,
+    GetServerToolsResponse,
     Servers,
     SetAuthRequestAuthData,
 )
@@ -57,6 +59,9 @@ __all__ = [
     "ApiKeyAuth",
     "AsyncKlavis",
     "Authdata",
+    "AzureAdoAuthErrorResponse",
+    "AzureAdoAuthSuccessResponse",
+    "BadRequestError",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -71,6 +76,7 @@ __all__ = [
     "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
+    "GetServerToolsResponse",
     "GetUserAuthResponse",
     "GetUserIntegrationsResponse",
     "GetUserResponse",
@@ -79,7 +85,6 @@ __all__ = [
     "KlavisEnvironment",
     "ListToolsResponse",
     "McpServer",
-    "McpServerGetToolsResponse",
     "McpServerName",
     "MultiServerToolsResponse",
     "OAuthServerName",
@@ -102,6 +107,8 @@ __all__ = [
     "__version__",
     "mcp_server",
     "oauth",
+    "onedrive_oauth",
+    "outlook_oauth",
     "teams_oauth",
     "user",
     "white_labeling",

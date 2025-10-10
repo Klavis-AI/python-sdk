@@ -596,14 +596,14 @@ Returns the authentication data if available, along with authentication status.
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import Klavis, McpServerName
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_strata_auth(
     strata_id="strataId",
-    server_name="serverName",
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -628,7 +628,7 @@ client.mcp_server.get_strata_auth(
 <dl>
 <dd>
 
-**server_name:** `str` — The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
+**server_name:** `McpServerName` — The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
     
 </dd>
 </dl>
@@ -677,14 +677,14 @@ This will clear the stored authentication credentials, effectively unauthenticat
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import Klavis, McpServerName
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_strata_auth(
     strata_id="strataId",
-    server_name="serverName",
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -709,7 +709,7 @@ client.mcp_server.delete_strata_auth(
 <dl>
 <dd>
 
-**server_name:** `str` — The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+**server_name:** `McpServerName` — The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
     
 </dd>
 </dl>
@@ -1042,7 +1042,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_server_instance(
-    instance_id="instance_id",
+    instance_id="instanceId",
 )
 
 ```
@@ -1113,7 +1113,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_server_instance(
-    instance_id="instance_id",
+    instance_id="instanceId",
 )
 
 ```
@@ -1187,7 +1187,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_instance_auth_data(
-    instance_id="instance_id",
+    instance_id="instanceId",
 )
 
 ```
@@ -1257,7 +1257,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_instance_auth(
-    instance_id="instance_id",
+    instance_id="instanceId",
 )
 
 ```
@@ -1294,7 +1294,7 @@ client.mcp_server.delete_instance_auth(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_tools</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_server_tools</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1326,8 +1326,8 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_tools(
-    server_name="server_name",
+client.mcp_server.get_server_tools(
+    server_name="serverName",
 )
 
 ```
@@ -1494,6 +1494,62 @@ client.mcp_server.set_instance_auth(
 <dd>
 
 **auth_data:** `SetAuthRequestAuthData` — Authentication data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_tools</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.get_tools(
+    server_name="server_name",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**server_name:** `str` 
     
 </dd>
 </dl>
@@ -1769,7 +1825,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.user.get_user_integrations(
-    user_id="user_id",
+    user_id="userId",
 )
 
 ```
@@ -1839,7 +1895,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.user.get_user_by_user_id(
-    user_id="user_id",
+    user_id="userId",
 )
 
 ```
@@ -1911,7 +1967,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.user.delete_user_by_user_id(
-    user_id="user_id",
+    user_id="userId",
 )
 
 ```
@@ -2069,14 +2125,14 @@ Includes token refresh handling if needed.
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import Klavis, McpServerName
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.user.get_user_auth(
-    user_id="user_id",
-    server_name="server_name",
+    user_id="userId",
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -2101,7 +2157,7 @@ client.user.get_user_auth(
 <dl>
 <dd>
 
-**server_name:** `str` — The name of the MCP server (e.g., 'GitHub', 'Jira')
+**server_name:** `McpServerName` — The name of the MCP server (e.g., 'GitHub', 'Jira')
     
 </dd>
 </dl>
@@ -2150,14 +2206,14 @@ This will clear the stored authentication credentials, effectively unauthenticat
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import Klavis, McpServerName
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.user.delete_user_auth(
-    user_id="user_id",
-    server_name="server_name",
+    user_id="userId",
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -2182,7 +2238,7 @@ client.user.delete_user_auth(
 <dl>
 <dd>
 
-**server_name:** `str` — The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
+**server_name:** `McpServerName` — The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
     
 </dd>
 </dl>
@@ -6166,6 +6222,120 @@ client.oauth.authorize_outlook(
 </dl>
 </details>
 
+## OnedriveOauth
+<details><summary><code>client.onedrive_oauth.<a href="src/klavis/onedrive_oauth/client.py">refresh_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.onedrive_oauth.refresh_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Instance ID for which to refresh the token
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## OutlookOauth
+<details><summary><code>client.outlook_oauth.<a href="src/klavis/outlook_oauth/client.py">refresh_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.outlook_oauth.refresh_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Instance ID for which to refresh the token
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## TeamsOauth
 <details><summary><code>client.teams_oauth.<a href="src/klavis/teams_oauth/client.py">authorize_teams</a>(...)</code></summary>
 <dl>
@@ -6228,6 +6398,62 @@ client.teams_oauth.authorize_teams(
 <dd>
 
 **redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.teams_oauth.<a href="src/klavis/teams_oauth/client.py">refresh_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.teams_oauth.refresh_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Instance ID for which to refresh the token
     
 </dd>
 </dl>

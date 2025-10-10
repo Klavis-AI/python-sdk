@@ -5,7 +5,7 @@
 from .types import (
     Authdata,
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
-    McpServerGetToolsResponse,
+    GetServerToolsResponse,
     Servers,
     SetAuthRequestAuthData,
 )
@@ -13,7 +13,7 @@ from .types import (
 __all__ = [
     "Authdata",
     "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
-    "McpServerGetToolsResponse",
+    "GetServerToolsResponse",
     "Servers",
     "SetAuthRequestAuthData",
 ]

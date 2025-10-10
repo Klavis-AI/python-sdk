@@ -257,7 +257,7 @@ class RawUserClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetUserAuthResponse]:
         """
         Retrieves authentication data for a specific integration for a user.
@@ -270,7 +270,7 @@ class RawUserClient:
         user_id : str
             The identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -313,7 +313,7 @@ class RawUserClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def delete_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StatusResponse]:
         """
         Deletes authentication data for a specific integration for a user.
@@ -325,7 +325,7 @@ class RawUserClient:
         user_id : str
             The unique identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -601,7 +601,7 @@ class AsyncRawUserClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetUserAuthResponse]:
         """
         Retrieves authentication data for a specific integration for a user.
@@ -614,7 +614,7 @@ class AsyncRawUserClient:
         user_id : str
             The identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -657,7 +657,7 @@ class AsyncRawUserClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def delete_user_auth(
-        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, user_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StatusResponse]:
         """
         Deletes authentication data for a specific integration for a user.
@@ -669,7 +669,7 @@ class AsyncRawUserClient:
         user_id : str
             The unique identifier for the user
 
-        server_name : str
+        server_name : McpServerName
             The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]

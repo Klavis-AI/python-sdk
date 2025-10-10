@@ -5,4 +5,4 @@ import typing
 from ...types.list_tools_response import ListToolsResponse
 from ...types.multi_server_tools_response import MultiServerToolsResponse
 
-McpServerGetToolsResponse = typing.Union[ListToolsResponse, MultiServerToolsResponse]
+GetServerToolsResponse = typing.Union[ListToolsResponse, MultiServerToolsResponse]

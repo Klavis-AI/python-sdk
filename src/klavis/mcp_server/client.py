@@ -26,7 +26,7 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
-from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
+from .types.get_server_tools_response import GetServerToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
 
@@ -373,7 +373,7 @@ class McpServerClient:
         return _response.data
 
     def get_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetAuthResponse:
         """
         Retrieves authentication data for a specific integration within a Strata MCP server.
@@ -385,7 +385,7 @@ class McpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -398,21 +398,21 @@ class McpServerClient:
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import Klavis, McpServerName
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_strata_auth(
             strata_id="strataId",
-            server_name="serverName",
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.get_strata_auth(strata_id, server_name, request_options=request_options)
         return _response.data
 
     def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
         Deletes authentication data for a specific integration within a Strata MCP server.
@@ -424,7 +424,7 @@ class McpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -437,14 +437,14 @@ class McpServerClient:
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import Klavis, McpServerName
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_strata_auth(
             strata_id="strataId",
-            server_name="serverName",
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.delete_strata_auth(strata_id, server_name, request_options=request_options)
@@ -634,7 +634,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_server_instance(
-            instance_id="instance_id",
+            instance_id="instanceId",
         )
         """
         _response = self._raw_client.get_server_instance(instance_id, request_options=request_options)
@@ -668,7 +668,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_server_instance(
-            instance_id="instance_id",
+            instance_id="instanceId",
         )
         """
         _response = self._raw_client.delete_server_instance(instance_id, request_options=request_options)
@@ -705,7 +705,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_instance_auth_data(
-            instance_id="instance_id",
+            instance_id="instanceId",
         )
         """
         _response = self._raw_client.get_instance_auth_data(instance_id, request_options=request_options)
@@ -738,19 +738,19 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_instance_auth(
-            instance_id="instance_id",
+            instance_id="instanceId",
         )
         """
         _response = self._raw_client.delete_instance_auth(instance_id, request_options=request_options)
         return _response.data
 
-    def get_tools(
+    def get_server_tools(
         self,
         server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> McpServerGetToolsResponse:
+    ) -> GetServerToolsResponse:
         """
         Get tools information for one or multiple MCP servers.
 
@@ -767,7 +767,7 @@ class McpServerClient:
 
         Returns
         -------
-        McpServerGetToolsResponse
+        GetServerToolsResponse
             Successful Response
 
         Examples
@@ -777,11 +777,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_tools(
-            server_name="server_name",
+        client.mcp_server.get_server_tools(
+            server_name="serverName",
         )
         """
-        _response = self._raw_client.get_tools(server_name, format=format, request_options=request_options)
+        _response = self._raw_client.get_server_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
@@ -853,6 +853,33 @@ class McpServerClient:
         _response = self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
+        return _response.data
+
+    def get_tools(self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        server_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.get_tools(
+            server_name="server_name",
+        )
+        """
+        _response = self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
@@ -1266,7 +1293,7 @@ class AsyncMcpServerClient:
         return _response.data
 
     async def get_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetAuthResponse:
         """
         Retrieves authentication data for a specific integration within a Strata MCP server.
@@ -1278,7 +1305,7 @@ class AsyncMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -1293,7 +1320,7 @@ class AsyncMcpServerClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1303,7 +1330,7 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.get_strata_auth(
                 strata_id="strataId",
-                server_name="serverName",
+                server_name=McpServerName.AFFINITY,
             )
 
 
@@ -1313,7 +1340,7 @@ class AsyncMcpServerClient:
         return _response.data
 
     async def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StatusResponse:
         """
         Deletes authentication data for a specific integration within a Strata MCP server.
@@ -1325,7 +1352,7 @@ class AsyncMcpServerClient:
         strata_id : str
             The strata server ID
 
-        server_name : str
+        server_name : McpServerName
             The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
@@ -1340,7 +1367,7 @@ class AsyncMcpServerClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1350,7 +1377,7 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.delete_strata_auth(
                 strata_id="strataId",
-                server_name="serverName",
+                server_name=McpServerName.AFFINITY,
             )
 
 
@@ -1572,7 +1599,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_server_instance(
-                instance_id="instance_id",
+                instance_id="instanceId",
             )
 
 
@@ -1614,7 +1641,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.delete_server_instance(
-                instance_id="instance_id",
+                instance_id="instanceId",
             )
 
 
@@ -1659,7 +1686,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_instance_auth_data(
-                instance_id="instance_id",
+                instance_id="instanceId",
             )
 
 
@@ -1700,7 +1727,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.delete_instance_auth(
-                instance_id="instance_id",
+                instance_id="instanceId",
             )
 
 
@@ -1709,13 +1736,13 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.delete_instance_auth(instance_id, request_options=request_options)
         return _response.data
 
-    async def get_tools(
+    async def get_server_tools(
         self,
         server_name: str,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> McpServerGetToolsResponse:
+    ) -> GetServerToolsResponse:
         """
         Get tools information for one or multiple MCP servers.
 
@@ -1732,7 +1759,7 @@ class AsyncMcpServerClient:
 
         Returns
         -------
-        McpServerGetToolsResponse
+        GetServerToolsResponse
             Successful Response
 
         Examples
@@ -1747,14 +1774,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_tools(
-                server_name="server_name",
+            await client.mcp_server.get_server_tools(
+                server_name="serverName",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_tools(server_name, format=format, request_options=request_options)
+        _response = await self._raw_client.get_server_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     async def get_all_mcp_servers(
@@ -1844,6 +1871,41 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
+        return _response.data
+
+    async def get_tools(self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        server_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.get_tools(
+                server_name="server_name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     async def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
