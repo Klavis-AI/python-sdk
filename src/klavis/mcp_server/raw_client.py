@@ -29,13 +29,13 @@ from ..types.strata_delete_servers_response import StrataDeleteServersResponse
 from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
+from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
 from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
-from .types.strata_set_auth_request_auth_data import StrataSetAuthRequestAuthData
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -328,7 +328,7 @@ class RawMcpServerClient:
             "mcp-server/strata/add",
             method="POST",
             json={
-                "strata_id": strata_id,
+                "strataId": strata_id,
                 "servers": convert_and_respect_annotation_metadata(
                     object_=servers, annotation=Servers, direction="write"
                 ),
@@ -387,7 +387,7 @@ class RawMcpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strata_id: The strata server ID (path parameter)
+        - strataId: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -553,29 +553,21 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def set_strata_auth(
-        self,
-        *,
-        strata_id: str,
-        server_name: McpServerName,
-        auth_data: StrataSetAuthRequestAuthData,
-        request_options: typing.Optional[RequestOptions] = None,
+    def delete_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StatusResponse]:
         """
-        Sets authentication data for a specific integration within a Strata MCP server.
+        Deletes authentication data for a specific integration within a Strata MCP server.
 
-        Accepts either API key authentication or general authentication data.
+        This will clear the stored authentication credentials, effectively unauthenticating the server.
 
         Parameters
         ----------
         strata_id : str
             The strata server ID
 
-        server_name : McpServerName
-            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
-
-        auth_data : StrataSetAuthRequestAuthData
-            Authentication data
+        server_name : str
+            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -586,20 +578,9 @@ class RawMcpServerClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "mcp-server/strata/set-auth",
-            method="POST",
-            json={
-                "strata_id": strata_id,
-                "serverName": server_name,
-                "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=StrataSetAuthRequestAuthData, direction="write"
-                ),
-            },
-            headers={
-                "content-type": "application/json",
-            },
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/auth/{jsonable_encoder(server_name)}",
+            method="DELETE",
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -627,21 +608,29 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[StatusResponse]:
         """
-        Deletes authentication data for a specific integration within a Strata MCP server.
+        Sets authentication data for a specific integration within a Strata MCP server.
 
-        This will clear the stored authentication credentials, effectively unauthenticating the server.
+        Accepts either API key authentication or general authentication data.
 
         Parameters
         ----------
         strata_id : str
             The strata server ID
 
-        server_name : str
-            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -652,9 +641,20 @@ class RawMcpServerClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"mcp-server/strata/{jsonable_encoder(strata_id)}/server/{jsonable_encoder(server_name)}/auth",
-            method="DELETE",
+            "mcp-server/strata/set-auth",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -1513,7 +1513,7 @@ class AsyncRawMcpServerClient:
             "mcp-server/strata/add",
             method="POST",
             json={
-                "strata_id": strata_id,
+                "strataId": strata_id,
                 "servers": convert_and_respect_annotation_metadata(
                     object_=servers, annotation=Servers, direction="write"
                 ),
@@ -1572,7 +1572,7 @@ class AsyncRawMcpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strata_id: The strata server ID (path parameter)
+        - strataId: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -1738,29 +1738,21 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def set_strata_auth(
-        self,
-        *,
-        strata_id: str,
-        server_name: McpServerName,
-        auth_data: StrataSetAuthRequestAuthData,
-        request_options: typing.Optional[RequestOptions] = None,
+    async def delete_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StatusResponse]:
         """
-        Sets authentication data for a specific integration within a Strata MCP server.
+        Deletes authentication data for a specific integration within a Strata MCP server.
 
-        Accepts either API key authentication or general authentication data.
+        This will clear the stored authentication credentials, effectively unauthenticating the server.
 
         Parameters
         ----------
         strata_id : str
             The strata server ID
 
-        server_name : McpServerName
-            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
-
-        auth_data : StrataSetAuthRequestAuthData
-            Authentication data
+        server_name : str
+            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1771,20 +1763,9 @@ class AsyncRawMcpServerClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "mcp-server/strata/set-auth",
-            method="POST",
-            json={
-                "strata_id": strata_id,
-                "serverName": server_name,
-                "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=StrataSetAuthRequestAuthData, direction="write"
-                ),
-            },
-            headers={
-                "content-type": "application/json",
-            },
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/auth/{jsonable_encoder(server_name)}",
+            method="DELETE",
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -1812,21 +1793,29 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def delete_strata_auth(
-        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    async def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[StatusResponse]:
         """
-        Deletes authentication data for a specific integration within a Strata MCP server.
+        Sets authentication data for a specific integration within a Strata MCP server.
 
-        This will clear the stored authentication credentials, effectively unauthenticating the server.
+        Accepts either API key authentication or general authentication data.
 
         Parameters
         ----------
         strata_id : str
             The strata server ID
 
-        server_name : str
-            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1837,9 +1826,20 @@ class AsyncRawMcpServerClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"mcp-server/strata/{jsonable_encoder(strata_id)}/server/{jsonable_encoder(server_name)}/auth",
-            method="DELETE",
+            "mcp-server/strata/set-auth",
+            method="POST",
+            json={
+                "strataId": strata_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=Authdata, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:

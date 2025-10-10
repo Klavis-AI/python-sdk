@@ -22,13 +22,13 @@ from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
+from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
 from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
-from .types.strata_set_auth_request_auth_data import StrataSetAuthRequestAuthData
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -270,7 +270,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.add_servers_to_strata(
-            strata_id="strata_id",
+            strata_id="strataId",
         )
         """
         _response = self._raw_client.add_servers_to_strata(
@@ -297,7 +297,7 @@ class McpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strata_id: The strata server ID (path parameter)
+        - strataId: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -329,7 +329,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_servers_from_strata(
-            strata_id="strata_id",
+            strata_id="strataId",
         )
         """
         _response = self._raw_client.delete_servers_from_strata(
@@ -366,7 +366,7 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_strata_server(
-            strata_id="strata_id",
+            strata_id="strataId",
         )
         """
         _response = self._raw_client.get_strata_server(strata_id, request_options=request_options)
@@ -404,61 +404,11 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_strata_auth(
-            strata_id="strata_id",
+            strata_id="strataId",
             server_name="serverName",
         )
         """
         _response = self._raw_client.get_strata_auth(strata_id, server_name, request_options=request_options)
-        return _response.data
-
-    def set_strata_auth(
-        self,
-        *,
-        strata_id: str,
-        server_name: McpServerName,
-        auth_data: StrataSetAuthRequestAuthData,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> StatusResponse:
-        """
-        Sets authentication data for a specific integration within a Strata MCP server.
-
-        Accepts either API key authentication or general authentication data.
-
-        Parameters
-        ----------
-        strata_id : str
-            The strata server ID
-
-        server_name : McpServerName
-            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
-
-        auth_data : StrataSetAuthRequestAuthData
-            Authentication data
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        StatusResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import ApiKeyAuth, Klavis, McpServerName
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.mcp_server.set_strata_auth(
-            strata_id="strata_id",
-            server_name=McpServerName.AFFINITY,
-            auth_data=ApiKeyAuth(),
-        )
-        """
-        _response = self._raw_client.set_strata_auth(
-            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
-        )
         return _response.data
 
     def delete_strata_auth(
@@ -493,11 +443,61 @@ class McpServerClient:
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.delete_strata_auth(
-            strata_id="strata_id",
-            server_name="server_name",
+            strata_id="strataId",
+            server_name="serverName",
         )
         """
         _response = self._raw_client.delete_strata_auth(strata_id, server_name, request_options=request_options)
+        return _response.data
+
+    def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import ApiKeyAuth, Klavis, McpServerName
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.set_strata_auth(
+            strata_id="strataId",
+            server_name=McpServerName.AFFINITY,
+            auth_data=ApiKeyAuth(),
+        )
+        """
+        _response = self._raw_client.set_strata_auth(
+            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
         return _response.data
 
     def create_server_instance(
@@ -1144,7 +1144,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.add_servers_to_strata(
-                strata_id="strata_id",
+                strata_id="strataId",
             )
 
 
@@ -1174,7 +1174,7 @@ class AsyncMcpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strata_id: The strata server ID (path parameter)
+        - strataId: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -1211,7 +1211,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.delete_servers_from_strata(
-                strata_id="strata_id",
+                strata_id="strataId",
             )
 
 
@@ -1256,7 +1256,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_strata_server(
-                strata_id="strata_id",
+                strata_id="strataId",
             )
 
 
@@ -1302,7 +1302,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_strata_auth(
-                strata_id="strata_id",
+                strata_id="strataId",
                 server_name="serverName",
             )
 
@@ -1310,64 +1310,6 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_strata_auth(strata_id, server_name, request_options=request_options)
-        return _response.data
-
-    async def set_strata_auth(
-        self,
-        *,
-        strata_id: str,
-        server_name: McpServerName,
-        auth_data: StrataSetAuthRequestAuthData,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> StatusResponse:
-        """
-        Sets authentication data for a specific integration within a Strata MCP server.
-
-        Accepts either API key authentication or general authentication data.
-
-        Parameters
-        ----------
-        strata_id : str
-            The strata server ID
-
-        server_name : McpServerName
-            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
-
-        auth_data : StrataSetAuthRequestAuthData
-            Authentication data
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        StatusResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import ApiKeyAuth, AsyncKlavis, McpServerName
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.mcp_server.set_strata_auth(
-                strata_id="strata_id",
-                server_name=McpServerName.AFFINITY,
-                auth_data=ApiKeyAuth(),
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.set_strata_auth(
-            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
-        )
         return _response.data
 
     async def delete_strata_auth(
@@ -1407,14 +1349,72 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.delete_strata_auth(
-                strata_id="strata_id",
-                server_name="server_name",
+                strata_id="strataId",
+                server_name="serverName",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_strata_auth(strata_id, server_name, request_options=request_options)
+        return _response.data
+
+    async def set_strata_auth(
+        self,
+        *,
+        strata_id: str,
+        server_name: McpServerName,
+        auth_data: Authdata,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration within a Strata MCP server.
+
+        Accepts either API key authentication or general authentication data.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : McpServerName
+            The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : Authdata
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import ApiKeyAuth, AsyncKlavis, McpServerName
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.set_strata_auth(
+                strata_id="strataId",
+                server_name=McpServerName.AFFINITY,
+                auth_data=ApiKeyAuth(),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.set_strata_auth(
+            strata_id=strata_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
         return _response.data
 
     async def create_server_instance(

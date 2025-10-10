@@ -339,7 +339,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.add_servers_to_strata(
-    strata_id="strata_id",
+    strata_id="strataId",
 )
 
 ```
@@ -409,7 +409,7 @@ Delete servers from an existing Strata MCP server.
 Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
 Parameters:
-- strata_id: The strata server ID (path parameter)
+- strataId: The strata server ID (path parameter)
 - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
 - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -434,7 +434,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_servers_from_strata(
-    strata_id="strata_id",
+    strata_id="strataId",
 )
 
 ```
@@ -530,7 +530,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_strata_server(
-    strata_id="strata_id",
+    strata_id="strataId",
 )
 
 ```
@@ -602,7 +602,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_strata_auth(
-    strata_id="strata_id",
+    strata_id="strataId",
     server_name="serverName",
 )
 
@@ -629,96 +629,6 @@ client.mcp_server.get_strata_auth(
 <dd>
 
 **server_name:** `str` — The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">set_strata_auth</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Sets authentication data for a specific integration within a Strata MCP server.
-
-Accepts either API key authentication or general authentication data.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import ApiKeyAuth, Klavis, McpServerName
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mcp_server.set_strata_auth(
-    strata_id="strata_id",
-    server_name=McpServerName.AFFINITY,
-    auth_data=ApiKeyAuth(),
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**strata_id:** `str` — The strata server ID
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**server_name:** `McpServerName` — The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**auth_data:** `StrataSetAuthRequestAuthData` — Authentication data
     
 </dd>
 </dl>
@@ -773,8 +683,8 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_strata_auth(
-    strata_id="strata_id",
-    server_name="server_name",
+    strata_id="strataId",
+    server_name="serverName",
 )
 
 ```
@@ -800,6 +710,96 @@ client.mcp_server.delete_strata_auth(
 <dd>
 
 **server_name:** `str` — The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">set_strata_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets authentication data for a specific integration within a Strata MCP server.
+
+Accepts either API key authentication or general authentication data.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import ApiKeyAuth, Klavis, McpServerName
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.set_strata_auth(
+    strata_id="strataId",
+    server_name=McpServerName.AFFINITY,
+    auth_data=ApiKeyAuth(),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` — The strata server ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `McpServerName` — The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth_data:** `Authdata` — Authentication data
     
 </dd>
 </dl>

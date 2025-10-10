@@ -337,7 +337,7 @@ class RawUserClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"user/user/{jsonable_encoder(user_id)}/server/{jsonable_encoder(server_name)}/auth",
+            f"user/{jsonable_encoder(user_id)}/auth/{jsonable_encoder(server_name)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -681,7 +681,7 @@ class AsyncRawUserClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"user/user/{jsonable_encoder(user_id)}/server/{jsonable_encoder(server_name)}/auth",
+            f"user/{jsonable_encoder(user_id)}/auth/{jsonable_encoder(server_name)}",
             method="DELETE",
             request_options=request_options,
         )

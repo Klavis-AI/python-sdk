@@ -15,7 +15,7 @@ class StrataCreateResponse(UniversalBaseModel):
     URL to connect to the Strata MCP server
     """
 
-    strata_id: str = pydantic.Field()
+    strata_id: typing_extensions.Annotated[str, FieldMetadata(alias="strataId")] = pydantic.Field()
     """
     The strata server ID
     """

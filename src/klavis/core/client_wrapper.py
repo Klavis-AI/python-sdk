@@ -20,10 +20,10 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "klavis/2.8.0",
+            "User-Agent": "klavis/2.9.0",
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "klavis",
-            "X-Fern-SDK-Version": "2.8.0",
+            "X-Fern-SDK-Version": "2.9.0",
         }
         api_key = self._get_api_key()
         if api_key is not None:

@@ -3,17 +3,17 @@
 # isort: skip_file
 
 from .types import (
+    Authdata,
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
     McpServerGetToolsResponse,
     Servers,
     SetAuthRequestAuthData,
-    StrataSetAuthRequestAuthData,
 )
 
 __all__ = [
+    "Authdata",
     "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
     "McpServerGetToolsResponse",
     "Servers",
     "SetAuthRequestAuthData",
-    "StrataSetAuthRequestAuthData",
 ]

@@ -43,11 +43,11 @@ from . import mcp_server, oauth, teams_oauth, user, white_labeling
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
 from .mcp_server import (
+    Authdata,
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
     McpServerGetToolsResponse,
     Servers,
     SetAuthRequestAuthData,
-    StrataSetAuthRequestAuthData,
 )
 from .oauth import Environment
 from .user import SetUserAuthRequestAuthData
@@ -56,6 +56,7 @@ from .version import __version__
 __all__ = [
     "ApiKeyAuth",
     "AsyncKlavis",
+    "Authdata",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -93,7 +94,6 @@ __all__ = [
     "StrataDeleteServersResponse",
     "StrataGetAuthResponse",
     "StrataGetResponse",
-    "StrataSetAuthRequestAuthData",
     "ToolFormat",
     "UnprocessableEntityError",
     "ValidationError",
