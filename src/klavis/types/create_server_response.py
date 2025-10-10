@@ -16,7 +16,7 @@ class CreateServerResponse(UniversalBaseModel):
 
     instance_id: typing_extensions.Annotated[str, FieldMetadata(alias="instanceId")] = pydantic.Field()
     """
-    The unique identifier for this specific server connection instance.
+    The unique identifier for this specific server connection integration instance.
     """
 
     oauth_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="oauthUrl")] = pydantic.Field(

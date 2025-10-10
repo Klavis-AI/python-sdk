@@ -9,57 +9,106 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.delete_user_response import DeleteUserResponse
-from ..types.get_server_instances_response import GetServerInstancesResponse
+from ..types.get_user_auth_response import GetUserAuthResponse
+from ..types.get_user_integrations_response import GetUserIntegrationsResponse
+from ..types.get_user_response import GetUserResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.mcp_server_name import McpServerName
+from ..types.status_response import StatusResponse
+from .types.set_user_auth_request_auth_data import SetUserAuthRequestAuthData
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class RawUserClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get_server_instances_by_user(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GetServerInstancesResponse]:
+    def get_user_integrations(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GetUserIntegrationsResponse]:
         """
-        Get all MCP server instances information by user ID and platform name.
+        Get all available integrations (MCP server names) by user ID.
+        Returns a list of integration names as McpServerName types.
 
         Parameters
         ----------
         user_id : str
             The external user ID
 
-        platform_name : typing.Optional[str]
-            The platform name (optional)
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetUserIntegrationsResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"user/{jsonable_encoder(user_id)}/integrations",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetUserIntegrationsResponse,
+                    parse_obj_as(
+                        type_=GetUserIntegrationsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GetUserResponse]:
+        """
+        Get user information by user_id.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to fetch.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[GetServerInstancesResponse]
+        HttpResponse[GetUserResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "user/instances",
+            f"user/{jsonable_encoder(user_id)}",
             method="GET",
-            params={
-                "user_id": user_id,
-                "platform_name": platform_name,
-            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetServerInstancesResponse,
+                    GetUserResponse,
                     parse_obj_as(
-                        type_=GetServerInstancesResponse,  # type: ignore
+                        type_=GetUserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -102,7 +151,7 @@ class RawUserClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"user/delete/{jsonable_encoder(user_id)}",
+            f"user/{jsonable_encoder(user_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -132,52 +181,278 @@ class RawUserClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-
-class AsyncRawUserClient:
-    def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._client_wrapper = client_wrapper
-
-    async def get_server_instances_by_user(
+    def set_user_auth(
         self,
         *,
         user_id: str,
-        platform_name: typing.Optional[str] = None,
+        server_name: McpServerName,
+        auth_data: SetUserAuthRequestAuthData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GetServerInstancesResponse]:
+    ) -> HttpResponse[StatusResponse]:
         """
-        Get all MCP server instances information by user ID and platform name.
+        Sets authentication data for a specific integration for a user.
+
+        Accepts either API key authentication or general authentication data.
+        This updates the auth_metadata for the specified user's integration instance.
 
         Parameters
         ----------
         user_id : str
-            The external user ID
+            The unique identifier for the user
 
-        platform_name : typing.Optional[str]
-            The platform name (optional)
+        server_name : McpServerName
+            The name of the MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : SetUserAuthRequestAuthData
+            Authentication data
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[GetServerInstancesResponse]
+        HttpResponse[StatusResponse]
             Successful Response
         """
-        _response = await self._client_wrapper.httpx_client.request(
-            "user/instances",
-            method="GET",
-            params={
-                "user_id": user_id,
-                "platform_name": platform_name,
+        _response = self._client_wrapper.httpx_client.request(
+            "user/set-auth",
+            method="POST",
+            json={
+                "userId": user_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=SetUserAuthRequestAuthData, direction="write"
+                ),
             },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GetUserAuthResponse]:
+        """
+        Retrieves authentication data for a specific integration for a user.
+
+        Returns the authentication data if available, along with authentication status.
+        Includes token refresh handling if needed.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        server_name : str
+            The name of the MCP server (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetUserAuthResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"user/{jsonable_encoder(user_id)}/auth/{jsonable_encoder(server_name)}",
+            method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetServerInstancesResponse,
+                    GetUserAuthResponse,
                     parse_obj_as(
-                        type_=GetServerInstancesResponse,  # type: ignore
+                        type_=GetUserAuthResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific integration for a user.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the integration.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : str
+            The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"user/user/{jsonable_encoder(user_id)}/server/{jsonable_encoder(server_name)}/auth",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+
+class AsyncRawUserClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    async def get_user_integrations(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GetUserIntegrationsResponse]:
+        """
+        Get all available integrations (MCP server names) by user ID.
+        Returns a list of integration names as McpServerName types.
+
+        Parameters
+        ----------
+        user_id : str
+            The external user ID
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetUserIntegrationsResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"user/{jsonable_encoder(user_id)}/integrations",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetUserIntegrationsResponse,
+                    parse_obj_as(
+                        type_=GetUserIntegrationsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GetUserResponse]:
+        """
+        Get user information by user_id.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to fetch.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetUserResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"user/{jsonable_encoder(user_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetUserResponse,
+                    parse_obj_as(
+                        type_=GetUserResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -220,7 +495,7 @@ class AsyncRawUserClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"user/delete/{jsonable_encoder(user_id)}",
+            f"user/{jsonable_encoder(user_id)}",
             method="DELETE",
             request_options=request_options,
         )
@@ -230,6 +505,192 @@ class AsyncRawUserClient:
                     DeleteUserResponse,
                     parse_obj_as(
                         type_=DeleteUserResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def set_user_auth(
+        self,
+        *,
+        user_id: str,
+        server_name: McpServerName,
+        auth_data: SetUserAuthRequestAuthData,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StatusResponse]:
+        """
+        Sets authentication data for a specific integration for a user.
+
+        Accepts either API key authentication or general authentication data.
+        This updates the auth_metadata for the specified user's integration instance.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : McpServerName
+            The name of the MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : SetUserAuthRequestAuthData
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "user/set-auth",
+            method="POST",
+            json={
+                "userId": user_id,
+                "serverName": server_name,
+                "authData": convert_and_respect_annotation_metadata(
+                    object_=auth_data, annotation=SetUserAuthRequestAuthData, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GetUserAuthResponse]:
+        """
+        Retrieves authentication data for a specific integration for a user.
+
+        Returns the authentication data if available, along with authentication status.
+        Includes token refresh handling if needed.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        server_name : str
+            The name of the MCP server (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetUserAuthResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"user/{jsonable_encoder(user_id)}/auth/{jsonable_encoder(server_name)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetUserAuthResponse,
+                    parse_obj_as(
+                        type_=GetUserAuthResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific integration for a user.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the integration.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : str
+            The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"user/user/{jsonable_encoder(user_id)}/server/{jsonable_encoder(server_name)}/auth",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

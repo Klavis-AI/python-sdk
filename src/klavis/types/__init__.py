@@ -9,14 +9,15 @@ from .connection_type import ConnectionType
 from .create_self_hosted_server_response import CreateSelfHostedServerResponse
 from .create_server_response import CreateServerResponse
 from .delete_user_response import DeleteUserResponse
-from .extended_mcp_server import ExtendedMcpServer
 from .external_server_info import ExternalServerInfo
 from .external_server_request import ExternalServerRequest
 from .general_auth import GeneralAuth
 from .get_auth_data_response import GetAuthDataResponse
 from .get_instance_response import GetInstanceResponse
 from .get_mcp_servers_response import GetMcpServersResponse
-from .get_server_instances_response import GetServerInstancesResponse
+from .get_user_auth_response import GetUserAuthResponse
+from .get_user_integrations_response import GetUserIntegrationsResponse
+from .get_user_response import GetUserResponse
 from .http_validation_error import HttpValidationError
 from .list_tools_response import ListToolsResponse
 from .mcp_server import McpServer
@@ -29,6 +30,7 @@ from .status_response import StatusResponse
 from .strata_add_servers_response import StrataAddServersResponse
 from .strata_create_response import StrataCreateResponse
 from .strata_delete_servers_response import StrataDeleteServersResponse
+from .strata_get_auth_response import StrataGetAuthResponse
 from .strata_get_response import StrataGetResponse
 from .tool_format import ToolFormat
 from .validation_error import ValidationError
@@ -43,14 +45,15 @@ __all__ = [
     "CreateSelfHostedServerResponse",
     "CreateServerResponse",
     "DeleteUserResponse",
-    "ExtendedMcpServer",
     "ExternalServerInfo",
     "ExternalServerRequest",
     "GeneralAuth",
     "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
-    "GetServerInstancesResponse",
+    "GetUserAuthResponse",
+    "GetUserIntegrationsResponse",
+    "GetUserResponse",
     "HttpValidationError",
     "ListToolsResponse",
     "McpServer",
@@ -63,6 +66,7 @@ __all__ = [
     "StrataAddServersResponse",
     "StrataCreateResponse",
     "StrataDeleteServersResponse",
+    "StrataGetAuthResponse",
     "StrataGetResponse",
     "ToolFormat",
     "ValidationError",

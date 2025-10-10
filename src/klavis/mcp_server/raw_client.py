@@ -26,14 +26,16 @@ from ..types.status_response import StatusResponse
 from ..types.strata_add_servers_response import StrataAddServersResponse
 from ..types.strata_create_response import StrataCreateResponse
 from ..types.strata_delete_servers_response import StrataDeleteServersResponse
+from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
 from ..types.tool_format import ToolFormat
-from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
 from .types.mcp_server_get_tools_response import McpServerGetToolsResponse
 from .types.servers import Servers
+from .types.set_auth_request_auth_data import SetAuthRequestAuthData
+from .types.strata_set_auth_request_auth_data import StrataSetAuthRequestAuthData
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -326,7 +328,7 @@ class RawMcpServerClient:
             "mcp-server/strata/add",
             method="POST",
             json={
-                "strataId": strata_id,
+                "strata_id": strata_id,
                 "servers": convert_and_respect_annotation_metadata(
                     object_=servers, annotation=Servers, direction="write"
                 ),
@@ -385,7 +387,7 @@ class RawMcpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strataId: The strata server ID (path parameter)
+        - strata_id: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -496,12 +498,67 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def get_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StrataGetAuthResponse]:
+        """
+        Retrieves authentication data for a specific integration within a Strata MCP server.
+
+        Returns the authentication data if available, along with authentication status.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : str
+            The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataGetAuthResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/auth/{jsonable_encoder(server_name)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataGetAuthResponse,
+                    parse_obj_as(
+                        type_=StrataGetAuthResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def set_strata_auth(
         self,
         *,
         strata_id: str,
         server_name: McpServerName,
-        auth_data: Authdata,
+        auth_data: StrataSetAuthRequestAuthData,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[StatusResponse]:
         """
@@ -517,7 +574,7 @@ class RawMcpServerClient:
         server_name : McpServerName
             The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
 
-        auth_data : Authdata
+        auth_data : StrataSetAuthRequestAuthData
             Authentication data
 
         request_options : typing.Optional[RequestOptions]
@@ -532,10 +589,10 @@ class RawMcpServerClient:
             "mcp-server/strata/set-auth",
             method="POST",
             json={
-                "strataId": strata_id,
+                "strata_id": strata_id,
                 "serverName": server_name,
                 "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=Authdata, direction="write"
+                    object_=auth_data, annotation=StrataSetAuthRequestAuthData, direction="write"
                 ),
             },
             headers={
@@ -570,6 +627,61 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def delete_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific integration within a Strata MCP server.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the server.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : str
+            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/server/{jsonable_encoder(server_name)}/auth",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def create_server_instance(
         self,
         *,
@@ -577,6 +689,7 @@ class RawMcpServerClient:
         user_id: str,
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        legacy: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateServerResponse]:
         """
@@ -599,6 +712,9 @@ class RawMcpServerClient:
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -615,6 +731,7 @@ class RawMcpServerClient:
                 "userId": user_id,
                 "platformName": platform_name,
                 "connectionType": connection_type,
+                "legacy": legacy,
             },
             headers={
                 "content-type": "application/json",
@@ -723,7 +840,7 @@ class RawMcpServerClient:
         Parameters
         ----------
         instance_id : str
-            The ID of the connection instance whose status is being checked. This is returned by the Create API.
+            The ID of the connection integration instance whose status is being checked. This is returned by the Create API.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -734,7 +851,7 @@ class RawMcpServerClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/get/{jsonable_encoder(instance_id)}",
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -744,56 +861,6 @@ class RawMcpServerClient:
                     GetInstanceResponse,
                     parse_obj_as(
                         type_=GetInstanceResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def delete_instance_auth(
-        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[StatusResponse]:
-        """
-        Deletes authentication data for a specific server connection instance.
-
-        Parameters
-        ----------
-        instance_id : str
-            The ID of the connection instance to delete auth for.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[StatusResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/delete-auth/{jsonable_encoder(instance_id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    StatusResponse,
-                    parse_obj_as(
-                        type_=StatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -835,7 +902,111 @@ class RawMcpServerClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/delete/{jsonable_encoder(instance_id)}",
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_instance_auth_data(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[GetAuthDataResponse]:
+        """
+        Retrieves the auth data for a specific integration instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication data.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for integration instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to get auth data for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetAuthDataResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/auth",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAuthDataResponse,
+                    parse_obj_as(
+                        type_=GetAuthDataResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete_instance_auth(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific server connection instance.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to delete auth for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/auth",
             method="DELETE",
             request_options=request_options,
         )
@@ -962,19 +1133,23 @@ class RawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def set_instance_auth(
-        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        instance_id: str,
+        auth_data: SetAuthRequestAuthData,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[StatusResponse]:
         """
-        Sets authentication data for a specific instance.
+        Sets authentication data for a specific integration instance.
         Accepts either API key authentication or general authentication data.
-        This updates the auth_metadata for the specified instance.
+        This updates the auth_metadata for the specified integration instance.
 
         Parameters
         ----------
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_data : Authdata
+        auth_data : SetAuthRequestAuthData
             Authentication data
 
         request_options : typing.Optional[RequestOptions]
@@ -991,7 +1166,7 @@ class RawMcpServerClient:
             json={
                 "instanceId": instance_id,
                 "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=Authdata, direction="write"
+                    object_=auth_data, annotation=SetAuthRequestAuthData, direction="write"
                 ),
             },
             headers={
@@ -1006,60 +1181,6 @@ class RawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def get_instance_auth_data(
-        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[GetAuthDataResponse]:
-        """
-        Retrieves the auth data for a specific instance that the API key owner controls.
-        Includes access token, refresh token, and other authentication data.
-
-        This endpoint includes proper ownership verification to ensure users can only access
-        authentication data for instances they own. It also handles token refresh if needed.
-
-        Parameters
-        ----------
-        instance_id : str
-            The ID of the connection instance to get auth data for.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[GetAuthDataResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/get-auth/{jsonable_encoder(instance_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GetAuthDataResponse,
-                    parse_obj_as(
-                        type_=GetAuthDataResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1392,7 +1513,7 @@ class AsyncRawMcpServerClient:
             "mcp-server/strata/add",
             method="POST",
             json={
-                "strataId": strata_id,
+                "strata_id": strata_id,
                 "servers": convert_and_respect_annotation_metadata(
                     object_=servers, annotation=Servers, direction="write"
                 ),
@@ -1451,7 +1572,7 @@ class AsyncRawMcpServerClient:
         Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
         Parameters:
-        - strataId: The strata server ID (path parameter)
+        - strata_id: The strata server ID (path parameter)
         - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
         - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -1562,12 +1683,67 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def get_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StrataGetAuthResponse]:
+        """
+        Retrieves authentication data for a specific integration within a Strata MCP server.
+
+        Returns the authentication data if available, along with authentication status.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : str
+            The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataGetAuthResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/auth/{jsonable_encoder(server_name)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataGetAuthResponse,
+                    parse_obj_as(
+                        type_=StrataGetAuthResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def set_strata_auth(
         self,
         *,
         strata_id: str,
         server_name: McpServerName,
-        auth_data: Authdata,
+        auth_data: StrataSetAuthRequestAuthData,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[StatusResponse]:
         """
@@ -1583,7 +1759,7 @@ class AsyncRawMcpServerClient:
         server_name : McpServerName
             The name of the Klavis MCP server to set authentication for (e.g., 'GitHub', 'Jira')
 
-        auth_data : Authdata
+        auth_data : StrataSetAuthRequestAuthData
             Authentication data
 
         request_options : typing.Optional[RequestOptions]
@@ -1598,10 +1774,10 @@ class AsyncRawMcpServerClient:
             "mcp-server/strata/set-auth",
             method="POST",
             json={
-                "strataId": strata_id,
+                "strata_id": strata_id,
                 "serverName": server_name,
                 "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=Authdata, direction="write"
+                    object_=auth_data, annotation=StrataSetAuthRequestAuthData, direction="write"
                 ),
             },
             headers={
@@ -1636,6 +1812,61 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def delete_strata_auth(
+        self, strata_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific integration within a Strata MCP server.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the server.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server_name : str
+            The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/server/{jsonable_encoder(server_name)}/auth",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def create_server_instance(
         self,
         *,
@@ -1643,6 +1874,7 @@ class AsyncRawMcpServerClient:
         user_id: str,
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
+        legacy: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateServerResponse]:
         """
@@ -1665,6 +1897,9 @@ class AsyncRawMcpServerClient:
         connection_type : typing.Optional[ConnectionType]
             The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
 
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1681,6 +1916,7 @@ class AsyncRawMcpServerClient:
                 "userId": user_id,
                 "platformName": platform_name,
                 "connectionType": connection_type,
+                "legacy": legacy,
             },
             headers={
                 "content-type": "application/json",
@@ -1789,7 +2025,7 @@ class AsyncRawMcpServerClient:
         Parameters
         ----------
         instance_id : str
-            The ID of the connection instance whose status is being checked. This is returned by the Create API.
+            The ID of the connection integration instance whose status is being checked. This is returned by the Create API.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1800,7 +2036,7 @@ class AsyncRawMcpServerClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/get/{jsonable_encoder(instance_id)}",
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
             method="GET",
             request_options=request_options,
         )
@@ -1810,56 +2046,6 @@ class AsyncRawMcpServerClient:
                     GetInstanceResponse,
                     parse_obj_as(
                         type_=GetInstanceResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def delete_instance_auth(
-        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[StatusResponse]:
-        """
-        Deletes authentication data for a specific server connection instance.
-
-        Parameters
-        ----------
-        instance_id : str
-            The ID of the connection instance to delete auth for.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[StatusResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/delete-auth/{jsonable_encoder(instance_id)}",
-            method="DELETE",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    StatusResponse,
-                    parse_obj_as(
-                        type_=StatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1901,7 +2087,111 @@ class AsyncRawMcpServerClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/delete/{jsonable_encoder(instance_id)}",
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StatusResponse,
+                    parse_obj_as(
+                        type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_instance_auth_data(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[GetAuthDataResponse]:
+        """
+        Retrieves the auth data for a specific integration instance that the API key owner controls.
+        Includes access token, refresh token, and other authentication data.
+
+        This endpoint includes proper ownership verification to ensure users can only access
+        authentication data for integration instances they own. It also handles token refresh if needed.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to get auth data for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetAuthDataResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/auth",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAuthDataResponse,
+                    parse_obj_as(
+                        type_=GetAuthDataResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def delete_instance_auth(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StatusResponse]:
+        """
+        Deletes authentication data for a specific server connection instance.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection instance to delete auth for.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StatusResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/auth",
             method="DELETE",
             request_options=request_options,
         )
@@ -2028,19 +2318,23 @@ class AsyncRawMcpServerClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def set_instance_auth(
-        self, *, instance_id: str, auth_data: Authdata, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        instance_id: str,
+        auth_data: SetAuthRequestAuthData,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[StatusResponse]:
         """
-        Sets authentication data for a specific instance.
+        Sets authentication data for a specific integration instance.
         Accepts either API key authentication or general authentication data.
-        This updates the auth_metadata for the specified instance.
+        This updates the auth_metadata for the specified integration instance.
 
         Parameters
         ----------
         instance_id : str
             The unique identifier for the connection instance
 
-        auth_data : Authdata
+        auth_data : SetAuthRequestAuthData
             Authentication data
 
         request_options : typing.Optional[RequestOptions]
@@ -2057,7 +2351,7 @@ class AsyncRawMcpServerClient:
             json={
                 "instanceId": instance_id,
                 "authData": convert_and_respect_annotation_metadata(
-                    object_=auth_data, annotation=Authdata, direction="write"
+                    object_=auth_data, annotation=SetAuthRequestAuthData, direction="write"
                 ),
             },
             headers={
@@ -2072,60 +2366,6 @@ class AsyncRawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def get_instance_auth_data(
-        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[GetAuthDataResponse]:
-        """
-        Retrieves the auth data for a specific instance that the API key owner controls.
-        Includes access token, refresh token, and other authentication data.
-
-        This endpoint includes proper ownership verification to ensure users can only access
-        authentication data for instances they own. It also handles token refresh if needed.
-
-        Parameters
-        ----------
-        instance_id : str
-            The ID of the connection instance to get auth data for.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[GetAuthDataResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"mcp-server/instance/get-auth/{jsonable_encoder(instance_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    GetAuthDataResponse,
-                    parse_obj_as(
-                        type_=GetAuthDataResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

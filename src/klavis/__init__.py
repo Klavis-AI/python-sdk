@@ -10,14 +10,15 @@ from .types import (
     CreateSelfHostedServerResponse,
     CreateServerResponse,
     DeleteUserResponse,
-    ExtendedMcpServer,
     ExternalServerInfo,
     ExternalServerRequest,
     GeneralAuth,
     GetAuthDataResponse,
     GetInstanceResponse,
     GetMcpServersResponse,
-    GetServerInstancesResponse,
+    GetUserAuthResponse,
+    GetUserIntegrationsResponse,
+    GetUserResponse,
     HttpValidationError,
     ListToolsResponse,
     McpServer,
@@ -30,6 +31,7 @@ from .types import (
     StrataAddServersResponse,
     StrataCreateResponse,
     StrataDeleteServersResponse,
+    StrataGetAuthResponse,
     StrataGetResponse,
     ToolFormat,
     ValidationError,
@@ -37,22 +39,23 @@ from .types import (
     WhiteLabelingResponse,
 )
 from .errors import UnprocessableEntityError
-from . import mcp_server, oauth, user, white_labeling
+from . import mcp_server, oauth, teams_oauth, user, white_labeling
 from .client import AsyncKlavis, Klavis
 from .environment import KlavisEnvironment
 from .mcp_server import (
-    Authdata,
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
     McpServerGetToolsResponse,
     Servers,
+    SetAuthRequestAuthData,
+    StrataSetAuthRequestAuthData,
 )
 from .oauth import Environment
+from .user import SetUserAuthRequestAuthData
 from .version import __version__
 
 __all__ = [
     "ApiKeyAuth",
     "AsyncKlavis",
-    "Authdata",
     "CallToolResponse",
     "CallToolResult",
     "ConnectionType",
@@ -61,14 +64,15 @@ __all__ = [
     "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem",
     "DeleteUserResponse",
     "Environment",
-    "ExtendedMcpServer",
     "ExternalServerInfo",
     "ExternalServerRequest",
     "GeneralAuth",
     "GetAuthDataResponse",
     "GetInstanceResponse",
     "GetMcpServersResponse",
-    "GetServerInstancesResponse",
+    "GetUserAuthResponse",
+    "GetUserIntegrationsResponse",
+    "GetUserResponse",
     "HttpValidationError",
     "Klavis",
     "KlavisEnvironment",
@@ -81,11 +85,15 @@ __all__ = [
     "ServerTool",
     "ServerToolsResult",
     "Servers",
+    "SetAuthRequestAuthData",
+    "SetUserAuthRequestAuthData",
     "StatusResponse",
     "StrataAddServersResponse",
     "StrataCreateResponse",
     "StrataDeleteServersResponse",
+    "StrataGetAuthResponse",
     "StrataGetResponse",
+    "StrataSetAuthRequestAuthData",
     "ToolFormat",
     "UnprocessableEntityError",
     "ValidationError",
@@ -94,6 +102,7 @@ __all__ = [
     "__version__",
     "mcp_server",
     "oauth",
+    "teams_oauth",
     "user",
     "white_labeling",
 ]

@@ -2,6 +2,6 @@
 
 # isort: skip_file
 
-from .types import SetUserAuthRequestAuthData
+from .set_user_auth_request_auth_data import SetUserAuthRequestAuthData
 
 __all__ = ["SetUserAuthRequestAuthData"]

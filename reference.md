@@ -339,7 +339,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.add_servers_to_strata(
-    strata_id="strataId",
+    strata_id="strata_id",
 )
 
 ```
@@ -409,7 +409,7 @@ Delete servers from an existing Strata MCP server.
 Note: After deleting servers, you need to reconnect the MCP server so that list_tool can be updated to reflect the removed servers.
 
 Parameters:
-- strataId: The strata server ID (path parameter)
+- strata_id: The strata server ID (path parameter)
 - servers: Can be 'ALL' to delete all available Klavis integration, a list of specific server names, or null to delete no servers
 - externalServers: Query parameter - comma-separated list of external server names to delete
 
@@ -434,7 +434,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.delete_servers_from_strata(
-    strata_id="strataId",
+    strata_id="strata_id",
 )
 
 ```
@@ -530,7 +530,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_strata_server(
-    strata_id="strataId",
+    strata_id="strata_id",
 )
 
 ```
@@ -548,6 +548,87 @@ client.mcp_server.get_strata_server(
 <dd>
 
 **strata_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_strata_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves authentication data for a specific integration within a Strata MCP server.
+
+Returns the authentication data if available, along with authentication status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.get_strata_auth(
+    strata_id="strata_id",
+    server_name="serverName",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` — The strata server ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `str` — The name of the Klavis MCP server to get authentication for (e.g., 'GitHub', 'Jira')
     
 </dd>
 </dl>
@@ -602,7 +683,7 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.set_strata_auth(
-    strata_id="strataId",
+    strata_id="strata_id",
     server_name=McpServerName.AFFINITY,
     auth_data=ApiKeyAuth(),
 )
@@ -637,7 +718,88 @@ client.mcp_server.set_strata_auth(
 <dl>
 <dd>
 
-**auth_data:** `Authdata` — Authentication data
+**auth_data:** `StrataSetAuthRequestAuthData` — Authentication data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">delete_strata_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes authentication data for a specific integration within a Strata MCP server.
+
+This will clear the stored authentication credentials, effectively unauthenticating the server.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.delete_strata_auth(
+    strata_id="strata_id",
+    server_name="server_name",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**strata_id:** `str` — The strata server ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `str` — The name of the Klavis MCP server to delete authentication for (e.g., 'github', 'jira')
     
 </dd>
 </dl>
@@ -736,6 +898,14 @@ client.mcp_server.create_server_instance(
 <dd>
 
 **connection_type:** `typing.Optional[ConnectionType]` — The connection type to use for the MCP server. Default is STREAMABLE_HTTP.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legacy:** `typing.Optional[bool]` — Whether to use the legacy server. Default is False.
     
 </dd>
 </dl>
@@ -889,77 +1059,7 @@ client.mcp_server.get_server_instance(
 <dl>
 <dd>
 
-**instance_id:** `str` — The ID of the connection instance whose status is being checked. This is returned by the Create API.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">delete_instance_auth</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Deletes authentication data for a specific server connection instance.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mcp_server.delete_instance_auth(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — The ID of the connection instance to delete auth for.
+**instance_id:** `str` — The ID of the connection integration instance whose status is being checked. This is returned by the Create API.
     
 </dd>
 </dl>
@@ -1031,6 +1131,150 @@ client.mcp_server.delete_server_instance(
 <dd>
 
 **instance_id:** `str` — The ID of the connection instance to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_instance_auth_data</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the auth data for a specific integration instance that the API key owner controls.
+Includes access token, refresh token, and other authentication data.
+
+This endpoint includes proper ownership verification to ensure users can only access
+authentication data for integration instances they own. It also handles token refresh if needed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.get_instance_auth_data(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — The ID of the connection integration instance to get auth data for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">delete_instance_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes authentication data for a specific server connection instance.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.delete_instance_auth(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — The ID of the connection instance to delete auth for.
     
 </dd>
 </dl>
@@ -1200,9 +1444,9 @@ client.mcp_server.get_all_mcp_servers()
 <dl>
 <dd>
 
-Sets authentication data for a specific instance.
+Sets authentication data for a specific integration instance.
 Accepts either API key authentication or general authentication data.
-This updates the auth_metadata for the specified instance.
+This updates the auth_metadata for the specified integration instance.
 </dd>
 </dl>
 </dd>
@@ -1249,81 +1493,7 @@ client.mcp_server.set_instance_auth(
 <dl>
 <dd>
 
-**auth_data:** `Authdata` — Authentication data
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_instance_auth_data</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieves the auth data for a specific instance that the API key owner controls.
-Includes access token, refresh token, and other authentication data.
-
-This endpoint includes proper ownership verification to ensure users can only access
-authentication data for instances they own. It also handles token refresh if needed.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mcp_server.get_instance_auth_data(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — The ID of the connection instance to get auth data for.
+**auth_data:** `SetAuthRequestAuthData` — Authentication data
     
 </dd>
 </dl>
@@ -1565,7 +1735,7 @@ client.white_labeling.get_white_labeling_by_client_id(
 </details>
 
 ## User
-<details><summary><code>client.user.<a href="src/klavis/user/client.py">get_server_instances_by_user</a>(...)</code></summary>
+<details><summary><code>client.user.<a href="src/klavis/user/client.py">get_user_integrations</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1577,7 +1747,8 @@ client.white_labeling.get_white_labeling_by_client_id(
 <dl>
 <dd>
 
-Get all MCP server instances information by user ID and platform name.
+Get all available integrations (MCP server names) by user ID.
+Returns a list of integration names as McpServerName types.
 </dd>
 </dl>
 </dd>
@@ -1597,7 +1768,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.user.get_server_instances_by_user(
+client.user.get_user_integrations(
     user_id="user_id",
 )
 
@@ -1623,7 +1794,69 @@ client.user.get_server_instances_by_user(
 <dl>
 <dd>
 
-**platform_name:** `typing.Optional[str]` — The platform name (optional)
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.user.<a href="src/klavis/user/client.py">get_user_by_user_id</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get user information by user_id.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.user.get_user_by_user_id(
+    user_id="user_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The identifier for the user to fetch.
     
 </dd>
 </dl>
@@ -1696,6 +1929,260 @@ client.user.delete_user_by_user_id(
 <dd>
 
 **user_id:** `str` — The identifier for the user to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.user.<a href="src/klavis/user/client.py">set_user_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets authentication data for a specific integration for a user.
+
+Accepts either API key authentication or general authentication data.
+This updates the auth_metadata for the specified user's integration instance.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import ApiKeyAuth, Klavis, McpServerName
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.user.set_user_auth(
+    user_id="userId",
+    server_name=McpServerName.AFFINITY,
+    auth_data=ApiKeyAuth(),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The unique identifier for the user
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `McpServerName` — The name of the MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auth_data:** `SetUserAuthRequestAuthData` — Authentication data
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.user.<a href="src/klavis/user/client.py">get_user_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves authentication data for a specific integration for a user.
+
+Returns the authentication data if available, along with authentication status.
+Includes token refresh handling if needed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.user.get_user_auth(
+    user_id="user_id",
+    server_name="server_name",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The identifier for the user
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `str` — The name of the MCP server (e.g., 'GitHub', 'Jira')
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.user.<a href="src/klavis/user/client.py">delete_user_auth</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes authentication data for a specific integration for a user.
+
+This will clear the stored authentication credentials, effectively unauthenticating the integration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.user.delete_user_auth(
+    user_id="user_id",
+    server_name="server_name",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — The unique identifier for the user
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**server_name:** `str` — The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
     
 </dd>
 </dl>
@@ -5618,6 +6105,87 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.oauth.authorize_outlook(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## TeamsOauth
+<details><summary><code>client.teams_oauth.<a href="src/klavis/teams_oauth/client.py">authorize_teams</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.teams_oauth.authorize_teams(
     instance_id="instance_id",
 )
 

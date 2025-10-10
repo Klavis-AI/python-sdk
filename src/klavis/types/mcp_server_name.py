@@ -27,6 +27,7 @@ class McpServerName(str, enum.Enum):
     ELEVEN_LABS = "ElevenLabs"
     EXA = "Exa"
     FIGMA = "Figma"
+    FIREFLIES = "Fireflies"
     FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
     FIRECRAWL_WEB_SEARCH = "Firecrawl Web Search"
     FRESHDESK = "Freshdesk"
@@ -49,6 +50,7 @@ class McpServerName(str, enum.Enum):
     LINKEDIN = "LinkedIn"
     MARKDOWN2DOC = "Markdown2doc"
     MEM0 = "Mem0"
+    MICROSOFT_TEAMS = "Microsoft Teams"
     MIXPANEL = "Mixpanel"
     MONDAY = "Monday"
     MONEYBIRD = "Moneybird"
@@ -76,6 +78,7 @@ class McpServerName(str, enum.Enum):
     WORDPRESS = "WordPress"
     YOUTUBE = "YouTube"
     ZENDESK = "Zendesk"
+    SERVICE_NOW = "ServiceNow"
 
     def visit(
         self,
@@ -99,6 +102,7 @@ class McpServerName(str, enum.Enum):
         eleven_labs: typing.Callable[[], T_Result],
         exa: typing.Callable[[], T_Result],
         figma: typing.Callable[[], T_Result],
+        fireflies: typing.Callable[[], T_Result],
         firecrawl_deep_research: typing.Callable[[], T_Result],
         firecrawl_web_search: typing.Callable[[], T_Result],
         freshdesk: typing.Callable[[], T_Result],
@@ -121,6 +125,7 @@ class McpServerName(str, enum.Enum):
         linkedin: typing.Callable[[], T_Result],
         markdown2doc: typing.Callable[[], T_Result],
         mem0: typing.Callable[[], T_Result],
+        microsoft_teams: typing.Callable[[], T_Result],
         mixpanel: typing.Callable[[], T_Result],
         monday: typing.Callable[[], T_Result],
         moneybird: typing.Callable[[], T_Result],
@@ -148,6 +153,7 @@ class McpServerName(str, enum.Enum):
         wordpress: typing.Callable[[], T_Result],
         youtube: typing.Callable[[], T_Result],
         zendesk: typing.Callable[[], T_Result],
+        service_now: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
@@ -189,6 +195,8 @@ class McpServerName(str, enum.Enum):
             return exa()
         if self is McpServerName.FIGMA:
             return figma()
+        if self is McpServerName.FIREFLIES:
+            return fireflies()
         if self is McpServerName.FIRECRAWL_DEEP_RESEARCH:
             return firecrawl_deep_research()
         if self is McpServerName.FIRECRAWL_WEB_SEARCH:
@@ -233,6 +241,8 @@ class McpServerName(str, enum.Enum):
             return markdown2doc()
         if self is McpServerName.MEM0:
             return mem0()
+        if self is McpServerName.MICROSOFT_TEAMS:
+            return microsoft_teams()
         if self is McpServerName.MIXPANEL:
             return mixpanel()
         if self is McpServerName.MONDAY:
@@ -287,3 +297,5 @@ class McpServerName(str, enum.Enum):
             return youtube()
         if self is McpServerName.ZENDESK:
             return zendesk()
+        if self is McpServerName.SERVICE_NOW:
+            return service_now()

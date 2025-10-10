@@ -5,4 +5,4 @@ import typing
 from ...types.api_key_auth import ApiKeyAuth
 from ...types.general_auth import GeneralAuth
 
-Authdata = typing.Union[ApiKeyAuth, GeneralAuth]
+SetAuthRequestAuthData = typing.Union[ApiKeyAuth, GeneralAuth]

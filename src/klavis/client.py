@@ -7,6 +7,7 @@ from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import KlavisEnvironment
 from .mcp_server.client import AsyncMcpServerClient, McpServerClient
 from .oauth.client import AsyncOauthClient, OauthClient
+from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
 from .user.client import AsyncUserClient, UserClient
 from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
 
@@ -75,6 +76,7 @@ class Klavis:
         self.white_labeling = WhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = UserClient(client_wrapper=self._client_wrapper)
         self.oauth = OauthClient(client_wrapper=self._client_wrapper)
+        self.teams_oauth = TeamsOauthClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncKlavis:
@@ -141,6 +143,7 @@ class AsyncKlavis:
         self.white_labeling = AsyncWhiteLabelingClient(client_wrapper=self._client_wrapper)
         self.user = AsyncUserClient(client_wrapper=self._client_wrapper)
         self.oauth = AsyncOauthClient(client_wrapper=self._client_wrapper)
+        self.teams_oauth = AsyncTeamsOauthClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

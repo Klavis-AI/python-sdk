@@ -5,8 +5,16 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.delete_user_response import DeleteUserResponse
-from ..types.get_server_instances_response import GetServerInstancesResponse
+from ..types.get_user_auth_response import GetUserAuthResponse
+from ..types.get_user_integrations_response import GetUserIntegrationsResponse
+from ..types.get_user_response import GetUserResponse
+from ..types.mcp_server_name import McpServerName
+from ..types.status_response import StatusResponse
 from .raw_client import AsyncRawUserClient, RawUserClient
+from .types.set_user_auth_request_auth_data import SetUserAuthRequestAuthData
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class UserClient:
@@ -24,30 +32,24 @@ class UserClient:
         """
         return self._raw_client
 
-    def get_server_instances_by_user(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetServerInstancesResponse:
+    def get_user_integrations(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserIntegrationsResponse:
         """
-        Get all MCP server instances information by user ID and platform name.
+        Get all available integrations (MCP server names) by user ID.
+        Returns a list of integration names as McpServerName types.
 
         Parameters
         ----------
         user_id : str
             The external user ID
 
-        platform_name : typing.Optional[str]
-            The platform name (optional)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetServerInstancesResponse
+        GetUserIntegrationsResponse
             Successful Response
 
         Examples
@@ -57,13 +59,44 @@ class UserClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.user.get_server_instances_by_user(
+        client.user.get_user_integrations(
             user_id="user_id",
         )
         """
-        _response = self._raw_client.get_server_instances_by_user(
-            user_id=user_id, platform_name=platform_name, request_options=request_options
+        _response = self._raw_client.get_user_integrations(user_id, request_options=request_options)
+        return _response.data
+
+    def get_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserResponse:
+        """
+        Get user information by user_id.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to fetch.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
         )
+        client.user.get_user_by_user_id(
+            user_id="user_id",
+        )
+        """
+        _response = self._raw_client.get_user_by_user_id(user_id, request_options=request_options)
         return _response.data
 
     def delete_user_by_user_id(
@@ -101,6 +134,136 @@ class UserClient:
         _response = self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
         return _response.data
 
+    def set_user_auth(
+        self,
+        *,
+        user_id: str,
+        server_name: McpServerName,
+        auth_data: SetUserAuthRequestAuthData,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration for a user.
+
+        Accepts either API key authentication or general authentication data.
+        This updates the auth_metadata for the specified user's integration instance.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : McpServerName
+            The name of the MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : SetUserAuthRequestAuthData
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import ApiKeyAuth, Klavis, McpServerName
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.user.set_user_auth(
+            user_id="userId",
+            server_name=McpServerName.AFFINITY,
+            auth_data=ApiKeyAuth(),
+        )
+        """
+        _response = self._raw_client.set_user_auth(
+            user_id=user_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
+        return _response.data
+
+    def get_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserAuthResponse:
+        """
+        Retrieves authentication data for a specific integration for a user.
+
+        Returns the authentication data if available, along with authentication status.
+        Includes token refresh handling if needed.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        server_name : str
+            The name of the MCP server (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserAuthResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.user.get_user_auth(
+            user_id="user_id",
+            server_name="server_name",
+        )
+        """
+        _response = self._raw_client.get_user_auth(user_id, server_name, request_options=request_options)
+        return _response.data
+
+    def delete_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StatusResponse:
+        """
+        Deletes authentication data for a specific integration for a user.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the integration.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : str
+            The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.user.delete_user_auth(
+            user_id="user_id",
+            server_name="server_name",
+        )
+        """
+        _response = self._raw_client.delete_user_auth(user_id, server_name, request_options=request_options)
+        return _response.data
+
 
 class AsyncUserClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -117,30 +280,24 @@ class AsyncUserClient:
         """
         return self._raw_client
 
-    async def get_server_instances_by_user(
-        self,
-        *,
-        user_id: str,
-        platform_name: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetServerInstancesResponse:
+    async def get_user_integrations(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserIntegrationsResponse:
         """
-        Get all MCP server instances information by user ID and platform name.
+        Get all available integrations (MCP server names) by user ID.
+        Returns a list of integration names as McpServerName types.
 
         Parameters
         ----------
         user_id : str
             The external user ID
 
-        platform_name : typing.Optional[str]
-            The platform name (optional)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        GetServerInstancesResponse
+        GetUserIntegrationsResponse
             Successful Response
 
         Examples
@@ -155,16 +312,55 @@ class AsyncUserClient:
 
 
         async def main() -> None:
-            await client.user.get_server_instances_by_user(
+            await client.user.get_user_integrations(
                 user_id="user_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_server_instances_by_user(
-            user_id=user_id, platform_name=platform_name, request_options=request_options
+        _response = await self._raw_client.get_user_integrations(user_id, request_options=request_options)
+        return _response.data
+
+    async def get_user_by_user_id(
+        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserResponse:
+        """
+        Get user information by user_id.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user to fetch.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
         )
+
+
+        async def main() -> None:
+            await client.user.get_user_by_user_id(
+                user_id="user_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_user_by_user_id(user_id, request_options=request_options)
         return _response.data
 
     async def delete_user_by_user_id(
@@ -208,4 +404,158 @@ class AsyncUserClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
+        return _response.data
+
+    async def set_user_auth(
+        self,
+        *,
+        user_id: str,
+        server_name: McpServerName,
+        auth_data: SetUserAuthRequestAuthData,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StatusResponse:
+        """
+        Sets authentication data for a specific integration for a user.
+
+        Accepts either API key authentication or general authentication data.
+        This updates the auth_metadata for the specified user's integration instance.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : McpServerName
+            The name of the MCP server to set authentication for (e.g., 'GitHub', 'Jira')
+
+        auth_data : SetUserAuthRequestAuthData
+            Authentication data
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import ApiKeyAuth, AsyncKlavis, McpServerName
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.user.set_user_auth(
+                user_id="userId",
+                server_name=McpServerName.AFFINITY,
+                auth_data=ApiKeyAuth(),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.set_user_auth(
+            user_id=user_id, server_name=server_name, auth_data=auth_data, request_options=request_options
+        )
+        return _response.data
+
+    async def get_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetUserAuthResponse:
+        """
+        Retrieves authentication data for a specific integration for a user.
+
+        Returns the authentication data if available, along with authentication status.
+        Includes token refresh handling if needed.
+
+        Parameters
+        ----------
+        user_id : str
+            The identifier for the user
+
+        server_name : str
+            The name of the MCP server (e.g., 'GitHub', 'Jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserAuthResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.user.get_user_auth(
+                user_id="user_id",
+                server_name="server_name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_user_auth(user_id, server_name, request_options=request_options)
+        return _response.data
+
+    async def delete_user_auth(
+        self, user_id: str, server_name: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StatusResponse:
+        """
+        Deletes authentication data for a specific integration for a user.
+
+        This will clear the stored authentication credentials, effectively unauthenticating the integration.
+
+        Parameters
+        ----------
+        user_id : str
+            The unique identifier for the user
+
+        server_name : str
+            The name of the MCP server to delete authentication for (e.g., 'github', 'jira')
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StatusResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.user.delete_user_auth(
+                user_id="user_id",
+                server_name="server_name",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_user_auth(user_id, server_name, request_options=request_options)
         return _response.data

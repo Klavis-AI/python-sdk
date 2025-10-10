@@ -32,6 +32,7 @@ class OAuthServerName(str, enum.Enum):
     KLAVIYO = "Klaviyo"
     LINEAR = "Linear"
     LINKED_IN = "LinkedIn"
+    MICROSOFT_TEAMS = "Microsoft Teams"
     MONDAY = "Monday"
     MONEYBIRD = "Moneybird"
     NOTION = "Notion"
@@ -77,6 +78,7 @@ class OAuthServerName(str, enum.Enum):
         klaviyo: typing.Callable[[], T_Result],
         linear: typing.Callable[[], T_Result],
         linked_in: typing.Callable[[], T_Result],
+        microsoft_teams: typing.Callable[[], T_Result],
         monday: typing.Callable[[], T_Result],
         moneybird: typing.Callable[[], T_Result],
         notion: typing.Callable[[], T_Result],
@@ -145,6 +147,8 @@ class OAuthServerName(str, enum.Enum):
             return linear()
         if self is OAuthServerName.LINKED_IN:
             return linked_in()
+        if self is OAuthServerName.MICROSOFT_TEAMS:
+            return microsoft_teams()
         if self is OAuthServerName.MONDAY:
             return monday()
         if self is OAuthServerName.MONEYBIRD:

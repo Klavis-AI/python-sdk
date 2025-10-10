@@ -13,7 +13,7 @@ class GetInstanceResponse(UniversalBaseModel):
         default=None
     )
     """
-    The unique identifier of the connection instance.
+    The unique identifier of the connection integration instance.
     """
 
     auth_needed: typing_extensions.Annotated[typing.Optional[bool], FieldMetadata(alias="authNeeded")] = pydantic.Field(
