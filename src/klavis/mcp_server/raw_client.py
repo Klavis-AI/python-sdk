@@ -33,7 +33,6 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
-from .types.get_server_tools_response import GetServerToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
 
@@ -1038,18 +1037,18 @@ class RawMcpServerClient:
 
     def get_server_tools(
         self,
-        server_name: str,
+        server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GetServerToolsResponse]:
+    ) -> HttpResponse[ListToolsResponse]:
         """
-        Get tools information for one or multiple MCP servers.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
-        server_name : str
-            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -1059,7 +1058,7 @@ class RawMcpServerClient:
 
         Returns
         -------
-        HttpResponse[GetServerToolsResponse]
+        HttpResponse[ListToolsResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -1073,9 +1072,9 @@ class RawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetServerToolsResponse,
+                    ListToolsResponse,
                     parse_obj_as(
-                        type_=GetServerToolsResponse,  # type: ignore
+                        type_=ListToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1100,7 +1099,7 @@ class RawMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[GetMcpServersResponse]:
         """
-        Get all MCP servers with their basic information including id, name, and description.
+        Get all MCP servers with their basic information including id, name, description, and tools.
 
         Parameters
         ----------
@@ -2251,18 +2250,18 @@ class AsyncRawMcpServerClient:
 
     async def get_server_tools(
         self,
-        server_name: str,
+        server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GetServerToolsResponse]:
+    ) -> AsyncHttpResponse[ListToolsResponse]:
         """
-        Get tools information for one or multiple MCP servers.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
-        server_name : str
-            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -2272,7 +2271,7 @@ class AsyncRawMcpServerClient:
 
         Returns
         -------
-        AsyncHttpResponse[GetServerToolsResponse]
+        AsyncHttpResponse[ListToolsResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -2286,9 +2285,9 @@ class AsyncRawMcpServerClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetServerToolsResponse,
+                    ListToolsResponse,
                     parse_obj_as(
-                        type_=GetServerToolsResponse,  # type: ignore
+                        type_=ListToolsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2313,7 +2312,7 @@ class AsyncRawMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[GetMcpServersResponse]:
         """
-        Get all MCP servers with their basic information including id, name, and description.
+        Get all MCP servers with their basic information including id, name, description, and tools.
 
         Parameters
         ----------

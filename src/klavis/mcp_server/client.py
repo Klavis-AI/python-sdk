@@ -26,7 +26,6 @@ from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
 )
-from .types.get_server_tools_response import GetServerToolsResponse
 from .types.servers import Servers
 from .types.set_auth_request_auth_data import SetAuthRequestAuthData
 
@@ -746,18 +745,18 @@ class McpServerClient:
 
     def get_server_tools(
         self,
-        server_name: str,
+        server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetServerToolsResponse:
+    ) -> ListToolsResponse:
         """
-        Get tools information for one or multiple MCP servers.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
-        server_name : str
-            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -767,18 +766,18 @@ class McpServerClient:
 
         Returns
         -------
-        GetServerToolsResponse
+        ListToolsResponse
             Successful Response
 
         Examples
         --------
-        from klavis import Klavis
+        from klavis import Klavis, McpServerName
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_server_tools(
-            server_name="serverName",
+            server_name=McpServerName.AFFINITY,
         )
         """
         _response = self._raw_client.get_server_tools(server_name, format=format, request_options=request_options)
@@ -786,7 +785,7 @@ class McpServerClient:
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
         """
-        Get all MCP servers with their basic information including id, name, and description.
+        Get all MCP servers with their basic information including id, name, description, and tools.
 
         Parameters
         ----------
@@ -1738,18 +1737,18 @@ class AsyncMcpServerClient:
 
     async def get_server_tools(
         self,
-        server_name: str,
+        server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> GetServerToolsResponse:
+    ) -> ListToolsResponse:
         """
-        Get tools information for one or multiple MCP servers.
+        Get tools information for any MCP server.
 
         Parameters
         ----------
-        server_name : str
-            The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
+        server_name : McpServerName
+            The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
@@ -1759,14 +1758,14 @@ class AsyncMcpServerClient:
 
         Returns
         -------
-        GetServerToolsResponse
+        ListToolsResponse
             Successful Response
 
         Examples
         --------
         import asyncio
 
-        from klavis import AsyncKlavis
+        from klavis import AsyncKlavis, McpServerName
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1775,7 +1774,7 @@ class AsyncMcpServerClient:
 
         async def main() -> None:
             await client.mcp_server.get_server_tools(
-                server_name="serverName",
+                server_name=McpServerName.AFFINITY,
             )
 
 
@@ -1788,7 +1787,7 @@ class AsyncMcpServerClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetMcpServersResponse:
         """
-        Get all MCP servers with their basic information including id, name, and description.
+        Get all MCP servers with their basic information including id, name, description, and tools.
 
         Parameters
         ----------

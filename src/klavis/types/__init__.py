@@ -24,10 +24,8 @@ from .http_validation_error import HttpValidationError
 from .list_tools_response import ListToolsResponse
 from .mcp_server import McpServer
 from .mcp_server_name import McpServerName
-from .multi_server_tools_response import MultiServerToolsResponse
 from .o_auth_server_name import OAuthServerName
 from .server_tool import ServerTool
-from .server_tools_result import ServerToolsResult
 from .status_response import StatusResponse
 from .strata_add_servers_response import StrataAddServersResponse
 from .strata_create_response import StrataCreateResponse
@@ -62,10 +60,8 @@ __all__ = [
     "ListToolsResponse",
     "McpServer",
     "McpServerName",
-    "MultiServerToolsResponse",
     "OAuthServerName",
     "ServerTool",
-    "ServerToolsResult",
     "StatusResponse",
     "StrataAddServersResponse",
     "StrataCreateResponse",

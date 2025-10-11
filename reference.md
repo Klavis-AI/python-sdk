@@ -1306,7 +1306,7 @@ client.mcp_server.delete_instance_auth(
 <dl>
 <dd>
 
-Get tools information for one or multiple MCP servers.
+Get tools information for any MCP server.
 </dd>
 </dl>
 </dd>
@@ -1321,13 +1321,13 @@ Get tools information for one or multiple MCP servers.
 <dd>
 
 ```python
-from klavis import Klavis
+from klavis import Klavis, McpServerName
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_server_tools(
-    server_name="serverName",
+    server_name=McpServerName.AFFINITY,
 )
 
 ```
@@ -1344,7 +1344,7 @@ client.mcp_server.get_server_tools(
 <dl>
 <dd>
 
-**server_name:** `str` — The name of the target MCP server. Case-insensitive. Provide a comma-separated list (e.g., 'google calendar,slack') to fetch tools for multiple servers.
+**server_name:** `McpServerName` — The name of the target MCP server. Case-insensitive (e.g., 'google calendar', 'GOOGLE_CALENDAR', 'Google Calendar' are all valid).
     
 </dd>
 </dl>
@@ -1384,7 +1384,7 @@ client.mcp_server.get_server_tools(
 <dl>
 <dd>
 
-Get all MCP servers with their basic information including id, name, and description.
+Get all MCP servers with their basic information including id, name, description, and tools.
 </dd>
 </dl>
 </dd>
@@ -6222,6 +6222,86 @@ client.oauth.authorize_outlook(
 </dl>
 </details>
 
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_teams</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_teams(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## OnedriveOauth
 <details><summary><code>client.onedrive_oauth.<a href="src/klavis/onedrive_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
@@ -6337,86 +6417,6 @@ client.outlook_oauth.refresh_token(
 </details>
 
 ## TeamsOauth
-<details><summary><code>client.teams_oauth.<a href="src/klavis/teams_oauth/client.py">authorize_teams</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.teams_oauth.authorize_teams(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.teams_oauth.<a href="src/klavis/teams_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
