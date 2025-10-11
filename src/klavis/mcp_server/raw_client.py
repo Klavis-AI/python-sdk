@@ -1040,6 +1040,7 @@ class RawMcpServerClient:
         server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
+        legacy: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ListToolsResponse]:
         """
@@ -1052,6 +1053,9 @@ class RawMcpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1066,6 +1070,7 @@ class RawMcpServerClient:
             method="GET",
             params={
                 "format": format,
+                "legacy": legacy,
             },
             request_options=request_options,
         )
@@ -2225,6 +2230,7 @@ class AsyncRawMcpServerClient:
         server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
+        legacy: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ListToolsResponse]:
         """
@@ -2237,6 +2243,9 @@ class AsyncRawMcpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2251,6 +2260,7 @@ class AsyncRawMcpServerClient:
             method="GET",
             params={
                 "format": format,
+                "legacy": legacy,
             },
             request_options=request_options,
         )

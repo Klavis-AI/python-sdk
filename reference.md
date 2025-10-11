@@ -1360,6 +1360,14 @@ client.mcp_server.get_tools(
 <dl>
 <dd>
 
+**legacy:** `typing.Optional[bool]` — Whether to use the legacy server. Default is False.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>

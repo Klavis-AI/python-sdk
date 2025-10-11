@@ -748,6 +748,7 @@ class McpServerClient:
         server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
+        legacy: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListToolsResponse:
         """
@@ -760,6 +761,9 @@ class McpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -780,7 +784,9 @@ class McpServerClient:
             server_name=McpServerName.AFFINITY,
         )
         """
-        _response = self._raw_client.get_tools(server_name, format=format, request_options=request_options)
+        _response = self._raw_client.get_tools(
+            server_name, format=format, legacy=legacy, request_options=request_options
+        )
         return _response.data
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
@@ -1713,6 +1719,7 @@ class AsyncMcpServerClient:
         server_name: McpServerName,
         *,
         format: typing.Optional[ToolFormat] = None,
+        legacy: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListToolsResponse:
         """
@@ -1725,6 +1732,9 @@ class AsyncMcpServerClient:
 
         format : typing.Optional[ToolFormat]
             The format to return tools in. Default is MCP Native format for maximum compatibility.
+
+        legacy : typing.Optional[bool]
+            Whether to use the legacy server. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1753,7 +1763,9 @@ class AsyncMcpServerClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_tools(server_name, format=format, request_options=request_options)
+        _response = await self._raw_client.get_tools(
+            server_name, format=format, legacy=legacy, request_options=request_options
+        )
         return _response.data
 
     async def get_all_mcp_servers(
