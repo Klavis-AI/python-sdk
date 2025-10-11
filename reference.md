@@ -1294,7 +1294,7 @@ client.mcp_server.delete_instance_auth(
 </dl>
 </details>
 
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_server_tools</a>(...)</code></summary>
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_tools</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1326,7 +1326,7 @@ from klavis import Klavis, McpServerName
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.mcp_server.get_server_tools(
+client.mcp_server.get_tools(
     server_name=McpServerName.AFFINITY,
 )
 
@@ -1494,62 +1494,6 @@ client.mcp_server.set_instance_auth(
 <dd>
 
 **auth_data:** `SetAuthRequestAuthData` — Authentication data
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">get_tools</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mcp_server.get_tools(
-    server_name="server_name",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**server_name:** `str` 
     
 </dd>
 </dl>

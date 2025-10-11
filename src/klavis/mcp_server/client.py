@@ -743,7 +743,7 @@ class McpServerClient:
         _response = self._raw_client.delete_instance_auth(instance_id, request_options=request_options)
         return _response.data
 
-    def get_server_tools(
+    def get_tools(
         self,
         server_name: McpServerName,
         *,
@@ -776,11 +776,11 @@ class McpServerClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mcp_server.get_server_tools(
+        client.mcp_server.get_tools(
             server_name=McpServerName.AFFINITY,
         )
         """
-        _response = self._raw_client.get_server_tools(server_name, format=format, request_options=request_options)
+        _response = self._raw_client.get_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     def get_all_mcp_servers(self, *, request_options: typing.Optional[RequestOptions] = None) -> GetMcpServersResponse:
@@ -852,33 +852,6 @@ class McpServerClient:
         _response = self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
-        return _response.data
-
-    def get_tools(self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
-        """
-        Parameters
-        ----------
-        server_name : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.mcp_server.get_tools(
-            server_name="server_name",
-        )
-        """
-        _response = self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
@@ -1735,7 +1708,7 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.delete_instance_auth(instance_id, request_options=request_options)
         return _response.data
 
-    async def get_server_tools(
+    async def get_tools(
         self,
         server_name: McpServerName,
         *,
@@ -1773,14 +1746,14 @@ class AsyncMcpServerClient:
 
 
         async def main() -> None:
-            await client.mcp_server.get_server_tools(
+            await client.mcp_server.get_tools(
                 server_name=McpServerName.AFFINITY,
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_server_tools(server_name, format=format, request_options=request_options)
+        _response = await self._raw_client.get_tools(server_name, format=format, request_options=request_options)
         return _response.data
 
     async def get_all_mcp_servers(
@@ -1870,41 +1843,6 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
-        return _response.data
-
-    async def get_tools(self, server_name: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
-        """
-        Parameters
-        ----------
-        server_name : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.mcp_server.get_tools(
-                server_name="server_name",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.get_tools(server_name, request_options=request_options)
         return _response.data
 
     async def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
