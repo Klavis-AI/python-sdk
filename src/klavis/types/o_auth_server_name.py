@@ -19,6 +19,7 @@ class OAuthServerName(str, enum.Enum):
     DIALPAD = "Dialpad"
     DOCU_SIGN = "DocuSign"
     DROPBOX = "Dropbox"
+    FATHOM = "Fathom"
     FIGMA = "Figma"
     GIT_HUB = "GitHub"
     GIT_LAB = "GitLab"
@@ -65,6 +66,7 @@ class OAuthServerName(str, enum.Enum):
         dialpad: typing.Callable[[], T_Result],
         docu_sign: typing.Callable[[], T_Result],
         dropbox: typing.Callable[[], T_Result],
+        fathom: typing.Callable[[], T_Result],
         figma: typing.Callable[[], T_Result],
         git_hub: typing.Callable[[], T_Result],
         git_lab: typing.Callable[[], T_Result],
@@ -121,6 +123,8 @@ class OAuthServerName(str, enum.Enum):
             return docu_sign()
         if self is OAuthServerName.DROPBOX:
             return dropbox()
+        if self is OAuthServerName.FATHOM:
+            return fathom()
         if self is OAuthServerName.FIGMA:
             return figma()
         if self is OAuthServerName.GIT_HUB:

@@ -12,6 +12,7 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.delete_user_response import DeleteUserResponse
+from ..types.get_all_users_response import GetAllUsersResponse
 from ..types.get_user_auth_response import GetUserAuthResponse
 from ..types.get_user_integrations_response import GetUserIntegrationsResponse
 from ..types.get_user_response import GetUserResponse
@@ -161,6 +162,67 @@ class RawUserClient:
                     DeleteUserResponse,
                     parse_obj_as(
                         type_=DeleteUserResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_all_users(
+        self,
+        *,
+        page_size: typing.Optional[int] = None,
+        page_number: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[GetAllUsersResponse]:
+        """
+        Retrieve all users that have been created under your account, with support for pagination.
+
+        Parameters
+        ----------
+        page_size : typing.Optional[int]
+            Number of results per page (max 1000)
+
+        page_number : typing.Optional[int]
+            Page number to retrieve (starting from 1)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[GetAllUsersResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "user/",
+            method="GET",
+            params={
+                "page_size": page_size,
+                "page_number": page_number,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAllUsersResponse,
+                    parse_obj_as(
+                        type_=GetAllUsersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -505,6 +567,67 @@ class AsyncRawUserClient:
                     DeleteUserResponse,
                     parse_obj_as(
                         type_=DeleteUserResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_all_users(
+        self,
+        *,
+        page_size: typing.Optional[int] = None,
+        page_number: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[GetAllUsersResponse]:
+        """
+        Retrieve all users that have been created under your account, with support for pagination.
+
+        Parameters
+        ----------
+        page_size : typing.Optional[int]
+            Number of results per page (max 1000)
+
+        page_number : typing.Optional[int]
+            Page number to retrieve (starting from 1)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[GetAllUsersResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "user/",
+            method="GET",
+            params={
+                "page_size": page_size,
+                "page_number": page_number,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    GetAllUsersResponse,
+                    parse_obj_as(
+                        type_=GetAllUsersResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

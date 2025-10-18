@@ -26,6 +26,7 @@ class McpServerName(str, enum.Enum):
     DROPBOX = "Dropbox"
     ELEVEN_LABS = "ElevenLabs"
     EXA = "Exa"
+    FATHOM = "Fathom"
     FIGMA = "Figma"
     FIREFLIES = "Fireflies"
     FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
@@ -101,6 +102,7 @@ class McpServerName(str, enum.Enum):
         dropbox: typing.Callable[[], T_Result],
         eleven_labs: typing.Callable[[], T_Result],
         exa: typing.Callable[[], T_Result],
+        fathom: typing.Callable[[], T_Result],
         figma: typing.Callable[[], T_Result],
         fireflies: typing.Callable[[], T_Result],
         firecrawl_deep_research: typing.Callable[[], T_Result],
@@ -193,6 +195,8 @@ class McpServerName(str, enum.Enum):
             return eleven_labs()
         if self is McpServerName.EXA:
             return exa()
+        if self is McpServerName.FATHOM:
+            return fathom()
         if self is McpServerName.FIGMA:
             return figma()
         if self is McpServerName.FIREFLIES:

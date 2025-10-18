@@ -28,6 +28,7 @@ from ..types.strata_create_response import StrataCreateResponse
 from ..types.strata_delete_servers_response import StrataDeleteServersResponse
 from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
+from ..types.strata_raw_actions_response import StrataRawActionsResponse
 from ..types.tool_format import ToolFormat
 from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
@@ -497,6 +498,62 @@ class RawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def list_strata_raw_actions(
+        self, strata_id: str, *, server: McpServerName, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StrataRawActionsResponse]:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration within a Strata MCP instance.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server : McpServerName
+            The name of the server to fetch raw actions for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StrataRawActionsResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/raw-actions",
+            method="GET",
+            params={
+                "server": server,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataRawActionsResponse,
+                    parse_obj_as(
+                        type_=StrataRawActionsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def get_strata_auth(
         self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StrataGetAuthResponse]:
@@ -696,6 +753,7 @@ class RawMcpServerClient:
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
         If OAuth is configured for the server, also returns the base OAuth authorization URL.
+        Note that some servers have hundreds of tools and therefore only expose the Strata tools.
 
         Parameters
         ----------
@@ -1687,6 +1745,62 @@ class AsyncRawMcpServerClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def list_strata_raw_actions(
+        self, strata_id: str, *, server: McpServerName, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StrataRawActionsResponse]:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration within a Strata MCP instance.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server : McpServerName
+            The name of the server to fetch raw actions for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StrataRawActionsResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/strata/{jsonable_encoder(strata_id)}/raw-actions",
+            method="GET",
+            params={
+                "server": server,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StrataRawActionsResponse,
+                    parse_obj_as(
+                        type_=StrataRawActionsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def get_strata_auth(
         self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StrataGetAuthResponse]:
@@ -1886,6 +2000,7 @@ class AsyncRawMcpServerClient:
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
         If OAuth is configured for the server, also returns the base OAuth authorization URL.
+        Note that some servers have hundreds of tools and therefore only expose the Strata tools.
 
         Parameters
         ----------

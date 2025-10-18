@@ -5,6 +5,7 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.delete_user_response import DeleteUserResponse
+from ..types.get_all_users_response import GetAllUsersResponse
 from ..types.get_user_auth_response import GetUserAuthResponse
 from ..types.get_user_integrations_response import GetUserIntegrationsResponse
 from ..types.get_user_response import GetUserResponse
@@ -132,6 +133,46 @@ class UserClient:
         )
         """
         _response = self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
+        return _response.data
+
+    def get_all_users(
+        self,
+        *,
+        page_size: typing.Optional[int] = None,
+        page_number: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetAllUsersResponse:
+        """
+        Retrieve all users that have been created under your account, with support for pagination.
+
+        Parameters
+        ----------
+        page_size : typing.Optional[int]
+            Number of results per page (max 1000)
+
+        page_number : typing.Optional[int]
+            Page number to retrieve (starting from 1)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAllUsersResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.user.get_all_users()
+        """
+        _response = self._raw_client.get_all_users(
+            page_size=page_size, page_number=page_number, request_options=request_options
+        )
         return _response.data
 
     def set_user_auth(
@@ -404,6 +445,54 @@ class AsyncUserClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_user_by_user_id(user_id, request_options=request_options)
+        return _response.data
+
+    async def get_all_users(
+        self,
+        *,
+        page_size: typing.Optional[int] = None,
+        page_number: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> GetAllUsersResponse:
+        """
+        Retrieve all users that have been created under your account, with support for pagination.
+
+        Parameters
+        ----------
+        page_size : typing.Optional[int]
+            Number of results per page (max 1000)
+
+        page_number : typing.Optional[int]
+            Page number to retrieve (starting from 1)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAllUsersResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.user.get_all_users()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_all_users(
+            page_size=page_size, page_number=page_number, request_options=request_options
+        )
         return _response.data
 
     async def set_user_auth(

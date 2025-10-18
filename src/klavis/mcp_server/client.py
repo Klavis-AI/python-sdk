@@ -20,6 +20,7 @@ from ..types.strata_create_response import StrataCreateResponse
 from ..types.strata_delete_servers_response import StrataDeleteServersResponse
 from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
+from ..types.strata_raw_actions_response import StrataRawActionsResponse
 from ..types.tool_format import ToolFormat
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
 from .types.authdata import Authdata
@@ -371,6 +372,43 @@ class McpServerClient:
         _response = self._raw_client.get_strata_server(strata_id, request_options=request_options)
         return _response.data
 
+    def list_strata_raw_actions(
+        self, strata_id: str, *, server: McpServerName, request_options: typing.Optional[RequestOptions] = None
+    ) -> StrataRawActionsResponse:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration within a Strata MCP instance.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server : McpServerName
+            The name of the server to fetch raw actions for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataRawActionsResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis, McpServerName
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.list_strata_raw_actions(
+            strata_id="strataId",
+            server=McpServerName.AFFINITY,
+        )
+        """
+        _response = self._raw_client.list_strata_raw_actions(strata_id, server=server, request_options=request_options)
+        return _response.data
+
     def get_strata_auth(
         self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetAuthResponse:
@@ -514,6 +552,7 @@ class McpServerClient:
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
         If OAuth is configured for the server, also returns the base OAuth authorization URL.
+        Note that some servers have hundreds of tools and therefore only expose the Strata tools.
 
         Parameters
         ----------
@@ -1270,6 +1309,53 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.get_strata_server(strata_id, request_options=request_options)
         return _response.data
 
+    async def list_strata_raw_actions(
+        self, strata_id: str, *, server: McpServerName, request_options: typing.Optional[RequestOptions] = None
+    ) -> StrataRawActionsResponse:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration within a Strata MCP instance.
+
+        Parameters
+        ----------
+        strata_id : str
+            The strata server ID
+
+        server : McpServerName
+            The name of the server to fetch raw actions for
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StrataRawActionsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis, McpServerName
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.list_strata_raw_actions(
+                strata_id="strataId",
+                server=McpServerName.AFFINITY,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_strata_raw_actions(
+            strata_id, server=server, request_options=request_options
+        )
+        return _response.data
+
     async def get_strata_auth(
         self, strata_id: str, server_name: McpServerName, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StrataGetAuthResponse:
@@ -1437,6 +1523,7 @@ class AsyncMcpServerClient:
         validating the request with an API key and user details.
         Returns the existing server URL if it already exists for the user.
         If OAuth is configured for the server, also returns the base OAuth authorization URL.
+        Note that some servers have hundreds of tools and therefore only expose the Strata tools.
 
         Parameters
         ----------
