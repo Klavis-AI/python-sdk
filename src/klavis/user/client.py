@@ -168,7 +168,10 @@ class UserClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.user.get_all_users()
+        client.user.get_all_users(
+            page_size=1,
+            page_number=1,
+        )
         """
         _response = self._raw_client.get_all_users(
             page_size=page_size, page_number=page_number, request_options=request_options
@@ -485,7 +488,10 @@ class AsyncUserClient:
 
 
         async def main() -> None:
-            await client.user.get_all_users()
+            await client.user.get_all_users(
+                page_size=1,
+                page_number=1,
+            )
 
 
         asyncio.run(main())

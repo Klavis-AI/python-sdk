@@ -330,6 +330,7 @@ class McpServerClient:
         )
         client.mcp_server.delete_servers_from_strata(
             strata_id="strataId",
+            external_servers="externalServers",
         )
         """
         _response = self._raw_client.delete_servers_from_strata(
@@ -814,13 +815,15 @@ class McpServerClient:
 
         Examples
         --------
-        from klavis import Klavis, McpServerName
+        from klavis import Klavis, McpServerName, ToolFormat
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.mcp_server.get_tools(
             server_name=McpServerName.AFFINITY,
+            format=ToolFormat.OPENAI,
+            legacy=True,
         )
         """
         _response = self._raw_client.get_tools(
@@ -1256,6 +1259,7 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.delete_servers_from_strata(
                 strata_id="strataId",
+                external_servers="externalServers",
             )
 
 
@@ -1835,7 +1839,7 @@ class AsyncMcpServerClient:
         --------
         import asyncio
 
-        from klavis import AsyncKlavis, McpServerName
+        from klavis import AsyncKlavis, McpServerName, ToolFormat
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -1845,6 +1849,8 @@ class AsyncMcpServerClient:
         async def main() -> None:
             await client.mcp_server.get_tools(
                 server_name=McpServerName.AFFINITY,
+                format=ToolFormat.OPENAI,
+                legacy=True,
             )
 
 

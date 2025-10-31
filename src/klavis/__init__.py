@@ -2,58 +2,142 @@
 
 # isort: skip_file
 
-from .types import (
-    ApiKeyAuth,
-    AzureAdoAuthErrorResponse,
-    AzureAdoAuthSuccessResponse,
-    CallToolResponse,
-    CallToolResult,
-    ConnectionType,
-    CreateSelfHostedServerResponse,
-    CreateServerResponse,
-    DeleteUserResponse,
-    ExternalServerInfo,
-    ExternalServerRequest,
-    GeneralAuth,
-    GetAllUsersResponse,
-    GetAuthDataResponse,
-    GetInstanceResponse,
-    GetMcpServersResponse,
-    GetUserAuthResponse,
-    GetUserIntegrationsResponse,
-    GetUserResponse,
-    HttpValidationError,
-    ListToolsResponse,
-    McpServer,
-    McpServerName,
-    OAuthServerName,
-    ServerTool,
-    StatusResponse,
-    StrataAddServersResponse,
-    StrataCreateResponse,
-    StrataDeleteServersResponse,
-    StrataGetAuthResponse,
-    StrataGetResponse,
-    StrataRawActionsResponse,
-    ToolFormat,
-    UserInfo,
-    ValidationError,
-    ValidationErrorLocItem,
-    WhiteLabelingResponse,
-)
-from .errors import BadRequestError, UnprocessableEntityError
-from . import mcp_server, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
-from .client import AsyncKlavis, Klavis
-from .environment import KlavisEnvironment
-from .mcp_server import (
-    Authdata,
-    DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
-    Servers,
-    SetAuthRequestAuthData,
-)
-from .oauth import Environment
-from .user import SetUserAuthRequestAuthData
-from .version import __version__
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .types import (
+        ApiKeyAuth,
+        AzureAdoAuthErrorResponse,
+        AzureAdoAuthSuccessResponse,
+        CallToolResponse,
+        CallToolResult,
+        ConnectionType,
+        CreateSelfHostedServerResponse,
+        CreateServerResponse,
+        DeleteUserResponse,
+        ExternalServerInfo,
+        ExternalServerRequest,
+        GeneralAuth,
+        GetAllUsersResponse,
+        GetAuthDataResponse,
+        GetInstanceResponse,
+        GetMcpServersResponse,
+        GetUserAuthResponse,
+        GetUserIntegrationsResponse,
+        GetUserResponse,
+        HttpValidationError,
+        ListToolsResponse,
+        McpServer,
+        McpServerName,
+        OAuthServerName,
+        ServerTool,
+        StatusResponse,
+        StrataAddServersResponse,
+        StrataCreateResponse,
+        StrataDeleteServersResponse,
+        StrataGetAuthResponse,
+        StrataGetResponse,
+        StrataRawActionsResponse,
+        ToolFormat,
+        UserInfo,
+        ValidationError,
+        ValidationErrorLocItem,
+        WhiteLabelingResponse,
+    )
+    from .errors import BadRequestError, UnprocessableEntityError
+    from . import mcp_server, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
+    from .client import AsyncKlavis, Klavis
+    from .environment import KlavisEnvironment
+    from .mcp_server import (
+        Authdata,
+        DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
+        Servers,
+        SetAuthRequestAuthData,
+    )
+    from .oauth import Environment
+    from .user import SetUserAuthRequestAuthData
+    from .version import __version__
+_dynamic_imports: typing.Dict[str, str] = {
+    "ApiKeyAuth": ".types",
+    "AsyncKlavis": ".client",
+    "Authdata": ".mcp_server",
+    "AzureAdoAuthErrorResponse": ".types",
+    "AzureAdoAuthSuccessResponse": ".types",
+    "BadRequestError": ".errors",
+    "CallToolResponse": ".types",
+    "CallToolResult": ".types",
+    "ConnectionType": ".types",
+    "CreateSelfHostedServerResponse": ".types",
+    "CreateServerResponse": ".types",
+    "DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem": ".mcp_server",
+    "DeleteUserResponse": ".types",
+    "Environment": ".oauth",
+    "ExternalServerInfo": ".types",
+    "ExternalServerRequest": ".types",
+    "GeneralAuth": ".types",
+    "GetAllUsersResponse": ".types",
+    "GetAuthDataResponse": ".types",
+    "GetInstanceResponse": ".types",
+    "GetMcpServersResponse": ".types",
+    "GetUserAuthResponse": ".types",
+    "GetUserIntegrationsResponse": ".types",
+    "GetUserResponse": ".types",
+    "HttpValidationError": ".types",
+    "Klavis": ".client",
+    "KlavisEnvironment": ".environment",
+    "ListToolsResponse": ".types",
+    "McpServer": ".types",
+    "McpServerName": ".types",
+    "OAuthServerName": ".types",
+    "ServerTool": ".types",
+    "Servers": ".mcp_server",
+    "SetAuthRequestAuthData": ".mcp_server",
+    "SetUserAuthRequestAuthData": ".user",
+    "StatusResponse": ".types",
+    "StrataAddServersResponse": ".types",
+    "StrataCreateResponse": ".types",
+    "StrataDeleteServersResponse": ".types",
+    "StrataGetAuthResponse": ".types",
+    "StrataGetResponse": ".types",
+    "StrataRawActionsResponse": ".types",
+    "ToolFormat": ".types",
+    "UnprocessableEntityError": ".errors",
+    "UserInfo": ".types",
+    "ValidationError": ".types",
+    "ValidationErrorLocItem": ".types",
+    "WhiteLabelingResponse": ".types",
+    "__version__": ".version",
+    "mcp_server": ".mcp_server",
+    "oauth": ".oauth",
+    "onedrive_oauth": ".onedrive_oauth",
+    "outlook_oauth": ".outlook_oauth",
+    "teams_oauth": ".teams_oauth",
+    "user": ".user",
+    "white_labeling": ".white_labeling",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
 
 __all__ = [
     "ApiKeyAuth",

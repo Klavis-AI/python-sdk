@@ -2,43 +2,108 @@
 
 # isort: skip_file
 
-from .api_key_auth import ApiKeyAuth
-from .azure_ado_auth_error_response import AzureAdoAuthErrorResponse
-from .azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
-from .call_tool_response import CallToolResponse
-from .call_tool_result import CallToolResult
-from .connection_type import ConnectionType
-from .create_self_hosted_server_response import CreateSelfHostedServerResponse
-from .create_server_response import CreateServerResponse
-from .delete_user_response import DeleteUserResponse
-from .external_server_info import ExternalServerInfo
-from .external_server_request import ExternalServerRequest
-from .general_auth import GeneralAuth
-from .get_all_users_response import GetAllUsersResponse
-from .get_auth_data_response import GetAuthDataResponse
-from .get_instance_response import GetInstanceResponse
-from .get_mcp_servers_response import GetMcpServersResponse
-from .get_user_auth_response import GetUserAuthResponse
-from .get_user_integrations_response import GetUserIntegrationsResponse
-from .get_user_response import GetUserResponse
-from .http_validation_error import HttpValidationError
-from .list_tools_response import ListToolsResponse
-from .mcp_server import McpServer
-from .mcp_server_name import McpServerName
-from .o_auth_server_name import OAuthServerName
-from .server_tool import ServerTool
-from .status_response import StatusResponse
-from .strata_add_servers_response import StrataAddServersResponse
-from .strata_create_response import StrataCreateResponse
-from .strata_delete_servers_response import StrataDeleteServersResponse
-from .strata_get_auth_response import StrataGetAuthResponse
-from .strata_get_response import StrataGetResponse
-from .strata_raw_actions_response import StrataRawActionsResponse
-from .tool_format import ToolFormat
-from .user_info import UserInfo
-from .validation_error import ValidationError
-from .validation_error_loc_item import ValidationErrorLocItem
-from .white_labeling_response import WhiteLabelingResponse
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .api_key_auth import ApiKeyAuth
+    from .azure_ado_auth_error_response import AzureAdoAuthErrorResponse
+    from .azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
+    from .call_tool_response import CallToolResponse
+    from .call_tool_result import CallToolResult
+    from .connection_type import ConnectionType
+    from .create_self_hosted_server_response import CreateSelfHostedServerResponse
+    from .create_server_response import CreateServerResponse
+    from .delete_user_response import DeleteUserResponse
+    from .external_server_info import ExternalServerInfo
+    from .external_server_request import ExternalServerRequest
+    from .general_auth import GeneralAuth
+    from .get_all_users_response import GetAllUsersResponse
+    from .get_auth_data_response import GetAuthDataResponse
+    from .get_instance_response import GetInstanceResponse
+    from .get_mcp_servers_response import GetMcpServersResponse
+    from .get_user_auth_response import GetUserAuthResponse
+    from .get_user_integrations_response import GetUserIntegrationsResponse
+    from .get_user_response import GetUserResponse
+    from .http_validation_error import HttpValidationError
+    from .list_tools_response import ListToolsResponse
+    from .mcp_server import McpServer
+    from .mcp_server_name import McpServerName
+    from .o_auth_server_name import OAuthServerName
+    from .server_tool import ServerTool
+    from .status_response import StatusResponse
+    from .strata_add_servers_response import StrataAddServersResponse
+    from .strata_create_response import StrataCreateResponse
+    from .strata_delete_servers_response import StrataDeleteServersResponse
+    from .strata_get_auth_response import StrataGetAuthResponse
+    from .strata_get_response import StrataGetResponse
+    from .strata_raw_actions_response import StrataRawActionsResponse
+    from .tool_format import ToolFormat
+    from .user_info import UserInfo
+    from .validation_error import ValidationError
+    from .validation_error_loc_item import ValidationErrorLocItem
+    from .white_labeling_response import WhiteLabelingResponse
+_dynamic_imports: typing.Dict[str, str] = {
+    "ApiKeyAuth": ".api_key_auth",
+    "AzureAdoAuthErrorResponse": ".azure_ado_auth_error_response",
+    "AzureAdoAuthSuccessResponse": ".azure_ado_auth_success_response",
+    "CallToolResponse": ".call_tool_response",
+    "CallToolResult": ".call_tool_result",
+    "ConnectionType": ".connection_type",
+    "CreateSelfHostedServerResponse": ".create_self_hosted_server_response",
+    "CreateServerResponse": ".create_server_response",
+    "DeleteUserResponse": ".delete_user_response",
+    "ExternalServerInfo": ".external_server_info",
+    "ExternalServerRequest": ".external_server_request",
+    "GeneralAuth": ".general_auth",
+    "GetAllUsersResponse": ".get_all_users_response",
+    "GetAuthDataResponse": ".get_auth_data_response",
+    "GetInstanceResponse": ".get_instance_response",
+    "GetMcpServersResponse": ".get_mcp_servers_response",
+    "GetUserAuthResponse": ".get_user_auth_response",
+    "GetUserIntegrationsResponse": ".get_user_integrations_response",
+    "GetUserResponse": ".get_user_response",
+    "HttpValidationError": ".http_validation_error",
+    "ListToolsResponse": ".list_tools_response",
+    "McpServer": ".mcp_server",
+    "McpServerName": ".mcp_server_name",
+    "OAuthServerName": ".o_auth_server_name",
+    "ServerTool": ".server_tool",
+    "StatusResponse": ".status_response",
+    "StrataAddServersResponse": ".strata_add_servers_response",
+    "StrataCreateResponse": ".strata_create_response",
+    "StrataDeleteServersResponse": ".strata_delete_servers_response",
+    "StrataGetAuthResponse": ".strata_get_auth_response",
+    "StrataGetResponse": ".strata_get_response",
+    "StrataRawActionsResponse": ".strata_raw_actions_response",
+    "ToolFormat": ".tool_format",
+    "UserInfo": ".user_info",
+    "ValidationError": ".validation_error",
+    "ValidationErrorLocItem": ".validation_error_loc_item",
+    "WhiteLabelingResponse": ".white_labeling_response",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
 
 __all__ = [
     "ApiKeyAuth",

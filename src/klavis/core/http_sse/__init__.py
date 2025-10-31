@@ -6,8 +6,16 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .set_user_auth_request_auth_data import SetUserAuthRequestAuthData
-_dynamic_imports: typing.Dict[str, str] = {"SetUserAuthRequestAuthData": ".set_user_auth_request_auth_data"}
+    from ._api import EventSource, aconnect_sse, connect_sse
+    from ._exceptions import SSEError
+    from ._models import ServerSentEvent
+_dynamic_imports: typing.Dict[str, str] = {
+    "EventSource": "._api",
+    "SSEError": "._exceptions",
+    "ServerSentEvent": "._models",
+    "aconnect_sse": "._api",
+    "connect_sse": "._api",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +39,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["SetUserAuthRequestAuthData"]
+__all__ = ["EventSource", "SSEError", "ServerSentEvent", "aconnect_sse", "connect_sse"]

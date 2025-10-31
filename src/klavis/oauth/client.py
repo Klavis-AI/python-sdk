@@ -77,6 +77,10 @@ class OauthClient:
         )
         client.oauth.authorize_slack(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            user_scope="user_scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_slack(
@@ -138,6 +142,9 @@ class OauthClient:
         )
         client.oauth.authorize_github(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_github(
@@ -198,6 +205,9 @@ class OauthClient:
         )
         client.oauth.authorize_gitlab(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gitlab(
@@ -253,6 +263,8 @@ class OauthClient:
         )
         client.oauth.authorize_supabase(
             instance_id="instance_id",
+            client_id="client_id",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_supabase(
@@ -309,6 +321,9 @@ class OauthClient:
         )
         client.oauth.authorize_notion(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_notion(
@@ -369,6 +384,9 @@ class OauthClient:
         )
         client.oauth.authorize_jira(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_jira(
@@ -429,6 +447,9 @@ class OauthClient:
         )
         client.oauth.authorize_confluence(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_confluence(
@@ -489,6 +510,9 @@ class OauthClient:
         )
         client.oauth.authorize_wordpress(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_wordpress(
@@ -549,6 +573,9 @@ class OauthClient:
         )
         client.oauth.authorize_gmail(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gmail(
@@ -609,6 +636,9 @@ class OauthClient:
         )
         client.oauth.authorize_gdrive(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gdrive(
@@ -669,6 +699,9 @@ class OauthClient:
         )
         client.oauth.authorize_gcalendar(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gcalendar(
@@ -729,6 +762,9 @@ class OauthClient:
         )
         client.oauth.authorize_gsheets(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gsheets(
@@ -789,6 +825,9 @@ class OauthClient:
         )
         client.oauth.authorize_gdocs(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_gdocs(
@@ -844,6 +883,8 @@ class OauthClient:
         )
         client.oauth.authorize_attio(
             instance_id="instance_id",
+            client_id="client_id",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_attio(
@@ -905,6 +946,10 @@ class OauthClient:
         )
         client.oauth.authorize_salesforce(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
+            instance_url="instance_url",
         )
         """
         _response = self._raw_client.authorize_salesforce(
@@ -966,6 +1011,9 @@ class OauthClient:
         )
         client.oauth.authorize_asana(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_asana(
@@ -1026,6 +1074,9 @@ class OauthClient:
         )
         client.oauth.authorize_linear(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_linear(
@@ -1086,6 +1137,9 @@ class OauthClient:
         )
         client.oauth.authorize_close(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_close(
@@ -1141,6 +1195,8 @@ class OauthClient:
         )
         client.oauth.authorize_clickup(
             instance_id="instance_id",
+            client_id="client_id",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_clickup(
@@ -1197,6 +1253,9 @@ class OauthClient:
         )
         client.oauth.authorize_airtable(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_airtable(
@@ -1257,6 +1316,9 @@ class OauthClient:
         )
         client.oauth.authorize_hubspot(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_hubspot(
@@ -1317,6 +1379,9 @@ class OauthClient:
         )
         client.oauth.authorize_linkedin(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_linkedin(
@@ -1377,6 +1442,9 @@ class OauthClient:
         )
         client.oauth.authorize_canva(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_canva(
@@ -1437,6 +1505,9 @@ class OauthClient:
         )
         client.oauth.authorize_xero(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_xero(
@@ -1497,6 +1568,9 @@ class OauthClient:
         )
         client.oauth.authorize_dropbox(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_dropbox(
@@ -1551,6 +1625,9 @@ class OauthClient:
         )
         client.oauth.authorize_box(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_box(
@@ -1610,12 +1687,17 @@ class OauthClient:
         Examples
         --------
         from klavis import Klavis
+        from klavis.oauth import Environment
 
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
         client.oauth.authorize_quickbooks(
             instance_id="instance_id",
+            client_id="client_id",
+            environment=Environment.SANDBOX,
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_quickbooks(
@@ -1683,6 +1765,9 @@ class OauthClient:
         client.oauth.authorize_zendesk(
             instance_id="instance_id",
             subdomain="subdomain",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_zendesk(
@@ -1744,6 +1829,9 @@ class OauthClient:
         )
         client.oauth.authorize_stripe(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_stripe(
@@ -1799,6 +1887,8 @@ class OauthClient:
         )
         client.oauth.authorize_calcom(
             instance_id="instance_id",
+            client_id="client_id",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_calcom(
@@ -1855,6 +1945,9 @@ class OauthClient:
         )
         client.oauth.authorize_vercel(
             instance_id="instance_id",
+            client_id="client_id",
+            client_slug="client_slug",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_vercel(
@@ -1915,6 +2008,9 @@ class OauthClient:
         )
         client.oauth.authorize_pipedrive(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_pipedrive(
@@ -1975,6 +2071,9 @@ class OauthClient:
         )
         client.oauth.authorize_figma(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_figma(
@@ -2027,6 +2126,9 @@ class OauthClient:
         )
         client.oauth.authorize_klaviyo(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_klaviyo(
@@ -2087,6 +2189,9 @@ class OauthClient:
         )
         client.oauth.authorize_pagerduty(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_pagerduty(
@@ -2147,6 +2252,9 @@ class OauthClient:
         )
         client.oauth.authorize_docusign(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_docusign(
@@ -2217,6 +2325,11 @@ class OauthClient:
         )
         client.oauth.authorize_dialpad(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
+            code_challenge="code_challenge",
+            code_challenge_method="code_challenge_method",
         )
         """
         _response = self._raw_client.authorize_dialpad(
@@ -2285,6 +2398,9 @@ class OauthClient:
         client.oauth.authorize_shopify(
             instance_id="instance_id",
             shop="shop",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_shopify(
@@ -2338,6 +2454,9 @@ class OauthClient:
         )
         client.oauth.authorize_onedrive(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_onedrive(
@@ -2390,6 +2509,9 @@ class OauthClient:
         )
         client.oauth.authorize_outlook(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_outlook(
@@ -2442,6 +2564,9 @@ class OauthClient:
         )
         client.oauth.authorize_teams(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_teams(
@@ -2502,6 +2627,9 @@ class OauthClient:
         )
         client.oauth.authorize_fathom(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_fathom(
@@ -2562,6 +2690,9 @@ class OauthClient:
         )
         client.oauth.authorize_monday(
             instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
         )
         """
         _response = self._raw_client.authorize_monday(
@@ -2648,6 +2779,10 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_slack(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                user_scope="user_scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -2717,6 +2852,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_github(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -2785,6 +2923,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gitlab(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -2848,6 +2989,8 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_supabase(
                 instance_id="instance_id",
+                client_id="client_id",
+                redirect_url="redirect_url",
             )
 
 
@@ -2912,6 +3055,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_notion(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -2980,6 +3126,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_jira(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3048,6 +3197,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_confluence(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3116,6 +3268,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_wordpress(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3184,6 +3339,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gmail(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3252,6 +3410,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gdrive(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3320,6 +3481,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gcalendar(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3388,6 +3552,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gsheets(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3456,6 +3623,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_gdocs(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3519,6 +3689,8 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_attio(
                 instance_id="instance_id",
+                client_id="client_id",
+                redirect_url="redirect_url",
             )
 
 
@@ -3588,6 +3760,10 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_salesforce(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
+                instance_url="instance_url",
             )
 
 
@@ -3657,6 +3833,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_asana(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3725,6 +3904,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_linear(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3793,6 +3975,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_close(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3856,6 +4041,8 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_clickup(
                 instance_id="instance_id",
+                client_id="client_id",
+                redirect_url="redirect_url",
             )
 
 
@@ -3920,6 +4107,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_airtable(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -3988,6 +4178,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_hubspot(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4056,6 +4249,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_linkedin(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4124,6 +4320,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_canva(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4192,6 +4391,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_xero(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4260,6 +4462,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_dropbox(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4322,6 +4527,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_box(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4386,6 +4594,7 @@ class AsyncOauthClient:
         import asyncio
 
         from klavis import AsyncKlavis
+        from klavis.oauth import Environment
 
         client = AsyncKlavis(
             api_key="YOUR_API_KEY",
@@ -4395,6 +4604,10 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_quickbooks(
                 instance_id="instance_id",
+                client_id="client_id",
+                environment=Environment.SANDBOX,
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4470,6 +4683,9 @@ class AsyncOauthClient:
             await client.oauth.authorize_zendesk(
                 instance_id="instance_id",
                 subdomain="subdomain",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4539,6 +4755,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_stripe(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4602,6 +4821,8 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_calcom(
                 instance_id="instance_id",
+                client_id="client_id",
+                redirect_url="redirect_url",
             )
 
 
@@ -4666,6 +4887,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_vercel(
                 instance_id="instance_id",
+                client_id="client_id",
+                client_slug="client_slug",
+                redirect_url="redirect_url",
             )
 
 
@@ -4734,6 +4958,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_pipedrive(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4802,6 +5029,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_figma(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4862,6 +5092,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_klaviyo(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4930,6 +5163,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_pagerduty(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -4998,6 +5234,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_docusign(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5076,6 +5315,11 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_dialpad(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
+                code_challenge="code_challenge",
+                code_challenge_method="code_challenge_method",
             )
 
 
@@ -5152,6 +5396,9 @@ class AsyncOauthClient:
             await client.oauth.authorize_shopify(
                 instance_id="instance_id",
                 shop="shop",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5213,6 +5460,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_onedrive(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5273,6 +5523,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_outlook(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5333,6 +5586,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_teams(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5401,6 +5657,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_fathom(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 
@@ -5469,6 +5728,9 @@ class AsyncOauthClient:
         async def main() -> None:
             await client.oauth.authorize_monday(
                 instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
             )
 
 

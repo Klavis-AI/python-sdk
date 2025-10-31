@@ -435,6 +435,7 @@ client = Klavis(
 )
 client.mcp_server.delete_servers_from_strata(
     strata_id="strataId",
+    external_servers="externalServers",
 )
 
 ```
@@ -1401,13 +1402,15 @@ Get tools information for any MCP server.
 <dd>
 
 ```python
-from klavis import Klavis, McpServerName
+from klavis import Klavis, McpServerName, ToolFormat
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.mcp_server.get_tools(
     server_name=McpServerName.AFFINITY,
+    format=ToolFormat.OPENAI,
+    legacy=True,
 )
 
 ```
@@ -2068,7 +2071,10 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.user.get_all_users()
+client.user.get_all_users(
+    page_size=1,
+    page_number=1,
+)
 
 ```
 </dd>
@@ -2408,6 +2414,10 @@ client = Klavis(
 )
 client.oauth.authorize_slack(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    user_scope="user_scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -2516,6 +2526,9 @@ client = Klavis(
 )
 client.oauth.authorize_github(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -2616,6 +2629,9 @@ client = Klavis(
 )
 client.oauth.authorize_gitlab(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -2715,6 +2731,8 @@ client = Klavis(
 )
 client.oauth.authorize_supabase(
     instance_id="instance_id",
+    client_id="client_id",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -2807,6 +2825,9 @@ client = Klavis(
 )
 client.oauth.authorize_notion(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -2907,6 +2928,9 @@ client = Klavis(
 )
 client.oauth.authorize_jira(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3007,6 +3031,9 @@ client = Klavis(
 )
 client.oauth.authorize_confluence(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3107,6 +3134,9 @@ client = Klavis(
 )
 client.oauth.authorize_wordpress(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3207,6 +3237,9 @@ client = Klavis(
 )
 client.oauth.authorize_gmail(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3307,6 +3340,9 @@ client = Klavis(
 )
 client.oauth.authorize_gdrive(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3407,6 +3443,9 @@ client = Klavis(
 )
 client.oauth.authorize_gcalendar(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3507,6 +3546,9 @@ client = Klavis(
 )
 client.oauth.authorize_gsheets(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3607,6 +3649,9 @@ client = Klavis(
 )
 client.oauth.authorize_gdocs(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3706,6 +3751,8 @@ client = Klavis(
 )
 client.oauth.authorize_attio(
     instance_id="instance_id",
+    client_id="client_id",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -3799,6 +3846,10 @@ client = Klavis(
 )
 client.oauth.authorize_salesforce(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+    instance_url="instance_url",
 )
 
 ```
@@ -3907,6 +3958,9 @@ client = Klavis(
 )
 client.oauth.authorize_asana(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4007,6 +4061,9 @@ client = Klavis(
 )
 client.oauth.authorize_linear(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4107,6 +4164,9 @@ client = Klavis(
 )
 client.oauth.authorize_close(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4206,6 +4266,8 @@ client = Klavis(
 )
 client.oauth.authorize_clickup(
     instance_id="instance_id",
+    client_id="client_id",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4298,6 +4360,9 @@ client = Klavis(
 )
 client.oauth.authorize_airtable(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4398,6 +4463,9 @@ client = Klavis(
 )
 client.oauth.authorize_hubspot(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4498,6 +4566,9 @@ client = Klavis(
 )
 client.oauth.authorize_linkedin(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4598,6 +4669,9 @@ client = Klavis(
 )
 client.oauth.authorize_canva(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4698,6 +4772,9 @@ client = Klavis(
 )
 client.oauth.authorize_xero(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4798,6 +4875,9 @@ client = Klavis(
 )
 client.oauth.authorize_dropbox(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4892,6 +4972,9 @@ client = Klavis(
 )
 client.oauth.authorize_box(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -4987,12 +5070,17 @@ Parameters:
 
 ```python
 from klavis import Klavis
+from klavis.oauth import Environment
 
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.oauth.authorize_quickbooks(
     instance_id="instance_id",
+    client_id="client_id",
+    environment=Environment.SANDBOX,
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5103,6 +5191,9 @@ client = Klavis(
 client.oauth.authorize_zendesk(
     instance_id="instance_id",
     subdomain="subdomain",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5211,6 +5302,9 @@ client = Klavis(
 )
 client.oauth.authorize_stripe(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5310,6 +5404,8 @@ client = Klavis(
 )
 client.oauth.authorize_calcom(
     instance_id="instance_id",
+    client_id="client_id",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5402,6 +5498,9 @@ client = Klavis(
 )
 client.oauth.authorize_vercel(
     instance_id="instance_id",
+    client_id="client_id",
+    client_slug="client_slug",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5502,6 +5601,9 @@ client = Klavis(
 )
 client.oauth.authorize_pipedrive(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5602,6 +5704,9 @@ client = Klavis(
 )
 client.oauth.authorize_figma(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5682,6 +5787,9 @@ client = Klavis(
 )
 client.oauth.authorize_klaviyo(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5782,6 +5890,9 @@ client = Klavis(
 )
 client.oauth.authorize_pagerduty(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5882,6 +5993,9 @@ client = Klavis(
 )
 client.oauth.authorize_docusign(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -5984,6 +6098,11 @@ client = Klavis(
 )
 client.oauth.authorize_dialpad(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+    code_challenge="code_challenge",
+    code_challenge_method="code_challenge_method",
 )
 
 ```
@@ -6102,6 +6221,9 @@ client = Klavis(
 client.oauth.authorize_shopify(
     instance_id="instance_id",
     shop="shop",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -6190,6 +6312,9 @@ client = Klavis(
 )
 client.oauth.authorize_onedrive(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -6270,6 +6395,9 @@ client = Klavis(
 )
 client.oauth.authorize_outlook(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -6350,6 +6478,9 @@ client = Klavis(
 )
 client.oauth.authorize_teams(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -6450,6 +6581,9 @@ client = Klavis(
 )
 client.oauth.authorize_fathom(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -6550,6 +6684,9 @@ client = Klavis(
 )
 client.oauth.authorize_monday(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
