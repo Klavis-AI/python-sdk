@@ -39,11 +39,11 @@ class OAuthServerName(str, enum.Enum):
     NOTION = "Notion"
     ONEDRIVE = "Onedrive"
     OUTLOOK = "Outlook"
+    MS_CALENDAR = "MsCalendar"
     PAGER_DUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     QUICK_BOOKS = "QuickBooks"
     SALESFORCE = "Salesforce"
-    SHOPIFY = "Shopify"
     SLACK = "Slack"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
@@ -86,11 +86,11 @@ class OAuthServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
         outlook: typing.Callable[[], T_Result],
+        ms_calendar: typing.Callable[[], T_Result],
         pager_duty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         quick_books: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
-        shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
@@ -163,6 +163,8 @@ class OAuthServerName(str, enum.Enum):
             return onedrive()
         if self is OAuthServerName.OUTLOOK:
             return outlook()
+        if self is OAuthServerName.MS_CALENDAR:
+            return ms_calendar()
         if self is OAuthServerName.PAGER_DUTY:
             return pager_duty()
         if self is OAuthServerName.PIPEDRIVE:
@@ -171,8 +173,6 @@ class OAuthServerName(str, enum.Enum):
             return quick_books()
         if self is OAuthServerName.SALESFORCE:
             return salesforce()
-        if self is OAuthServerName.SHOPIFY:
-            return shopify()
         if self is OAuthServerName.SLACK:
             return slack()
         if self is OAuthServerName.STRIPE:

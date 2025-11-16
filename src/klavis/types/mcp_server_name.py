@@ -14,6 +14,7 @@ class McpServerName(str, enum.Enum):
     BOX = "Box"
     BRAVE_SEARCH = "Brave Search"
     CAL_COM = "Cal.com"
+    CANVA = "Canva"
     CLICKUP = "ClickUp"
     CLOSE = "Close"
     CLOUDFLARE = "Cloudflare"
@@ -60,6 +61,7 @@ class McpServerName(str, enum.Enum):
     ONEDRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
     OUTLOOK = "Outlook"
+    OUTLOOK_CALENDAR = "Outlook Calendar"
     PAGERDUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     PLAI = "Plai"
@@ -90,6 +92,7 @@ class McpServerName(str, enum.Enum):
         box: typing.Callable[[], T_Result],
         brave_search: typing.Callable[[], T_Result],
         cal_com: typing.Callable[[], T_Result],
+        canva: typing.Callable[[], T_Result],
         clickup: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         cloudflare: typing.Callable[[], T_Result],
@@ -136,6 +139,7 @@ class McpServerName(str, enum.Enum):
         onedrive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
         outlook: typing.Callable[[], T_Result],
+        outlook_calendar: typing.Callable[[], T_Result],
         pagerduty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
@@ -171,6 +175,8 @@ class McpServerName(str, enum.Enum):
             return brave_search()
         if self is McpServerName.CAL_COM:
             return cal_com()
+        if self is McpServerName.CANVA:
+            return canva()
         if self is McpServerName.CLICKUP:
             return clickup()
         if self is McpServerName.CLOSE:
@@ -263,6 +269,8 @@ class McpServerName(str, enum.Enum):
             return openrouter()
         if self is McpServerName.OUTLOOK:
             return outlook()
+        if self is McpServerName.OUTLOOK_CALENDAR:
+            return outlook_calendar()
         if self is McpServerName.PAGERDUTY:
             return pagerduty()
         if self is McpServerName.PIPEDRIVE:

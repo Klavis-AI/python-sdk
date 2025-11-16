@@ -10,6 +10,7 @@ from .environment import KlavisEnvironment
 
 if typing.TYPE_CHECKING:
     from .mcp_server.client import AsyncMcpServerClient, McpServerClient
+    from .mscalendar_oauth.client import AsyncMscalendarOauthClient, MscalendarOauthClient
     from .oauth.client import AsyncOauthClient, OauthClient
     from .onedrive_oauth.client import AsyncOnedriveOauthClient, OnedriveOauthClient
     from .outlook_oauth.client import AsyncOutlookOauthClient, OutlookOauthClient
@@ -89,6 +90,7 @@ class Klavis:
         self._oauth: typing.Optional[OauthClient] = None
         self._onedrive_oauth: typing.Optional[OnedriveOauthClient] = None
         self._outlook_oauth: typing.Optional[OutlookOauthClient] = None
+        self._mscalendar_oauth: typing.Optional[MscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[TeamsOauthClient] = None
 
     @property
@@ -138,6 +140,14 @@ class Klavis:
 
             self._outlook_oauth = OutlookOauthClient(client_wrapper=self._client_wrapper)
         return self._outlook_oauth
+
+    @property
+    def mscalendar_oauth(self):
+        if self._mscalendar_oauth is None:
+            from .mscalendar_oauth.client import MscalendarOauthClient  # noqa: E402
+
+            self._mscalendar_oauth = MscalendarOauthClient(client_wrapper=self._client_wrapper)
+        return self._mscalendar_oauth
 
     @property
     def teams_oauth(self):
@@ -219,6 +229,7 @@ class AsyncKlavis:
         self._oauth: typing.Optional[AsyncOauthClient] = None
         self._onedrive_oauth: typing.Optional[AsyncOnedriveOauthClient] = None
         self._outlook_oauth: typing.Optional[AsyncOutlookOauthClient] = None
+        self._mscalendar_oauth: typing.Optional[AsyncMscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[AsyncTeamsOauthClient] = None
 
     @property
@@ -268,6 +279,14 @@ class AsyncKlavis:
 
             self._outlook_oauth = AsyncOutlookOauthClient(client_wrapper=self._client_wrapper)
         return self._outlook_oauth
+
+    @property
+    def mscalendar_oauth(self):
+        if self._mscalendar_oauth is None:
+            from .mscalendar_oauth.client import AsyncMscalendarOauthClient  # noqa: E402
+
+            self._mscalendar_oauth = AsyncMscalendarOauthClient(client_wrapper=self._client_wrapper)
+        return self._mscalendar_oauth
 
     @property
     def teams_oauth(self):

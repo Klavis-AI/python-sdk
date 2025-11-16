@@ -2343,76 +2343,6 @@ class OauthClient:
         )
         return _response.data
 
-    def authorize_shopify(
-        self,
-        *,
-        instance_id: str,
-        shop: str,
-        client_id: typing.Optional[str] = None,
-        scope: typing.Optional[str] = None,
-        redirect_url: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
-        """
-        Start Shopify OAuth flow
-
-        Parameters:
-        - instance_id: Identifier for the instance requesting authorization
-        - shop: Shopify shop domain (e.g., mystore.myshopify.com)
-        - client_id: Optional client ID for white labeling
-        - scope: Optional scopes to request (comma-separated)
-        - redirect_url: Optional URL to redirect to after authorization completes
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance requesting authorization
-
-        shop : str
-            Shopify shop domain (e.g., mystore.myshopify.com)
-
-        client_id : typing.Optional[str]
-            Client ID for white labeling, if not provided will use default credentials
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string)
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.oauth.authorize_shopify(
-            instance_id="instance_id",
-            shop="shop",
-            client_id="client_id",
-            scope="scope",
-            redirect_url="redirect_url",
-        )
-        """
-        _response = self._raw_client.authorize_shopify(
-            instance_id=instance_id,
-            shop=shop,
-            client_id=client_id,
-            scope=scope,
-            redirect_url=redirect_url,
-            request_options=request_options,
-        )
-        return _response.data
-
     def authorize_onedrive(
         self,
         *,
@@ -2702,6 +2632,29 @@ class OauthClient:
             redirect_url=redirect_url,
             request_options=request_options,
         )
+        return _response.data
+
+    def authorize_shopify(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.oauth.authorize_shopify()
+        """
+        _response = self._raw_client.authorize_shopify(request_options=request_options)
         return _response.data
 
 
@@ -5336,84 +5289,6 @@ class AsyncOauthClient:
         )
         return _response.data
 
-    async def authorize_shopify(
-        self,
-        *,
-        instance_id: str,
-        shop: str,
-        client_id: typing.Optional[str] = None,
-        scope: typing.Optional[str] = None,
-        redirect_url: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Optional[typing.Any]:
-        """
-        Start Shopify OAuth flow
-
-        Parameters:
-        - instance_id: Identifier for the instance requesting authorization
-        - shop: Shopify shop domain (e.g., mystore.myshopify.com)
-        - client_id: Optional client ID for white labeling
-        - scope: Optional scopes to request (comma-separated)
-        - redirect_url: Optional URL to redirect to after authorization completes
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the client instance requesting authorization
-
-        shop : str
-            Shopify shop domain (e.g., mystore.myshopify.com)
-
-        client_id : typing.Optional[str]
-            Client ID for white labeling, if not provided will use default credentials
-
-        scope : typing.Optional[str]
-            Optional OAuth scopes to request (comma-separated string)
-
-        redirect_url : typing.Optional[str]
-            Optional URL to redirect to after authorization completes
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.oauth.authorize_shopify(
-                instance_id="instance_id",
-                shop="shop",
-                client_id="client_id",
-                scope="scope",
-                redirect_url="redirect_url",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.authorize_shopify(
-            instance_id=instance_id,
-            shop=shop,
-            client_id=client_id,
-            scope=scope,
-            redirect_url=redirect_url,
-            request_options=request_options,
-        )
-        return _response.data
-
     async def authorize_onedrive(
         self,
         *,
@@ -5743,4 +5618,35 @@ class AsyncOauthClient:
             redirect_url=redirect_url,
             request_options=request_options,
         )
+        return _response.data
+
+    async def authorize_shopify(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+        """
+        Parameters
+        ----------
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.oauth.authorize_shopify()
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.authorize_shopify(request_options=request_options)
         return _response.data

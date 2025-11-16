@@ -3,7 +3,7 @@ name = "klavis"
 
 [tool.poetry]
 name = "klavis"
-version = "2.11.2"
+version = "2.12.2"
 description = ""
 readme = "README.md"
 authors = []
@@ -15,7 +15,7 @@ keywords = [
     "llm",
     "tools"
 ]
-license = "MIT"
+license = "Apache-2.0"
 classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python",
@@ -32,7 +32,7 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
-    "License :: OSI Approved :: MIT License"
+    "License :: OSI Approved :: Apache Software License"
 ]
 packages = [
     { include = "klavis", from = "src"}

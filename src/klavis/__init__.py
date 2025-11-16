@@ -46,7 +46,7 @@ if typing.TYPE_CHECKING:
         WhiteLabelingResponse,
     )
     from .errors import BadRequestError, UnprocessableEntityError
-    from . import mcp_server, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
+    from . import mcp_server, mscalendar_oauth, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
     from .client import AsyncKlavis, Klavis
     from .environment import KlavisEnvironment
     from .mcp_server import (
@@ -109,6 +109,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WhiteLabelingResponse": ".types",
     "__version__": ".version",
     "mcp_server": ".mcp_server",
+    "mscalendar_oauth": ".mscalendar_oauth",
     "oauth": ".oauth",
     "onedrive_oauth": ".onedrive_oauth",
     "outlook_oauth": ".outlook_oauth",
@@ -190,6 +191,7 @@ __all__ = [
     "WhiteLabelingResponse",
     "__version__",
     "mcp_server",
+    "mscalendar_oauth",
     "oauth",
     "onedrive_oauth",
     "outlook_oauth",

@@ -6179,119 +6179,6 @@ client.oauth.authorize_dialpad(
 </dl>
 </details>
 
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_shopify</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Shopify OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- shop: Shopify shop domain (e.g., mystore.myshopify.com)
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (comma-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_shopify(
-    instance_id="instance_id",
-    shop="shop",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**shop:** `str` — Shopify shop domain (e.g., mystore.myshopify.com)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_onedrive</a>(...)</code></summary>
 <dl>
 <dd>
@@ -6747,6 +6634,52 @@ client.oauth.authorize_monday(
 </dl>
 </details>
 
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_shopify</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_shopify()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## OnedriveOauth
 <details><summary><code>client.onedrive_oauth.<a href="src/klavis/onedrive_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
@@ -6824,6 +6757,146 @@ client = Klavis(
     api_key="YOUR_API_KEY",
 )
 client.outlook_oauth.refresh_token(
+    instance_id="instance_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Instance ID for which to refresh the token
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## MscalendarOauth
+<details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">authorize_ms_calendar</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mscalendar_oauth.authorize_ms_calendar(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">refresh_token</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mscalendar_oauth.refresh_token(
     instance_id="instance_id",
 )
 
