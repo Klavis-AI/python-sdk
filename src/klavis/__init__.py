@@ -44,9 +44,21 @@ if typing.TYPE_CHECKING:
         ValidationError,
         ValidationErrorLocItem,
         WhiteLabelingResponse,
+        ZoomOAuthErrorResponse,
+        ZoomOAuthSuccessResponse,
     )
     from .errors import BadRequestError, UnprocessableEntityError
-    from . import mcp_server, mscalendar_oauth, oauth, onedrive_oauth, outlook_oauth, teams_oauth, user, white_labeling
+    from . import (
+        mcp_server,
+        mscalendar_oauth,
+        oauth,
+        onedrive_oauth,
+        outlook_oauth,
+        teams_oauth,
+        user,
+        white_labeling,
+        zoom_oauth,
+    )
     from .client import AsyncKlavis, Klavis
     from .environment import KlavisEnvironment
     from .mcp_server import (
@@ -107,6 +119,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ValidationError": ".types",
     "ValidationErrorLocItem": ".types",
     "WhiteLabelingResponse": ".types",
+    "ZoomOAuthErrorResponse": ".types",
+    "ZoomOAuthSuccessResponse": ".types",
     "__version__": ".version",
     "mcp_server": ".mcp_server",
     "mscalendar_oauth": ".mscalendar_oauth",
@@ -116,6 +130,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "teams_oauth": ".teams_oauth",
     "user": ".user",
     "white_labeling": ".white_labeling",
+    "zoom_oauth": ".zoom_oauth",
 }
 
 
@@ -189,6 +204,8 @@ __all__ = [
     "ValidationError",
     "ValidationErrorLocItem",
     "WhiteLabelingResponse",
+    "ZoomOAuthErrorResponse",
+    "ZoomOAuthSuccessResponse",
     "__version__",
     "mcp_server",
     "mscalendar_oauth",
@@ -198,4 +215,5 @@ __all__ = [
     "teams_oauth",
     "user",
     "white_labeling",
+    "zoom_oauth",
 ]

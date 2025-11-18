@@ -43,6 +43,8 @@ if typing.TYPE_CHECKING:
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
     from .white_labeling_response import WhiteLabelingResponse
+    from .zoom_o_auth_error_response import ZoomOAuthErrorResponse
+    from .zoom_o_auth_success_response import ZoomOAuthSuccessResponse
 _dynamic_imports: typing.Dict[str, str] = {
     "ApiKeyAuth": ".api_key_auth",
     "AzureAdoAuthErrorResponse": ".azure_ado_auth_error_response",
@@ -81,6 +83,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
     "WhiteLabelingResponse": ".white_labeling_response",
+    "ZoomOAuthErrorResponse": ".zoom_o_auth_error_response",
+    "ZoomOAuthSuccessResponse": ".zoom_o_auth_success_response",
 }
 
 
@@ -143,4 +147,6 @@ __all__ = [
     "ValidationError",
     "ValidationErrorLocItem",
     "WhiteLabelingResponse",
+    "ZoomOAuthErrorResponse",
+    "ZoomOAuthSuccessResponse",
 ]

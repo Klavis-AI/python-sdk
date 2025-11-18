@@ -17,6 +17,7 @@ if typing.TYPE_CHECKING:
     from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
     from .user.client import AsyncUserClient, UserClient
     from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
+    from .zoom_oauth.client import AsyncZoomOauthClient, ZoomOauthClient
 
 
 class Klavis:
@@ -92,6 +93,7 @@ class Klavis:
         self._outlook_oauth: typing.Optional[OutlookOauthClient] = None
         self._mscalendar_oauth: typing.Optional[MscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[TeamsOauthClient] = None
+        self._zoom_oauth: typing.Optional[ZoomOauthClient] = None
 
     @property
     def mcp_server(self):
@@ -156,6 +158,14 @@ class Klavis:
 
             self._teams_oauth = TeamsOauthClient(client_wrapper=self._client_wrapper)
         return self._teams_oauth
+
+    @property
+    def zoom_oauth(self):
+        if self._zoom_oauth is None:
+            from .zoom_oauth.client import ZoomOauthClient  # noqa: E402
+
+            self._zoom_oauth = ZoomOauthClient(client_wrapper=self._client_wrapper)
+        return self._zoom_oauth
 
 
 class AsyncKlavis:
@@ -231,6 +241,7 @@ class AsyncKlavis:
         self._outlook_oauth: typing.Optional[AsyncOutlookOauthClient] = None
         self._mscalendar_oauth: typing.Optional[AsyncMscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[AsyncTeamsOauthClient] = None
+        self._zoom_oauth: typing.Optional[AsyncZoomOauthClient] = None
 
     @property
     def mcp_server(self):
@@ -295,6 +306,14 @@ class AsyncKlavis:
 
             self._teams_oauth = AsyncTeamsOauthClient(client_wrapper=self._client_wrapper)
         return self._teams_oauth
+
+    @property
+    def zoom_oauth(self):
+        if self._zoom_oauth is None:
+            from .zoom_oauth.client import AsyncZoomOauthClient  # noqa: E402
+
+            self._zoom_oauth = AsyncZoomOauthClient(client_wrapper=self._client_wrapper)
+        return self._zoom_oauth
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

@@ -10,7 +10,6 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.bad_request_error import BadRequestError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.azure_ado_auth_error_response import AzureAdoAuthErrorResponse
 from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from ..types.http_validation_error import HttpValidationError
 
@@ -58,9 +57,9 @@ class RawTeamsOauthClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        AzureAdoAuthErrorResponse,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=AzureAdoAuthErrorResponse,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -125,9 +124,9 @@ class AsyncRawTeamsOauthClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        AzureAdoAuthErrorResponse,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=AzureAdoAuthErrorResponse,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

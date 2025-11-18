@@ -60,13 +60,14 @@ class McpServerName(str, enum.Enum):
     NOTION = "Notion"
     ONEDRIVE = "OneDrive"
     OPENROUTER = "Openrouter"
-    OUTLOOK = "Outlook"
+    OUTLOOK_MAIL = "Outlook Mail"
     OUTLOOK_CALENDAR = "Outlook Calendar"
     PAGERDUTY = "PagerDuty"
     PIPEDRIVE = "Pipedrive"
     PLAI = "Plai"
     POSTGRES = "Postgres"
     POSTHOG = "PostHog"
+    POSTMAN = "Postman"
     QUICKBOOKS = "QuickBooks"
     RESEND = "Resend"
     SALESFORCE = "Salesforce"
@@ -138,13 +139,14 @@ class McpServerName(str, enum.Enum):
         notion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
         openrouter: typing.Callable[[], T_Result],
-        outlook: typing.Callable[[], T_Result],
+        outlook_mail: typing.Callable[[], T_Result],
         outlook_calendar: typing.Callable[[], T_Result],
         pagerduty: typing.Callable[[], T_Result],
         pipedrive: typing.Callable[[], T_Result],
         plai: typing.Callable[[], T_Result],
         postgres: typing.Callable[[], T_Result],
         posthog: typing.Callable[[], T_Result],
+        postman: typing.Callable[[], T_Result],
         quickbooks: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
@@ -267,8 +269,8 @@ class McpServerName(str, enum.Enum):
             return onedrive()
         if self is McpServerName.OPENROUTER:
             return openrouter()
-        if self is McpServerName.OUTLOOK:
-            return outlook()
+        if self is McpServerName.OUTLOOK_MAIL:
+            return outlook_mail()
         if self is McpServerName.OUTLOOK_CALENDAR:
             return outlook_calendar()
         if self is McpServerName.PAGERDUTY:
@@ -281,6 +283,8 @@ class McpServerName(str, enum.Enum):
             return postgres()
         if self is McpServerName.POSTHOG:
             return posthog()
+        if self is McpServerName.POSTMAN:
+            return postman()
         if self is McpServerName.QUICKBOOKS:
             return quickbooks()
         if self is McpServerName.RESEND:

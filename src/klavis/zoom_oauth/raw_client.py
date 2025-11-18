@@ -10,15 +10,15 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.bad_request_error import BadRequestError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.zoom_o_auth_success_response import ZoomOAuthSuccessResponse
 
 
-class RawMscalendarOauthClient:
+class RawZoomOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def authorize_ms_calendar(
+    def authorize_zoom(
         self,
         *,
         instance_id: str,
@@ -51,7 +51,7 @@ class RawMscalendarOauthClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/authorize",
+            "oauth/zoom/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -91,7 +91,7 @@ class RawMscalendarOauthClient:
 
     def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[AzureAdoAuthSuccessResponse]:
+    ) -> HttpResponse[ZoomOAuthSuccessResponse]:
         """
         Parameters
         ----------
@@ -103,11 +103,11 @@ class RawMscalendarOauthClient:
 
         Returns
         -------
-        HttpResponse[AzureAdoAuthSuccessResponse]
+        HttpResponse[ZoomOAuthSuccessResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/refresh_token",
+            "oauth/zoom/refresh_token",
             method="POST",
             params={
                 "instance_id": instance_id,
@@ -117,9 +117,9 @@ class RawMscalendarOauthClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    AzureAdoAuthSuccessResponse,
+                    ZoomOAuthSuccessResponse,
                     parse_obj_as(
-                        type_=AzureAdoAuthSuccessResponse,  # type: ignore
+                        type_=ZoomOAuthSuccessResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -152,11 +152,11 @@ class RawMscalendarOauthClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawMscalendarOauthClient:
+class AsyncRawZoomOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def authorize_ms_calendar(
+    async def authorize_zoom(
         self,
         *,
         instance_id: str,
@@ -189,7 +189,7 @@ class AsyncRawMscalendarOauthClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/authorize",
+            "oauth/zoom/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -229,7 +229,7 @@ class AsyncRawMscalendarOauthClient:
 
     async def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[AzureAdoAuthSuccessResponse]:
+    ) -> AsyncHttpResponse[ZoomOAuthSuccessResponse]:
         """
         Parameters
         ----------
@@ -241,11 +241,11 @@ class AsyncRawMscalendarOauthClient:
 
         Returns
         -------
-        AsyncHttpResponse[AzureAdoAuthSuccessResponse]
+        AsyncHttpResponse[ZoomOAuthSuccessResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/refresh_token",
+            "oauth/zoom/refresh_token",
             method="POST",
             params={
                 "instance_id": instance_id,
@@ -255,9 +255,9 @@ class AsyncRawMscalendarOauthClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    AzureAdoAuthSuccessResponse,
+                    ZoomOAuthSuccessResponse,
                     parse_obj_as(
-                        type_=AzureAdoAuthSuccessResponse,  # type: ignore
+                        type_=ZoomOAuthSuccessResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
