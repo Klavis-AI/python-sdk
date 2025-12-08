@@ -46,6 +46,7 @@ class OAuthServerName(str, enum.Enum):
     QUICK_BOOKS = "QuickBooks"
     SALESFORCE = "Salesforce"
     SLACK = "Slack"
+    SNOWFLAKE = "Snowflake"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
     VERCEL = "Vercel"
@@ -94,6 +95,7 @@ class OAuthServerName(str, enum.Enum):
         quick_books: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
+        snowflake: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         vercel: typing.Callable[[], T_Result],
@@ -179,6 +181,8 @@ class OAuthServerName(str, enum.Enum):
             return salesforce()
         if self is OAuthServerName.SLACK:
             return slack()
+        if self is OAuthServerName.SNOWFLAKE:
+            return snowflake()
         if self is OAuthServerName.STRIPE:
             return stripe()
         if self is OAuthServerName.SUPABASE:
