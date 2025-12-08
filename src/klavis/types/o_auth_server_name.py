@@ -28,6 +28,7 @@ class OAuthServerName(str, enum.Enum):
     GOOGLE_DOCS = "Google Docs"
     GOOGLE_DRIVE = "Google Drive"
     GOOGLE_SHEETS = "Google Sheets"
+    GOOGLE_FORMS = "Google Forms"
     HUB_SPOT = "HubSpot"
     JIRA = "Jira"
     KLAVIYO = "Klaviyo"
@@ -75,6 +76,7 @@ class OAuthServerName(str, enum.Enum):
         google_docs: typing.Callable[[], T_Result],
         google_drive: typing.Callable[[], T_Result],
         google_sheets: typing.Callable[[], T_Result],
+        google_forms: typing.Callable[[], T_Result],
         hub_spot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         klaviyo: typing.Callable[[], T_Result],
@@ -141,6 +143,8 @@ class OAuthServerName(str, enum.Enum):
             return google_drive()
         if self is OAuthServerName.GOOGLE_SHEETS:
             return google_sheets()
+        if self is OAuthServerName.GOOGLE_FORMS:
+            return google_forms()
         if self is OAuthServerName.HUB_SPOT:
             return hub_spot()
         if self is OAuthServerName.JIRA:

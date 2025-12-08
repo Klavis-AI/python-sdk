@@ -14,6 +14,7 @@ from ..types.get_instance_response import GetInstanceResponse
 from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
+from ..types.raw_actions_response import RawActionsResponse
 from ..types.status_response import StatusResponse
 from ..types.strata_add_servers_response import StrataAddServersResponse
 from ..types.strata_create_response import StrataCreateResponse
@@ -900,6 +901,41 @@ class McpServerClient:
         _response = self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
+        return _response.data
+
+    def list_raw_actions(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> RawActionsResponse:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration instance.
+
+        This endpoint takes an instance ID, and then fetches the raw actions with categories.
+
+        Parameters
+        ----------
+        instance_id : str
+            The instance ID for the server connection
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RawActionsResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.list_raw_actions(
+            instance_id="instanceId",
+        )
+        """
+        _response = self._raw_client.list_raw_actions(instance_id, request_options=request_options)
         return _response.data
 
     def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:
@@ -1948,6 +1984,49 @@ class AsyncMcpServerClient:
         _response = await self._raw_client.set_instance_auth(
             instance_id=instance_id, auth_data=auth_data, request_options=request_options
         )
+        return _response.data
+
+    async def list_raw_actions(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> RawActionsResponse:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration instance.
+
+        This endpoint takes an instance ID, and then fetches the raw actions with categories.
+
+        Parameters
+        ----------
+        instance_id : str
+            The instance ID for the server connection
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RawActionsResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.list_raw_actions(
+                instance_id="instanceId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_raw_actions(instance_id, request_options=request_options)
         return _response.data
 
     async def get_oauth_url(self, *, request_options: typing.Optional[RequestOptions] = None) -> None:

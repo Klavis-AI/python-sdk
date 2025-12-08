@@ -22,6 +22,7 @@ from ..types.get_mcp_servers_response import GetMcpServersResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.list_tools_response import ListToolsResponse
 from ..types.mcp_server_name import McpServerName
+from ..types.raw_actions_response import RawActionsResponse
 from ..types.status_response import StatusResponse
 from ..types.strata_add_servers_response import StrataAddServersResponse
 from ..types.strata_create_response import StrataCreateResponse
@@ -1243,6 +1244,58 @@ class RawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def list_raw_actions(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[RawActionsResponse]:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration instance.
+
+        This endpoint takes an instance ID, and then fetches the raw actions with categories.
+
+        Parameters
+        ----------
+        instance_id : str
+            The instance ID for the server connection
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[RawActionsResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/raw-actions",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RawActionsResponse,
+                    parse_obj_as(
+                        type_=RawActionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2490,6 +2543,58 @@ class AsyncRawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def list_raw_actions(
+        self, instance_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[RawActionsResponse]:
+        """
+        Fetch raw actions (all underlying actions) for a specific integration instance.
+
+        This endpoint takes an instance ID, and then fetches the raw actions with categories.
+
+        Parameters
+        ----------
+        instance_id : str
+            The instance ID for the server connection
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[RawActionsResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}/raw-actions",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RawActionsResponse,
+                    parse_obj_as(
+                        type_=RawActionsResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

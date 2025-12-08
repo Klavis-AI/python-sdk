@@ -42,6 +42,7 @@ class McpServerName(str, enum.Enum):
     GOOGLE_DRIVE = "Google Drive"
     GOOGLE_JOBS = "Google Jobs"
     GOOGLE_SHEETS = "Google Sheets"
+    GOOGLE_FORMS = "Google Forms"
     HACKER_NEWS = "Hacker News"
     HEYGEN = "Heygen"
     HUBSPOT = "HubSpot"
@@ -121,6 +122,7 @@ class McpServerName(str, enum.Enum):
         google_drive: typing.Callable[[], T_Result],
         google_jobs: typing.Callable[[], T_Result],
         google_sheets: typing.Callable[[], T_Result],
+        google_forms: typing.Callable[[], T_Result],
         hacker_news: typing.Callable[[], T_Result],
         heygen: typing.Callable[[], T_Result],
         hubspot: typing.Callable[[], T_Result],
@@ -233,6 +235,8 @@ class McpServerName(str, enum.Enum):
             return google_jobs()
         if self is McpServerName.GOOGLE_SHEETS:
             return google_sheets()
+        if self is McpServerName.GOOGLE_FORMS:
+            return google_forms()
         if self is McpServerName.HACKER_NEWS:
             return hacker_news()
         if self is McpServerName.HEYGEN:
