@@ -29,6 +29,7 @@ class OAuthServerName(str, enum.Enum):
     GOOGLE_DRIVE = "Google Drive"
     GOOGLE_SHEETS = "Google Sheets"
     GOOGLE_FORMS = "Google Forms"
+    GOOGLE_CLOUD = "Google Cloud"
     HUB_SPOT = "HubSpot"
     JIRA = "Jira"
     KLAVIYO = "Klaviyo"
@@ -46,7 +47,6 @@ class OAuthServerName(str, enum.Enum):
     QUICK_BOOKS = "QuickBooks"
     SALESFORCE = "Salesforce"
     SLACK = "Slack"
-    SNOWFLAKE = "Snowflake"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
     VERCEL = "Vercel"
@@ -78,6 +78,7 @@ class OAuthServerName(str, enum.Enum):
         google_drive: typing.Callable[[], T_Result],
         google_sheets: typing.Callable[[], T_Result],
         google_forms: typing.Callable[[], T_Result],
+        google_cloud: typing.Callable[[], T_Result],
         hub_spot: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         klaviyo: typing.Callable[[], T_Result],
@@ -95,7 +96,6 @@ class OAuthServerName(str, enum.Enum):
         quick_books: typing.Callable[[], T_Result],
         salesforce: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
-        snowflake: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         vercel: typing.Callable[[], T_Result],
@@ -147,6 +147,8 @@ class OAuthServerName(str, enum.Enum):
             return google_sheets()
         if self is OAuthServerName.GOOGLE_FORMS:
             return google_forms()
+        if self is OAuthServerName.GOOGLE_CLOUD:
+            return google_cloud()
         if self is OAuthServerName.HUB_SPOT:
             return hub_spot()
         if self is OAuthServerName.JIRA:
@@ -181,8 +183,6 @@ class OAuthServerName(str, enum.Enum):
             return salesforce()
         if self is OAuthServerName.SLACK:
             return slack()
-        if self is OAuthServerName.SNOWFLAKE:
-            return snowflake()
         if self is OAuthServerName.STRIPE:
             return stripe()
         if self is OAuthServerName.SUPABASE:

@@ -9,8 +9,6 @@ from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import KlavisEnvironment
 
 if typing.TYPE_CHECKING:
-    from .google_cloud_oauth.client import AsyncGoogleCloudOauthClient, GoogleCloudOauthClient
-    from .google_forms_oauth.client import AsyncGoogleFormsOauthClient, GoogleFormsOauthClient
     from .mcp_server.client import AsyncMcpServerClient, McpServerClient
     from .mscalendar_oauth.client import AsyncMscalendarOauthClient, MscalendarOauthClient
     from .oauth.client import AsyncOauthClient, OauthClient
@@ -21,6 +19,7 @@ if typing.TYPE_CHECKING:
     from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
     from .user.client import AsyncUserClient, UserClient
     from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
+    from .zoho_mail_oauth.client import AsyncZohoMailOauthClient, ZohoMailOauthClient
     from .zoom_oauth.client import AsyncZoomOauthClient, ZoomOauthClient
 
 
@@ -93,13 +92,12 @@ class Klavis:
         self._white_labeling: typing.Optional[WhiteLabelingClient] = None
         self._user: typing.Optional[UserClient] = None
         self._oauth: typing.Optional[OauthClient] = None
-        self._google_cloud_oauth: typing.Optional[GoogleCloudOauthClient] = None
-        self._google_forms_oauth: typing.Optional[GoogleFormsOauthClient] = None
         self._onedrive_oauth: typing.Optional[OnedriveOauthClient] = None
         self._outlook_oauth: typing.Optional[OutlookOauthClient] = None
         self._mscalendar_oauth: typing.Optional[MscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[TeamsOauthClient] = None
         self._zoom_oauth: typing.Optional[ZoomOauthClient] = None
+        self._zoho_mail_oauth: typing.Optional[ZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[SharesightOauthClient] = None
         self._sandbox: typing.Optional[SandboxClient] = None
 
@@ -134,22 +132,6 @@ class Klavis:
 
             self._oauth = OauthClient(client_wrapper=self._client_wrapper)
         return self._oauth
-
-    @property
-    def google_cloud_oauth(self):
-        if self._google_cloud_oauth is None:
-            from .google_cloud_oauth.client import GoogleCloudOauthClient  # noqa: E402
-
-            self._google_cloud_oauth = GoogleCloudOauthClient(client_wrapper=self._client_wrapper)
-        return self._google_cloud_oauth
-
-    @property
-    def google_forms_oauth(self):
-        if self._google_forms_oauth is None:
-            from .google_forms_oauth.client import GoogleFormsOauthClient  # noqa: E402
-
-            self._google_forms_oauth = GoogleFormsOauthClient(client_wrapper=self._client_wrapper)
-        return self._google_forms_oauth
 
     @property
     def onedrive_oauth(self):
@@ -190,6 +172,14 @@ class Klavis:
 
             self._zoom_oauth = ZoomOauthClient(client_wrapper=self._client_wrapper)
         return self._zoom_oauth
+
+    @property
+    def zoho_mail_oauth(self):
+        if self._zoho_mail_oauth is None:
+            from .zoho_mail_oauth.client import ZohoMailOauthClient  # noqa: E402
+
+            self._zoho_mail_oauth = ZohoMailOauthClient(client_wrapper=self._client_wrapper)
+        return self._zoho_mail_oauth
 
     @property
     def sharesight_oauth(self):
@@ -277,13 +267,12 @@ class AsyncKlavis:
         self._white_labeling: typing.Optional[AsyncWhiteLabelingClient] = None
         self._user: typing.Optional[AsyncUserClient] = None
         self._oauth: typing.Optional[AsyncOauthClient] = None
-        self._google_cloud_oauth: typing.Optional[AsyncGoogleCloudOauthClient] = None
-        self._google_forms_oauth: typing.Optional[AsyncGoogleFormsOauthClient] = None
         self._onedrive_oauth: typing.Optional[AsyncOnedriveOauthClient] = None
         self._outlook_oauth: typing.Optional[AsyncOutlookOauthClient] = None
         self._mscalendar_oauth: typing.Optional[AsyncMscalendarOauthClient] = None
         self._teams_oauth: typing.Optional[AsyncTeamsOauthClient] = None
         self._zoom_oauth: typing.Optional[AsyncZoomOauthClient] = None
+        self._zoho_mail_oauth: typing.Optional[AsyncZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[AsyncSharesightOauthClient] = None
         self._sandbox: typing.Optional[AsyncSandboxClient] = None
 
@@ -318,22 +307,6 @@ class AsyncKlavis:
 
             self._oauth = AsyncOauthClient(client_wrapper=self._client_wrapper)
         return self._oauth
-
-    @property
-    def google_cloud_oauth(self):
-        if self._google_cloud_oauth is None:
-            from .google_cloud_oauth.client import AsyncGoogleCloudOauthClient  # noqa: E402
-
-            self._google_cloud_oauth = AsyncGoogleCloudOauthClient(client_wrapper=self._client_wrapper)
-        return self._google_cloud_oauth
-
-    @property
-    def google_forms_oauth(self):
-        if self._google_forms_oauth is None:
-            from .google_forms_oauth.client import AsyncGoogleFormsOauthClient  # noqa: E402
-
-            self._google_forms_oauth = AsyncGoogleFormsOauthClient(client_wrapper=self._client_wrapper)
-        return self._google_forms_oauth
 
     @property
     def onedrive_oauth(self):
@@ -374,6 +347,14 @@ class AsyncKlavis:
 
             self._zoom_oauth = AsyncZoomOauthClient(client_wrapper=self._client_wrapper)
         return self._zoom_oauth
+
+    @property
+    def zoho_mail_oauth(self):
+        if self._zoho_mail_oauth is None:
+            from .zoho_mail_oauth.client import AsyncZohoMailOauthClient  # noqa: E402
+
+            self._zoho_mail_oauth = AsyncZohoMailOauthClient(client_wrapper=self._client_wrapper)
+        return self._zoho_mail_oauth
 
     @property
     def sharesight_oauth(self):

@@ -3784,6 +3784,212 @@ client.oauth.authorize_gdocs(
 </dl>
 </details>
 
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_google_cloud</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Google Cloud OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_google_cloud(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_google_forms</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Google Forms OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_google_forms(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_attio</a>(...)</code></summary>
 <dl>
 <dd>
@@ -6417,6 +6623,89 @@ client.oauth.authorize_outlook(
 </dl>
 </details>
 
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_mscalendar</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_mscalendar(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_teams</a>(...)</code></summary>
 <dl>
 <dd>
@@ -6706,6 +6995,172 @@ client.oauth.authorize_monday(
 </dl>
 </details>
 
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_zoom</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_zoom(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_sharesight</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.oauth.authorize_sharesight(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_shopify</a>()</code></summary>
 <dl>
 <dd>
@@ -6736,214 +7191,6 @@ client.oauth.authorize_shopify()
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## GoogleCloudOauth
-<details><summary><code>client.google_cloud_oauth.<a href="src/klavis/google_cloud_oauth/client.py">authorize_google_cloud</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Google Cloud OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (comma-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.google_cloud_oauth.authorize_google_cloud(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## GoogleFormsOauth
-<details><summary><code>client.google_forms_oauth.<a href="src/klavis/google_forms_oauth/client.py">authorize_google_forms</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Google Forms OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (comma-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.google_forms_oauth.authorize_google_forms(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -7075,89 +7322,6 @@ client.outlook_oauth.refresh_token(
 </details>
 
 ## MscalendarOauth
-<details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">authorize_ms_calendar</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.mscalendar_oauth.authorize_ms_calendar(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7272,89 +7436,6 @@ client.teams_oauth.refresh_token(
 </details>
 
 ## ZoomOauth
-<details><summary><code>client.zoom_oauth.<a href="src/klavis/zoom_oauth/client.py">authorize_zoom</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.zoom_oauth.authorize_zoom(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.zoom_oauth.<a href="src/klavis/zoom_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7411,10 +7492,30 @@ client.zoom_oauth.refresh_token(
 </dl>
 </details>
 
-## SharesightOauth
-<details><summary><code>client.sharesight_oauth.<a href="src/klavis/sharesight_oauth/client.py">authorize_sharesight</a>(...)</code></summary>
+## ZohoMailOauth
+<details><summary><code>client.zoho_mail_oauth.<a href="src/klavis/zoho_mail_oauth/client.py">authorize_zoho_mail</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Zoho Mail OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -7430,7 +7531,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.sharesight_oauth.authorize_sharesight(
+client.zoho_mail_oauth.authorize_zoho_mail(
     instance_id="instance_id",
     client_id="client_id",
     scope="scope",
@@ -7467,7 +7568,7 @@ client.sharesight_oauth.authorize_sharesight(
 <dl>
 <dd>
 
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
     
 </dd>
 </dl>
@@ -7495,6 +7596,7 @@ client.sharesight_oauth.authorize_sharesight(
 </dl>
 </details>
 
+## SharesightOauth
 <details><summary><code>client.sharesight_oauth.<a href="src/klavis/sharesight_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7871,7 +7973,7 @@ client.sandbox.reset_sandbox(
 <dl>
 <dd>
 
-Initialize the sandbox with snowflake-specific data following the defined schema.
+Initialize the sandbox with google_cloud-specific data following the defined schema.
 </dd>
 </dl>
 </dd>
@@ -7917,7 +8019,63 @@ client.sandbox.initialize_sandbox(
 <dl>
 <dd>
 
-**databases:** `typing.Optional[typing.Sequence[SnowflakeDatabase]]` — List of databases with their schemas
+**datasets:** `typing.Optional[typing.Sequence[BigQueryDataset]]` — BigQuery datasets
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tables:** `typing.Optional[typing.Sequence[BigQueryTable]]` — BigQuery tables
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**buckets:** `typing.Optional[typing.Sequence[StorageBucket]]` — Cloud Storage buckets
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**objects:** `typing.Optional[typing.Sequence[StorageObject]]` — Cloud Storage objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**log_entries:** `typing.Optional[typing.Sequence[LogEntry]]` — Log entries
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**log_sinks:** `typing.Optional[typing.Sequence[LogSink]]` — Log sinks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**log_buckets:** `typing.Optional[typing.Sequence[LogBucket]]` — Log buckets
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**instances:** `typing.Optional[typing.Sequence[ComputeInstance]]` — Compute Engine instances
     
 </dd>
 </dl>

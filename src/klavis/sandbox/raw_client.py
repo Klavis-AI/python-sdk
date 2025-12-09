@@ -11,15 +11,22 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.big_query_dataset import BigQueryDataset
+from ..types.big_query_table import BigQueryTable
+from ..types.compute_instance import ComputeInstance
 from ..types.create_sandbox_response import CreateSandboxResponse
-from ..types.dump_sandbox_response_snowflake_data import DumpSandboxResponseSnowflakeData
+from ..types.dump_sandbox_response_google_cloud_data import DumpSandboxResponseGoogleCloudData
 from ..types.http_validation_error import HttpValidationError
 from ..types.initialize_sandbox_response import InitializeSandboxResponse
+from ..types.log_bucket import LogBucket
+from ..types.log_entry import LogEntry
+from ..types.log_sink import LogSink
 from ..types.release_sandbox_response import ReleaseSandboxResponse
 from ..types.reset_sandbox_response import ResetSandboxResponse
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
-from ..types.snowflake_database import SnowflakeDatabase
+from ..types.storage_bucket import StorageBucket
+from ..types.storage_object import StorageObject
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -242,19 +249,47 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
+        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
+        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
+        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
+        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
+        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
+        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
+        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
-        Initialize the sandbox with snowflake-specific data following the defined schema.
+        Initialize the sandbox with google_cloud-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
+            BigQuery datasets
+
+        tables : typing.Optional[typing.Sequence[BigQueryTable]]
+            BigQuery tables
+
+        buckets : typing.Optional[typing.Sequence[StorageBucket]]
+            Cloud Storage buckets
+
+        objects : typing.Optional[typing.Sequence[StorageObject]]
+            Cloud Storage objects
+
+        log_entries : typing.Optional[typing.Sequence[LogEntry]]
+            Log entries
+
+        log_sinks : typing.Optional[typing.Sequence[LogSink]]
+            Log sinks
+
+        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
+            Log buckets
+
+        instances : typing.Optional[typing.Sequence[ComputeInstance]]
+            Compute Engine instances
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -265,11 +300,32 @@ class RawSandboxClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
+            f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
+                "datasets": convert_and_respect_annotation_metadata(
+                    object_=datasets, annotation=typing.Sequence[BigQueryDataset], direction="write"
+                ),
+                "tables": convert_and_respect_annotation_metadata(
+                    object_=tables, annotation=typing.Sequence[BigQueryTable], direction="write"
+                ),
+                "buckets": convert_and_respect_annotation_metadata(
+                    object_=buckets, annotation=typing.Sequence[StorageBucket], direction="write"
+                ),
+                "objects": convert_and_respect_annotation_metadata(
+                    object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
+                ),
+                "logEntries": convert_and_respect_annotation_metadata(
+                    object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
+                ),
+                "logSinks": convert_and_respect_annotation_metadata(
+                    object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
+                ),
+                "logBuckets": convert_and_respect_annotation_metadata(
+                    object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
+                ),
+                "instances": convert_and_respect_annotation_metadata(
+                    object_=instances, annotation=typing.Sequence[ComputeInstance], direction="write"
                 ),
             },
             headers={
@@ -306,7 +362,7 @@ class RawSandboxClient:
 
     def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[DumpSandboxResponseSnowflakeData]:
+    ) -> HttpResponse[DumpSandboxResponseGoogleCloudData]:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -320,20 +376,20 @@ class RawSandboxClient:
 
         Returns
         -------
-        HttpResponse[DumpSandboxResponseSnowflakeData]
+        HttpResponse[DumpSandboxResponseGoogleCloudData]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/dump",
+            f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/dump",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    DumpSandboxResponseSnowflakeData,
+                    DumpSandboxResponseGoogleCloudData,
                     parse_obj_as(
-                        type_=DumpSandboxResponseSnowflakeData,  # type: ignore
+                        type_=DumpSandboxResponseGoogleCloudData,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -572,19 +628,47 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
+        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
+        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
+        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
+        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
+        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
+        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
+        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
-        Initialize the sandbox with snowflake-specific data following the defined schema.
+        Initialize the sandbox with google_cloud-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
+            BigQuery datasets
+
+        tables : typing.Optional[typing.Sequence[BigQueryTable]]
+            BigQuery tables
+
+        buckets : typing.Optional[typing.Sequence[StorageBucket]]
+            Cloud Storage buckets
+
+        objects : typing.Optional[typing.Sequence[StorageObject]]
+            Cloud Storage objects
+
+        log_entries : typing.Optional[typing.Sequence[LogEntry]]
+            Log entries
+
+        log_sinks : typing.Optional[typing.Sequence[LogSink]]
+            Log sinks
+
+        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
+            Log buckets
+
+        instances : typing.Optional[typing.Sequence[ComputeInstance]]
+            Compute Engine instances
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -595,11 +679,32 @@ class AsyncRawSandboxClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
+            f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
+                "datasets": convert_and_respect_annotation_metadata(
+                    object_=datasets, annotation=typing.Sequence[BigQueryDataset], direction="write"
+                ),
+                "tables": convert_and_respect_annotation_metadata(
+                    object_=tables, annotation=typing.Sequence[BigQueryTable], direction="write"
+                ),
+                "buckets": convert_and_respect_annotation_metadata(
+                    object_=buckets, annotation=typing.Sequence[StorageBucket], direction="write"
+                ),
+                "objects": convert_and_respect_annotation_metadata(
+                    object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
+                ),
+                "logEntries": convert_and_respect_annotation_metadata(
+                    object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
+                ),
+                "logSinks": convert_and_respect_annotation_metadata(
+                    object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
+                ),
+                "logBuckets": convert_and_respect_annotation_metadata(
+                    object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
+                ),
+                "instances": convert_and_respect_annotation_metadata(
+                    object_=instances, annotation=typing.Sequence[ComputeInstance], direction="write"
                 ),
             },
             headers={
@@ -636,7 +741,7 @@ class AsyncRawSandboxClient:
 
     async def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[DumpSandboxResponseSnowflakeData]:
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleCloudData]:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -650,20 +755,20 @@ class AsyncRawSandboxClient:
 
         Returns
         -------
-        AsyncHttpResponse[DumpSandboxResponseSnowflakeData]
+        AsyncHttpResponse[DumpSandboxResponseGoogleCloudData]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/dump",
+            f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/dump",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    DumpSandboxResponseSnowflakeData,
+                    DumpSandboxResponseGoogleCloudData,
                     parse_obj_as(
-                        type_=DumpSandboxResponseSnowflakeData,  # type: ignore
+                        type_=DumpSandboxResponseGoogleCloudData,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

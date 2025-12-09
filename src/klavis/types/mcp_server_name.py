@@ -43,6 +43,7 @@ class McpServerName(str, enum.Enum):
     GOOGLE_JOBS = "Google Jobs"
     GOOGLE_SHEETS = "Google Sheets"
     GOOGLE_FORMS = "Google Forms"
+    GOOGLE_CLOUD = "Google Cloud"
     HACKER_NEWS = "Hacker News"
     HEYGEN = "Heygen"
     HUBSPOT = "HubSpot"
@@ -75,6 +76,7 @@ class McpServerName(str, enum.Enum):
     SENDGRID = "SendGrid"
     SHOPIFY = "Shopify"
     SLACK = "Slack"
+    SNOWFLAKE = "Snowflake"
     STRIPE = "Stripe"
     SUPABASE = "Supabase"
     TAVILY = "Tavily"
@@ -123,6 +125,7 @@ class McpServerName(str, enum.Enum):
         google_jobs: typing.Callable[[], T_Result],
         google_sheets: typing.Callable[[], T_Result],
         google_forms: typing.Callable[[], T_Result],
+        google_cloud: typing.Callable[[], T_Result],
         hacker_news: typing.Callable[[], T_Result],
         heygen: typing.Callable[[], T_Result],
         hubspot: typing.Callable[[], T_Result],
@@ -155,6 +158,7 @@ class McpServerName(str, enum.Enum):
         sendgrid: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
         slack: typing.Callable[[], T_Result],
+        snowflake: typing.Callable[[], T_Result],
         stripe: typing.Callable[[], T_Result],
         supabase: typing.Callable[[], T_Result],
         tavily: typing.Callable[[], T_Result],
@@ -237,6 +241,8 @@ class McpServerName(str, enum.Enum):
             return google_sheets()
         if self is McpServerName.GOOGLE_FORMS:
             return google_forms()
+        if self is McpServerName.GOOGLE_CLOUD:
+            return google_cloud()
         if self is McpServerName.HACKER_NEWS:
             return hacker_news()
         if self is McpServerName.HEYGEN:
@@ -301,6 +307,8 @@ class McpServerName(str, enum.Enum):
             return shopify()
         if self is McpServerName.SLACK:
             return slack()
+        if self is McpServerName.SNOWFLAKE:
+            return snowflake()
         if self is McpServerName.STRIPE:
             return stripe()
         if self is McpServerName.SUPABASE:

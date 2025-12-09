@@ -4,25 +4,25 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from .raw_client import AsyncRawGoogleCloudOauthClient, RawGoogleCloudOauthClient
+from .raw_client import AsyncRawZohoMailOauthClient, RawZohoMailOauthClient
 
 
-class GoogleCloudOauthClient:
+class ZohoMailOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawGoogleCloudOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = RawZohoMailOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawGoogleCloudOauthClient:
+    def with_raw_response(self) -> RawZohoMailOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawGoogleCloudOauthClient
+        RawZohoMailOauthClient
         """
         return self._raw_client
 
-    def authorize_google_cloud(
+    def authorize_zoho_mail(
         self,
         *,
         instance_id: str,
@@ -32,7 +32,7 @@ class GoogleCloudOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
-        Start Google Cloud OAuth flow
+        Start Zoho Mail OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -69,14 +69,14 @@ class GoogleCloudOauthClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.google_cloud_oauth.authorize_google_cloud(
+        client.zoho_mail_oauth.authorize_zoho_mail(
             instance_id="instance_id",
             client_id="client_id",
             scope="scope",
             redirect_url="redirect_url",
         )
         """
-        _response = self._raw_client.authorize_google_cloud(
+        _response = self._raw_client.authorize_zoho_mail(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,
@@ -86,22 +86,22 @@ class GoogleCloudOauthClient:
         return _response.data
 
 
-class AsyncGoogleCloudOauthClient:
+class AsyncZohoMailOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawGoogleCloudOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawZohoMailOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawGoogleCloudOauthClient:
+    def with_raw_response(self) -> AsyncRawZohoMailOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawGoogleCloudOauthClient
+        AsyncRawZohoMailOauthClient
         """
         return self._raw_client
 
-    async def authorize_google_cloud(
+    async def authorize_zoho_mail(
         self,
         *,
         instance_id: str,
@@ -111,7 +111,7 @@ class AsyncGoogleCloudOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
-        Start Google Cloud OAuth flow
+        Start Zoho Mail OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -153,7 +153,7 @@ class AsyncGoogleCloudOauthClient:
 
 
         async def main() -> None:
-            await client.google_cloud_oauth.authorize_google_cloud(
+            await client.zoho_mail_oauth.authorize_zoho_mail(
                 instance_id="instance_id",
                 client_id="client_id",
                 scope="scope",
@@ -163,7 +163,7 @@ class AsyncGoogleCloudOauthClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.authorize_google_cloud(
+        _response = await self._raw_client.authorize_zoho_mail(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,

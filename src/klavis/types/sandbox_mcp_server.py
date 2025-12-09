@@ -45,6 +45,7 @@ class SandboxMcpServer(str, enum.Enum):
     CONFLUENCE = "confluence"
     DISCORD = "discord"
     SNOWFLAKE = "snowflake"
+    GOOGLE_CLOUD = "google_cloud"
 
     def visit(
         self,
@@ -82,6 +83,7 @@ class SandboxMcpServer(str, enum.Enum):
         confluence: typing.Callable[[], T_Result],
         discord: typing.Callable[[], T_Result],
         snowflake: typing.Callable[[], T_Result],
+        google_cloud: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is SandboxMcpServer.JIRA:
             return jira()
@@ -151,3 +153,5 @@ class SandboxMcpServer(str, enum.Enum):
             return discord()
         if self is SandboxMcpServer.SNOWFLAKE:
             return snowflake()
+        if self is SandboxMcpServer.GOOGLE_CLOUD:
+            return google_cloud()

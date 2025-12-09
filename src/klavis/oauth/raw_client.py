@@ -1044,6 +1044,164 @@ class RawOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def authorize_google_cloud(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Start Google Cloud OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "oauth/google-cloud/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def authorize_google_forms(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Start Google Forms OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "oauth/google-forms/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def authorize_attio(
         self,
         *,
@@ -3080,6 +3238,77 @@ class RawOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def authorize_mscalendar(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "oauth/mscalendar/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def authorize_teams(
         self,
         *,
@@ -3272,6 +3501,148 @@ class RawOauthClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "oauth/monday/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def authorize_zoom(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "oauth/zoom/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def authorize_sharesight(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "oauth/sharesight/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -4328,6 +4699,164 @@ class AsyncRawOauthClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "oauth/gdocs/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def authorize_google_cloud(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Start Google Cloud OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "oauth/google-cloud/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def authorize_google_forms(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Start Google Forms OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (comma-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "oauth/google-forms/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -6401,6 +6930,77 @@ class AsyncRawOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def authorize_mscalendar(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "oauth/mscalendar/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def authorize_teams(
         self,
         *,
@@ -6593,6 +7193,148 @@ class AsyncRawOauthClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "oauth/monday/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def authorize_zoom(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "oauth/zoom/authorize",
+            method="GET",
+            params={
+                "instance_id": instance_id,
+                "client_id": client_id,
+                "scope": scope,
+                "redirect_url": redirect_url,
+            },
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def authorize_sharesight(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "oauth/sharesight/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,

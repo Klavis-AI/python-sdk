@@ -17,6 +17,12 @@ if typing.TYPE_CHECKING:
     from .asana_task import AsanaTask
     from .azure_ado_auth_error_response import AzureAdoAuthErrorResponse
     from .azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
+    from .big_query_dataset import BigQueryDataset
+    from .big_query_dataset_reference import BigQueryDatasetReference
+    from .big_query_table import BigQueryTable
+    from .big_query_table_field_schema import BigQueryTableFieldSchema
+    from .big_query_table_reference import BigQueryTableReference
+    from .big_query_table_schema import BigQueryTableSchema
     from .calcom_data import CalcomData
     from .calcom_schedule import CalcomSchedule
     from .call_tool_response import CallToolResponse
@@ -32,6 +38,7 @@ if typing.TYPE_CHECKING:
     from .close_lead import CloseLead
     from .close_opportunity import CloseOpportunity
     from .close_task import CloseTask
+    from .compute_instance import ComputeInstance
     from .confluence_comment import ConfluenceComment
     from .confluence_data_output import ConfluenceDataOutput
     from .confluence_page import ConfluencePage
@@ -59,6 +66,7 @@ if typing.TYPE_CHECKING:
     from .dump_sandbox_response_git_hub_data import DumpSandboxResponseGitHubData
     from .dump_sandbox_response_gmail_data import DumpSandboxResponseGmailData
     from .dump_sandbox_response_google_calendar_data import DumpSandboxResponseGoogleCalendarData
+    from .dump_sandbox_response_google_cloud_data import DumpSandboxResponseGoogleCloudData
     from .dump_sandbox_response_google_docs_data import DumpSandboxResponseGoogleDocsData
     from .dump_sandbox_response_google_drive_data import DumpSandboxResponseGoogleDriveData
     from .dump_sandbox_response_google_forms_data import DumpSandboxResponseGoogleFormsData
@@ -105,6 +113,7 @@ if typing.TYPE_CHECKING:
     from .google_calendar_data import GoogleCalendarData
     from .google_calendar_event import GoogleCalendarEvent
     from .google_calendar_event_date_time import GoogleCalendarEventDateTime
+    from .google_cloud_data_output import GoogleCloudDataOutput
     from .google_docs_data import GoogleDocsData
     from .google_docs_document import GoogleDocsDocument
     from .google_drive_data import GoogleDriveData
@@ -142,6 +151,9 @@ if typing.TYPE_CHECKING:
     from .linear_issue import LinearIssue
     from .linear_project import LinearProject
     from .list_tools_response import ListToolsResponse
+    from .log_bucket import LogBucket
+    from .log_entry import LogEntry
+    from .log_sink import LogSink
     from .mcp_server import McpServer
     from .mcp_server_name import McpServerName
     from .mem0data_output import Mem0DataOutput
@@ -210,6 +222,13 @@ if typing.TYPE_CHECKING:
     from .snowflake_schema import SnowflakeSchema
     from .snowflake_table import SnowflakeTable
     from .status_response import StatusResponse
+    from .storage_bucket import StorageBucket
+    from .storage_bucket_lifecycle import StorageBucketLifecycle
+    from .storage_bucket_lifecycle_rule import StorageBucketLifecycleRule
+    from .storage_bucket_lifecycle_rule_action import StorageBucketLifecycleRuleAction
+    from .storage_bucket_lifecycle_rule_condition import StorageBucketLifecycleRuleCondition
+    from .storage_bucket_versioning import StorageBucketVersioning
+    from .storage_object import StorageObject
     from .strata_add_servers_response import StrataAddServersResponse
     from .strata_create_response import StrataCreateResponse
     from .strata_delete_servers_response import StrataDeleteServersResponse
@@ -245,6 +264,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AsanaTask": ".asana_task",
     "AzureAdoAuthErrorResponse": ".azure_ado_auth_error_response",
     "AzureAdoAuthSuccessResponse": ".azure_ado_auth_success_response",
+    "BigQueryDataset": ".big_query_dataset",
+    "BigQueryDatasetReference": ".big_query_dataset_reference",
+    "BigQueryTable": ".big_query_table",
+    "BigQueryTableFieldSchema": ".big_query_table_field_schema",
+    "BigQueryTableReference": ".big_query_table_reference",
+    "BigQueryTableSchema": ".big_query_table_schema",
     "CalcomData": ".calcom_data",
     "CalcomSchedule": ".calcom_schedule",
     "CallToolResponse": ".call_tool_response",
@@ -260,6 +285,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CloseLead": ".close_lead",
     "CloseOpportunity": ".close_opportunity",
     "CloseTask": ".close_task",
+    "ComputeInstance": ".compute_instance",
     "ConfluenceComment": ".confluence_comment",
     "ConfluenceDataOutput": ".confluence_data_output",
     "ConfluencePage": ".confluence_page",
@@ -287,6 +313,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DumpSandboxResponseGitHubData": ".dump_sandbox_response_git_hub_data",
     "DumpSandboxResponseGmailData": ".dump_sandbox_response_gmail_data",
     "DumpSandboxResponseGoogleCalendarData": ".dump_sandbox_response_google_calendar_data",
+    "DumpSandboxResponseGoogleCloudData": ".dump_sandbox_response_google_cloud_data",
     "DumpSandboxResponseGoogleDocsData": ".dump_sandbox_response_google_docs_data",
     "DumpSandboxResponseGoogleDriveData": ".dump_sandbox_response_google_drive_data",
     "DumpSandboxResponseGoogleFormsData": ".dump_sandbox_response_google_forms_data",
@@ -333,6 +360,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GoogleCalendarData": ".google_calendar_data",
     "GoogleCalendarEvent": ".google_calendar_event",
     "GoogleCalendarEventDateTime": ".google_calendar_event_date_time",
+    "GoogleCloudDataOutput": ".google_cloud_data_output",
     "GoogleDocsData": ".google_docs_data",
     "GoogleDocsDocument": ".google_docs_document",
     "GoogleDriveData": ".google_drive_data",
@@ -370,6 +398,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LinearIssue": ".linear_issue",
     "LinearProject": ".linear_project",
     "ListToolsResponse": ".list_tools_response",
+    "LogBucket": ".log_bucket",
+    "LogEntry": ".log_entry",
+    "LogSink": ".log_sink",
     "McpServer": ".mcp_server",
     "McpServerName": ".mcp_server_name",
     "Mem0DataOutput": ".mem0data_output",
@@ -438,6 +469,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SnowflakeSchema": ".snowflake_schema",
     "SnowflakeTable": ".snowflake_table",
     "StatusResponse": ".status_response",
+    "StorageBucket": ".storage_bucket",
+    "StorageBucketLifecycle": ".storage_bucket_lifecycle",
+    "StorageBucketLifecycleRule": ".storage_bucket_lifecycle_rule",
+    "StorageBucketLifecycleRuleAction": ".storage_bucket_lifecycle_rule_action",
+    "StorageBucketLifecycleRuleCondition": ".storage_bucket_lifecycle_rule_condition",
+    "StorageBucketVersioning": ".storage_bucket_versioning",
+    "StorageObject": ".storage_object",
     "StrataAddServersResponse": ".strata_add_servers_response",
     "StrataCreateResponse": ".strata_create_response",
     "StrataDeleteServersResponse": ".strata_delete_servers_response",
@@ -497,6 +535,12 @@ __all__ = [
     "AsanaTask",
     "AzureAdoAuthErrorResponse",
     "AzureAdoAuthSuccessResponse",
+    "BigQueryDataset",
+    "BigQueryDatasetReference",
+    "BigQueryTable",
+    "BigQueryTableFieldSchema",
+    "BigQueryTableReference",
+    "BigQueryTableSchema",
     "CalcomData",
     "CalcomSchedule",
     "CallToolResponse",
@@ -512,6 +556,7 @@ __all__ = [
     "CloseLead",
     "CloseOpportunity",
     "CloseTask",
+    "ComputeInstance",
     "ConfluenceComment",
     "ConfluenceDataOutput",
     "ConfluencePage",
@@ -539,6 +584,7 @@ __all__ = [
     "DumpSandboxResponseGitHubData",
     "DumpSandboxResponseGmailData",
     "DumpSandboxResponseGoogleCalendarData",
+    "DumpSandboxResponseGoogleCloudData",
     "DumpSandboxResponseGoogleDocsData",
     "DumpSandboxResponseGoogleDriveData",
     "DumpSandboxResponseGoogleFormsData",
@@ -585,6 +631,7 @@ __all__ = [
     "GoogleCalendarData",
     "GoogleCalendarEvent",
     "GoogleCalendarEventDateTime",
+    "GoogleCloudDataOutput",
     "GoogleDocsData",
     "GoogleDocsDocument",
     "GoogleDriveData",
@@ -622,6 +669,9 @@ __all__ = [
     "LinearIssue",
     "LinearProject",
     "ListToolsResponse",
+    "LogBucket",
+    "LogEntry",
+    "LogSink",
     "McpServer",
     "McpServerName",
     "Mem0DataOutput",
@@ -690,6 +740,13 @@ __all__ = [
     "SnowflakeSchema",
     "SnowflakeTable",
     "StatusResponse",
+    "StorageBucket",
+    "StorageBucketLifecycle",
+    "StorageBucketLifecycleRule",
+    "StorageBucketLifecycleRuleAction",
+    "StorageBucketLifecycleRuleCondition",
+    "StorageBucketVersioning",
+    "StorageObject",
     "StrataAddServersResponse",
     "StrataCreateResponse",
     "StrataDeleteServersResponse",

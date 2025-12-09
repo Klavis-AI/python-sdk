@@ -4,14 +4,21 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.big_query_dataset import BigQueryDataset
+from ..types.big_query_table import BigQueryTable
+from ..types.compute_instance import ComputeInstance
 from ..types.create_sandbox_response import CreateSandboxResponse
-from ..types.dump_sandbox_response_snowflake_data import DumpSandboxResponseSnowflakeData
+from ..types.dump_sandbox_response_google_cloud_data import DumpSandboxResponseGoogleCloudData
 from ..types.initialize_sandbox_response import InitializeSandboxResponse
+from ..types.log_bucket import LogBucket
+from ..types.log_entry import LogEntry
+from ..types.log_sink import LogSink
 from ..types.release_sandbox_response import ReleaseSandboxResponse
 from ..types.reset_sandbox_response import ResetSandboxResponse
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
-from ..types.snowflake_database import SnowflakeDatabase
+from ..types.storage_bucket import StorageBucket
+from ..types.storage_object import StorageObject
 from .raw_client import AsyncRawSandboxClient, RawSandboxClient
 
 # this is used as the default value for optional parameters
@@ -181,19 +188,47 @@ class SandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
+        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
+        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
+        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
+        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
+        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
+        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
+        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
-        Initialize the sandbox with snowflake-specific data following the defined schema.
+        Initialize the sandbox with google_cloud-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
+            BigQuery datasets
+
+        tables : typing.Optional[typing.Sequence[BigQueryTable]]
+            BigQuery tables
+
+        buckets : typing.Optional[typing.Sequence[StorageBucket]]
+            Cloud Storage buckets
+
+        objects : typing.Optional[typing.Sequence[StorageObject]]
+            Cloud Storage objects
+
+        log_entries : typing.Optional[typing.Sequence[LogEntry]]
+            Log entries
+
+        log_sinks : typing.Optional[typing.Sequence[LogSink]]
+            Log sinks
+
+        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
+            Log buckets
+
+        instances : typing.Optional[typing.Sequence[ComputeInstance]]
+            Compute Engine instances
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -215,13 +250,22 @@ class SandboxClient:
         )
         """
         _response = self._raw_client.initialize_sandbox(
-            sandbox_id, databases=databases, request_options=request_options
+            sandbox_id,
+            datasets=datasets,
+            tables=tables,
+            buckets=buckets,
+            objects=objects,
+            log_entries=log_entries,
+            log_sinks=log_sinks,
+            log_buckets=log_buckets,
+            instances=instances,
+            request_options=request_options,
         )
         return _response.data
 
     def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> DumpSandboxResponseSnowflakeData:
+    ) -> DumpSandboxResponseGoogleCloudData:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -235,7 +279,7 @@ class SandboxClient:
 
         Returns
         -------
-        DumpSandboxResponseSnowflakeData
+        DumpSandboxResponseGoogleCloudData
             Successful Response
 
         Examples
@@ -448,19 +492,47 @@ class AsyncSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
+        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
+        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
+        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
+        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
+        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
+        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
+        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
-        Initialize the sandbox with snowflake-specific data following the defined schema.
+        Initialize the sandbox with google_cloud-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
+            BigQuery datasets
+
+        tables : typing.Optional[typing.Sequence[BigQueryTable]]
+            BigQuery tables
+
+        buckets : typing.Optional[typing.Sequence[StorageBucket]]
+            Cloud Storage buckets
+
+        objects : typing.Optional[typing.Sequence[StorageObject]]
+            Cloud Storage objects
+
+        log_entries : typing.Optional[typing.Sequence[LogEntry]]
+            Log entries
+
+        log_sinks : typing.Optional[typing.Sequence[LogSink]]
+            Log sinks
+
+        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
+            Log buckets
+
+        instances : typing.Optional[typing.Sequence[ComputeInstance]]
+            Compute Engine instances
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -490,13 +562,22 @@ class AsyncSandboxClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.initialize_sandbox(
-            sandbox_id, databases=databases, request_options=request_options
+            sandbox_id,
+            datasets=datasets,
+            tables=tables,
+            buckets=buckets,
+            objects=objects,
+            log_entries=log_entries,
+            log_sinks=log_sinks,
+            log_buckets=log_buckets,
+            instances=instances,
+            request_options=request_options,
         )
         return _response.data
 
     async def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> DumpSandboxResponseSnowflakeData:
+    ) -> DumpSandboxResponseGoogleCloudData:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -510,7 +591,7 @@ class AsyncSandboxClient:
 
         Returns
         -------
-        DumpSandboxResponseSnowflakeData
+        DumpSandboxResponseGoogleCloudData
             Successful Response
 
         Examples

@@ -12,11 +12,11 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
 
 
-class RawGoogleCloudOauthClient:
+class RawZohoMailOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def authorize_google_cloud(
+    def authorize_zoho_mail(
         self,
         *,
         instance_id: str,
@@ -26,7 +26,7 @@ class RawGoogleCloudOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
-        Start Google Cloud OAuth flow
+        Start Zoho Mail OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -57,7 +57,7 @@ class RawGoogleCloudOauthClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/google-cloud/authorize",
+            "oauth/zoho-mail/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -96,11 +96,11 @@ class RawGoogleCloudOauthClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawGoogleCloudOauthClient:
+class AsyncRawZohoMailOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def authorize_google_cloud(
+    async def authorize_zoho_mail(
         self,
         *,
         instance_id: str,
@@ -110,7 +110,7 @@ class AsyncRawGoogleCloudOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
-        Start Google Cloud OAuth flow
+        Start Zoho Mail OAuth flow
 
         Parameters:
         - instance_id: Identifier for the instance requesting authorization
@@ -141,7 +141,7 @@ class AsyncRawGoogleCloudOauthClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/google-cloud/authorize",
+            "oauth/zoho-mail/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
