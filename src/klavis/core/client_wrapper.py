@@ -22,10 +22,10 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "klavis/2.14.1",
+            "User-Agent": "klavis/2.14.2",
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "klavis",
-            "X-Fern-SDK-Version": "2.14.1",
+            "X-Fern-SDK-Version": "2.14.2",
             **(self.get_custom_headers() or {}),
         }
         api_key = self._get_api_key()
