@@ -5,7 +5,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .linear_data import LinearData
+from .linear_data_output import LinearDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -25,7 +25,7 @@ class DumpSandboxResponseLinearData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: LinearData = pydantic.Field()
+    data: LinearDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

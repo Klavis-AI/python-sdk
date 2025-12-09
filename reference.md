@@ -3784,212 +3784,6 @@ client.oauth.authorize_gdocs(
 </dl>
 </details>
 
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_google_cloud</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Google Cloud OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (comma-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_google_cloud(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_google_forms</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Start Google Forms OAuth flow
-
-Parameters:
-- instance_id: Identifier for the instance requesting authorization
-- client_id: Optional client ID for white labeling
-- scope: Optional scopes to request (comma-separated)
-- redirect_url: Optional URL to redirect to after authorization completes
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_google_forms(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_attio</a>(...)</code></summary>
 <dl>
 <dd>
@@ -6623,89 +6417,6 @@ client.oauth.authorize_outlook(
 </dl>
 </details>
 
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_mscalendar</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_mscalendar(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_teams</a>(...)</code></summary>
 <dl>
 <dd>
@@ -6995,172 +6706,6 @@ client.oauth.authorize_monday(
 </dl>
 </details>
 
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_zoom</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_zoom(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_sharesight</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.oauth.authorize_sharesight(
-    instance_id="instance_id",
-    client_id="client_id",
-    scope="scope",
-    redirect_url="redirect_url",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the client instance requesting authorization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.oauth.<a href="src/klavis/oauth/client.py">authorize_shopify</a>()</code></summary>
 <dl>
 <dd>
@@ -7191,6 +6736,214 @@ client.oauth.authorize_shopify()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## GoogleCloudOauth
+<details><summary><code>client.google_cloud_oauth.<a href="src/klavis/google_cloud_oauth/client.py">authorize_google_cloud</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Google Cloud OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.google_cloud_oauth.authorize_google_cloud(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## GoogleFormsOauth
+<details><summary><code>client.google_forms_oauth.<a href="src/klavis/google_forms_oauth/client.py">authorize_google_forms</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start Google Forms OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.google_forms_oauth.authorize_google_forms(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -7322,6 +7075,89 @@ client.outlook_oauth.refresh_token(
 </details>
 
 ## MscalendarOauth
+<details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">authorize_ms_calendar</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mscalendar_oauth.authorize_ms_calendar(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.mscalendar_oauth.<a href="src/klavis/mscalendar_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7436,6 +7272,89 @@ client.teams_oauth.refresh_token(
 </details>
 
 ## ZoomOauth
+<details><summary><code>client.zoom_oauth.<a href="src/klavis/zoom_oauth/client.py">authorize_zoom</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.zoom_oauth.authorize_zoom(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.zoom_oauth.<a href="src/klavis/zoom_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7597,6 +7516,89 @@ client.zoho_mail_oauth.authorize_zoho_mail(
 </details>
 
 ## SharesightOauth
+<details><summary><code>client.sharesight_oauth.<a href="src/klavis/sharesight_oauth/client.py">authorize_sharesight</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sharesight_oauth.authorize_sharesight(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (space-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.sharesight_oauth.<a href="src/klavis/sharesight_oauth/client.py">refresh_token</a>(...)</code></summary>
 <dl>
 <dd>
@@ -7961,7 +7963,5110 @@ client.sandbox.reset_sandbox(
 </dl>
 </details>
 
-<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_sandbox</a>(...)</code></summary>
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_jira_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with jira-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_jira_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projects:** `typing.Optional[typing.Sequence[JiraProject]]` — List of projects with their issues
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**boards:** `typing.Optional[typing.Sequence[JiraBoard]]` — List of boards
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sprints:** `typing.Optional[typing.Sequence[JiraSprint]]` — List of sprints
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_jira_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_jira_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_calendar_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with google_calendar-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_google_calendar_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**events:** `typing.Optional[typing.Sequence[GoogleCalendarEvent]]` — List of Google Calendar events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_calendar_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_google_calendar_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_gmail_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with gmail-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_gmail_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**messages:** `typing.Optional[typing.Sequence[GmailMessage]]` — List of Gmail messages to send
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**drafts:** `typing.Optional[typing.Sequence[GmailDraft]]` — List of Gmail drafts to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_gmail_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_gmail_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_docs_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with google_docs-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_google_docs_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documents:** `typing.Optional[typing.Sequence[GoogleDocsDocument]]` — List of Google Docs documents
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_docs_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_google_docs_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_drive_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with google_drive-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_google_drive_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**files:** `typing.Optional[typing.Sequence[GoogleDriveFile]]` — List of Google Drive files and folders
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_drive_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_google_drive_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_forms_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with google_forms-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_google_forms_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**forms:** `typing.Optional[typing.Sequence[GoogleFormsForm]]` — List of Google Forms
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_forms_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_google_forms_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_sheets_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with google_sheets-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_google_sheets_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**spreadsheets:** `typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]` — List of Google Sheets spreadsheets
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_sheets_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_google_sheets_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_salesforce_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with salesforce-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_salesforce_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accounts:** `typing.Optional[typing.Sequence[SalesforceAccount]]` — List of Salesforce accounts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts:** `typing.Optional[typing.Sequence[SalesforceContact]]` — List of Salesforce contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**opportunities:** `typing.Optional[typing.Sequence[SalesforceOpportunity]]` — List of Salesforce opportunities
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**leads:** `typing.Optional[typing.Sequence[SalesforceLead]]` — List of Salesforce leads
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cases:** `typing.Optional[typing.Sequence[SalesforceCase]]` — List of Salesforce cases
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**campaigns:** `typing.Optional[typing.Sequence[SalesforceCampaign]]` — List of Salesforce campaigns
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_salesforce_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_salesforce_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_onedrive_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with onedrive-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis, OneDriveFolder
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_onedrive_sandbox(
+    sandbox_id="sandbox_id",
+    root=OneDriveFolder(
+        name="name",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**root:** `OneDriveFolder` — Root folder containing all subfolders and files
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_onedrive_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_onedrive_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_microsoft_teams_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with microsoft_teams-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_microsoft_teams_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channels:** `typing.Optional[typing.Sequence[TeamsChannel]]` — List of team channels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**chats:** `typing.Optional[typing.Sequence[TeamsChat]]` — List of one-on-one chats
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_microsoft_teams_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_microsoft_teams_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_outlook_mail_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with outlook_mail-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_outlook_mail_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**messages:** `typing.Optional[typing.Sequence[OutlookMailMessage]]` — List of mail messages
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_outlook_mail_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_outlook_mail_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_calcom_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with Cal.com-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_calcom_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedules:** `typing.Optional[typing.Sequence[CalcomSchedule]]` — List of schedules to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_calcom_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_calcom_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_hubspot_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with hubspot-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_hubspot_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**companies:** `typing.Optional[typing.Sequence[HubSpotCompany]]` — List of companies
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts:** `typing.Optional[typing.Sequence[HubSpotContact]]` — List of contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deals:** `typing.Optional[typing.Sequence[HubSpotDeal]]` — List of deals
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tickets:** `typing.Optional[typing.Sequence[HubSpotTicket]]` — List of tickets
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tasks:** `typing.Optional[typing.Sequence[HubSpotTask]]` — List of tasks
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_hubspot_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_hubspot_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_quickbooks_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with quickbooks-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_quickbooks_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accounts:** `typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]` — List of accounts (input: minimal, output: full API objects)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customers:** `typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]` — List of customers (input: minimal, output: full API objects)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vendors:** `typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]` — List of vendors (input: minimal, output: full API objects)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoices:** `typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]` — List of invoices (input: minimal, output: full API objects)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payments:** `typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]` — List of payments (input: minimal, output: full API objects)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_quickbooks_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_quickbooks_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_moneybird_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with moneybird-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_moneybird_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ledger_accounts:** `typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]` — List of ledger accounts to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts:** `typing.Optional[typing.Sequence[MoneybirdContact]]` — List of contacts to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**products:** `typing.Optional[typing.Sequence[MoneybirdProduct]]` — List of products to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projects:** `typing.Optional[typing.Sequence[MoneybirdProject]]` — List of projects to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**time_entries:** `typing.Optional[typing.Sequence[MoneybirdTimeEntry]]` — List of time entries to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sales_invoices:** `typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]` — List of sales invoices to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_moneybird_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_moneybird_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_dropbox_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with dropbox-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_dropbox_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**folders:** `typing.Optional[typing.Sequence[str]]` — List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**files:** `typing.Optional[typing.Sequence[DropboxFile]]` — List of files to create with their content
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_dropbox_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_dropbox_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_shopify_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with shopify-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_shopify_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**products:** `typing.Optional[typing.Sequence[ShopifyProduct]]` — List of products to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customers:** `typing.Optional[typing.Sequence[ShopifyCustomer]]` — List of customers to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_shopify_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_shopify_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_outlook_calendar_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with outlook_calendar-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_outlook_calendar_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**events:** `typing.Optional[typing.Sequence[OutlookCalendarEvent]]` — List of calendar events
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_outlook_calendar_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_outlook_calendar_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_clickup_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with clickup-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_clickup_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**spaces:** `typing.Optional[typing.Sequence[ClickUpSpace]]` — List of spaces with nested objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_clickup_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_clickup_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_close_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with close-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_close_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**leads:** `typing.Optional[typing.Sequence[CloseLead]]` — List of leads with nested objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_close_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_close_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_resend_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with resend-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_resend_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**emails:** `typing.Optional[typing.Sequence[ResendEmail]]` — List of standalone transactional emails
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contacts:** `typing.Optional[typing.Sequence[ResendContact]]` — List of standalone contacts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**segments:** `typing.Optional[typing.Sequence[ResendSegment]]` — List of segments with nested broadcasts
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_resend_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_resend_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_wordpress_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with wordpress-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_wordpress_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**posts:** `typing.Optional[typing.Sequence[WordPressPost]]` — List of WordPress posts to create
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_wordpress_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_wordpress_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_asana_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with asana-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_asana_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projects:** `typing.Optional[typing.Sequence[AsanaProject]]` — List of projects with nested tasks and stories
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_asana_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_asana_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_mem0sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with mem0-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_mem0sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**memories:** `typing.Optional[typing.Sequence[Mem0Memory]]` — List of memories
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_mem0sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_mem0sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_supabase_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with supabase-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_supabase_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projects:** `typing.Optional[typing.Sequence[SupabaseProject]]` — List of Supabase projects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_supabase_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_supabase_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_github_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with github-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_github_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**repos:** `typing.Optional[typing.Sequence[GitHubRepo]]` — List of repositories
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_github_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_github_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_linear_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with linear-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_linear_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**projects:** `typing.Optional[typing.Sequence[LinearProject]]` — List of projects with their issues. At most 50 projects can be included.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_linear_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_linear_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_notion_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with notion-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_notion_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**databases:** `typing.Optional[typing.Sequence[NotionDatabase]]` — List of databases with their data sources and pages
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pages:** `typing.Optional[typing.Sequence[NotionPage]]` — List of standalone pages (not in databases)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_notion_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_notion_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_slack_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with slack-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_slack_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channels:** `typing.Optional[typing.Sequence[SlackChannel]]` — List of channels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_slack_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_slack_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_confluence_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with confluence-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_confluence_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**spaces:** `typing.Optional[typing.Sequence[ConfluenceSpace]]` — List of spaces
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_confluence_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_confluence_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_discord_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with discord-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_discord_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**channels:** `typing.Optional[typing.Sequence[DiscordChannel]]` — List of channels
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_discord_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_discord_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_airtable_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with airtable-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_airtable_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tables:** `typing.Optional[typing.Sequence[AirtableTable]]` — List of tables (simplified, assumes single base)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_airtable_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_airtable_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_snowflake_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initialize the sandbox with snowflake-specific data following the defined schema.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.initialize_snowflake_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**databases:** `typing.Optional[typing.Sequence[SnowflakeDatabase]]` — List of databases with their schemas
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_snowflake_sandbox</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export all data from the sandbox in the same format used for initialization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.sandbox.dump_snowflake_sandbox(
+    sandbox_id="sandbox_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandbox_id:** `str` — The unique sandbox identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">initialize_google_cloud_sandbox</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7993,7 +13098,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.sandbox.initialize_sandbox(
+client.sandbox.initialize_google_cloud_sandbox(
     sandbox_id="sandbox_id",
 )
 
@@ -8095,7 +13200,7 @@ client.sandbox.initialize_sandbox(
 </dl>
 </details>
 
-<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_sandbox</a>(...)</code></summary>
+<details><summary><code>client.sandbox.<a href="src/klavis/sandbox/client.py">dump_google_cloud_sandbox</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -8127,7 +13232,7 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.sandbox.dump_sandbox(
+client.sandbox.dump_google_cloud_sandbox(
     sandbox_id="sandbox_id",
 )
 

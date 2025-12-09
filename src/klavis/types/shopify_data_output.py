@@ -8,7 +8,7 @@ from .shopify_customer import ShopifyCustomer
 from .shopify_product import ShopifyProduct
 
 
-class ShopifyData(UniversalBaseModel):
+class ShopifyDataOutput(UniversalBaseModel):
     """
     Complete Shopify sandbox data structure
 

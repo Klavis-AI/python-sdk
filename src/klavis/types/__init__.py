@@ -23,7 +23,7 @@ if typing.TYPE_CHECKING:
     from .big_query_table_field_schema import BigQueryTableFieldSchema
     from .big_query_table_reference import BigQueryTableReference
     from .big_query_table_schema import BigQueryTableSchema
-    from .calcom_data import CalcomData
+    from .calcom_data_output import CalcomDataOutput
     from .calcom_schedule import CalcomSchedule
     from .call_tool_response import CallToolResponse
     from .call_tool_result import CallToolResult
@@ -100,7 +100,7 @@ if typing.TYPE_CHECKING:
     from .get_user_integrations_response import GetUserIntegrationsResponse
     from .get_user_response import GetUserResponse
     from .git_hub_branch import GitHubBranch
-    from .git_hub_data import GitHubData
+    from .git_hub_data_output import GitHubDataOutput
     from .git_hub_file import GitHubFile
     from .git_hub_folder import GitHubFolder
     from .git_hub_issue import GitHubIssue
@@ -110,7 +110,7 @@ if typing.TYPE_CHECKING:
     from .gmail_draft import GmailDraft
     from .gmail_message import GmailMessage
     from .google_calendar_attendee import GoogleCalendarAttendee
-    from .google_calendar_data import GoogleCalendarData
+    from .google_calendar_data_output import GoogleCalendarDataOutput
     from .google_calendar_event import GoogleCalendarEvent
     from .google_calendar_event_date_time import GoogleCalendarEventDateTime
     from .google_cloud_data_output import GoogleCloudDataOutput
@@ -118,15 +118,16 @@ if typing.TYPE_CHECKING:
     from .google_docs_document import GoogleDocsDocument
     from .google_drive_data import GoogleDriveData
     from .google_drive_file import GoogleDriveFile
-    from .google_forms_data import GoogleFormsData
+    from .google_forms_data_output import GoogleFormsDataOutput
     from .google_forms_form import GoogleFormsForm
     from .google_forms_form_settings import GoogleFormsFormSettings
     from .google_forms_info import GoogleFormsInfo
     from .google_forms_item import GoogleFormsItem
     from .google_forms_quiz_settings import GoogleFormsQuizSettings
     from .google_sheets_cell_value import GoogleSheetsCellValue
-    from .google_sheets_data import GoogleSheetsData
-    from .google_sheets_grid_data import GoogleSheetsGridData
+    from .google_sheets_data_output import GoogleSheetsDataOutput
+    from .google_sheets_grid_data_input import GoogleSheetsGridDataInput
+    from .google_sheets_grid_data_output import GoogleSheetsGridDataOutput
     from .google_sheets_row_data import GoogleSheetsRowData
     from .google_sheets_sheet import GoogleSheetsSheet
     from .google_sheets_sheet_properties import GoogleSheetsSheetProperties
@@ -147,7 +148,7 @@ if typing.TYPE_CHECKING:
     from .jira_project import JiraProject
     from .jira_sprint import JiraSprint
     from .linear_comment import LinearComment
-    from .linear_data import LinearData
+    from .linear_data_output import LinearDataOutput
     from .linear_issue import LinearIssue
     from .linear_project import LinearProject
     from .list_tools_response import ListToolsResponse
@@ -160,14 +161,14 @@ if typing.TYPE_CHECKING:
     from .mem0memory import Mem0Memory
     from .mem0message import Mem0Message
     from .moneybird_contact import MoneybirdContact
-    from .moneybird_data import MoneybirdData
+    from .moneybird_data_output import MoneybirdDataOutput
     from .moneybird_invoice_detail import MoneybirdInvoiceDetail
     from .moneybird_ledger_account import MoneybirdLedgerAccount
     from .moneybird_product import MoneybirdProduct
     from .moneybird_project import MoneybirdProject
     from .moneybird_sales_invoice import MoneybirdSalesInvoice
     from .moneybird_time_entry import MoneybirdTimeEntry
-    from .ms_teams_data import MsTeamsData
+    from .ms_teams_data_output import MsTeamsDataOutput
     from .notion_block import NotionBlock
     from .notion_comment import NotionComment
     from .notion_data_output import NotionDataOutput
@@ -175,7 +176,7 @@ if typing.TYPE_CHECKING:
     from .notion_database import NotionDatabase
     from .notion_page import NotionPage
     from .o_auth_server_name import OAuthServerName
-    from .one_drive_data import OneDriveData
+    from .one_drive_data_output import OneDriveDataOutput
     from .one_drive_file import OneDriveFile
     from .one_drive_folder import OneDriveFolder
     from .outlook_calendar_data import OutlookCalendarData
@@ -207,7 +208,7 @@ if typing.TYPE_CHECKING:
     from .sharesight_o_auth_success_response import SharesightOAuthSuccessResponse
     from .shopify_address import ShopifyAddress
     from .shopify_customer import ShopifyCustomer
-    from .shopify_data import ShopifyData
+    from .shopify_data_output import ShopifyDataOutput
     from .shopify_product import ShopifyProduct
     from .shopify_product_variant import ShopifyProductVariant
     from .slack_channel import SlackChannel
@@ -235,7 +236,7 @@ if typing.TYPE_CHECKING:
     from .strata_get_auth_response import StrataGetAuthResponse
     from .strata_get_response import StrataGetResponse
     from .strata_raw_actions_response import StrataRawActionsResponse
-    from .supabase_data import SupabaseData
+    from .supabase_data_output import SupabaseDataOutput
     from .supabase_project import SupabaseProject
     from .supabase_table import SupabaseTable
     from .teams_channel import TeamsChannel
@@ -270,7 +271,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BigQueryTableFieldSchema": ".big_query_table_field_schema",
     "BigQueryTableReference": ".big_query_table_reference",
     "BigQueryTableSchema": ".big_query_table_schema",
-    "CalcomData": ".calcom_data",
+    "CalcomDataOutput": ".calcom_data_output",
     "CalcomSchedule": ".calcom_schedule",
     "CallToolResponse": ".call_tool_response",
     "CallToolResult": ".call_tool_result",
@@ -347,7 +348,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GetUserIntegrationsResponse": ".get_user_integrations_response",
     "GetUserResponse": ".get_user_response",
     "GitHubBranch": ".git_hub_branch",
-    "GitHubData": ".git_hub_data",
+    "GitHubDataOutput": ".git_hub_data_output",
     "GitHubFile": ".git_hub_file",
     "GitHubFolder": ".git_hub_folder",
     "GitHubIssue": ".git_hub_issue",
@@ -357,7 +358,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GmailDraft": ".gmail_draft",
     "GmailMessage": ".gmail_message",
     "GoogleCalendarAttendee": ".google_calendar_attendee",
-    "GoogleCalendarData": ".google_calendar_data",
+    "GoogleCalendarDataOutput": ".google_calendar_data_output",
     "GoogleCalendarEvent": ".google_calendar_event",
     "GoogleCalendarEventDateTime": ".google_calendar_event_date_time",
     "GoogleCloudDataOutput": ".google_cloud_data_output",
@@ -365,15 +366,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GoogleDocsDocument": ".google_docs_document",
     "GoogleDriveData": ".google_drive_data",
     "GoogleDriveFile": ".google_drive_file",
-    "GoogleFormsData": ".google_forms_data",
+    "GoogleFormsDataOutput": ".google_forms_data_output",
     "GoogleFormsForm": ".google_forms_form",
     "GoogleFormsFormSettings": ".google_forms_form_settings",
     "GoogleFormsInfo": ".google_forms_info",
     "GoogleFormsItem": ".google_forms_item",
     "GoogleFormsQuizSettings": ".google_forms_quiz_settings",
     "GoogleSheetsCellValue": ".google_sheets_cell_value",
-    "GoogleSheetsData": ".google_sheets_data",
-    "GoogleSheetsGridData": ".google_sheets_grid_data",
+    "GoogleSheetsDataOutput": ".google_sheets_data_output",
+    "GoogleSheetsGridDataInput": ".google_sheets_grid_data_input",
+    "GoogleSheetsGridDataOutput": ".google_sheets_grid_data_output",
     "GoogleSheetsRowData": ".google_sheets_row_data",
     "GoogleSheetsSheet": ".google_sheets_sheet",
     "GoogleSheetsSheetProperties": ".google_sheets_sheet_properties",
@@ -394,7 +396,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "JiraProject": ".jira_project",
     "JiraSprint": ".jira_sprint",
     "LinearComment": ".linear_comment",
-    "LinearData": ".linear_data",
+    "LinearDataOutput": ".linear_data_output",
     "LinearIssue": ".linear_issue",
     "LinearProject": ".linear_project",
     "ListToolsResponse": ".list_tools_response",
@@ -407,14 +409,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Mem0Memory": ".mem0memory",
     "Mem0Message": ".mem0message",
     "MoneybirdContact": ".moneybird_contact",
-    "MoneybirdData": ".moneybird_data",
+    "MoneybirdDataOutput": ".moneybird_data_output",
     "MoneybirdInvoiceDetail": ".moneybird_invoice_detail",
     "MoneybirdLedgerAccount": ".moneybird_ledger_account",
     "MoneybirdProduct": ".moneybird_product",
     "MoneybirdProject": ".moneybird_project",
     "MoneybirdSalesInvoice": ".moneybird_sales_invoice",
     "MoneybirdTimeEntry": ".moneybird_time_entry",
-    "MsTeamsData": ".ms_teams_data",
+    "MsTeamsDataOutput": ".ms_teams_data_output",
     "NotionBlock": ".notion_block",
     "NotionComment": ".notion_comment",
     "NotionDataOutput": ".notion_data_output",
@@ -422,7 +424,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotionDatabase": ".notion_database",
     "NotionPage": ".notion_page",
     "OAuthServerName": ".o_auth_server_name",
-    "OneDriveData": ".one_drive_data",
+    "OneDriveDataOutput": ".one_drive_data_output",
     "OneDriveFile": ".one_drive_file",
     "OneDriveFolder": ".one_drive_folder",
     "OutlookCalendarData": ".outlook_calendar_data",
@@ -454,7 +456,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SharesightOAuthSuccessResponse": ".sharesight_o_auth_success_response",
     "ShopifyAddress": ".shopify_address",
     "ShopifyCustomer": ".shopify_customer",
-    "ShopifyData": ".shopify_data",
+    "ShopifyDataOutput": ".shopify_data_output",
     "ShopifyProduct": ".shopify_product",
     "ShopifyProductVariant": ".shopify_product_variant",
     "SlackChannel": ".slack_channel",
@@ -482,7 +484,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "StrataGetAuthResponse": ".strata_get_auth_response",
     "StrataGetResponse": ".strata_get_response",
     "StrataRawActionsResponse": ".strata_raw_actions_response",
-    "SupabaseData": ".supabase_data",
+    "SupabaseDataOutput": ".supabase_data_output",
     "SupabaseProject": ".supabase_project",
     "SupabaseTable": ".supabase_table",
     "TeamsChannel": ".teams_channel",
@@ -541,7 +543,7 @@ __all__ = [
     "BigQueryTableFieldSchema",
     "BigQueryTableReference",
     "BigQueryTableSchema",
-    "CalcomData",
+    "CalcomDataOutput",
     "CalcomSchedule",
     "CallToolResponse",
     "CallToolResult",
@@ -618,7 +620,7 @@ __all__ = [
     "GetUserIntegrationsResponse",
     "GetUserResponse",
     "GitHubBranch",
-    "GitHubData",
+    "GitHubDataOutput",
     "GitHubFile",
     "GitHubFolder",
     "GitHubIssue",
@@ -628,7 +630,7 @@ __all__ = [
     "GmailDraft",
     "GmailMessage",
     "GoogleCalendarAttendee",
-    "GoogleCalendarData",
+    "GoogleCalendarDataOutput",
     "GoogleCalendarEvent",
     "GoogleCalendarEventDateTime",
     "GoogleCloudDataOutput",
@@ -636,15 +638,16 @@ __all__ = [
     "GoogleDocsDocument",
     "GoogleDriveData",
     "GoogleDriveFile",
-    "GoogleFormsData",
+    "GoogleFormsDataOutput",
     "GoogleFormsForm",
     "GoogleFormsFormSettings",
     "GoogleFormsInfo",
     "GoogleFormsItem",
     "GoogleFormsQuizSettings",
     "GoogleSheetsCellValue",
-    "GoogleSheetsData",
-    "GoogleSheetsGridData",
+    "GoogleSheetsDataOutput",
+    "GoogleSheetsGridDataInput",
+    "GoogleSheetsGridDataOutput",
     "GoogleSheetsRowData",
     "GoogleSheetsSheet",
     "GoogleSheetsSheetProperties",
@@ -665,7 +668,7 @@ __all__ = [
     "JiraProject",
     "JiraSprint",
     "LinearComment",
-    "LinearData",
+    "LinearDataOutput",
     "LinearIssue",
     "LinearProject",
     "ListToolsResponse",
@@ -678,14 +681,14 @@ __all__ = [
     "Mem0Memory",
     "Mem0Message",
     "MoneybirdContact",
-    "MoneybirdData",
+    "MoneybirdDataOutput",
     "MoneybirdInvoiceDetail",
     "MoneybirdLedgerAccount",
     "MoneybirdProduct",
     "MoneybirdProject",
     "MoneybirdSalesInvoice",
     "MoneybirdTimeEntry",
-    "MsTeamsData",
+    "MsTeamsDataOutput",
     "NotionBlock",
     "NotionComment",
     "NotionDataOutput",
@@ -693,7 +696,7 @@ __all__ = [
     "NotionDatabase",
     "NotionPage",
     "OAuthServerName",
-    "OneDriveData",
+    "OneDriveDataOutput",
     "OneDriveFile",
     "OneDriveFolder",
     "OutlookCalendarData",
@@ -725,7 +728,7 @@ __all__ = [
     "SharesightOAuthSuccessResponse",
     "ShopifyAddress",
     "ShopifyCustomer",
-    "ShopifyData",
+    "ShopifyDataOutput",
     "ShopifyProduct",
     "ShopifyProductVariant",
     "SlackChannel",
@@ -753,7 +756,7 @@ __all__ = [
     "StrataGetAuthResponse",
     "StrataGetResponse",
     "StrataRawActionsResponse",
-    "SupabaseData",
+    "SupabaseDataOutput",
     "SupabaseProject",
     "SupabaseTable",
     "TeamsChannel",

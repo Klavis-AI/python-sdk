@@ -11,22 +11,109 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.airtable_table import AirtableTable
+from ..types.asana_project import AsanaProject
 from ..types.big_query_dataset import BigQueryDataset
 from ..types.big_query_table import BigQueryTable
+from ..types.calcom_schedule import CalcomSchedule
+from ..types.click_up_space import ClickUpSpace
+from ..types.close_lead import CloseLead
 from ..types.compute_instance import ComputeInstance
+from ..types.confluence_space import ConfluenceSpace
 from ..types.create_sandbox_response import CreateSandboxResponse
+from ..types.discord_channel import DiscordChannel
+from ..types.dropbox_file import DropboxFile
+from ..types.dump_sandbox_response_airtable_data import DumpSandboxResponseAirtableData
+from ..types.dump_sandbox_response_asana_data import DumpSandboxResponseAsanaData
+from ..types.dump_sandbox_response_calcom_data import DumpSandboxResponseCalcomData
+from ..types.dump_sandbox_response_click_up_data import DumpSandboxResponseClickUpData
+from ..types.dump_sandbox_response_close_data import DumpSandboxResponseCloseData
+from ..types.dump_sandbox_response_confluence_data import DumpSandboxResponseConfluenceData
+from ..types.dump_sandbox_response_discord_data import DumpSandboxResponseDiscordData
+from ..types.dump_sandbox_response_dropbox_data import DumpSandboxResponseDropboxData
+from ..types.dump_sandbox_response_git_hub_data import DumpSandboxResponseGitHubData
+from ..types.dump_sandbox_response_gmail_data import DumpSandboxResponseGmailData
+from ..types.dump_sandbox_response_google_calendar_data import DumpSandboxResponseGoogleCalendarData
 from ..types.dump_sandbox_response_google_cloud_data import DumpSandboxResponseGoogleCloudData
+from ..types.dump_sandbox_response_google_docs_data import DumpSandboxResponseGoogleDocsData
+from ..types.dump_sandbox_response_google_drive_data import DumpSandboxResponseGoogleDriveData
+from ..types.dump_sandbox_response_google_forms_data import DumpSandboxResponseGoogleFormsData
+from ..types.dump_sandbox_response_google_sheets_data import DumpSandboxResponseGoogleSheetsData
+from ..types.dump_sandbox_response_hub_spot_data import DumpSandboxResponseHubSpotData
+from ..types.dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
+from ..types.dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
+from ..types.dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
+from ..types.dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
+from ..types.dump_sandbox_response_ms_teams_data import DumpSandboxResponseMsTeamsData
+from ..types.dump_sandbox_response_notion_data import DumpSandboxResponseNotionData
+from ..types.dump_sandbox_response_one_drive_data import DumpSandboxResponseOneDriveData
+from ..types.dump_sandbox_response_outlook_calendar_data import DumpSandboxResponseOutlookCalendarData
+from ..types.dump_sandbox_response_outlook_mail_data import DumpSandboxResponseOutlookMailData
+from ..types.dump_sandbox_response_quick_books_data import DumpSandboxResponseQuickBooksData
+from ..types.dump_sandbox_response_resend_data import DumpSandboxResponseResendData
+from ..types.dump_sandbox_response_salesforce_data import DumpSandboxResponseSalesforceData
+from ..types.dump_sandbox_response_shopify_data import DumpSandboxResponseShopifyData
+from ..types.dump_sandbox_response_slack_data import DumpSandboxResponseSlackData
+from ..types.dump_sandbox_response_snowflake_data import DumpSandboxResponseSnowflakeData
+from ..types.dump_sandbox_response_supabase_data import DumpSandboxResponseSupabaseData
+from ..types.dump_sandbox_response_word_press_data import DumpSandboxResponseWordPressData
+from ..types.git_hub_repo import GitHubRepo
+from ..types.gmail_draft import GmailDraft
+from ..types.gmail_message import GmailMessage
+from ..types.google_calendar_event import GoogleCalendarEvent
+from ..types.google_docs_document import GoogleDocsDocument
+from ..types.google_drive_file import GoogleDriveFile
+from ..types.google_forms_form import GoogleFormsForm
+from ..types.google_sheets_spreadsheet import GoogleSheetsSpreadsheet
 from ..types.http_validation_error import HttpValidationError
+from ..types.hub_spot_company import HubSpotCompany
+from ..types.hub_spot_contact import HubSpotContact
+from ..types.hub_spot_deal import HubSpotDeal
+from ..types.hub_spot_task import HubSpotTask
+from ..types.hub_spot_ticket import HubSpotTicket
 from ..types.initialize_sandbox_response import InitializeSandboxResponse
+from ..types.jira_board import JiraBoard
+from ..types.jira_project import JiraProject
+from ..types.jira_sprint import JiraSprint
+from ..types.linear_project import LinearProject
 from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
 from ..types.log_sink import LogSink
+from ..types.mem0memory import Mem0Memory
+from ..types.moneybird_contact import MoneybirdContact
+from ..types.moneybird_ledger_account import MoneybirdLedgerAccount
+from ..types.moneybird_product import MoneybirdProduct
+from ..types.moneybird_project import MoneybirdProject
+from ..types.moneybird_sales_invoice import MoneybirdSalesInvoice
+from ..types.moneybird_time_entry import MoneybirdTimeEntry
+from ..types.notion_database import NotionDatabase
+from ..types.notion_page import NotionPage
+from ..types.one_drive_folder import OneDriveFolder
+from ..types.outlook_calendar_event import OutlookCalendarEvent
+from ..types.outlook_mail_message import OutlookMailMessage
 from ..types.release_sandbox_response import ReleaseSandboxResponse
+from ..types.resend_contact import ResendContact
+from ..types.resend_email import ResendEmail
+from ..types.resend_segment import ResendSegment
 from ..types.reset_sandbox_response import ResetSandboxResponse
+from ..types.salesforce_account import SalesforceAccount
+from ..types.salesforce_campaign import SalesforceCampaign
+from ..types.salesforce_case import SalesforceCase
+from ..types.salesforce_contact import SalesforceContact
+from ..types.salesforce_lead import SalesforceLead
+from ..types.salesforce_opportunity import SalesforceOpportunity
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
+from ..types.shopify_customer import ShopifyCustomer
+from ..types.shopify_product import ShopifyProduct
+from ..types.slack_channel import SlackChannel
+from ..types.snowflake_database import SnowflakeDatabase
 from ..types.storage_bucket import StorageBucket
 from ..types.storage_object import StorageObject
+from ..types.supabase_project import SupabaseProject
+from ..types.teams_channel import TeamsChannel
+from ..types.teams_chat import TeamsChat
+from ..types.word_press_post import WordPressPost
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -245,7 +332,4008 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def initialize_sandbox(
+    def initialize_jira_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
+        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
+        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with jira-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[JiraProject]]
+            List of projects with their issues
+
+        boards : typing.Optional[typing.Sequence[JiraBoard]]
+            List of boards
+
+        sprints : typing.Optional[typing.Sequence[JiraSprint]]
+            List of sprints
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/jira/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[JiraProject], direction="write"
+                ),
+                "boards": convert_and_respect_annotation_metadata(
+                    object_=boards, annotation=typing.Sequence[JiraBoard], direction="write"
+                ),
+                "sprints": convert_and_respect_annotation_metadata(
+                    object_=sprints, annotation=typing.Sequence[JiraSprint], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_jira_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseJiraData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseJiraData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/jira/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseJiraData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseJiraData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
+            List of Google Calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "events": convert_and_respect_annotation_metadata(
+                    object_=events, annotation=typing.Sequence[GoogleCalendarEvent], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_google_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGoogleCalendarData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGoogleCalendarData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleCalendarData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleCalendarData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_gmail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
+        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with gmail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[GmailMessage]]
+            List of Gmail messages to send
+
+        drafts : typing.Optional[typing.Sequence[GmailDraft]]
+            List of Gmail drafts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[GmailMessage], direction="write"
+                ),
+                "drafts": convert_and_respect_annotation_metadata(
+                    object_=drafts, annotation=typing.Sequence[GmailDraft], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_gmail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGmailData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGmailData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGmailData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGmailData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_docs_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_docs-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
+            List of Google Docs documents
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "documents": convert_and_respect_annotation_metadata(
+                    object_=documents, annotation=typing.Sequence[GoogleDocsDocument], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_google_docs_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGoogleDocsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGoogleDocsData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleDocsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleDocsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_drive_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_drive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
+            List of Google Drive files and folders
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "files": convert_and_respect_annotation_metadata(
+                    object_=files, annotation=typing.Sequence[GoogleDriveFile], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_google_drive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGoogleDriveData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGoogleDriveData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleDriveData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleDriveData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_forms_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_forms-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
+            List of Google Forms
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "forms": convert_and_respect_annotation_metadata(
+                    object_=forms, annotation=typing.Sequence[GoogleFormsForm], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_google_forms_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGoogleFormsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGoogleFormsData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleFormsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleFormsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_sheets_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_sheets-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
+            List of Google Sheets spreadsheets
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spreadsheets": convert_and_respect_annotation_metadata(
+                    object_=spreadsheets, annotation=typing.Sequence[GoogleSheetsSpreadsheet], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_google_sheets_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGoogleSheetsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGoogleSheetsData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleSheetsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleSheetsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_salesforce_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with salesforce-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
+            List of Salesforce accounts
+
+        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
+            List of Salesforce contacts
+
+        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
+            List of Salesforce opportunities
+
+        leads : typing.Optional[typing.Sequence[SalesforceLead]]
+            List of Salesforce leads
+
+        cases : typing.Optional[typing.Sequence[SalesforceCase]]
+            List of Salesforce cases
+
+        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
+            List of Salesforce campaigns
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "accounts": convert_and_respect_annotation_metadata(
+                    object_=accounts, annotation=typing.Sequence[SalesforceAccount], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[SalesforceContact], direction="write"
+                ),
+                "opportunities": convert_and_respect_annotation_metadata(
+                    object_=opportunities, annotation=typing.Sequence[SalesforceOpportunity], direction="write"
+                ),
+                "leads": convert_and_respect_annotation_metadata(
+                    object_=leads, annotation=typing.Sequence[SalesforceLead], direction="write"
+                ),
+                "cases": convert_and_respect_annotation_metadata(
+                    object_=cases, annotation=typing.Sequence[SalesforceCase], direction="write"
+                ),
+                "campaigns": convert_and_respect_annotation_metadata(
+                    object_=campaigns, annotation=typing.Sequence[SalesforceCampaign], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_salesforce_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseSalesforceData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseSalesforceData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSalesforceData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSalesforceData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_onedrive_sandbox(
+        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with onedrive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        root : OneDriveFolder
+            Root folder containing all subfolders and files
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "root": convert_and_respect_annotation_metadata(
+                    object_=root, annotation=OneDriveFolder, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_onedrive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseOneDriveData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseOneDriveData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOneDriveData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOneDriveData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_microsoft_teams_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with microsoft_teams-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+            List of team channels
+
+        chats : typing.Optional[typing.Sequence[TeamsChat]]
+            List of one-on-one chats
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[TeamsChannel], direction="write"
+                ),
+                "chats": convert_and_respect_annotation_metadata(
+                    object_=chats, annotation=typing.Sequence[TeamsChat], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_microsoft_teams_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseMsTeamsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseMsTeamsData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMsTeamsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMsTeamsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_outlook_mail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with outlook_mail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
+            List of mail messages
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[OutlookMailMessage], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_outlook_mail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseOutlookMailData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseOutlookMailData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOutlookMailData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOutlookMailData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_calcom_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with Cal.com-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
+            List of schedules to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "schedules": convert_and_respect_annotation_metadata(
+                    object_=schedules, annotation=typing.Sequence[CalcomSchedule], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseCalcomData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseCalcomData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseCalcomData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseCalcomData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_hubspot_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
+        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
+        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
+        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with hubspot-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
+            List of companies
+
+        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
+            List of contacts
+
+        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
+            List of deals
+
+        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
+            List of tickets
+
+        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
+            List of tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "companies": convert_and_respect_annotation_metadata(
+                    object_=companies, annotation=typing.Sequence[HubSpotCompany], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[HubSpotContact], direction="write"
+                ),
+                "deals": convert_and_respect_annotation_metadata(
+                    object_=deals, annotation=typing.Sequence[HubSpotDeal], direction="write"
+                ),
+                "tickets": convert_and_respect_annotation_metadata(
+                    object_=tickets, annotation=typing.Sequence[HubSpotTicket], direction="write"
+                ),
+                "tasks": convert_and_respect_annotation_metadata(
+                    object_=tasks, annotation=typing.Sequence[HubSpotTask], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_hubspot_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseHubSpotData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseHubSpotData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseHubSpotData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseHubSpotData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_quickbooks_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with quickbooks-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of accounts (input: minimal, output: full API objects)
+
+        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of customers (input: minimal, output: full API objects)
+
+        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of vendors (input: minimal, output: full API objects)
+
+        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of invoices (input: minimal, output: full API objects)
+
+        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of payments (input: minimal, output: full API objects)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "accounts": accounts,
+                "customers": customers,
+                "vendors": vendors,
+                "invoices": invoices,
+                "payments": payments,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_quickbooks_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseQuickBooksData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseQuickBooksData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseQuickBooksData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseQuickBooksData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_moneybird_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
+        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
+        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
+        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
+        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with moneybird-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
+            List of ledger accounts to create
+
+        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
+            List of contacts to create
+
+        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
+            List of products to create
+
+        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
+            List of projects to create
+
+        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
+            List of time entries to create
+
+        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
+            List of sales invoices to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "ledger_accounts": convert_and_respect_annotation_metadata(
+                    object_=ledger_accounts, annotation=typing.Sequence[MoneybirdLedgerAccount], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[MoneybirdContact], direction="write"
+                ),
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[MoneybirdProduct], direction="write"
+                ),
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[MoneybirdProject], direction="write"
+                ),
+                "time_entries": convert_and_respect_annotation_metadata(
+                    object_=time_entries, annotation=typing.Sequence[MoneybirdTimeEntry], direction="write"
+                ),
+                "sales_invoices": convert_and_respect_annotation_metadata(
+                    object_=sales_invoices, annotation=typing.Sequence[MoneybirdSalesInvoice], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_moneybird_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseMoneybirdData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseMoneybirdData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMoneybirdData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMoneybirdData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_dropbox_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        folders: typing.Optional[typing.Sequence[str]] = OMIT,
+        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with dropbox-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        folders : typing.Optional[typing.Sequence[str]]
+            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+
+        files : typing.Optional[typing.Sequence[DropboxFile]]
+            List of files to create with their content
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "folders": folders,
+                "files": convert_and_respect_annotation_metadata(
+                    object_=files, annotation=typing.Sequence[DropboxFile], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_dropbox_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseDropboxData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseDropboxData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseDropboxData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseDropboxData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_shopify_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
+        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with shopify-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        products : typing.Optional[typing.Sequence[ShopifyProduct]]
+            List of products to create
+
+        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
+            List of customers to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[ShopifyProduct], direction="write"
+                ),
+                "customers": convert_and_respect_annotation_metadata(
+                    object_=customers, annotation=typing.Sequence[ShopifyCustomer], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_shopify_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseShopifyData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseShopifyData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseShopifyData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseShopifyData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_outlook_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with outlook_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+            List of calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "events": convert_and_respect_annotation_metadata(
+                    object_=events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_outlook_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseOutlookCalendarData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseOutlookCalendarData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOutlookCalendarData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOutlookCalendarData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_clickup_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with clickup-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
+            List of spaces with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spaces": convert_and_respect_annotation_metadata(
+                    object_=spaces, annotation=typing.Sequence[ClickUpSpace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_clickup_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseClickUpData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseClickUpData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseClickUpData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseClickUpData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_close_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with close-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        leads : typing.Optional[typing.Sequence[CloseLead]]
+            List of leads with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/close/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "leads": convert_and_respect_annotation_metadata(
+                    object_=leads, annotation=typing.Sequence[CloseLead], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_close_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseCloseData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseCloseData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/close/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseCloseData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseCloseData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_resend_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
+        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with resend-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        emails : typing.Optional[typing.Sequence[ResendEmail]]
+            List of standalone transactional emails
+
+        contacts : typing.Optional[typing.Sequence[ResendContact]]
+            List of standalone contacts
+
+        segments : typing.Optional[typing.Sequence[ResendSegment]]
+            List of segments with nested broadcasts
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/resend/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "emails": convert_and_respect_annotation_metadata(
+                    object_=emails, annotation=typing.Sequence[ResendEmail], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[ResendContact], direction="write"
+                ),
+                "segments": convert_and_respect_annotation_metadata(
+                    object_=segments, annotation=typing.Sequence[ResendSegment], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_resend_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseResendData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseResendData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/resend/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseResendData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseResendData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_wordpress_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with wordpress-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        posts : typing.Optional[typing.Sequence[WordPressPost]]
+            List of WordPress posts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "posts": convert_and_respect_annotation_metadata(
+                    object_=posts, annotation=typing.Sequence[WordPressPost], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_wordpress_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseWordPressData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseWordPressData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseWordPressData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseWordPressData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_asana_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with asana-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[AsanaProject]]
+            List of projects with nested tasks and stories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/asana/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[AsanaProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_asana_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseAsanaData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseAsanaData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/asana/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseAsanaData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseAsanaData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_mem0sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with mem0-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+            List of memories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "memories": convert_and_respect_annotation_metadata(
+                    object_=memories, annotation=typing.Sequence[Mem0Memory], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_mem0sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseMem0Data]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseMem0Data]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMem0Data,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMem0Data,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_supabase_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with supabase-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[SupabaseProject]]
+            List of Supabase projects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[SupabaseProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_supabase_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseSupabaseData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseSupabaseData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSupabaseData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSupabaseData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_github_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with github-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        repos : typing.Optional[typing.Sequence[GitHubRepo]]
+            List of repositories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/github/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "repos": convert_and_respect_annotation_metadata(
+                    object_=repos, annotation=typing.Sequence[GitHubRepo], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_github_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseGitHubData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseGitHubData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/github/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGitHubData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGitHubData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_linear_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with linear-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[LinearProject]]
+            List of projects with their issues. At most 50 projects can be included.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/linear/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[LinearProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_linear_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseLinearData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseLinearData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/linear/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseLinearData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseLinearData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_notion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
+        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with notion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[NotionDatabase]]
+            List of databases with their data sources and pages
+
+        pages : typing.Optional[typing.Sequence[NotionPage]]
+            List of standalone pages (not in databases)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/notion/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "databases": convert_and_respect_annotation_metadata(
+                    object_=databases, annotation=typing.Sequence[NotionDatabase], direction="write"
+                ),
+                "pages": convert_and_respect_annotation_metadata(
+                    object_=pages, annotation=typing.Sequence[NotionPage], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_notion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseNotionData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseNotionData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/notion/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseNotionData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseNotionData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_slack_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with slack-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[SlackChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/slack/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[SlackChannel], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_slack_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseSlackData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseSlackData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/slack/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSlackData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSlackData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_confluence_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with confluence-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
+            List of spaces
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spaces": convert_and_respect_annotation_metadata(
+                    object_=spaces, annotation=typing.Sequence[ConfluenceSpace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_confluence_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseConfluenceData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseConfluenceData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseConfluenceData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseConfluenceData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_discord_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with discord-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[DiscordChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/discord/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[DiscordChannel], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_discord_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseDiscordData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseDiscordData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/discord/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseDiscordData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseDiscordData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_airtable_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with airtable-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        tables : typing.Optional[typing.Sequence[AirtableTable]]
+            List of tables (simplified, assumes single base)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "tables": convert_and_respect_annotation_metadata(
+                    object_=tables, annotation=typing.Sequence[AirtableTable], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_airtable_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseAirtableData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseAirtableData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseAirtableData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseAirtableData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_snowflake_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with snowflake-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
+            List of databases with their schemas
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "databases": convert_and_respect_annotation_metadata(
+                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_snowflake_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseSnowflakeData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseSnowflakeData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSnowflakeData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSnowflakeData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_google_cloud_sandbox(
         self,
         sandbox_id: str,
         *,
@@ -360,7 +4448,7 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def dump_sandbox(
+    def dump_google_cloud_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[DumpSandboxResponseGoogleCloudData]:
         """
@@ -624,7 +4712,4008 @@ class AsyncRawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def initialize_sandbox(
+    async def initialize_jira_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
+        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
+        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with jira-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[JiraProject]]
+            List of projects with their issues
+
+        boards : typing.Optional[typing.Sequence[JiraBoard]]
+            List of boards
+
+        sprints : typing.Optional[typing.Sequence[JiraSprint]]
+            List of sprints
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/jira/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[JiraProject], direction="write"
+                ),
+                "boards": convert_and_respect_annotation_metadata(
+                    object_=boards, annotation=typing.Sequence[JiraBoard], direction="write"
+                ),
+                "sprints": convert_and_respect_annotation_metadata(
+                    object_=sprints, annotation=typing.Sequence[JiraSprint], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_jira_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseJiraData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseJiraData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/jira/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseJiraData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseJiraData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
+            List of Google Calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "events": convert_and_respect_annotation_metadata(
+                    object_=events, annotation=typing.Sequence[GoogleCalendarEvent], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_google_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleCalendarData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGoogleCalendarData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleCalendarData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleCalendarData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_gmail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
+        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with gmail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[GmailMessage]]
+            List of Gmail messages to send
+
+        drafts : typing.Optional[typing.Sequence[GmailDraft]]
+            List of Gmail drafts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[GmailMessage], direction="write"
+                ),
+                "drafts": convert_and_respect_annotation_metadata(
+                    object_=drafts, annotation=typing.Sequence[GmailDraft], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_gmail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGmailData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGmailData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGmailData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGmailData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_docs_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_docs-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
+            List of Google Docs documents
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "documents": convert_and_respect_annotation_metadata(
+                    object_=documents, annotation=typing.Sequence[GoogleDocsDocument], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_google_docs_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleDocsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGoogleDocsData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleDocsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleDocsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_drive_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_drive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
+            List of Google Drive files and folders
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "files": convert_and_respect_annotation_metadata(
+                    object_=files, annotation=typing.Sequence[GoogleDriveFile], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_google_drive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleDriveData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGoogleDriveData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleDriveData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleDriveData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_forms_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_forms-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
+            List of Google Forms
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "forms": convert_and_respect_annotation_metadata(
+                    object_=forms, annotation=typing.Sequence[GoogleFormsForm], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_google_forms_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleFormsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGoogleFormsData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleFormsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleFormsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_sheets_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with google_sheets-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
+            List of Google Sheets spreadsheets
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spreadsheets": convert_and_respect_annotation_metadata(
+                    object_=spreadsheets, annotation=typing.Sequence[GoogleSheetsSpreadsheet], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_google_sheets_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGoogleSheetsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGoogleSheetsData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGoogleSheetsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGoogleSheetsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_salesforce_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with salesforce-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
+            List of Salesforce accounts
+
+        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
+            List of Salesforce contacts
+
+        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
+            List of Salesforce opportunities
+
+        leads : typing.Optional[typing.Sequence[SalesforceLead]]
+            List of Salesforce leads
+
+        cases : typing.Optional[typing.Sequence[SalesforceCase]]
+            List of Salesforce cases
+
+        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
+            List of Salesforce campaigns
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "accounts": convert_and_respect_annotation_metadata(
+                    object_=accounts, annotation=typing.Sequence[SalesforceAccount], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[SalesforceContact], direction="write"
+                ),
+                "opportunities": convert_and_respect_annotation_metadata(
+                    object_=opportunities, annotation=typing.Sequence[SalesforceOpportunity], direction="write"
+                ),
+                "leads": convert_and_respect_annotation_metadata(
+                    object_=leads, annotation=typing.Sequence[SalesforceLead], direction="write"
+                ),
+                "cases": convert_and_respect_annotation_metadata(
+                    object_=cases, annotation=typing.Sequence[SalesforceCase], direction="write"
+                ),
+                "campaigns": convert_and_respect_annotation_metadata(
+                    object_=campaigns, annotation=typing.Sequence[SalesforceCampaign], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_salesforce_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseSalesforceData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseSalesforceData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSalesforceData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSalesforceData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_onedrive_sandbox(
+        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with onedrive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        root : OneDriveFolder
+            Root folder containing all subfolders and files
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "root": convert_and_respect_annotation_metadata(
+                    object_=root, annotation=OneDriveFolder, direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_onedrive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseOneDriveData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseOneDriveData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOneDriveData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOneDriveData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_microsoft_teams_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with microsoft_teams-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+            List of team channels
+
+        chats : typing.Optional[typing.Sequence[TeamsChat]]
+            List of one-on-one chats
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[TeamsChannel], direction="write"
+                ),
+                "chats": convert_and_respect_annotation_metadata(
+                    object_=chats, annotation=typing.Sequence[TeamsChat], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_microsoft_teams_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseMsTeamsData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseMsTeamsData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMsTeamsData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMsTeamsData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_outlook_mail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with outlook_mail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
+            List of mail messages
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "messages": convert_and_respect_annotation_metadata(
+                    object_=messages, annotation=typing.Sequence[OutlookMailMessage], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_outlook_mail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseOutlookMailData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseOutlookMailData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOutlookMailData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOutlookMailData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_calcom_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with Cal.com-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
+            List of schedules to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "schedules": convert_and_respect_annotation_metadata(
+                    object_=schedules, annotation=typing.Sequence[CalcomSchedule], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseCalcomData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseCalcomData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseCalcomData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseCalcomData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_hubspot_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
+        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
+        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
+        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with hubspot-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
+            List of companies
+
+        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
+            List of contacts
+
+        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
+            List of deals
+
+        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
+            List of tickets
+
+        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
+            List of tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "companies": convert_and_respect_annotation_metadata(
+                    object_=companies, annotation=typing.Sequence[HubSpotCompany], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[HubSpotContact], direction="write"
+                ),
+                "deals": convert_and_respect_annotation_metadata(
+                    object_=deals, annotation=typing.Sequence[HubSpotDeal], direction="write"
+                ),
+                "tickets": convert_and_respect_annotation_metadata(
+                    object_=tickets, annotation=typing.Sequence[HubSpotTicket], direction="write"
+                ),
+                "tasks": convert_and_respect_annotation_metadata(
+                    object_=tasks, annotation=typing.Sequence[HubSpotTask], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_hubspot_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseHubSpotData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseHubSpotData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseHubSpotData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseHubSpotData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_quickbooks_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with quickbooks-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of accounts (input: minimal, output: full API objects)
+
+        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of customers (input: minimal, output: full API objects)
+
+        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of vendors (input: minimal, output: full API objects)
+
+        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of invoices (input: minimal, output: full API objects)
+
+        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of payments (input: minimal, output: full API objects)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "accounts": accounts,
+                "customers": customers,
+                "vendors": vendors,
+                "invoices": invoices,
+                "payments": payments,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_quickbooks_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseQuickBooksData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseQuickBooksData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseQuickBooksData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseQuickBooksData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_moneybird_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
+        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
+        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
+        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
+        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with moneybird-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
+            List of ledger accounts to create
+
+        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
+            List of contacts to create
+
+        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
+            List of products to create
+
+        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
+            List of projects to create
+
+        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
+            List of time entries to create
+
+        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
+            List of sales invoices to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "ledger_accounts": convert_and_respect_annotation_metadata(
+                    object_=ledger_accounts, annotation=typing.Sequence[MoneybirdLedgerAccount], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[MoneybirdContact], direction="write"
+                ),
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[MoneybirdProduct], direction="write"
+                ),
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[MoneybirdProject], direction="write"
+                ),
+                "time_entries": convert_and_respect_annotation_metadata(
+                    object_=time_entries, annotation=typing.Sequence[MoneybirdTimeEntry], direction="write"
+                ),
+                "sales_invoices": convert_and_respect_annotation_metadata(
+                    object_=sales_invoices, annotation=typing.Sequence[MoneybirdSalesInvoice], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_moneybird_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseMoneybirdData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseMoneybirdData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMoneybirdData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMoneybirdData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_dropbox_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        folders: typing.Optional[typing.Sequence[str]] = OMIT,
+        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with dropbox-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        folders : typing.Optional[typing.Sequence[str]]
+            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+
+        files : typing.Optional[typing.Sequence[DropboxFile]]
+            List of files to create with their content
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "folders": folders,
+                "files": convert_and_respect_annotation_metadata(
+                    object_=files, annotation=typing.Sequence[DropboxFile], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_dropbox_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseDropboxData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseDropboxData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseDropboxData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseDropboxData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_shopify_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
+        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with shopify-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        products : typing.Optional[typing.Sequence[ShopifyProduct]]
+            List of products to create
+
+        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
+            List of customers to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "products": convert_and_respect_annotation_metadata(
+                    object_=products, annotation=typing.Sequence[ShopifyProduct], direction="write"
+                ),
+                "customers": convert_and_respect_annotation_metadata(
+                    object_=customers, annotation=typing.Sequence[ShopifyCustomer], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_shopify_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseShopifyData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseShopifyData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseShopifyData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseShopifyData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_outlook_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with outlook_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+            List of calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "events": convert_and_respect_annotation_metadata(
+                    object_=events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_outlook_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseOutlookCalendarData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseOutlookCalendarData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseOutlookCalendarData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseOutlookCalendarData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_clickup_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with clickup-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
+            List of spaces with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spaces": convert_and_respect_annotation_metadata(
+                    object_=spaces, annotation=typing.Sequence[ClickUpSpace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_clickup_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseClickUpData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseClickUpData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseClickUpData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseClickUpData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_close_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with close-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        leads : typing.Optional[typing.Sequence[CloseLead]]
+            List of leads with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/close/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "leads": convert_and_respect_annotation_metadata(
+                    object_=leads, annotation=typing.Sequence[CloseLead], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_close_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseCloseData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseCloseData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/close/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseCloseData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseCloseData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_resend_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
+        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with resend-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        emails : typing.Optional[typing.Sequence[ResendEmail]]
+            List of standalone transactional emails
+
+        contacts : typing.Optional[typing.Sequence[ResendContact]]
+            List of standalone contacts
+
+        segments : typing.Optional[typing.Sequence[ResendSegment]]
+            List of segments with nested broadcasts
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/resend/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "emails": convert_and_respect_annotation_metadata(
+                    object_=emails, annotation=typing.Sequence[ResendEmail], direction="write"
+                ),
+                "contacts": convert_and_respect_annotation_metadata(
+                    object_=contacts, annotation=typing.Sequence[ResendContact], direction="write"
+                ),
+                "segments": convert_and_respect_annotation_metadata(
+                    object_=segments, annotation=typing.Sequence[ResendSegment], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_resend_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseResendData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseResendData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/resend/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseResendData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseResendData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_wordpress_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with wordpress-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        posts : typing.Optional[typing.Sequence[WordPressPost]]
+            List of WordPress posts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "posts": convert_and_respect_annotation_metadata(
+                    object_=posts, annotation=typing.Sequence[WordPressPost], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_wordpress_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseWordPressData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseWordPressData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseWordPressData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseWordPressData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_asana_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with asana-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[AsanaProject]]
+            List of projects with nested tasks and stories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/asana/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[AsanaProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_asana_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseAsanaData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseAsanaData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/asana/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseAsanaData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseAsanaData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_mem0sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with mem0-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+            List of memories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "memories": convert_and_respect_annotation_metadata(
+                    object_=memories, annotation=typing.Sequence[Mem0Memory], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_mem0sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseMem0Data]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseMem0Data]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMem0Data,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMem0Data,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_supabase_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with supabase-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[SupabaseProject]]
+            List of Supabase projects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[SupabaseProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_supabase_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseSupabaseData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseSupabaseData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSupabaseData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSupabaseData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_github_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with github-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        repos : typing.Optional[typing.Sequence[GitHubRepo]]
+            List of repositories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/github/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "repos": convert_and_respect_annotation_metadata(
+                    object_=repos, annotation=typing.Sequence[GitHubRepo], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_github_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseGitHubData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseGitHubData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/github/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseGitHubData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseGitHubData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_linear_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with linear-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[LinearProject]]
+            List of projects with their issues. At most 50 projects can be included.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/linear/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "projects": convert_and_respect_annotation_metadata(
+                    object_=projects, annotation=typing.Sequence[LinearProject], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_linear_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseLinearData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseLinearData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/linear/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseLinearData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseLinearData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_notion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
+        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with notion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[NotionDatabase]]
+            List of databases with their data sources and pages
+
+        pages : typing.Optional[typing.Sequence[NotionPage]]
+            List of standalone pages (not in databases)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/notion/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "databases": convert_and_respect_annotation_metadata(
+                    object_=databases, annotation=typing.Sequence[NotionDatabase], direction="write"
+                ),
+                "pages": convert_and_respect_annotation_metadata(
+                    object_=pages, annotation=typing.Sequence[NotionPage], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_notion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseNotionData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseNotionData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/notion/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseNotionData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseNotionData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_slack_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with slack-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[SlackChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/slack/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[SlackChannel], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_slack_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseSlackData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseSlackData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/slack/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSlackData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSlackData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_confluence_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with confluence-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
+            List of spaces
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "spaces": convert_and_respect_annotation_metadata(
+                    object_=spaces, annotation=typing.Sequence[ConfluenceSpace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_confluence_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseConfluenceData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseConfluenceData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseConfluenceData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseConfluenceData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_discord_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with discord-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[DiscordChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/discord/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "channels": convert_and_respect_annotation_metadata(
+                    object_=channels, annotation=typing.Sequence[DiscordChannel], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_discord_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseDiscordData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseDiscordData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/discord/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseDiscordData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseDiscordData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_airtable_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with airtable-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        tables : typing.Optional[typing.Sequence[AirtableTable]]
+            List of tables (simplified, assumes single base)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "tables": convert_and_respect_annotation_metadata(
+                    object_=tables, annotation=typing.Sequence[AirtableTable], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_airtable_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseAirtableData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseAirtableData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseAirtableData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseAirtableData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_snowflake_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with snowflake-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
+            List of databases with their schemas
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "databases": convert_and_respect_annotation_metadata(
+                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_snowflake_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseSnowflakeData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseSnowflakeData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseSnowflakeData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseSnowflakeData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_google_cloud_sandbox(
         self,
         sandbox_id: str,
         *,
@@ -739,7 +8828,7 @@ class AsyncRawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def dump_sandbox(
+    async def dump_google_cloud_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[DumpSandboxResponseGoogleCloudData]:
         """

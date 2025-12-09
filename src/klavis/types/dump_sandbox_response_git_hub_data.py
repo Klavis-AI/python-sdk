@@ -7,7 +7,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
-from .git_hub_data import GitHubData
+from .git_hub_data_output import GitHubDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -27,7 +27,7 @@ class DumpSandboxResponseGitHubData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: GitHubData = pydantic.Field()
+    data: GitHubDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

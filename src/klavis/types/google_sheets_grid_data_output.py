@@ -9,7 +9,7 @@ from ..core.serialization import FieldMetadata
 from .google_sheets_row_data import GoogleSheetsRowData
 
 
-class GoogleSheetsGridData(UniversalBaseModel):
+class GoogleSheetsGridDataOutput(UniversalBaseModel):
     """
     Grid data for a sheet
     """

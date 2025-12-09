@@ -5,7 +5,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .moneybird_data import MoneybirdData
+from .moneybird_data_output import MoneybirdDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -25,7 +25,7 @@ class DumpSandboxResponseMoneybirdData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: MoneybirdData = pydantic.Field()
+    data: MoneybirdDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

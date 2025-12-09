@@ -4,7 +4,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .google_sheets_grid_data import GoogleSheetsGridData
+from .google_sheets_grid_data_output import GoogleSheetsGridDataOutput
 from .google_sheets_sheet_properties import GoogleSheetsSheetProperties
 
 
@@ -18,7 +18,7 @@ class GoogleSheetsSheet(UniversalBaseModel):
     Sheet properties (required)
     """
 
-    data: typing.Optional[typing.List[GoogleSheetsGridData]] = pydantic.Field(default=None)
+    data: typing.Optional[typing.List[GoogleSheetsGridDataOutput]] = pydantic.Field(default=None)
     """
     Grid data for the sheet
     """

@@ -4,17 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .google_sheets_spreadsheet import GoogleSheetsSpreadsheet
+from .calcom_schedule import CalcomSchedule
 
 
-class GoogleSheetsData(UniversalBaseModel):
+class CalcomDataOutput(UniversalBaseModel):
     """
-    Complete Google Sheets sandbox data structure
+    Complete Cal.com sandbox data structure
     """
 
-    spreadsheets: typing.Optional[typing.List[GoogleSheetsSpreadsheet]] = pydantic.Field(default=None)
+    schedules: typing.Optional[typing.List[CalcomSchedule]] = pydantic.Field(default=None)
     """
-    List of Google Sheets spreadsheets
+    List of schedules to create
     """
 
     if IS_PYDANTIC_V2:

@@ -8,7 +8,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
 
 
-class OneDriveData(UniversalBaseModel):
+class OneDriveDataOutput(UniversalBaseModel):
     """
     Complete OneDrive sandbox data structure
     """
@@ -30,4 +30,4 @@ class OneDriveData(UniversalBaseModel):
 
 from .one_drive_folder import OneDriveFolder  # noqa: E402, I001
 
-update_forward_refs(OneDriveData)
+update_forward_refs(OneDriveDataOutput)

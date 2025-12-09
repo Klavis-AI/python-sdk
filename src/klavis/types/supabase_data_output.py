@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .supabase_project import SupabaseProject
 
 
-class SupabaseData(UniversalBaseModel):
+class SupabaseDataOutput(UniversalBaseModel):
     """
     Complete Supabase sandbox data structure
     """

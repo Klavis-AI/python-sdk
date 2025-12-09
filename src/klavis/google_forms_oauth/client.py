@@ -4,26 +4,25 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
-from .raw_client import AsyncRawMscalendarOauthClient, RawMscalendarOauthClient
+from .raw_client import AsyncRawGoogleFormsOauthClient, RawGoogleFormsOauthClient
 
 
-class MscalendarOauthClient:
+class GoogleFormsOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawMscalendarOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = RawGoogleFormsOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawMscalendarOauthClient:
+    def with_raw_response(self) -> RawGoogleFormsOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawMscalendarOauthClient
+        RawGoogleFormsOauthClient
         """
         return self._raw_client
 
-    def authorize_ms_calendar(
+    def authorize_google_forms(
         self,
         *,
         instance_id: str,
@@ -33,6 +32,14 @@ class MscalendarOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
+        Start Google Forms OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
         Parameters
         ----------
         instance_id : str
@@ -42,7 +49,7 @@ class MscalendarOauthClient:
             Client ID for white labeling, if not provided will use default credentials
 
         scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
+            Optional OAuth scopes to request (comma-separated string)
 
         redirect_url : typing.Optional[str]
             Optional URL to redirect to after authorization completes
@@ -62,14 +69,14 @@ class MscalendarOauthClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.mscalendar_oauth.authorize_ms_calendar(
+        client.google_forms_oauth.authorize_google_forms(
             instance_id="instance_id",
             client_id="client_id",
             scope="scope",
             redirect_url="redirect_url",
         )
         """
-        _response = self._raw_client.authorize_ms_calendar(
+        _response = self._raw_client.authorize_google_forms(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,
@@ -78,54 +85,23 @@ class MscalendarOauthClient:
         )
         return _response.data
 
-    def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AzureAdoAuthSuccessResponse:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
 
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AzureAdoAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.mscalendar_oauth.refresh_token(
-            instance_id="instance_id",
-        )
-        """
-        _response = self._raw_client.refresh_token(instance_id=instance_id, request_options=request_options)
-        return _response.data
-
-
-class AsyncMscalendarOauthClient:
+class AsyncGoogleFormsOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawMscalendarOauthClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawGoogleFormsOauthClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawMscalendarOauthClient:
+    def with_raw_response(self) -> AsyncRawGoogleFormsOauthClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawMscalendarOauthClient
+        AsyncRawGoogleFormsOauthClient
         """
         return self._raw_client
 
-    async def authorize_ms_calendar(
+    async def authorize_google_forms(
         self,
         *,
         instance_id: str,
@@ -135,6 +111,14 @@ class AsyncMscalendarOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Optional[typing.Any]:
         """
+        Start Google Forms OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
         Parameters
         ----------
         instance_id : str
@@ -144,7 +128,7 @@ class AsyncMscalendarOauthClient:
             Client ID for white labeling, if not provided will use default credentials
 
         scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
+            Optional OAuth scopes to request (comma-separated string)
 
         redirect_url : typing.Optional[str]
             Optional URL to redirect to after authorization completes
@@ -169,7 +153,7 @@ class AsyncMscalendarOauthClient:
 
 
         async def main() -> None:
-            await client.mscalendar_oauth.authorize_ms_calendar(
+            await client.google_forms_oauth.authorize_google_forms(
                 instance_id="instance_id",
                 client_id="client_id",
                 scope="scope",
@@ -179,50 +163,11 @@ class AsyncMscalendarOauthClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.authorize_ms_calendar(
+        _response = await self._raw_client.authorize_google_forms(
             instance_id=instance_id,
             client_id=client_id,
             scope=scope,
             redirect_url=redirect_url,
             request_options=request_options,
         )
-        return _response.data
-
-    async def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AzureAdoAuthSuccessResponse:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AzureAdoAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.mscalendar_oauth.refresh_token(
-                instance_id="instance_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.refresh_token(instance_id=instance_id, request_options=request_options)
         return _response.data

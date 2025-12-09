@@ -5,7 +5,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .calcom_data import CalcomData
+from .calcom_data_output import CalcomDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -25,7 +25,7 @@ class DumpSandboxResponseCalcomData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: CalcomData = pydantic.Field()
+    data: CalcomDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

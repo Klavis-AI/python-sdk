@@ -4,21 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .linear_project import LinearProject
+from .google_forms_form import GoogleFormsForm
 
 
-class LinearData(UniversalBaseModel):
+class GoogleFormsDataOutput(UniversalBaseModel):
     """
-    Complete Linear sandbox data structure.
-
-    Relational structure for initialization:
-    - Projects contain Issues
-    - Issues contain Comments
+    Complete Google Forms sandbox data structure
     """
 
-    projects: typing.Optional[typing.List[LinearProject]] = pydantic.Field(default=None)
+    forms: typing.Optional[typing.List[GoogleFormsForm]] = pydantic.Field(default=None)
     """
-    List of projects with their issues. At most 50 projects can be included.
+    List of Google Forms
     """
 
     if IS_PYDANTIC_V2:

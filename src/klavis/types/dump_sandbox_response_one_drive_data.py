@@ -7,7 +7,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
-from .one_drive_data import OneDriveData
+from .one_drive_data_output import OneDriveDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -27,7 +27,7 @@ class DumpSandboxResponseOneDriveData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: OneDriveData = pydantic.Field()
+    data: OneDriveDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

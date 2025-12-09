@@ -5,7 +5,7 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .google_calendar_data import GoogleCalendarData
+from .google_calendar_data_output import GoogleCalendarDataOutput
 from .sandbox_mcp_server import SandboxMcpServer
 
 
@@ -25,7 +25,7 @@ class DumpSandboxResponseGoogleCalendarData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: GoogleCalendarData = pydantic.Field()
+    data: GoogleCalendarDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

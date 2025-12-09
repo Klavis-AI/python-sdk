@@ -6,7 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .sandbox_mcp_server import SandboxMcpServer
-from .shopify_data import ShopifyData
+from .shopify_data_output import ShopifyDataOutput
 
 
 class DumpSandboxResponseShopifyData(UniversalBaseModel):
@@ -25,7 +25,7 @@ class DumpSandboxResponseShopifyData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: ShopifyData = pydantic.Field()
+    data: ShopifyDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

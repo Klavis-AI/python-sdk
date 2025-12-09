@@ -8,17 +8,15 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
-from ..errors.bad_request_error import BadRequestError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from ..types.http_validation_error import HttpValidationError
 
 
-class RawMscalendarOauthClient:
+class RawGoogleCloudOauthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def authorize_ms_calendar(
+    def authorize_google_cloud(
         self,
         *,
         instance_id: str,
@@ -28,6 +26,14 @@ class RawMscalendarOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
+        Start Google Cloud OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
         Parameters
         ----------
         instance_id : str
@@ -37,7 +43,7 @@ class RawMscalendarOauthClient:
             Client ID for white labeling, if not provided will use default credentials
 
         scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
+            Optional OAuth scopes to request (comma-separated string)
 
         redirect_url : typing.Optional[str]
             Optional URL to redirect to after authorization completes
@@ -51,7 +57,7 @@ class RawMscalendarOauthClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/authorize",
+            "oauth/google-cloud/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -89,74 +95,12 @@ class RawMscalendarOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[AzureAdoAuthSuccessResponse]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
 
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[AzureAdoAuthSuccessResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    AzureAdoAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=AzureAdoAuthSuccessResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-
-class AsyncRawMscalendarOauthClient:
+class AsyncRawGoogleCloudOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def authorize_ms_calendar(
+    async def authorize_google_cloud(
         self,
         *,
         instance_id: str,
@@ -166,6 +110,14 @@ class AsyncRawMscalendarOauthClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
+        Start Google Cloud OAuth flow
+
+        Parameters:
+        - instance_id: Identifier for the instance requesting authorization
+        - client_id: Optional client ID for white labeling
+        - scope: Optional scopes to request (comma-separated)
+        - redirect_url: Optional URL to redirect to after authorization completes
+
         Parameters
         ----------
         instance_id : str
@@ -175,7 +127,7 @@ class AsyncRawMscalendarOauthClient:
             Client ID for white labeling, if not provided will use default credentials
 
         scope : typing.Optional[str]
-            Optional OAuth scopes to request (space-separated string)
+            Optional OAuth scopes to request (comma-separated string)
 
         redirect_url : typing.Optional[str]
             Optional URL to redirect to after authorization completes
@@ -189,7 +141,7 @@ class AsyncRawMscalendarOauthClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/authorize",
+            "oauth/google-cloud/authorize",
             method="GET",
             params={
                 "instance_id": instance_id,
@@ -211,68 +163,6 @@ class AsyncRawMscalendarOauthClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[AzureAdoAuthSuccessResponse]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[AzureAdoAuthSuccessResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "oauth/mscalendar/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    AzureAdoAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=AzureAdoAuthSuccessResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),

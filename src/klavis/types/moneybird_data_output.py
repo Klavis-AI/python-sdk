@@ -12,7 +12,7 @@ from .moneybird_sales_invoice import MoneybirdSalesInvoice
 from .moneybird_time_entry import MoneybirdTimeEntry
 
 
-class MoneybirdData(UniversalBaseModel):
+class MoneybirdDataOutput(UniversalBaseModel):
     """
     Complete Moneybird sandbox data structure - API format
 

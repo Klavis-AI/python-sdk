@@ -6,7 +6,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .sandbox_mcp_server import SandboxMcpServer
-from .supabase_data import SupabaseData
+from .supabase_data_output import SupabaseDataOutput
 
 
 class DumpSandboxResponseSupabaseData(UniversalBaseModel):
@@ -25,7 +25,7 @@ class DumpSandboxResponseSupabaseData(UniversalBaseModel):
     Timestamp of dump
     """
 
-    data: SupabaseData = pydantic.Field()
+    data: SupabaseDataOutput = pydantic.Field()
     """
     Dumped sandbox data in server-specific format
     """

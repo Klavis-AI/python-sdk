@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .google_calendar_event import GoogleCalendarEvent
 
 
-class GoogleCalendarData(UniversalBaseModel):
+class GoogleCalendarDataOutput(UniversalBaseModel):
     """
     Complete Google Calendar sandbox data structure
     """

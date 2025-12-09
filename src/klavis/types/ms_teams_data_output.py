@@ -8,7 +8,7 @@ from .teams_channel import TeamsChannel
 from .teams_chat import TeamsChat
 
 
-class MsTeamsData(UniversalBaseModel):
+class MsTeamsDataOutput(UniversalBaseModel):
     """
     Complete Microsoft Teams sandbox data structure
     """

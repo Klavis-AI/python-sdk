@@ -4,21 +4,108 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.airtable_table import AirtableTable
+from ..types.asana_project import AsanaProject
 from ..types.big_query_dataset import BigQueryDataset
 from ..types.big_query_table import BigQueryTable
+from ..types.calcom_schedule import CalcomSchedule
+from ..types.click_up_space import ClickUpSpace
+from ..types.close_lead import CloseLead
 from ..types.compute_instance import ComputeInstance
+from ..types.confluence_space import ConfluenceSpace
 from ..types.create_sandbox_response import CreateSandboxResponse
+from ..types.discord_channel import DiscordChannel
+from ..types.dropbox_file import DropboxFile
+from ..types.dump_sandbox_response_airtable_data import DumpSandboxResponseAirtableData
+from ..types.dump_sandbox_response_asana_data import DumpSandboxResponseAsanaData
+from ..types.dump_sandbox_response_calcom_data import DumpSandboxResponseCalcomData
+from ..types.dump_sandbox_response_click_up_data import DumpSandboxResponseClickUpData
+from ..types.dump_sandbox_response_close_data import DumpSandboxResponseCloseData
+from ..types.dump_sandbox_response_confluence_data import DumpSandboxResponseConfluenceData
+from ..types.dump_sandbox_response_discord_data import DumpSandboxResponseDiscordData
+from ..types.dump_sandbox_response_dropbox_data import DumpSandboxResponseDropboxData
+from ..types.dump_sandbox_response_git_hub_data import DumpSandboxResponseGitHubData
+from ..types.dump_sandbox_response_gmail_data import DumpSandboxResponseGmailData
+from ..types.dump_sandbox_response_google_calendar_data import DumpSandboxResponseGoogleCalendarData
 from ..types.dump_sandbox_response_google_cloud_data import DumpSandboxResponseGoogleCloudData
+from ..types.dump_sandbox_response_google_docs_data import DumpSandboxResponseGoogleDocsData
+from ..types.dump_sandbox_response_google_drive_data import DumpSandboxResponseGoogleDriveData
+from ..types.dump_sandbox_response_google_forms_data import DumpSandboxResponseGoogleFormsData
+from ..types.dump_sandbox_response_google_sheets_data import DumpSandboxResponseGoogleSheetsData
+from ..types.dump_sandbox_response_hub_spot_data import DumpSandboxResponseHubSpotData
+from ..types.dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
+from ..types.dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
+from ..types.dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
+from ..types.dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
+from ..types.dump_sandbox_response_ms_teams_data import DumpSandboxResponseMsTeamsData
+from ..types.dump_sandbox_response_notion_data import DumpSandboxResponseNotionData
+from ..types.dump_sandbox_response_one_drive_data import DumpSandboxResponseOneDriveData
+from ..types.dump_sandbox_response_outlook_calendar_data import DumpSandboxResponseOutlookCalendarData
+from ..types.dump_sandbox_response_outlook_mail_data import DumpSandboxResponseOutlookMailData
+from ..types.dump_sandbox_response_quick_books_data import DumpSandboxResponseQuickBooksData
+from ..types.dump_sandbox_response_resend_data import DumpSandboxResponseResendData
+from ..types.dump_sandbox_response_salesforce_data import DumpSandboxResponseSalesforceData
+from ..types.dump_sandbox_response_shopify_data import DumpSandboxResponseShopifyData
+from ..types.dump_sandbox_response_slack_data import DumpSandboxResponseSlackData
+from ..types.dump_sandbox_response_snowflake_data import DumpSandboxResponseSnowflakeData
+from ..types.dump_sandbox_response_supabase_data import DumpSandboxResponseSupabaseData
+from ..types.dump_sandbox_response_word_press_data import DumpSandboxResponseWordPressData
+from ..types.git_hub_repo import GitHubRepo
+from ..types.gmail_draft import GmailDraft
+from ..types.gmail_message import GmailMessage
+from ..types.google_calendar_event import GoogleCalendarEvent
+from ..types.google_docs_document import GoogleDocsDocument
+from ..types.google_drive_file import GoogleDriveFile
+from ..types.google_forms_form import GoogleFormsForm
+from ..types.google_sheets_spreadsheet import GoogleSheetsSpreadsheet
+from ..types.hub_spot_company import HubSpotCompany
+from ..types.hub_spot_contact import HubSpotContact
+from ..types.hub_spot_deal import HubSpotDeal
+from ..types.hub_spot_task import HubSpotTask
+from ..types.hub_spot_ticket import HubSpotTicket
 from ..types.initialize_sandbox_response import InitializeSandboxResponse
+from ..types.jira_board import JiraBoard
+from ..types.jira_project import JiraProject
+from ..types.jira_sprint import JiraSprint
+from ..types.linear_project import LinearProject
 from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
 from ..types.log_sink import LogSink
+from ..types.mem0memory import Mem0Memory
+from ..types.moneybird_contact import MoneybirdContact
+from ..types.moneybird_ledger_account import MoneybirdLedgerAccount
+from ..types.moneybird_product import MoneybirdProduct
+from ..types.moneybird_project import MoneybirdProject
+from ..types.moneybird_sales_invoice import MoneybirdSalesInvoice
+from ..types.moneybird_time_entry import MoneybirdTimeEntry
+from ..types.notion_database import NotionDatabase
+from ..types.notion_page import NotionPage
+from ..types.one_drive_folder import OneDriveFolder
+from ..types.outlook_calendar_event import OutlookCalendarEvent
+from ..types.outlook_mail_message import OutlookMailMessage
 from ..types.release_sandbox_response import ReleaseSandboxResponse
+from ..types.resend_contact import ResendContact
+from ..types.resend_email import ResendEmail
+from ..types.resend_segment import ResendSegment
 from ..types.reset_sandbox_response import ResetSandboxResponse
+from ..types.salesforce_account import SalesforceAccount
+from ..types.salesforce_campaign import SalesforceCampaign
+from ..types.salesforce_case import SalesforceCase
+from ..types.salesforce_contact import SalesforceContact
+from ..types.salesforce_lead import SalesforceLead
+from ..types.salesforce_opportunity import SalesforceOpportunity
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
+from ..types.shopify_customer import ShopifyCustomer
+from ..types.shopify_product import ShopifyProduct
+from ..types.slack_channel import SlackChannel
+from ..types.snowflake_database import SnowflakeDatabase
 from ..types.storage_bucket import StorageBucket
 from ..types.storage_object import StorageObject
+from ..types.supabase_project import SupabaseProject
+from ..types.teams_channel import TeamsChannel
+from ..types.teams_chat import TeamsChat
+from ..types.word_press_post import WordPressPost
 from .raw_client import AsyncRawSandboxClient, RawSandboxClient
 
 # this is used as the default value for optional parameters
@@ -184,7 +271,2609 @@ class SandboxClient:
         _response = self._raw_client.reset_sandbox(server_name, sandbox_id, request_options=request_options)
         return _response.data
 
-    def initialize_sandbox(
+    def initialize_jira_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
+        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
+        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with jira-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[JiraProject]]
+            List of projects with their issues
+
+        boards : typing.Optional[typing.Sequence[JiraBoard]]
+            List of boards
+
+        sprints : typing.Optional[typing.Sequence[JiraSprint]]
+            List of sprints
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_jira_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_jira_sandbox(
+            sandbox_id, projects=projects, boards=boards, sprints=sprints, request_options=request_options
+        )
+        return _response.data
+
+    def dump_jira_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseJiraData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseJiraData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_jira_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_jira_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
+            List of Google Calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_google_calendar_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_google_calendar_sandbox(
+            sandbox_id, events=events, request_options=request_options
+        )
+        return _response.data
+
+    def dump_google_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleCalendarData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleCalendarData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_google_calendar_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_google_calendar_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_gmail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
+        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with gmail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[GmailMessage]]
+            List of Gmail messages to send
+
+        drafts : typing.Optional[typing.Sequence[GmailDraft]]
+            List of Gmail drafts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_gmail_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_gmail_sandbox(
+            sandbox_id, messages=messages, drafts=drafts, request_options=request_options
+        )
+        return _response.data
+
+    def dump_gmail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGmailData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGmailData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_gmail_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_gmail_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_docs_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_docs-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
+            List of Google Docs documents
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_google_docs_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_google_docs_sandbox(
+            sandbox_id, documents=documents, request_options=request_options
+        )
+        return _response.data
+
+    def dump_google_docs_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleDocsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleDocsData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_google_docs_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_google_docs_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_drive_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_drive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
+            List of Google Drive files and folders
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_google_drive_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_google_drive_sandbox(
+            sandbox_id, files=files, request_options=request_options
+        )
+        return _response.data
+
+    def dump_google_drive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleDriveData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleDriveData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_google_drive_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_google_drive_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_forms_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_forms-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
+            List of Google Forms
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_google_forms_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_google_forms_sandbox(
+            sandbox_id, forms=forms, request_options=request_options
+        )
+        return _response.data
+
+    def dump_google_forms_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleFormsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleFormsData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_google_forms_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_google_forms_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_sheets_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_sheets-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
+            List of Google Sheets spreadsheets
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_google_sheets_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_google_sheets_sandbox(
+            sandbox_id, spreadsheets=spreadsheets, request_options=request_options
+        )
+        return _response.data
+
+    def dump_google_sheets_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleSheetsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleSheetsData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_google_sheets_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_google_sheets_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_salesforce_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with salesforce-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
+            List of Salesforce accounts
+
+        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
+            List of Salesforce contacts
+
+        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
+            List of Salesforce opportunities
+
+        leads : typing.Optional[typing.Sequence[SalesforceLead]]
+            List of Salesforce leads
+
+        cases : typing.Optional[typing.Sequence[SalesforceCase]]
+            List of Salesforce cases
+
+        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
+            List of Salesforce campaigns
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_salesforce_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_salesforce_sandbox(
+            sandbox_id,
+            accounts=accounts,
+            contacts=contacts,
+            opportunities=opportunities,
+            leads=leads,
+            cases=cases,
+            campaigns=campaigns,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def dump_salesforce_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSalesforceData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSalesforceData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_salesforce_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_salesforce_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_onedrive_sandbox(
+        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with onedrive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        root : OneDriveFolder
+            Root folder containing all subfolders and files
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis, OneDriveFolder
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_onedrive_sandbox(
+            sandbox_id="sandbox_id",
+            root=OneDriveFolder(
+                name="name",
+            ),
+        )
+        """
+        _response = self._raw_client.initialize_onedrive_sandbox(sandbox_id, root=root, request_options=request_options)
+        return _response.data
+
+    def dump_onedrive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOneDriveData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOneDriveData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_onedrive_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_onedrive_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_microsoft_teams_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with microsoft_teams-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+            List of team channels
+
+        chats : typing.Optional[typing.Sequence[TeamsChat]]
+            List of one-on-one chats
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_microsoft_teams_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_microsoft_teams_sandbox(
+            sandbox_id, channels=channels, chats=chats, request_options=request_options
+        )
+        return _response.data
+
+    def dump_microsoft_teams_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMsTeamsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMsTeamsData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_microsoft_teams_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_microsoft_teams_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_outlook_mail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with outlook_mail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
+            List of mail messages
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_outlook_mail_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_outlook_mail_sandbox(
+            sandbox_id, messages=messages, request_options=request_options
+        )
+        return _response.data
+
+    def dump_outlook_mail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOutlookMailData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOutlookMailData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_outlook_mail_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_outlook_mail_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_calcom_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with Cal.com-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
+            List of schedules to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_calcom_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_calcom_sandbox(
+            sandbox_id, schedules=schedules, request_options=request_options
+        )
+        return _response.data
+
+    def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseCalcomData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseCalcomData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_calcom_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_calcom_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_hubspot_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
+        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
+        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
+        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with hubspot-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
+            List of companies
+
+        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
+            List of contacts
+
+        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
+            List of deals
+
+        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
+            List of tickets
+
+        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
+            List of tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_hubspot_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_hubspot_sandbox(
+            sandbox_id,
+            companies=companies,
+            contacts=contacts,
+            deals=deals,
+            tickets=tickets,
+            tasks=tasks,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def dump_hubspot_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseHubSpotData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseHubSpotData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_hubspot_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_hubspot_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_quickbooks_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with quickbooks-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of accounts (input: minimal, output: full API objects)
+
+        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of customers (input: minimal, output: full API objects)
+
+        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of vendors (input: minimal, output: full API objects)
+
+        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of invoices (input: minimal, output: full API objects)
+
+        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of payments (input: minimal, output: full API objects)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_quickbooks_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_quickbooks_sandbox(
+            sandbox_id,
+            accounts=accounts,
+            customers=customers,
+            vendors=vendors,
+            invoices=invoices,
+            payments=payments,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def dump_quickbooks_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseQuickBooksData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseQuickBooksData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_quickbooks_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_quickbooks_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_moneybird_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
+        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
+        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
+        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
+        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with moneybird-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
+            List of ledger accounts to create
+
+        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
+            List of contacts to create
+
+        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
+            List of products to create
+
+        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
+            List of projects to create
+
+        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
+            List of time entries to create
+
+        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
+            List of sales invoices to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_moneybird_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_moneybird_sandbox(
+            sandbox_id,
+            ledger_accounts=ledger_accounts,
+            contacts=contacts,
+            products=products,
+            projects=projects,
+            time_entries=time_entries,
+            sales_invoices=sales_invoices,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def dump_moneybird_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMoneybirdData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMoneybirdData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_moneybird_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_moneybird_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_dropbox_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        folders: typing.Optional[typing.Sequence[str]] = OMIT,
+        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with dropbox-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        folders : typing.Optional[typing.Sequence[str]]
+            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+
+        files : typing.Optional[typing.Sequence[DropboxFile]]
+            List of files to create with their content
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_dropbox_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_dropbox_sandbox(
+            sandbox_id, folders=folders, files=files, request_options=request_options
+        )
+        return _response.data
+
+    def dump_dropbox_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseDropboxData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseDropboxData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_dropbox_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_dropbox_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_shopify_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
+        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with shopify-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        products : typing.Optional[typing.Sequence[ShopifyProduct]]
+            List of products to create
+
+        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
+            List of customers to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_shopify_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_shopify_sandbox(
+            sandbox_id, products=products, customers=customers, request_options=request_options
+        )
+        return _response.data
+
+    def dump_shopify_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseShopifyData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseShopifyData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_shopify_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_shopify_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_outlook_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with outlook_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+            List of calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_outlook_calendar_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_outlook_calendar_sandbox(
+            sandbox_id, events=events, request_options=request_options
+        )
+        return _response.data
+
+    def dump_outlook_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOutlookCalendarData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOutlookCalendarData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_outlook_calendar_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_outlook_calendar_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_clickup_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with clickup-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
+            List of spaces with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_clickup_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_clickup_sandbox(
+            sandbox_id, spaces=spaces, request_options=request_options
+        )
+        return _response.data
+
+    def dump_clickup_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseClickUpData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseClickUpData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_clickup_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_clickup_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_close_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with close-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        leads : typing.Optional[typing.Sequence[CloseLead]]
+            List of leads with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_close_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_close_sandbox(sandbox_id, leads=leads, request_options=request_options)
+        return _response.data
+
+    def dump_close_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseCloseData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseCloseData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_close_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_close_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_resend_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
+        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with resend-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        emails : typing.Optional[typing.Sequence[ResendEmail]]
+            List of standalone transactional emails
+
+        contacts : typing.Optional[typing.Sequence[ResendContact]]
+            List of standalone contacts
+
+        segments : typing.Optional[typing.Sequence[ResendSegment]]
+            List of segments with nested broadcasts
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_resend_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_resend_sandbox(
+            sandbox_id, emails=emails, contacts=contacts, segments=segments, request_options=request_options
+        )
+        return _response.data
+
+    def dump_resend_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseResendData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseResendData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_resend_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_resend_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_wordpress_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with wordpress-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        posts : typing.Optional[typing.Sequence[WordPressPost]]
+            List of WordPress posts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_wordpress_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_wordpress_sandbox(
+            sandbox_id, posts=posts, request_options=request_options
+        )
+        return _response.data
+
+    def dump_wordpress_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseWordPressData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseWordPressData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_wordpress_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_wordpress_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_asana_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with asana-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[AsanaProject]]
+            List of projects with nested tasks and stories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_asana_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_asana_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    def dump_asana_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseAsanaData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseAsanaData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_asana_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_asana_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_mem0sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with mem0-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+            List of memories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_mem0sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_mem0sandbox(
+            sandbox_id, memories=memories, request_options=request_options
+        )
+        return _response.data
+
+    def dump_mem0sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMem0Data:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMem0Data
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_mem0sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_mem0sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_supabase_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with supabase-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[SupabaseProject]]
+            List of Supabase projects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_supabase_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_supabase_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    def dump_supabase_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSupabaseData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSupabaseData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_supabase_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_supabase_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_github_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with github-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        repos : typing.Optional[typing.Sequence[GitHubRepo]]
+            List of repositories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_github_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_github_sandbox(sandbox_id, repos=repos, request_options=request_options)
+        return _response.data
+
+    def dump_github_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGitHubData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGitHubData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_github_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_github_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_linear_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with linear-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[LinearProject]]
+            List of projects with their issues. At most 50 projects can be included.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_linear_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_linear_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    def dump_linear_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseLinearData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseLinearData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_linear_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_linear_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_notion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
+        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with notion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[NotionDatabase]]
+            List of databases with their data sources and pages
+
+        pages : typing.Optional[typing.Sequence[NotionPage]]
+            List of standalone pages (not in databases)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_notion_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_notion_sandbox(
+            sandbox_id, databases=databases, pages=pages, request_options=request_options
+        )
+        return _response.data
+
+    def dump_notion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseNotionData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseNotionData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_notion_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_notion_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_slack_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with slack-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[SlackChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_slack_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_slack_sandbox(
+            sandbox_id, channels=channels, request_options=request_options
+        )
+        return _response.data
+
+    def dump_slack_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSlackData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSlackData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_slack_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_slack_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_confluence_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with confluence-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
+            List of spaces
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_confluence_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_confluence_sandbox(
+            sandbox_id, spaces=spaces, request_options=request_options
+        )
+        return _response.data
+
+    def dump_confluence_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseConfluenceData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseConfluenceData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_confluence_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_confluence_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_discord_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with discord-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[DiscordChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_discord_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_discord_sandbox(
+            sandbox_id, channels=channels, request_options=request_options
+        )
+        return _response.data
+
+    def dump_discord_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseDiscordData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseDiscordData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_discord_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_discord_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_airtable_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with airtable-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        tables : typing.Optional[typing.Sequence[AirtableTable]]
+            List of tables (simplified, assumes single base)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_airtable_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_airtable_sandbox(
+            sandbox_id, tables=tables, request_options=request_options
+        )
+        return _response.data
+
+    def dump_airtable_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseAirtableData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseAirtableData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_airtable_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_airtable_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_snowflake_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with snowflake-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
+            List of databases with their schemas
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_snowflake_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_snowflake_sandbox(
+            sandbox_id, databases=databases, request_options=request_options
+        )
+        return _response.data
+
+    def dump_snowflake_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSnowflakeData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSnowflakeData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_snowflake_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_snowflake_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_google_cloud_sandbox(
         self,
         sandbox_id: str,
         *,
@@ -245,11 +2934,11 @@ class SandboxClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.sandbox.initialize_sandbox(
+        client.sandbox.initialize_google_cloud_sandbox(
             sandbox_id="sandbox_id",
         )
         """
-        _response = self._raw_client.initialize_sandbox(
+        _response = self._raw_client.initialize_google_cloud_sandbox(
             sandbox_id,
             datasets=datasets,
             tables=tables,
@@ -263,7 +2952,7 @@ class SandboxClient:
         )
         return _response.data
 
-    def dump_sandbox(
+    def dump_google_cloud_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> DumpSandboxResponseGoogleCloudData:
         """
@@ -289,11 +2978,11 @@ class SandboxClient:
         client = Klavis(
             api_key="YOUR_API_KEY",
         )
-        client.sandbox.dump_sandbox(
+        client.sandbox.dump_google_cloud_sandbox(
             sandbox_id="sandbox_id",
         )
         """
-        _response = self._raw_client.dump_sandbox(sandbox_id, request_options=request_options)
+        _response = self._raw_client.dump_google_cloud_sandbox(sandbox_id, request_options=request_options)
         return _response.data
 
 
@@ -488,7 +3177,3143 @@ class AsyncSandboxClient:
         _response = await self._raw_client.reset_sandbox(server_name, sandbox_id, request_options=request_options)
         return _response.data
 
-    async def initialize_sandbox(
+    async def initialize_jira_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
+        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
+        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with jira-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[JiraProject]]
+            List of projects with their issues
+
+        boards : typing.Optional[typing.Sequence[JiraBoard]]
+            List of boards
+
+        sprints : typing.Optional[typing.Sequence[JiraSprint]]
+            List of sprints
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_jira_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_jira_sandbox(
+            sandbox_id, projects=projects, boards=boards, sprints=sprints, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_jira_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseJiraData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseJiraData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_jira_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_jira_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
+            List of Google Calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_google_calendar_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_google_calendar_sandbox(
+            sandbox_id, events=events, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_google_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleCalendarData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleCalendarData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_google_calendar_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_google_calendar_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_gmail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
+        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with gmail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[GmailMessage]]
+            List of Gmail messages to send
+
+        drafts : typing.Optional[typing.Sequence[GmailDraft]]
+            List of Gmail drafts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_gmail_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_gmail_sandbox(
+            sandbox_id, messages=messages, drafts=drafts, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_gmail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGmailData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGmailData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_gmail_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_gmail_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_docs_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_docs-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
+            List of Google Docs documents
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_google_docs_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_google_docs_sandbox(
+            sandbox_id, documents=documents, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_google_docs_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleDocsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleDocsData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_google_docs_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_google_docs_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_drive_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_drive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
+            List of Google Drive files and folders
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_google_drive_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_google_drive_sandbox(
+            sandbox_id, files=files, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_google_drive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleDriveData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleDriveData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_google_drive_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_google_drive_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_forms_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_forms-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
+            List of Google Forms
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_google_forms_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_google_forms_sandbox(
+            sandbox_id, forms=forms, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_google_forms_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleFormsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleFormsData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_google_forms_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_google_forms_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_sheets_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with google_sheets-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
+            List of Google Sheets spreadsheets
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_google_sheets_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_google_sheets_sandbox(
+            sandbox_id, spreadsheets=spreadsheets, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_google_sheets_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGoogleSheetsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGoogleSheetsData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_google_sheets_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_google_sheets_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_salesforce_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with salesforce-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
+            List of Salesforce accounts
+
+        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
+            List of Salesforce contacts
+
+        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
+            List of Salesforce opportunities
+
+        leads : typing.Optional[typing.Sequence[SalesforceLead]]
+            List of Salesforce leads
+
+        cases : typing.Optional[typing.Sequence[SalesforceCase]]
+            List of Salesforce cases
+
+        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
+            List of Salesforce campaigns
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_salesforce_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_salesforce_sandbox(
+            sandbox_id,
+            accounts=accounts,
+            contacts=contacts,
+            opportunities=opportunities,
+            leads=leads,
+            cases=cases,
+            campaigns=campaigns,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def dump_salesforce_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSalesforceData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSalesforceData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_salesforce_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_salesforce_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_onedrive_sandbox(
+        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with onedrive-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        root : OneDriveFolder
+            Root folder containing all subfolders and files
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis, OneDriveFolder
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_onedrive_sandbox(
+                sandbox_id="sandbox_id",
+                root=OneDriveFolder(
+                    name="name",
+                ),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_onedrive_sandbox(
+            sandbox_id, root=root, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_onedrive_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOneDriveData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOneDriveData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_onedrive_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_onedrive_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_microsoft_teams_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with microsoft_teams-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+            List of team channels
+
+        chats : typing.Optional[typing.Sequence[TeamsChat]]
+            List of one-on-one chats
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_microsoft_teams_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_microsoft_teams_sandbox(
+            sandbox_id, channels=channels, chats=chats, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_microsoft_teams_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMsTeamsData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMsTeamsData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_microsoft_teams_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_microsoft_teams_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_outlook_mail_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with outlook_mail-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
+            List of mail messages
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_outlook_mail_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_outlook_mail_sandbox(
+            sandbox_id, messages=messages, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_outlook_mail_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOutlookMailData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOutlookMailData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_outlook_mail_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_outlook_mail_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_calcom_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with Cal.com-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
+            List of schedules to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_calcom_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_calcom_sandbox(
+            sandbox_id, schedules=schedules, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseCalcomData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseCalcomData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_calcom_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_calcom_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_hubspot_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
+        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
+        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
+        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with hubspot-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
+            List of companies
+
+        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
+            List of contacts
+
+        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
+            List of deals
+
+        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
+            List of tickets
+
+        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
+            List of tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_hubspot_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_hubspot_sandbox(
+            sandbox_id,
+            companies=companies,
+            contacts=contacts,
+            deals=deals,
+            tickets=tickets,
+            tasks=tasks,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def dump_hubspot_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseHubSpotData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseHubSpotData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_hubspot_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_hubspot_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_quickbooks_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with quickbooks-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of accounts (input: minimal, output: full API objects)
+
+        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of customers (input: minimal, output: full API objects)
+
+        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of vendors (input: minimal, output: full API objects)
+
+        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of invoices (input: minimal, output: full API objects)
+
+        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
+            List of payments (input: minimal, output: full API objects)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_quickbooks_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_quickbooks_sandbox(
+            sandbox_id,
+            accounts=accounts,
+            customers=customers,
+            vendors=vendors,
+            invoices=invoices,
+            payments=payments,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def dump_quickbooks_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseQuickBooksData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseQuickBooksData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_quickbooks_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_quickbooks_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_moneybird_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
+        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
+        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
+        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
+        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with moneybird-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
+            List of ledger accounts to create
+
+        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
+            List of contacts to create
+
+        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
+            List of products to create
+
+        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
+            List of projects to create
+
+        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
+            List of time entries to create
+
+        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
+            List of sales invoices to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_moneybird_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_moneybird_sandbox(
+            sandbox_id,
+            ledger_accounts=ledger_accounts,
+            contacts=contacts,
+            products=products,
+            projects=projects,
+            time_entries=time_entries,
+            sales_invoices=sales_invoices,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def dump_moneybird_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMoneybirdData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMoneybirdData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_moneybird_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_moneybird_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_dropbox_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        folders: typing.Optional[typing.Sequence[str]] = OMIT,
+        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with dropbox-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        folders : typing.Optional[typing.Sequence[str]]
+            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+
+        files : typing.Optional[typing.Sequence[DropboxFile]]
+            List of files to create with their content
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_dropbox_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_dropbox_sandbox(
+            sandbox_id, folders=folders, files=files, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_dropbox_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseDropboxData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseDropboxData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_dropbox_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_dropbox_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_shopify_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
+        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with shopify-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        products : typing.Optional[typing.Sequence[ShopifyProduct]]
+            List of products to create
+
+        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
+            List of customers to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_shopify_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_shopify_sandbox(
+            sandbox_id, products=products, customers=customers, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_shopify_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseShopifyData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseShopifyData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_shopify_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_shopify_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_outlook_calendar_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with outlook_calendar-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+            List of calendar events
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_outlook_calendar_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_outlook_calendar_sandbox(
+            sandbox_id, events=events, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_outlook_calendar_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseOutlookCalendarData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseOutlookCalendarData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_outlook_calendar_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_outlook_calendar_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_clickup_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with clickup-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
+            List of spaces with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_clickup_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_clickup_sandbox(
+            sandbox_id, spaces=spaces, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_clickup_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseClickUpData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseClickUpData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_clickup_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_clickup_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_close_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with close-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        leads : typing.Optional[typing.Sequence[CloseLead]]
+            List of leads with nested objects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_close_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_close_sandbox(
+            sandbox_id, leads=leads, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_close_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseCloseData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseCloseData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_close_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_close_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_resend_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
+        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with resend-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        emails : typing.Optional[typing.Sequence[ResendEmail]]
+            List of standalone transactional emails
+
+        contacts : typing.Optional[typing.Sequence[ResendContact]]
+            List of standalone contacts
+
+        segments : typing.Optional[typing.Sequence[ResendSegment]]
+            List of segments with nested broadcasts
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_resend_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_resend_sandbox(
+            sandbox_id, emails=emails, contacts=contacts, segments=segments, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_resend_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseResendData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseResendData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_resend_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_resend_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_wordpress_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with wordpress-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        posts : typing.Optional[typing.Sequence[WordPressPost]]
+            List of WordPress posts to create
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_wordpress_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_wordpress_sandbox(
+            sandbox_id, posts=posts, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_wordpress_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseWordPressData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseWordPressData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_wordpress_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_wordpress_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_asana_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with asana-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[AsanaProject]]
+            List of projects with nested tasks and stories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_asana_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_asana_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_asana_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseAsanaData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseAsanaData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_asana_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_asana_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_mem0sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with mem0-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+            List of memories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_mem0sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_mem0sandbox(
+            sandbox_id, memories=memories, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_mem0sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMem0Data:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMem0Data
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_mem0sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_mem0sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_supabase_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with supabase-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[SupabaseProject]]
+            List of Supabase projects
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_supabase_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_supabase_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_supabase_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSupabaseData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSupabaseData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_supabase_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_supabase_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_github_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with github-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        repos : typing.Optional[typing.Sequence[GitHubRepo]]
+            List of repositories
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_github_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_github_sandbox(
+            sandbox_id, repos=repos, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_github_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseGitHubData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseGitHubData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_github_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_github_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_linear_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with linear-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        projects : typing.Optional[typing.Sequence[LinearProject]]
+            List of projects with their issues. At most 50 projects can be included.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_linear_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_linear_sandbox(
+            sandbox_id, projects=projects, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_linear_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseLinearData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseLinearData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_linear_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_linear_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_notion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
+        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with notion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[NotionDatabase]]
+            List of databases with their data sources and pages
+
+        pages : typing.Optional[typing.Sequence[NotionPage]]
+            List of standalone pages (not in databases)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_notion_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_notion_sandbox(
+            sandbox_id, databases=databases, pages=pages, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_notion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseNotionData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseNotionData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_notion_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_notion_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_slack_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with slack-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[SlackChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_slack_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_slack_sandbox(
+            sandbox_id, channels=channels, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_slack_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSlackData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSlackData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_slack_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_slack_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_confluence_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with confluence-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
+            List of spaces
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_confluence_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_confluence_sandbox(
+            sandbox_id, spaces=spaces, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_confluence_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseConfluenceData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseConfluenceData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_confluence_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_confluence_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_discord_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with discord-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        channels : typing.Optional[typing.Sequence[DiscordChannel]]
+            List of channels
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_discord_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_discord_sandbox(
+            sandbox_id, channels=channels, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_discord_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseDiscordData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseDiscordData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_discord_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_discord_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_airtable_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with airtable-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        tables : typing.Optional[typing.Sequence[AirtableTable]]
+            List of tables (simplified, assumes single base)
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_airtable_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_airtable_sandbox(
+            sandbox_id, tables=tables, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_airtable_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseAirtableData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseAirtableData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_airtable_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_airtable_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_snowflake_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with snowflake-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
+            List of databases with their schemas
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_snowflake_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_snowflake_sandbox(
+            sandbox_id, databases=databases, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_snowflake_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseSnowflakeData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseSnowflakeData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_snowflake_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_snowflake_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_google_cloud_sandbox(
         self,
         sandbox_id: str,
         *,
@@ -554,14 +6379,14 @@ class AsyncSandboxClient:
 
 
         async def main() -> None:
-            await client.sandbox.initialize_sandbox(
+            await client.sandbox.initialize_google_cloud_sandbox(
                 sandbox_id="sandbox_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.initialize_sandbox(
+        _response = await self._raw_client.initialize_google_cloud_sandbox(
             sandbox_id,
             datasets=datasets,
             tables=tables,
@@ -575,7 +6400,7 @@ class AsyncSandboxClient:
         )
         return _response.data
 
-    async def dump_sandbox(
+    async def dump_google_cloud_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> DumpSandboxResponseGoogleCloudData:
         """
@@ -606,12 +6431,12 @@ class AsyncSandboxClient:
 
 
         async def main() -> None:
-            await client.sandbox.dump_sandbox(
+            await client.sandbox.dump_google_cloud_sandbox(
                 sandbox_id="sandbox_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.dump_sandbox(sandbox_id, request_options=request_options)
+        _response = await self._raw_client.dump_google_cloud_sandbox(sandbox_id, request_options=request_options)
         return _response.data

@@ -23,6 +23,61 @@ class SharesightOauthClient:
         """
         return self._raw_client
 
+    def authorize_sharesight(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sharesight_oauth.authorize_sharesight(
+            instance_id="instance_id",
+            client_id="client_id",
+            scope="scope",
+            redirect_url="redirect_url",
+        )
+        """
+        _response = self._raw_client.authorize_sharesight(
+            instance_id=instance_id,
+            client_id=client_id,
+            scope=scope,
+            redirect_url=redirect_url,
+            request_options=request_options,
+        )
+        return _response.data
+
     def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
     ) -> SharesightOAuthSuccessResponse:
@@ -69,6 +124,69 @@ class AsyncSharesightOauthClient:
         AsyncRawSharesightOauthClient
         """
         return self._raw_client
+
+    async def authorize_sharesight(
+        self,
+        *,
+        instance_id: str,
+        client_id: typing.Optional[str] = None,
+        scope: typing.Optional[str] = None,
+        redirect_url: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Optional[typing.Any]:
+        """
+        Parameters
+        ----------
+        instance_id : str
+            Unique identifier for the client instance requesting authorization
+
+        client_id : typing.Optional[str]
+            Client ID for white labeling, if not provided will use default credentials
+
+        scope : typing.Optional[str]
+            Optional OAuth scopes to request (space-separated string)
+
+        redirect_url : typing.Optional[str]
+            Optional URL to redirect to after authorization completes
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Optional[typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sharesight_oauth.authorize_sharesight(
+                instance_id="instance_id",
+                client_id="client_id",
+                scope="scope",
+                redirect_url="redirect_url",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.authorize_sharesight(
+            instance_id=instance_id,
+            client_id=client_id,
+            scope=scope,
+            redirect_url=redirect_url,
+            request_options=request_options,
+        )
+        return _response.data
 
     async def refresh_token(
         self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
