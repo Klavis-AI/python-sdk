@@ -4,11 +4,23 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .integration_item import IntegrationItem
+from .motion_project import MotionProject
 
 
-class GetUserIntegrationsResponse(UniversalBaseModel):
-    integrations: typing.List[IntegrationItem]
+class MotionWorkspace(UniversalBaseModel):
+    """
+    Motion Workspace object - typically NOT deleted (organization level)
+    """
+
+    name: str = pydantic.Field()
+    """
+    Workspace name
+    """
+
+    projects: typing.Optional[typing.List[MotionProject]] = pydantic.Field(default=None)
+    """
+    Projects in this workspace
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

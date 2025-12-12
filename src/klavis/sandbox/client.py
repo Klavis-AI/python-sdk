@@ -36,7 +36,9 @@ from ..types.dump_sandbox_response_hub_spot_data import DumpSandboxResponseHubSp
 from ..types.dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
 from ..types.dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
 from ..types.dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
+from ..types.dump_sandbox_response_monday_data import DumpSandboxResponseMondayData
 from ..types.dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
+from ..types.dump_sandbox_response_motion_data import DumpSandboxResponseMotionData
 from ..types.dump_sandbox_response_ms_teams_data import DumpSandboxResponseMsTeamsData
 from ..types.dump_sandbox_response_notion_data import DumpSandboxResponseNotionData
 from ..types.dump_sandbox_response_one_drive_data import DumpSandboxResponseOneDriveData
@@ -72,12 +74,15 @@ from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
 from ..types.log_sink import LogSink
 from ..types.mem0memory import Mem0Memory
+from ..types.monday_board import MondayBoard
+from ..types.monday_workspace import MondayWorkspace
 from ..types.moneybird_contact import MoneybirdContact
 from ..types.moneybird_ledger_account import MoneybirdLedgerAccount
 from ..types.moneybird_product import MoneybirdProduct
 from ..types.moneybird_project import MoneybirdProject
 from ..types.moneybird_sales_invoice import MoneybirdSalesInvoice
 from ..types.moneybird_time_entry import MoneybirdTimeEntry
+from ..types.motion_workspace import MotionWorkspace
 from ..types.notion_database import NotionDatabase
 from ..types.notion_page import NotionPage
 from ..types.one_drive_folder import OneDriveFolder
@@ -2983,6 +2988,160 @@ class SandboxClient:
         )
         """
         _response = self._raw_client.dump_google_cloud_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_monday_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
+        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with monday-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
+            List of workspaces
+
+        boards : typing.Optional[typing.Sequence[MondayBoard]]
+            List of boards with their groups and items
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_monday_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_monday_sandbox(
+            sandbox_id, workspaces=workspaces, boards=boards, request_options=request_options
+        )
+        return _response.data
+
+    def dump_monday_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMondayData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMondayData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_monday_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_monday_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    def initialize_motion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with motion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
+            List of workspaces with their projects and tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.initialize_motion_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.initialize_motion_sandbox(
+            sandbox_id, workspaces=workspaces, request_options=request_options
+        )
+        return _response.data
+
+    def dump_motion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMotionData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMotionData
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.sandbox.dump_motion_sandbox(
+            sandbox_id="sandbox_id",
+        )
+        """
+        _response = self._raw_client.dump_motion_sandbox(sandbox_id, request_options=request_options)
         return _response.data
 
 
@@ -6439,4 +6598,190 @@ class AsyncSandboxClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.dump_google_cloud_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_monday_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
+        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with monday-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
+            List of workspaces
+
+        boards : typing.Optional[typing.Sequence[MondayBoard]]
+            List of boards with their groups and items
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_monday_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_monday_sandbox(
+            sandbox_id, workspaces=workspaces, boards=boards, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_monday_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMondayData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMondayData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_monday_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_monday_sandbox(sandbox_id, request_options=request_options)
+        return _response.data
+
+    async def initialize_motion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> InitializeSandboxResponse:
+        """
+        Initialize the sandbox with motion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
+            List of workspaces with their projects and tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InitializeSandboxResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.initialize_motion_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.initialize_motion_sandbox(
+            sandbox_id, workspaces=workspaces, request_options=request_options
+        )
+        return _response.data
+
+    async def dump_motion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> DumpSandboxResponseMotionData:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DumpSandboxResponseMotionData
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.sandbox.dump_motion_sandbox(
+                sandbox_id="sandbox_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.dump_motion_sandbox(sandbox_id, request_options=request_options)
         return _response.data

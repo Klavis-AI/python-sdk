@@ -9,15 +9,24 @@ from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import KlavisEnvironment
 
 if typing.TYPE_CHECKING:
+    from .clockwise_oauth.client import AsyncClockwiseOauthClient, ClockwiseOauthClient
     from .google_cloud_oauth.client import AsyncGoogleCloudOauthClient, GoogleCloudOauthClient
     from .google_forms_oauth.client import AsyncGoogleFormsOauthClient, GoogleFormsOauthClient
+    from .honeycomb_oauth.client import AsyncHoneycombOauthClient, HoneycombOauthClient
+    from .huggingface_oauth.client import AsyncHuggingfaceOauthClient, HuggingfaceOauthClient
+    from .intercom_oauth.client import AsyncIntercomOauthClient, IntercomOauthClient
+    from .jotform_oauth.client import AsyncJotformOauthClient, JotformOauthClient
     from .mcp_server.client import AsyncMcpServerClient, McpServerClient
     from .mscalendar_oauth.client import AsyncMscalendarOauthClient, MscalendarOauthClient
+    from .netlify_oauth.client import AsyncNetlifyOauthClient, NetlifyOauthClient
     from .oauth.client import AsyncOauthClient, OauthClient
     from .onedrive_oauth.client import AsyncOnedriveOauthClient, OnedriveOauthClient
     from .outlook_oauth.client import AsyncOutlookOauthClient, OutlookOauthClient
+    from .paypal_oauth.client import AsyncPaypalOauthClient, PaypalOauthClient
     from .sandbox.client import AsyncSandboxClient, SandboxClient
+    from .sentry_oauth.client import AsyncSentryOauthClient, SentryOauthClient
     from .sharesight_oauth.client import AsyncSharesightOauthClient, SharesightOauthClient
+    from .square_oauth.client import AsyncSquareOauthClient, SquareOauthClient
     from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
     from .user.client import AsyncUserClient, UserClient
     from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
@@ -103,6 +112,15 @@ class Klavis:
         self._zoom_oauth: typing.Optional[ZoomOauthClient] = None
         self._zoho_mail_oauth: typing.Optional[ZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[SharesightOauthClient] = None
+        self._intercom_oauth: typing.Optional[IntercomOauthClient] = None
+        self._paypal_oauth: typing.Optional[PaypalOauthClient] = None
+        self._sentry_oauth: typing.Optional[SentryOauthClient] = None
+        self._netlify_oauth: typing.Optional[NetlifyOauthClient] = None
+        self._huggingface_oauth: typing.Optional[HuggingfaceOauthClient] = None
+        self._square_oauth: typing.Optional[SquareOauthClient] = None
+        self._clockwise_oauth: typing.Optional[ClockwiseOauthClient] = None
+        self._jotform_oauth: typing.Optional[JotformOauthClient] = None
+        self._honeycomb_oauth: typing.Optional[HoneycombOauthClient] = None
         self._sandbox: typing.Optional[SandboxClient] = None
 
     @property
@@ -210,6 +228,78 @@ class Klavis:
         return self._sharesight_oauth
 
     @property
+    def intercom_oauth(self):
+        if self._intercom_oauth is None:
+            from .intercom_oauth.client import IntercomOauthClient  # noqa: E402
+
+            self._intercom_oauth = IntercomOauthClient(client_wrapper=self._client_wrapper)
+        return self._intercom_oauth
+
+    @property
+    def paypal_oauth(self):
+        if self._paypal_oauth is None:
+            from .paypal_oauth.client import PaypalOauthClient  # noqa: E402
+
+            self._paypal_oauth = PaypalOauthClient(client_wrapper=self._client_wrapper)
+        return self._paypal_oauth
+
+    @property
+    def sentry_oauth(self):
+        if self._sentry_oauth is None:
+            from .sentry_oauth.client import SentryOauthClient  # noqa: E402
+
+            self._sentry_oauth = SentryOauthClient(client_wrapper=self._client_wrapper)
+        return self._sentry_oauth
+
+    @property
+    def netlify_oauth(self):
+        if self._netlify_oauth is None:
+            from .netlify_oauth.client import NetlifyOauthClient  # noqa: E402
+
+            self._netlify_oauth = NetlifyOauthClient(client_wrapper=self._client_wrapper)
+        return self._netlify_oauth
+
+    @property
+    def huggingface_oauth(self):
+        if self._huggingface_oauth is None:
+            from .huggingface_oauth.client import HuggingfaceOauthClient  # noqa: E402
+
+            self._huggingface_oauth = HuggingfaceOauthClient(client_wrapper=self._client_wrapper)
+        return self._huggingface_oauth
+
+    @property
+    def square_oauth(self):
+        if self._square_oauth is None:
+            from .square_oauth.client import SquareOauthClient  # noqa: E402
+
+            self._square_oauth = SquareOauthClient(client_wrapper=self._client_wrapper)
+        return self._square_oauth
+
+    @property
+    def clockwise_oauth(self):
+        if self._clockwise_oauth is None:
+            from .clockwise_oauth.client import ClockwiseOauthClient  # noqa: E402
+
+            self._clockwise_oauth = ClockwiseOauthClient(client_wrapper=self._client_wrapper)
+        return self._clockwise_oauth
+
+    @property
+    def jotform_oauth(self):
+        if self._jotform_oauth is None:
+            from .jotform_oauth.client import JotformOauthClient  # noqa: E402
+
+            self._jotform_oauth = JotformOauthClient(client_wrapper=self._client_wrapper)
+        return self._jotform_oauth
+
+    @property
+    def honeycomb_oauth(self):
+        if self._honeycomb_oauth is None:
+            from .honeycomb_oauth.client import HoneycombOauthClient  # noqa: E402
+
+            self._honeycomb_oauth = HoneycombOauthClient(client_wrapper=self._client_wrapper)
+        return self._honeycomb_oauth
+
+    @property
     def sandbox(self):
         if self._sandbox is None:
             from .sandbox.client import SandboxClient  # noqa: E402
@@ -296,6 +386,15 @@ class AsyncKlavis:
         self._zoom_oauth: typing.Optional[AsyncZoomOauthClient] = None
         self._zoho_mail_oauth: typing.Optional[AsyncZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[AsyncSharesightOauthClient] = None
+        self._intercom_oauth: typing.Optional[AsyncIntercomOauthClient] = None
+        self._paypal_oauth: typing.Optional[AsyncPaypalOauthClient] = None
+        self._sentry_oauth: typing.Optional[AsyncSentryOauthClient] = None
+        self._netlify_oauth: typing.Optional[AsyncNetlifyOauthClient] = None
+        self._huggingface_oauth: typing.Optional[AsyncHuggingfaceOauthClient] = None
+        self._square_oauth: typing.Optional[AsyncSquareOauthClient] = None
+        self._clockwise_oauth: typing.Optional[AsyncClockwiseOauthClient] = None
+        self._jotform_oauth: typing.Optional[AsyncJotformOauthClient] = None
+        self._honeycomb_oauth: typing.Optional[AsyncHoneycombOauthClient] = None
         self._sandbox: typing.Optional[AsyncSandboxClient] = None
 
     @property
@@ -401,6 +500,78 @@ class AsyncKlavis:
 
             self._sharesight_oauth = AsyncSharesightOauthClient(client_wrapper=self._client_wrapper)
         return self._sharesight_oauth
+
+    @property
+    def intercom_oauth(self):
+        if self._intercom_oauth is None:
+            from .intercom_oauth.client import AsyncIntercomOauthClient  # noqa: E402
+
+            self._intercom_oauth = AsyncIntercomOauthClient(client_wrapper=self._client_wrapper)
+        return self._intercom_oauth
+
+    @property
+    def paypal_oauth(self):
+        if self._paypal_oauth is None:
+            from .paypal_oauth.client import AsyncPaypalOauthClient  # noqa: E402
+
+            self._paypal_oauth = AsyncPaypalOauthClient(client_wrapper=self._client_wrapper)
+        return self._paypal_oauth
+
+    @property
+    def sentry_oauth(self):
+        if self._sentry_oauth is None:
+            from .sentry_oauth.client import AsyncSentryOauthClient  # noqa: E402
+
+            self._sentry_oauth = AsyncSentryOauthClient(client_wrapper=self._client_wrapper)
+        return self._sentry_oauth
+
+    @property
+    def netlify_oauth(self):
+        if self._netlify_oauth is None:
+            from .netlify_oauth.client import AsyncNetlifyOauthClient  # noqa: E402
+
+            self._netlify_oauth = AsyncNetlifyOauthClient(client_wrapper=self._client_wrapper)
+        return self._netlify_oauth
+
+    @property
+    def huggingface_oauth(self):
+        if self._huggingface_oauth is None:
+            from .huggingface_oauth.client import AsyncHuggingfaceOauthClient  # noqa: E402
+
+            self._huggingface_oauth = AsyncHuggingfaceOauthClient(client_wrapper=self._client_wrapper)
+        return self._huggingface_oauth
+
+    @property
+    def square_oauth(self):
+        if self._square_oauth is None:
+            from .square_oauth.client import AsyncSquareOauthClient  # noqa: E402
+
+            self._square_oauth = AsyncSquareOauthClient(client_wrapper=self._client_wrapper)
+        return self._square_oauth
+
+    @property
+    def clockwise_oauth(self):
+        if self._clockwise_oauth is None:
+            from .clockwise_oauth.client import AsyncClockwiseOauthClient  # noqa: E402
+
+            self._clockwise_oauth = AsyncClockwiseOauthClient(client_wrapper=self._client_wrapper)
+        return self._clockwise_oauth
+
+    @property
+    def jotform_oauth(self):
+        if self._jotform_oauth is None:
+            from .jotform_oauth.client import AsyncJotformOauthClient  # noqa: E402
+
+            self._jotform_oauth = AsyncJotformOauthClient(client_wrapper=self._client_wrapper)
+        return self._jotform_oauth
+
+    @property
+    def honeycomb_oauth(self):
+        if self._honeycomb_oauth is None:
+            from .honeycomb_oauth.client import AsyncHoneycombOauthClient  # noqa: E402
+
+            self._honeycomb_oauth = AsyncHoneycombOauthClient(client_wrapper=self._client_wrapper)
+        return self._honeycomb_oauth
 
     @property
     def sandbox(self):

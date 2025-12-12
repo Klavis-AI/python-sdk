@@ -4,11 +4,27 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .integration_item import IntegrationItem
 
 
-class GetUserIntegrationsResponse(UniversalBaseModel):
-    integrations: typing.List[IntegrationItem]
+class MondayWorkspace(UniversalBaseModel):
+    """
+    Monday.com Workspace object - DELETE SUPPORTED
+    """
+
+    name: str = pydantic.Field()
+    """
+    Workspace name
+    """
+
+    kind: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Workspace kind (open, closed)
+    """
+
+    description: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Workspace description
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

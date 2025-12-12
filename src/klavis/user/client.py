@@ -38,7 +38,7 @@ class UserClient:
     ) -> GetUserIntegrationsResponse:
         """
         Get all available integrations (MCP server names) by user ID.
-        Returns a list of integration names as McpServerName types.
+        Returns a list of integration names and their authentication status.
 
         Parameters
         ----------
@@ -329,7 +329,7 @@ class AsyncUserClient:
     ) -> GetUserIntegrationsResponse:
         """
         Get all available integrations (MCP server names) by user ID.
-        Returns a list of integration names as McpServerName types.
+        Returns a list of integration names and their authentication status.
 
         Parameters
         ----------

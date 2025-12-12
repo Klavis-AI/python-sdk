@@ -28,6 +28,7 @@ class McpServerName(str, enum.Enum):
     ELEVEN_LABS = "ElevenLabs"
     EXA = "Exa"
     FATHOM = "Fathom"
+    FETCH_URL = "Fetch URL"
     FIGMA = "Figma"
     FIREFLIES = "Fireflies"
     FIRECRAWL_DEEP_RESEARCH = "Firecrawl Deep Research"
@@ -47,6 +48,7 @@ class McpServerName(str, enum.Enum):
     HACKER_NEWS = "Hacker News"
     HEYGEN = "Heygen"
     HUBSPOT = "HubSpot"
+    INTERCOM = "Intercom"
     JIRA = "Jira"
     KLAVIYO = "Klaviyo"
     KLAVIS_REPORT_GEN = "Klavis ReportGen"
@@ -86,6 +88,15 @@ class McpServerName(str, enum.Enum):
     YOUTUBE = "YouTube"
     ZENDESK = "Zendesk"
     SERVICE_NOW = "ServiceNow"
+    PAY_PAL = "PayPal"
+    SENTRY = "Sentry"
+    NETLIFY = "Netlify"
+    HUGGING_FACE = "Hugging Face"
+    SQUARE = "Square"
+    CLOCKWISE = "Clockwise"
+    JOTFORM = "Jotform"
+    HONEYCOMB = "Honeycomb"
+    ZOHO_MAIL = "Zoho Mail"
 
     def visit(
         self,
@@ -110,6 +121,7 @@ class McpServerName(str, enum.Enum):
         eleven_labs: typing.Callable[[], T_Result],
         exa: typing.Callable[[], T_Result],
         fathom: typing.Callable[[], T_Result],
+        fetch_url: typing.Callable[[], T_Result],
         figma: typing.Callable[[], T_Result],
         fireflies: typing.Callable[[], T_Result],
         firecrawl_deep_research: typing.Callable[[], T_Result],
@@ -129,6 +141,7 @@ class McpServerName(str, enum.Enum):
         hacker_news: typing.Callable[[], T_Result],
         heygen: typing.Callable[[], T_Result],
         hubspot: typing.Callable[[], T_Result],
+        intercom: typing.Callable[[], T_Result],
         jira: typing.Callable[[], T_Result],
         klaviyo: typing.Callable[[], T_Result],
         klavis_report_gen: typing.Callable[[], T_Result],
@@ -168,6 +181,15 @@ class McpServerName(str, enum.Enum):
         youtube: typing.Callable[[], T_Result],
         zendesk: typing.Callable[[], T_Result],
         service_now: typing.Callable[[], T_Result],
+        pay_pal: typing.Callable[[], T_Result],
+        sentry: typing.Callable[[], T_Result],
+        netlify: typing.Callable[[], T_Result],
+        hugging_face: typing.Callable[[], T_Result],
+        square: typing.Callable[[], T_Result],
+        clockwise: typing.Callable[[], T_Result],
+        jotform: typing.Callable[[], T_Result],
+        honeycomb: typing.Callable[[], T_Result],
+        zoho_mail: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
@@ -211,6 +233,8 @@ class McpServerName(str, enum.Enum):
             return exa()
         if self is McpServerName.FATHOM:
             return fathom()
+        if self is McpServerName.FETCH_URL:
+            return fetch_url()
         if self is McpServerName.FIGMA:
             return figma()
         if self is McpServerName.FIREFLIES:
@@ -249,6 +273,8 @@ class McpServerName(str, enum.Enum):
             return heygen()
         if self is McpServerName.HUBSPOT:
             return hubspot()
+        if self is McpServerName.INTERCOM:
+            return intercom()
         if self is McpServerName.JIRA:
             return jira()
         if self is McpServerName.KLAVIYO:
@@ -327,3 +353,21 @@ class McpServerName(str, enum.Enum):
             return zendesk()
         if self is McpServerName.SERVICE_NOW:
             return service_now()
+        if self is McpServerName.PAY_PAL:
+            return pay_pal()
+        if self is McpServerName.SENTRY:
+            return sentry()
+        if self is McpServerName.NETLIFY:
+            return netlify()
+        if self is McpServerName.HUGGING_FACE:
+            return hugging_face()
+        if self is McpServerName.SQUARE:
+            return square()
+        if self is McpServerName.CLOCKWISE:
+            return clockwise()
+        if self is McpServerName.JOTFORM:
+            return jotform()
+        if self is McpServerName.HONEYCOMB:
+            return honeycomb()
+        if self is McpServerName.ZOHO_MAIL:
+            return zoho_mail()

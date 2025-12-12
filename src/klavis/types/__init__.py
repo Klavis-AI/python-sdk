@@ -75,7 +75,9 @@ if typing.TYPE_CHECKING:
     from .dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
     from .dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
     from .dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
+    from .dump_sandbox_response_monday_data import DumpSandboxResponseMondayData
     from .dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
+    from .dump_sandbox_response_motion_data import DumpSandboxResponseMotionData
     from .dump_sandbox_response_ms_teams_data import DumpSandboxResponseMsTeamsData
     from .dump_sandbox_response_notion_data import DumpSandboxResponseNotionData
     from .dump_sandbox_response_one_drive_data import DumpSandboxResponseOneDriveData
@@ -141,6 +143,7 @@ if typing.TYPE_CHECKING:
     from .hub_spot_task import HubSpotTask
     from .hub_spot_ticket import HubSpotTicket
     from .initialize_sandbox_response import InitializeSandboxResponse
+    from .integration_item import IntegrationItem
     from .jira_board import JiraBoard
     from .jira_comment import JiraComment
     from .jira_data_output import JiraDataOutput
@@ -157,9 +160,17 @@ if typing.TYPE_CHECKING:
     from .log_sink import LogSink
     from .mcp_server import McpServer
     from .mcp_server_name import McpServerName
+    from .mcpo_auth_success_response import McpoAuthSuccessResponse
     from .mem0data_output import Mem0DataOutput
     from .mem0memory import Mem0Memory
     from .mem0message import Mem0Message
+    from .monday_board import MondayBoard
+    from .monday_data_output import MondayDataOutput
+    from .monday_group import MondayGroup
+    from .monday_item import MondayItem
+    from .monday_subitem import MondaySubitem
+    from .monday_update import MondayUpdate
+    from .monday_workspace import MondayWorkspace
     from .moneybird_contact import MoneybirdContact
     from .moneybird_data_output import MoneybirdDataOutput
     from .moneybird_invoice_detail import MoneybirdInvoiceDetail
@@ -168,6 +179,11 @@ if typing.TYPE_CHECKING:
     from .moneybird_project import MoneybirdProject
     from .moneybird_sales_invoice import MoneybirdSalesInvoice
     from .moneybird_time_entry import MoneybirdTimeEntry
+    from .motion_comment import MotionComment
+    from .motion_data_output import MotionDataOutput
+    from .motion_project import MotionProject
+    from .motion_task import MotionTask
+    from .motion_workspace import MotionWorkspace
     from .ms_teams_data_output import MsTeamsDataOutput
     from .notion_block import NotionBlock
     from .notion_comment import NotionComment
@@ -323,7 +339,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DumpSandboxResponseJiraData": ".dump_sandbox_response_jira_data",
     "DumpSandboxResponseLinearData": ".dump_sandbox_response_linear_data",
     "DumpSandboxResponseMem0Data": ".dump_sandbox_response_mem0data",
+    "DumpSandboxResponseMondayData": ".dump_sandbox_response_monday_data",
     "DumpSandboxResponseMoneybirdData": ".dump_sandbox_response_moneybird_data",
+    "DumpSandboxResponseMotionData": ".dump_sandbox_response_motion_data",
     "DumpSandboxResponseMsTeamsData": ".dump_sandbox_response_ms_teams_data",
     "DumpSandboxResponseNotionData": ".dump_sandbox_response_notion_data",
     "DumpSandboxResponseOneDriveData": ".dump_sandbox_response_one_drive_data",
@@ -389,6 +407,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "HubSpotTask": ".hub_spot_task",
     "HubSpotTicket": ".hub_spot_ticket",
     "InitializeSandboxResponse": ".initialize_sandbox_response",
+    "IntegrationItem": ".integration_item",
     "JiraBoard": ".jira_board",
     "JiraComment": ".jira_comment",
     "JiraDataOutput": ".jira_data_output",
@@ -405,9 +424,17 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LogSink": ".log_sink",
     "McpServer": ".mcp_server",
     "McpServerName": ".mcp_server_name",
+    "McpoAuthSuccessResponse": ".mcpo_auth_success_response",
     "Mem0DataOutput": ".mem0data_output",
     "Mem0Memory": ".mem0memory",
     "Mem0Message": ".mem0message",
+    "MondayBoard": ".monday_board",
+    "MondayDataOutput": ".monday_data_output",
+    "MondayGroup": ".monday_group",
+    "MondayItem": ".monday_item",
+    "MondaySubitem": ".monday_subitem",
+    "MondayUpdate": ".monday_update",
+    "MondayWorkspace": ".monday_workspace",
     "MoneybirdContact": ".moneybird_contact",
     "MoneybirdDataOutput": ".moneybird_data_output",
     "MoneybirdInvoiceDetail": ".moneybird_invoice_detail",
@@ -416,6 +443,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MoneybirdProject": ".moneybird_project",
     "MoneybirdSalesInvoice": ".moneybird_sales_invoice",
     "MoneybirdTimeEntry": ".moneybird_time_entry",
+    "MotionComment": ".motion_comment",
+    "MotionDataOutput": ".motion_data_output",
+    "MotionProject": ".motion_project",
+    "MotionTask": ".motion_task",
+    "MotionWorkspace": ".motion_workspace",
     "MsTeamsDataOutput": ".ms_teams_data_output",
     "NotionBlock": ".notion_block",
     "NotionComment": ".notion_comment",
@@ -595,7 +627,9 @@ __all__ = [
     "DumpSandboxResponseJiraData",
     "DumpSandboxResponseLinearData",
     "DumpSandboxResponseMem0Data",
+    "DumpSandboxResponseMondayData",
     "DumpSandboxResponseMoneybirdData",
+    "DumpSandboxResponseMotionData",
     "DumpSandboxResponseMsTeamsData",
     "DumpSandboxResponseNotionData",
     "DumpSandboxResponseOneDriveData",
@@ -661,6 +695,7 @@ __all__ = [
     "HubSpotTask",
     "HubSpotTicket",
     "InitializeSandboxResponse",
+    "IntegrationItem",
     "JiraBoard",
     "JiraComment",
     "JiraDataOutput",
@@ -677,9 +712,17 @@ __all__ = [
     "LogSink",
     "McpServer",
     "McpServerName",
+    "McpoAuthSuccessResponse",
     "Mem0DataOutput",
     "Mem0Memory",
     "Mem0Message",
+    "MondayBoard",
+    "MondayDataOutput",
+    "MondayGroup",
+    "MondayItem",
+    "MondaySubitem",
+    "MondayUpdate",
+    "MondayWorkspace",
     "MoneybirdContact",
     "MoneybirdDataOutput",
     "MoneybirdInvoiceDetail",
@@ -688,6 +731,11 @@ __all__ = [
     "MoneybirdProject",
     "MoneybirdSalesInvoice",
     "MoneybirdTimeEntry",
+    "MotionComment",
+    "MotionDataOutput",
+    "MotionProject",
+    "MotionTask",
+    "MotionWorkspace",
     "MsTeamsDataOutput",
     "NotionBlock",
     "NotionComment",

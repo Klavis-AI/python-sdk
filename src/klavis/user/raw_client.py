@@ -34,7 +34,7 @@ class RawUserClient:
     ) -> HttpResponse[GetUserIntegrationsResponse]:
         """
         Get all available integrations (MCP server names) by user ID.
-        Returns a list of integration names as McpServerName types.
+        Returns a list of integration names and their authentication status.
 
         Parameters
         ----------
@@ -439,7 +439,7 @@ class AsyncRawUserClient:
     ) -> AsyncHttpResponse[GetUserIntegrationsResponse]:
         """
         Get all available integrations (MCP server names) by user ID.
-        Returns a list of integration names as McpServerName types.
+        Returns a list of integration names and their authentication status.
 
         Parameters
         ----------

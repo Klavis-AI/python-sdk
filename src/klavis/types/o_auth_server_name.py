@@ -53,6 +53,15 @@ class OAuthServerName(str, enum.Enum):
     WORD_PRESS = "WordPress"
     XERO = "Xero"
     ZENDESK = "Zendesk"
+    PAY_PAL = "PayPal"
+    SENTRY = "Sentry"
+    NETLIFY = "Netlify"
+    HUGGING_FACE = "Hugging Face"
+    SQUARE = "Square"
+    CLOCKWISE = "Clockwise"
+    JOTFORM = "Jotform"
+    HONEYCOMB = "Honeycomb"
+    ZOHO_MAIL = "Zoho Mail"
 
     def visit(
         self,
@@ -102,6 +111,15 @@ class OAuthServerName(str, enum.Enum):
         word_press: typing.Callable[[], T_Result],
         xero: typing.Callable[[], T_Result],
         zendesk: typing.Callable[[], T_Result],
+        pay_pal: typing.Callable[[], T_Result],
+        sentry: typing.Callable[[], T_Result],
+        netlify: typing.Callable[[], T_Result],
+        hugging_face: typing.Callable[[], T_Result],
+        square: typing.Callable[[], T_Result],
+        clockwise: typing.Callable[[], T_Result],
+        jotform: typing.Callable[[], T_Result],
+        honeycomb: typing.Callable[[], T_Result],
+        zoho_mail: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is OAuthServerName.AIRTABLE:
             return airtable()
@@ -195,3 +213,21 @@ class OAuthServerName(str, enum.Enum):
             return xero()
         if self is OAuthServerName.ZENDESK:
             return zendesk()
+        if self is OAuthServerName.PAY_PAL:
+            return pay_pal()
+        if self is OAuthServerName.SENTRY:
+            return sentry()
+        if self is OAuthServerName.NETLIFY:
+            return netlify()
+        if self is OAuthServerName.HUGGING_FACE:
+            return hugging_face()
+        if self is OAuthServerName.SQUARE:
+            return square()
+        if self is OAuthServerName.CLOCKWISE:
+            return clockwise()
+        if self is OAuthServerName.JOTFORM:
+            return jotform()
+        if self is OAuthServerName.HONEYCOMB:
+            return honeycomb()
+        if self is OAuthServerName.ZOHO_MAIL:
+            return zoho_mail()

@@ -4,11 +4,28 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .integration_item import IntegrationItem
+from .monday_item import MondayItem
 
 
-class GetUserIntegrationsResponse(UniversalBaseModel):
-    integrations: typing.List[IntegrationItem]
+class MondayGroup(UniversalBaseModel):
+    """
+    Monday.com Group (Section) object - DELETE SUPPORTED
+    """
+
+    title: str = pydantic.Field()
+    """
+    Group title
+    """
+
+    color: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Group color (e.g., '#FF0000', 'red')
+    """
+
+    items: typing.Optional[typing.List[MondayItem]] = pydantic.Field(default=None)
+    """
+    Items in this group
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

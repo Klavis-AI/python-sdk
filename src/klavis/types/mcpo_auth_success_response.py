@@ -4,11 +4,18 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .integration_item import IntegrationItem
 
 
-class GetUserIntegrationsResponse(UniversalBaseModel):
-    integrations: typing.List[IntegrationItem]
+class McpoAuthSuccessResponse(UniversalBaseModel):
+    status: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Status of the operation
+    """
+
+    message: str = pydantic.Field()
+    """
+    Success message
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

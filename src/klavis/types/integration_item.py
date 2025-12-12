@@ -4,11 +4,15 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .integration_item import IntegrationItem
+from .mcp_server_name import McpServerName
 
 
-class GetUserIntegrationsResponse(UniversalBaseModel):
-    integrations: typing.List[IntegrationItem]
+class IntegrationItem(UniversalBaseModel):
+    name: McpServerName
+    is_authenticated: bool = pydantic.Field()
+    """
+    Whether the integration is authenticated
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

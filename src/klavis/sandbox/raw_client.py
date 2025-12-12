@@ -43,7 +43,9 @@ from ..types.dump_sandbox_response_hub_spot_data import DumpSandboxResponseHubSp
 from ..types.dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
 from ..types.dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
 from ..types.dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
+from ..types.dump_sandbox_response_monday_data import DumpSandboxResponseMondayData
 from ..types.dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
+from ..types.dump_sandbox_response_motion_data import DumpSandboxResponseMotionData
 from ..types.dump_sandbox_response_ms_teams_data import DumpSandboxResponseMsTeamsData
 from ..types.dump_sandbox_response_notion_data import DumpSandboxResponseNotionData
 from ..types.dump_sandbox_response_one_drive_data import DumpSandboxResponseOneDriveData
@@ -80,12 +82,15 @@ from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
 from ..types.log_sink import LogSink
 from ..types.mem0memory import Mem0Memory
+from ..types.monday_board import MondayBoard
+from ..types.monday_workspace import MondayWorkspace
 from ..types.moneybird_contact import MoneybirdContact
 from ..types.moneybird_ledger_account import MoneybirdLedgerAccount
 from ..types.moneybird_product import MoneybirdProduct
 from ..types.moneybird_project import MoneybirdProject
 from ..types.moneybird_sales_invoice import MoneybirdSalesInvoice
 from ..types.moneybird_time_entry import MoneybirdTimeEntry
+from ..types.motion_workspace import MotionWorkspace
 from ..types.notion_database import NotionDatabase
 from ..types.notion_page import NotionPage
 from ..types.one_drive_folder import OneDriveFolder
@@ -4498,6 +4503,245 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def initialize_monday_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
+        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with monday-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
+            List of workspaces
+
+        boards : typing.Optional[typing.Sequence[MondayBoard]]
+            List of boards with their groups and items
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/monday/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "workspaces": convert_and_respect_annotation_metadata(
+                    object_=workspaces, annotation=typing.Sequence[MondayWorkspace], direction="write"
+                ),
+                "boards": convert_and_respect_annotation_metadata(
+                    object_=boards, annotation=typing.Sequence[MondayBoard], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_monday_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseMondayData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseMondayData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/monday/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMondayData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMondayData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_motion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with motion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
+            List of workspaces with their projects and tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/motion/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "workspaces": convert_and_respect_annotation_metadata(
+                    object_=workspaces, annotation=typing.Sequence[MotionWorkspace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_motion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DumpSandboxResponseMotionData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DumpSandboxResponseMotionData]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/motion/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMotionData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMotionData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawSandboxClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -8858,6 +9102,245 @@ class AsyncRawSandboxClient:
                     DumpSandboxResponseGoogleCloudData,
                     parse_obj_as(
                         type_=DumpSandboxResponseGoogleCloudData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_monday_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
+        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with monday-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
+            List of workspaces
+
+        boards : typing.Optional[typing.Sequence[MondayBoard]]
+            List of boards with their groups and items
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/monday/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "workspaces": convert_and_respect_annotation_metadata(
+                    object_=workspaces, annotation=typing.Sequence[MondayWorkspace], direction="write"
+                ),
+                "boards": convert_and_respect_annotation_metadata(
+                    object_=boards, annotation=typing.Sequence[MondayBoard], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_monday_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseMondayData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseMondayData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/monday/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMondayData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMondayData,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_motion_sandbox(
+        self,
+        sandbox_id: str,
+        *,
+        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Initialize the sandbox with motion-specific data following the defined schema.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
+            List of workspaces with their projects and tasks
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/motion/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            json={
+                "workspaces": convert_and_respect_annotation_metadata(
+                    object_=workspaces, annotation=typing.Sequence[MotionWorkspace], direction="write"
+                ),
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_motion_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DumpSandboxResponseMotionData]:
+        """
+        Export all data from the sandbox in the same format used for initialization.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DumpSandboxResponseMotionData]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/motion/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DumpSandboxResponseMotionData,
+                    parse_obj_as(
+                        type_=DumpSandboxResponseMotionData,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

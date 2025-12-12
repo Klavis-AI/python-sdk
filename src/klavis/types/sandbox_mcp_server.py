@@ -28,6 +28,7 @@ class SandboxMcpServer(str, enum.Enum):
     CLICKUP = "clickup"
     CLOSE = "close"
     MONDAY = "monday"
+    MOTION = "motion"
     ONEDRIVE = "onedrive"
     MICROSOFT_TEAMS = "microsoft_teams"
     OUTLOOK_MAIL = "outlook_mail"
@@ -66,6 +67,7 @@ class SandboxMcpServer(str, enum.Enum):
         clickup: typing.Callable[[], T_Result],
         close: typing.Callable[[], T_Result],
         monday: typing.Callable[[], T_Result],
+        motion: typing.Callable[[], T_Result],
         onedrive: typing.Callable[[], T_Result],
         microsoft_teams: typing.Callable[[], T_Result],
         outlook_mail: typing.Callable[[], T_Result],
@@ -119,6 +121,8 @@ class SandboxMcpServer(str, enum.Enum):
             return close()
         if self is SandboxMcpServer.MONDAY:
             return monday()
+        if self is SandboxMcpServer.MOTION:
+            return motion()
         if self is SandboxMcpServer.ONEDRIVE:
             return onedrive()
         if self is SandboxMcpServer.MICROSOFT_TEAMS:
