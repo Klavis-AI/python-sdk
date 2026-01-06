@@ -12,14 +12,14 @@ class HubSpotCompany(UniversalBaseModel):
     Base object, typically doesn't associate upwards in this schema, but contacts/deals associate to it.
     """
 
-    name: str = pydantic.Field()
+    company_name: str = pydantic.Field()
     """
     Company name
     """
 
-    domain: typing.Optional[str] = pydantic.Field(default=None)
+    website_domain: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Company domain/website
+    Company website domain
     """
 
     industry: typing.Optional[str] = pydantic.Field(default=None)
@@ -32,7 +32,7 @@ class HubSpotCompany(UniversalBaseModel):
     Company city
     """
 
-    state: typing.Optional[str] = pydantic.Field(default=None)
+    state_region: typing.Optional[str] = pydantic.Field(default=None)
     """
     Company state/region
     """
@@ -42,19 +42,19 @@ class HubSpotCompany(UniversalBaseModel):
     Company country
     """
 
-    phone: typing.Optional[str] = pydantic.Field(default=None)
+    phone_number: typing.Optional[str] = pydantic.Field(default=None)
     """
     Company phone number
     """
 
-    number_of_employees: typing.Optional[str] = pydantic.Field(default=None)
+    employee_count: typing.Optional[str] = pydantic.Field(default=None)
     """
     Number of employees
     """
 
-    annual_revenue: typing.Optional[str] = pydantic.Field(default=None)
+    yearly_revenue: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Annual revenue
+    Yearly revenue
     """
 
     if IS_PYDANTIC_V2:

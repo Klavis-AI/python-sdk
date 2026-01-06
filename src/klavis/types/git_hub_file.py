@@ -23,7 +23,7 @@ class GitHubFile(UniversalBaseModel):
 
     content: typing.Optional[str] = pydantic.Field(default=None)
     """
-    File content (base64 encoded for binary files)
+    File content
     """
 
     if IS_PYDANTIC_V2:

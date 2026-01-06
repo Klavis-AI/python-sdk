@@ -3,14 +3,12 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class ComputeInstance(UniversalBaseModel):
     """
-    Compute Engine instance - matches API format
+    Compute Engine instance
     """
 
     name: str = pydantic.Field()
@@ -23,9 +21,7 @@ class ComputeInstance(UniversalBaseModel):
     Instance zone
     """
 
-    machine_type: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="machineType")] = (
-        pydantic.Field(default=None)
-    )
+    machine_type: typing.Optional[str] = pydantic.Field(default=None)
     """
     Machine type
     """
@@ -33,25 +29,6 @@ class ComputeInstance(UniversalBaseModel):
     status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Instance status
-    """
-
-    creation_timestamp: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="creationTimestamp")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Creation timestamp
-    """
-
-    id: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Instance ID
-    """
-
-    self_link: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="selfLink")] = pydantic.Field(
-        default=None
-    )
-    """
-    Self link URL
     """
 
     description: typing.Optional[str] = pydantic.Field(default=None)
@@ -62,6 +39,11 @@ class ComputeInstance(UniversalBaseModel):
     labels: typing.Optional[typing.Dict[str, typing.Optional[str]]] = pydantic.Field(default=None)
     """
     Instance labels
+    """
+
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Creation timestamp
     """
 
     if IS_PYDANTIC_V2:

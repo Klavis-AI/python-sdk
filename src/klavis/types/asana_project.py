@@ -22,9 +22,9 @@ class AsanaProject(UniversalBaseModel):
     Project name
     """
 
-    notes: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Project notes/description
+    Project description
     """
 
     tasks: typing.Optional[typing.List[AsanaTask]] = pydantic.Field(default=None)

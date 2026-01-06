@@ -12,17 +12,17 @@ class HubSpotDeal(UniversalBaseModel):
     Can be associated with: Contacts, Companies.
     """
 
-    deal_name: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Deal name
-    """
-
-    amount: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Deal amount
+    Deal title
     """
 
-    deal_stage: typing.Optional[str] = pydantic.Field(default=None)
+    value: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Deal value/amount
+    """
+
+    stage: typing.Optional[str] = pydantic.Field(default=None)
     """
     Deal stage
     """
@@ -32,7 +32,7 @@ class HubSpotDeal(UniversalBaseModel):
     Deal pipeline
     """
 
-    close_date: typing.Optional[str] = pydantic.Field(default=None)
+    expected_close_date: typing.Optional[str] = pydantic.Field(default=None)
     """
     Expected close date
     """

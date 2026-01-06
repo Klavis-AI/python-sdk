@@ -3,19 +3,22 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
-class BigQueryDatasetReference(UniversalBaseModel):
+class GoogleFormsSectionHeader(UniversalBaseModel):
     """
-    Reference to a BigQuery dataset
+    A section header/text item in the form
     """
 
-    dataset_id: typing_extensions.Annotated[str, FieldMetadata(alias="datasetId")] = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Dataset ID
+    The section title
+    """
+
+    description: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Section description
     """
 
     if IS_PYDANTIC_V2:

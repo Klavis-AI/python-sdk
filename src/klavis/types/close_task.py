@@ -11,22 +11,22 @@ class CloseTask(UniversalBaseModel):
     Close Task object - child of Lead
     """
 
-    text: str = pydantic.Field()
+    description: str = pydantic.Field()
     """
     Task description
     """
 
     date: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The date of a task represents the point in time of when the task is actionable and appears in the inbox
+    The date when the task is actionable
     """
 
-    is_complete: typing.Optional[bool] = pydantic.Field(default=None)
+    completed: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Whether task is completed
     """
 
-    assigned_to: typing.Optional[str] = pydantic.Field(default=None)
+    assignee_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     User ID assigned to
     """

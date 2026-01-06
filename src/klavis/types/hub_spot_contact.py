@@ -12,22 +12,22 @@ class HubSpotContact(UniversalBaseModel):
     Can be associated with: Companies.
     """
 
-    firstname: str = pydantic.Field()
+    first_name: str = pydantic.Field()
     """
     Contact first name
     """
 
-    lastname: str = pydantic.Field()
+    last_name: str = pydantic.Field()
     """
     Contact last name
     """
 
-    email: str = pydantic.Field()
+    email_address: str = pydantic.Field()
     """
     Contact email address
     """
 
-    phone: typing.Optional[str] = pydantic.Field(default=None)
+    phone_number: typing.Optional[str] = pydantic.Field(default=None)
     """
     Contact phone number
     """

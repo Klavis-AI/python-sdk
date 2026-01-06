@@ -13,17 +13,17 @@ class TeamsChat(UniversalBaseModel):
     Teams Chat object
     """
 
-    id: typing.Optional[str] = pydantic.Field(default=None)
+    chat_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Chat ID (read-only, set by Teams)
     """
 
-    members: typing.Optional[typing.List[TeamsChatMember]] = pydantic.Field(default=None)
+    chat_members: typing.Optional[typing.List[TeamsChatMember]] = pydantic.Field(default=None)
     """
     List of chat members
     """
 
-    messages: typing.Optional[typing.List[TeamsMessage]] = pydantic.Field(default=None)
+    chat_messages: typing.Optional[typing.List[TeamsMessage]] = pydantic.Field(default=None)
     """
     List of messages in the chat
     """

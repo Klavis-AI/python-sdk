@@ -4,29 +4,32 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .google_forms_form_settings import GoogleFormsFormSettings
-from .google_forms_info import GoogleFormsInfo
 from .google_forms_item import GoogleFormsItem
 
 
 class GoogleFormsForm(UniversalBaseModel):
     """
-    Google Forms form object - matches API Form resource
+    A Google Form with simplified structure
     """
 
-    info: GoogleFormsInfo = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Required. The title and description of the form
+    The form title visible to responders
     """
 
-    settings: typing.Optional[GoogleFormsFormSettings] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The form's settings
+    The form description
+    """
+
+    is_quiz: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    Whether this form is a quiz
     """
 
     items: typing.Optional[typing.List[GoogleFormsItem]] = pydantic.Field(default=None)
     """
-    A list of the form's items
+    List of form items (questions and section headers)
     """
 
     if IS_PYDANTIC_V2:

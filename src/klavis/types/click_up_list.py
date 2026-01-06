@@ -17,9 +17,9 @@ class ClickUpList(UniversalBaseModel):
     List name
     """
 
-    content: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    List description/content
+    List description
     """
 
     tasks: typing.Optional[typing.List[ClickUpTask]] = pydantic.Field(default=None)

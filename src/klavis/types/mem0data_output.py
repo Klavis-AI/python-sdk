@@ -12,7 +12,7 @@ class Mem0DataOutput(UniversalBaseModel):
     Complete Mem0 sandbox data structure
     """
 
-    memories: typing.Optional[typing.List[Mem0Memory]] = pydantic.Field(default=None)
+    memory_list: typing.Optional[typing.List[Mem0Memory]] = pydantic.Field(default=None)
     """
     List of memories
     """

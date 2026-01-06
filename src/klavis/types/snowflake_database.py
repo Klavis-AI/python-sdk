@@ -17,9 +17,9 @@ class SnowflakeDatabase(UniversalBaseModel):
     Database name, cannot be 'SNOWFLAKE' or 'USER$...' since they are default databases
     """
 
-    comment: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Database comment/description
+    Database description
     """
 
     schemas: typing.Optional[typing.List[SnowflakeSchema]] = pydantic.Field(default=None)

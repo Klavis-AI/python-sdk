@@ -23,6 +23,7 @@ from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
 from ..types.strata_raw_actions_response import StrataRawActionsResponse
 from ..types.tool_format import ToolFormat
+from ..types.update_server_instance_response import UpdateServerInstanceResponse
 from .raw_client import AsyncRawMcpServerClient, RawMcpServerClient
 from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
@@ -547,6 +548,7 @@ class McpServerClient:
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         legacy: typing.Optional[bool] = OMIT,
+        is_read_only: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
         """
@@ -572,6 +574,9 @@ class McpServerClient:
 
         legacy : typing.Optional[bool]
             Whether to use the legacy server. Default is False.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -599,6 +604,7 @@ class McpServerClient:
             platform_name=platform_name,
             connection_type=connection_type,
             legacy=legacy,
+            is_read_only=is_read_only,
             request_options=request_options,
         )
         return _response.data
@@ -712,6 +718,49 @@ class McpServerClient:
         )
         """
         _response = self._raw_client.delete_server_instance(instance_id, request_options=request_options)
+        return _response.data
+
+    def update_server_instance(
+        self,
+        instance_id: str,
+        *,
+        is_read_only: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> UpdateServerInstanceResponse:
+        """
+        Updates the settings of a specific server connection instance.
+        Currently supports updating the read-only status of the connection.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to update.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UpdateServerInstanceResponse
+            Successful Response
+
+        Examples
+        --------
+        from klavis import Klavis
+
+        client = Klavis(
+            api_key="YOUR_API_KEY",
+        )
+        client.mcp_server.update_server_instance(
+            instance_id="instanceId",
+        )
+        """
+        _response = self._raw_client.update_server_instance(
+            instance_id, is_read_only=is_read_only, request_options=request_options
+        )
         return _response.data
 
     def get_instance_auth_data(
@@ -1556,6 +1605,7 @@ class AsyncMcpServerClient:
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         legacy: typing.Optional[bool] = OMIT,
+        is_read_only: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateServerResponse:
         """
@@ -1581,6 +1631,9 @@ class AsyncMcpServerClient:
 
         legacy : typing.Optional[bool]
             Whether to use the legacy server. Default is False.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted. Default is False.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1616,6 +1669,7 @@ class AsyncMcpServerClient:
             platform_name=platform_name,
             connection_type=connection_type,
             legacy=legacy,
+            is_read_only=is_read_only,
             request_options=request_options,
         )
         return _response.data
@@ -1753,6 +1807,57 @@ class AsyncMcpServerClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_server_instance(instance_id, request_options=request_options)
+        return _response.data
+
+    async def update_server_instance(
+        self,
+        instance_id: str,
+        *,
+        is_read_only: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> UpdateServerInstanceResponse:
+        """
+        Updates the settings of a specific server connection instance.
+        Currently supports updating the read-only status of the connection.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to update.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UpdateServerInstanceResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from klavis import AsyncKlavis
+
+        client = AsyncKlavis(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.mcp_server.update_server_instance(
+                instance_id="instanceId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_server_instance(
+            instance_id, is_read_only=is_read_only, request_options=request_options
+        )
         return _response.data
 
     async def get_instance_auth_data(

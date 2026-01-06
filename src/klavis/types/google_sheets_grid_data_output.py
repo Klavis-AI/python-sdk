@@ -2,44 +2,4 @@
 
 import typing
 
-import pydantic
-import typing_extensions
-from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
-from .google_sheets_row_data import GoogleSheetsRowData
-
-
-class GoogleSheetsGridDataOutput(UniversalBaseModel):
-    """
-    Grid data for a sheet
-    """
-
-    start_row: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="startRow")] = pydantic.Field(
-        default=None
-    )
-    """
-    Starting row index
-    """
-
-    start_column: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="startColumn")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Starting column index
-    """
-
-    row_data: typing_extensions.Annotated[
-        typing.Optional[typing.List[GoogleSheetsRowData]], FieldMetadata(alias="rowData")
-    ] = pydantic.Field(default=None)
-    """
-    Row data with values array
-    """
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
+GoogleSheetsGridDataOutput = typing.Optional[typing.Any]

@@ -11,15 +11,19 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.account import Account
 from ..types.airtable_table import AirtableTable
 from ..types.asana_project import AsanaProject
 from ..types.big_query_dataset import BigQueryDataset
 from ..types.big_query_table import BigQueryTable
 from ..types.calcom_schedule import CalcomSchedule
+from ..types.campaign import Campaign
+from ..types.case import Case
 from ..types.click_up_space import ClickUpSpace
 from ..types.close_lead import CloseLead
 from ..types.compute_instance import ComputeInstance
 from ..types.confluence_space import ConfluenceSpace
+from ..types.contact import Contact
 from ..types.create_sandbox_response import CreateSandboxResponse
 from ..types.discord_channel import DiscordChannel
 from ..types.dropbox_file import DropboxFile
@@ -77,6 +81,7 @@ from ..types.initialize_sandbox_response import InitializeSandboxResponse
 from ..types.jira_board import JiraBoard
 from ..types.jira_project import JiraProject
 from ..types.jira_sprint import JiraSprint
+from ..types.lead import Lead
 from ..types.linear_project import LinearProject
 from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
@@ -94,6 +99,7 @@ from ..types.motion_workspace import MotionWorkspace
 from ..types.notion_database import NotionDatabase
 from ..types.notion_page import NotionPage
 from ..types.one_drive_folder import OneDriveFolder
+from ..types.opportunity import Opportunity
 from ..types.outlook_calendar_event import OutlookCalendarEvent
 from ..types.outlook_mail_message import OutlookMailMessage
 from ..types.release_sandbox_response import ReleaseSandboxResponse
@@ -101,12 +107,6 @@ from ..types.resend_contact import ResendContact
 from ..types.resend_email import ResendEmail
 from ..types.resend_segment import ResendSegment
 from ..types.reset_sandbox_response import ResetSandboxResponse
-from ..types.salesforce_account import SalesforceAccount
-from ..types.salesforce_campaign import SalesforceCampaign
-from ..types.salesforce_case import SalesforceCase
-from ..types.salesforce_contact import SalesforceContact
-from ..types.salesforce_lead import SalesforceLead
-from ..types.salesforce_opportunity import SalesforceOpportunity
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
 from ..types.shopify_customer import ShopifyCustomer
@@ -129,15 +129,22 @@ class RawSandboxClient:
         self._client_wrapper = client_wrapper
 
     def create_sandbox(
-        self, server_name: SandboxMcpServer, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        server_name: SandboxMcpServer,
+        *,
+        test_account_email: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateSandboxResponse]:
         """
-        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'.
+        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'. Optionally specify a test_account_email to acquire a specific test account.
 
         Parameters
         ----------
         server_name : SandboxMcpServer
             The MCP server name
+
+        test_account_email : typing.Optional[str]
+            Optional email of a specific test account to acquire. If provided, the system will attempt to acquire the sandbox associated with this test account email instead of a random idle sandbox.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -150,7 +157,14 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/{jsonable_encoder(server_name)}",
             method="POST",
+            json={
+                "test_account_email": test_account_email,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -1174,12 +1188,12 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1190,23 +1204,17 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
-            List of Salesforce accounts
+        accounts : typing.Optional[typing.Sequence[Account]]
 
-        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
-            List of Salesforce contacts
+        contacts : typing.Optional[typing.Sequence[Contact]]
 
-        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
-            List of Salesforce opportunities
+        opportunities : typing.Optional[typing.Sequence[Opportunity]]
 
-        leads : typing.Optional[typing.Sequence[SalesforceLead]]
-            List of Salesforce leads
+        leads : typing.Optional[typing.Sequence[Lead]]
 
-        cases : typing.Optional[typing.Sequence[SalesforceCase]]
-            List of Salesforce cases
+        cases : typing.Optional[typing.Sequence[Case]]
 
-        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
-            List of Salesforce campaigns
+        campaigns : typing.Optional[typing.Sequence[Campaign]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1221,22 +1229,22 @@ class RawSandboxClient:
             method="POST",
             json={
                 "accounts": convert_and_respect_annotation_metadata(
-                    object_=accounts, annotation=typing.Sequence[SalesforceAccount], direction="write"
+                    object_=accounts, annotation=typing.Sequence[Account], direction="write"
                 ),
                 "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[SalesforceContact], direction="write"
+                    object_=contacts, annotation=typing.Sequence[Contact], direction="write"
                 ),
                 "opportunities": convert_and_respect_annotation_metadata(
-                    object_=opportunities, annotation=typing.Sequence[SalesforceOpportunity], direction="write"
+                    object_=opportunities, annotation=typing.Sequence[Opportunity], direction="write"
                 ),
                 "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[SalesforceLead], direction="write"
+                    object_=leads, annotation=typing.Sequence[Lead], direction="write"
                 ),
                 "cases": convert_and_respect_annotation_metadata(
-                    object_=cases, annotation=typing.Sequence[SalesforceCase], direction="write"
+                    object_=cases, annotation=typing.Sequence[Case], direction="write"
                 ),
                 "campaigns": convert_and_respect_annotation_metadata(
-                    object_=campaigns, annotation=typing.Sequence[SalesforceCampaign], direction="write"
+                    object_=campaigns, annotation=typing.Sequence[Campaign], direction="write"
                 ),
             },
             headers={
@@ -1322,7 +1330,11 @@ class RawSandboxClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def initialize_onedrive_sandbox(
-        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+        self,
+        sandbox_id: str,
+        *,
+        root: typing.Sequence[OneDriveFolder],
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
         Initialize the sandbox with onedrive-specific data following the defined schema.
@@ -1332,8 +1344,8 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : OneDriveFolder
-            Root folder containing all subfolders and files
+        root : typing.Sequence[OneDriveFolder]
+            List containing root folder (should contain only one element)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1348,7 +1360,7 @@ class RawSandboxClient:
             method="POST",
             json={
                 "root": convert_and_respect_annotation_metadata(
-                    object_=root, annotation=OneDriveFolder, direction="write"
+                    object_=root, annotation=typing.Sequence[OneDriveFolder], direction="write"
                 ),
             },
             headers={
@@ -1437,8 +1449,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1449,10 +1461,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
             List of team channels
 
-        chats : typing.Optional[typing.Sequence[TeamsChat]]
+        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
             List of one-on-one chats
 
         request_options : typing.Optional[RequestOptions]
@@ -1467,11 +1479,11 @@ class RawSandboxClient:
             f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[TeamsChannel], direction="write"
+                "team_channels": convert_and_respect_annotation_metadata(
+                    object_=team_channels, annotation=typing.Sequence[TeamsChannel], direction="write"
                 ),
-                "chats": convert_and_respect_annotation_metadata(
-                    object_=chats, annotation=typing.Sequence[TeamsChat], direction="write"
+                "team_chats": convert_and_respect_annotation_metadata(
+                    object_=team_chats, annotation=typing.Sequence[TeamsChat], direction="write"
                 ),
             },
             headers={
@@ -2465,7 +2477,7 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2476,7 +2488,7 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
             List of calendar events
 
         request_options : typing.Optional[RequestOptions]
@@ -2491,8 +2503,8 @@ class RawSandboxClient:
             f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "events": convert_and_respect_annotation_metadata(
-                    object_=events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
+                "calendar_events": convert_and_respect_annotation_metadata(
+                    object_=calendar_events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
                 ),
             },
             headers={
@@ -3175,7 +3187,7 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3186,7 +3198,7 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
             List of memories
 
         request_options : typing.Optional[RequestOptions]
@@ -3201,8 +3213,8 @@ class RawSandboxClient:
             f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "memories": convert_and_respect_annotation_metadata(
-                    object_=memories, annotation=typing.Sequence[Mem0Memory], direction="write"
+                "memory_list": convert_and_respect_annotation_metadata(
+                    object_=memory_list, annotation=typing.Sequence[Mem0Memory], direction="write"
                 ),
             },
             headers={
@@ -4408,13 +4420,13 @@ class RawSandboxClient:
                 "objects": convert_and_respect_annotation_metadata(
                     object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
                 ),
-                "logEntries": convert_and_respect_annotation_metadata(
+                "log_entries": convert_and_respect_annotation_metadata(
                     object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
                 ),
-                "logSinks": convert_and_respect_annotation_metadata(
+                "log_sinks": convert_and_respect_annotation_metadata(
                     object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
                 ),
-                "logBuckets": convert_and_respect_annotation_metadata(
+                "log_buckets": convert_and_respect_annotation_metadata(
                     object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
                 ),
                 "instances": convert_and_respect_annotation_metadata(
@@ -4748,15 +4760,22 @@ class AsyncRawSandboxClient:
         self._client_wrapper = client_wrapper
 
     async def create_sandbox(
-        self, server_name: SandboxMcpServer, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        server_name: SandboxMcpServer,
+        *,
+        test_account_email: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateSandboxResponse]:
         """
-        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'.
+        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'. Optionally specify a test_account_email to acquire a specific test account.
 
         Parameters
         ----------
         server_name : SandboxMcpServer
             The MCP server name
+
+        test_account_email : typing.Optional[str]
+            Optional email of a specific test account to acquire. If provided, the system will attempt to acquire the sandbox associated with this test account email instead of a random idle sandbox.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4769,7 +4788,14 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/{jsonable_encoder(server_name)}",
             method="POST",
+            json={
+                "test_account_email": test_account_email,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -5793,12 +5819,12 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5809,23 +5835,17 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
-            List of Salesforce accounts
+        accounts : typing.Optional[typing.Sequence[Account]]
 
-        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
-            List of Salesforce contacts
+        contacts : typing.Optional[typing.Sequence[Contact]]
 
-        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
-            List of Salesforce opportunities
+        opportunities : typing.Optional[typing.Sequence[Opportunity]]
 
-        leads : typing.Optional[typing.Sequence[SalesforceLead]]
-            List of Salesforce leads
+        leads : typing.Optional[typing.Sequence[Lead]]
 
-        cases : typing.Optional[typing.Sequence[SalesforceCase]]
-            List of Salesforce cases
+        cases : typing.Optional[typing.Sequence[Case]]
 
-        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
-            List of Salesforce campaigns
+        campaigns : typing.Optional[typing.Sequence[Campaign]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5840,22 +5860,22 @@ class AsyncRawSandboxClient:
             method="POST",
             json={
                 "accounts": convert_and_respect_annotation_metadata(
-                    object_=accounts, annotation=typing.Sequence[SalesforceAccount], direction="write"
+                    object_=accounts, annotation=typing.Sequence[Account], direction="write"
                 ),
                 "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[SalesforceContact], direction="write"
+                    object_=contacts, annotation=typing.Sequence[Contact], direction="write"
                 ),
                 "opportunities": convert_and_respect_annotation_metadata(
-                    object_=opportunities, annotation=typing.Sequence[SalesforceOpportunity], direction="write"
+                    object_=opportunities, annotation=typing.Sequence[Opportunity], direction="write"
                 ),
                 "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[SalesforceLead], direction="write"
+                    object_=leads, annotation=typing.Sequence[Lead], direction="write"
                 ),
                 "cases": convert_and_respect_annotation_metadata(
-                    object_=cases, annotation=typing.Sequence[SalesforceCase], direction="write"
+                    object_=cases, annotation=typing.Sequence[Case], direction="write"
                 ),
                 "campaigns": convert_and_respect_annotation_metadata(
-                    object_=campaigns, annotation=typing.Sequence[SalesforceCampaign], direction="write"
+                    object_=campaigns, annotation=typing.Sequence[Campaign], direction="write"
                 ),
             },
             headers={
@@ -5941,7 +5961,11 @@ class AsyncRawSandboxClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def initialize_onedrive_sandbox(
-        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+        self,
+        sandbox_id: str,
+        *,
+        root: typing.Sequence[OneDriveFolder],
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
         Initialize the sandbox with onedrive-specific data following the defined schema.
@@ -5951,8 +5975,8 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : OneDriveFolder
-            Root folder containing all subfolders and files
+        root : typing.Sequence[OneDriveFolder]
+            List containing root folder (should contain only one element)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5967,7 +5991,7 @@ class AsyncRawSandboxClient:
             method="POST",
             json={
                 "root": convert_and_respect_annotation_metadata(
-                    object_=root, annotation=OneDriveFolder, direction="write"
+                    object_=root, annotation=typing.Sequence[OneDriveFolder], direction="write"
                 ),
             },
             headers={
@@ -6056,8 +6080,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6068,10 +6092,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
             List of team channels
 
-        chats : typing.Optional[typing.Sequence[TeamsChat]]
+        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
             List of one-on-one chats
 
         request_options : typing.Optional[RequestOptions]
@@ -6086,11 +6110,11 @@ class AsyncRawSandboxClient:
             f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[TeamsChannel], direction="write"
+                "team_channels": convert_and_respect_annotation_metadata(
+                    object_=team_channels, annotation=typing.Sequence[TeamsChannel], direction="write"
                 ),
-                "chats": convert_and_respect_annotation_metadata(
-                    object_=chats, annotation=typing.Sequence[TeamsChat], direction="write"
+                "team_chats": convert_and_respect_annotation_metadata(
+                    object_=team_chats, annotation=typing.Sequence[TeamsChat], direction="write"
                 ),
             },
             headers={
@@ -7084,7 +7108,7 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7095,7 +7119,7 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
             List of calendar events
 
         request_options : typing.Optional[RequestOptions]
@@ -7110,8 +7134,8 @@ class AsyncRawSandboxClient:
             f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "events": convert_and_respect_annotation_metadata(
-                    object_=events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
+                "calendar_events": convert_and_respect_annotation_metadata(
+                    object_=calendar_events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
                 ),
             },
             headers={
@@ -7794,7 +7818,7 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7805,7 +7829,7 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
             List of memories
 
         request_options : typing.Optional[RequestOptions]
@@ -7820,8 +7844,8 @@ class AsyncRawSandboxClient:
             f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
             json={
-                "memories": convert_and_respect_annotation_metadata(
-                    object_=memories, annotation=typing.Sequence[Mem0Memory], direction="write"
+                "memory_list": convert_and_respect_annotation_metadata(
+                    object_=memory_list, annotation=typing.Sequence[Mem0Memory], direction="write"
                 ),
             },
             headers={
@@ -9027,13 +9051,13 @@ class AsyncRawSandboxClient:
                 "objects": convert_and_respect_annotation_metadata(
                     object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
                 ),
-                "logEntries": convert_and_respect_annotation_metadata(
+                "log_entries": convert_and_respect_annotation_metadata(
                     object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
                 ),
-                "logSinks": convert_and_respect_annotation_metadata(
+                "log_sinks": convert_and_respect_annotation_metadata(
                     object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
                 ),
-                "logBuckets": convert_and_respect_annotation_metadata(
+                "log_buckets": convert_and_respect_annotation_metadata(
                     object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
                 ),
                 "instances": convert_and_respect_annotation_metadata(

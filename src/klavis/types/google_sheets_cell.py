@@ -4,22 +4,32 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .value import Value
 
 
-class SharesightOAuthSuccessResponse(UniversalBaseModel):
-    status: typing.Optional[str] = pydantic.Field(default=None)
+class GoogleSheetsCell(UniversalBaseModel):
     """
-    Status of the OAuth process
-    """
-
-    message: str = pydantic.Field()
-    """
-    Success message
+    A single cell with its position and value
     """
 
-    data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    row: int = pydantic.Field()
     """
-    Additional data related to the response
+    Row index (0-based)
+    """
+
+    col: int = pydantic.Field()
+    """
+    Column index (0-based)
+    """
+
+    value: typing.Optional[Value] = pydantic.Field(default=None)
+    """
+    Cell value (string, number, boolean, or null)
+    """
+
+    formula: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Formula if the cell contains one (e.g., '=A1+B1')
     """
 
     if IS_PYDANTIC_V2:

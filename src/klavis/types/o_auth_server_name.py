@@ -62,6 +62,8 @@ class OAuthServerName(str, enum.Enum):
     JOTFORM = "Jotform"
     HONEYCOMB = "Honeycomb"
     ZOHO_MAIL = "Zoho Mail"
+    SHARESIGHT = "Sharesight"
+    INSTAGRAM = "Instagram"
 
     def visit(
         self,
@@ -120,6 +122,8 @@ class OAuthServerName(str, enum.Enum):
         jotform: typing.Callable[[], T_Result],
         honeycomb: typing.Callable[[], T_Result],
         zoho_mail: typing.Callable[[], T_Result],
+        sharesight: typing.Callable[[], T_Result],
+        instagram: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is OAuthServerName.AIRTABLE:
             return airtable()
@@ -231,3 +235,7 @@ class OAuthServerName(str, enum.Enum):
             return honeycomb()
         if self is OAuthServerName.ZOHO_MAIL:
             return zoho_mail()
+        if self is OAuthServerName.SHARESIGHT:
+            return sharesight()
+        if self is OAuthServerName.INSTAGRAM:
+            return instagram()

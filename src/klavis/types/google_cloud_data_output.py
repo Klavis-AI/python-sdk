@@ -5,9 +5,7 @@ from __future__ import annotations
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
-from ..core.serialization import FieldMetadata
 from .big_query_dataset import BigQueryDataset
 from .big_query_table import BigQueryTable
 from .compute_instance import ComputeInstance
@@ -43,23 +41,17 @@ class GoogleCloudDataOutput(UniversalBaseModel):
     Cloud Storage objects
     """
 
-    log_entries: typing_extensions.Annotated[
-        typing.Optional[typing.List[LogEntry]], FieldMetadata(alias="logEntries")
-    ] = pydantic.Field(default=None)
+    log_entries: typing.Optional[typing.List[LogEntry]] = pydantic.Field(default=None)
     """
     Log entries
     """
 
-    log_sinks: typing_extensions.Annotated[typing.Optional[typing.List[LogSink]], FieldMetadata(alias="logSinks")] = (
-        pydantic.Field(default=None)
-    )
+    log_sinks: typing.Optional[typing.List[LogSink]] = pydantic.Field(default=None)
     """
     Log sinks
     """
 
-    log_buckets: typing_extensions.Annotated[
-        typing.Optional[typing.List[LogBucket]], FieldMetadata(alias="logBuckets")
-    ] = pydantic.Field(default=None)
+    log_buckets: typing.Optional[typing.List[LogBucket]] = pydantic.Field(default=None)
     """
     Log buckets
     """

@@ -5,30 +5,22 @@ from __future__ import annotations
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
-from ..core.serialization import FieldMetadata
-from .big_query_table_reference import BigQueryTableReference
-from .big_query_table_schema import BigQueryTableSchema
 
 
 class BigQueryTable(UniversalBaseModel):
     """
-    BigQuery table object - matches API format
+    BigQuery table
     """
 
-    table_reference: typing_extensions.Annotated[BigQueryTableReference, FieldMetadata(alias="tableReference")] = (
-        pydantic.Field()
-    )
+    dataset_id: str = pydantic.Field()
     """
-    Table reference
+    Parent dataset ID
     """
 
-    schema_: typing_extensions.Annotated[typing.Optional[BigQueryTableSchema], FieldMetadata(alias="schema")] = (
-        pydantic.Field(default=None)
-    )
+    id: str = pydantic.Field()
     """
-    Table schema
+    Table ID
     """
 
     description: typing.Optional[str] = pydantic.Field(default=None)
@@ -36,16 +28,17 @@ class BigQueryTable(UniversalBaseModel):
     Table description
     """
 
-    num_rows: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="numRows")] = pydantic.Field(
-        default=None
-    )
+    fields: typing.Optional[typing.List["BigQueryField"]] = pydantic.Field(default=None)
+    """
+    Table schema fields
+    """
+
+    row_count: typing.Optional[str] = pydantic.Field(default=None)
     """
     Number of rows
     """
 
-    creation_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="creationTime")] = (
-        pydantic.Field(default=None)
-    )
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Creation timestamp
     """
@@ -59,5 +52,7 @@ class BigQueryTable(UniversalBaseModel):
             smart_union = True
             extra = pydantic.Extra.allow
 
+
+from .big_query_field import BigQueryField  # noqa: E402, I001
 
 update_forward_refs(BigQueryTable)

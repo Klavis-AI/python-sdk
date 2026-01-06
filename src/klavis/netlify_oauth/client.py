@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.mcpo_auth_success_response import McpoAuthSuccessResponse
 from .raw_client import AsyncRawNetlifyOauthClient, RawNetlifyOauthClient
 
 
@@ -71,44 +70,6 @@ class NetlifyOauthClient:
             redirect_url=redirect_url,
             force_refresh=force_refresh,
             request_options=request_options,
-        )
-        return _response.data
-
-    def refresh_netlify_oauth_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> McpoAuthSuccessResponse:
-        """
-        Refresh OAuth token for an MCP connection.
-
-        This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-        The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the MCP connection
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        McpoAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.netlify_oauth.refresh_netlify_oauth_token(
-            instance_id="instance_id",
-        )
-        """
-        _response = self._raw_client.refresh_netlify_oauth_token(
-            instance_id=instance_id, request_options=request_options
         )
         return _response.data
 
@@ -184,51 +145,5 @@ class AsyncNetlifyOauthClient:
             redirect_url=redirect_url,
             force_refresh=force_refresh,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def refresh_netlify_oauth_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> McpoAuthSuccessResponse:
-        """
-        Refresh OAuth token for an MCP connection.
-
-        This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-        The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the MCP connection
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        McpoAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.netlify_oauth.refresh_netlify_oauth_token(
-                instance_id="instance_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.refresh_netlify_oauth_token(
-            instance_id=instance_id, request_options=request_options
         )
         return _response.data

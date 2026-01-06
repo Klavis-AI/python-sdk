@@ -17,12 +17,12 @@ class Mem0Memory(UniversalBaseModel):
     Memory ID (read-only, set by Mem0)
     """
 
-    memory: typing.Optional[str] = pydantic.Field(default=None)
+    content_text: typing.Optional[str] = pydantic.Field(default=None)
     """
     Memory content (returned from API)
     """
 
-    messages: typing.Optional[typing.List[Mem0Message]] = pydantic.Field(default=None)
+    message_list: typing.Optional[typing.List[Mem0Message]] = pydantic.Field(default=None)
     """
     Array of message objects representing the content
     """
@@ -52,42 +52,42 @@ class Mem0Memory(UniversalBaseModel):
     Additional metadata
     """
 
-    includes: typing.Optional[str] = pydantic.Field(default=None)
+    include_preferences: typing.Optional[str] = pydantic.Field(default=None)
     """
     String to include specific preferences in the memory
     """
 
-    excludes: typing.Optional[str] = pydantic.Field(default=None)
+    exclude_preferences: typing.Optional[str] = pydantic.Field(default=None)
     """
     String to exclude specific preferences in the memory
     """
 
-    infer: typing.Optional[bool] = pydantic.Field(default=None)
+    auto_infer: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Whether to infer memories or directly store messages
     """
 
-    output_format: typing.Optional[str] = pydantic.Field(default=None)
+    response_format: typing.Optional[str] = pydantic.Field(default=None)
     """
     Response format structure (v1.0 or v1.1)
     """
 
-    custom_categories: typing.Optional[typing.List[typing.Dict[str, str]]] = pydantic.Field(default=None)
+    category_definitions: typing.Optional[typing.List[typing.Dict[str, str]]] = pydantic.Field(default=None)
     """
     List of custom categories with name and description
     """
 
-    custom_instructions: typing.Optional[str] = pydantic.Field(default=None)
+    processing_instructions: typing.Optional[str] = pydantic.Field(default=None)
     """
     Project-specific guidelines for handling memories
     """
 
-    immutable: typing.Optional[bool] = pydantic.Field(default=None)
+    read_only: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Whether the memory is immutable
     """
 
-    async_mode: typing.Optional[bool] = pydantic.Field(default=None)
+    background_processing: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Whether to add memory asynchronously
     """
@@ -95,16 +95,6 @@ class Mem0Memory(UniversalBaseModel):
     timestamp: typing.Optional[int] = pydantic.Field(default=None)
     """
     Unix timestamp of the memory
-    """
-
-    expiration_date: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Expiration date (YYYY-MM-DD)
-    """
-
-    version: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Memory version (v1 deprecated, use v2)
     """
 
     created_at: typing.Optional[str] = pydantic.Field(default=None)
@@ -115,16 +105,6 @@ class Mem0Memory(UniversalBaseModel):
     updated_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Last update timestamp
-    """
-
-    owner: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Memory owner
-    """
-
-    organization: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Organization
     """
 
     if IS_PYDANTIC_V2:

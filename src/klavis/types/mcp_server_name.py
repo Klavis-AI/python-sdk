@@ -9,6 +9,7 @@ T_Result = typing.TypeVar("T_Result")
 class McpServerName(str, enum.Enum):
     AFFINITY = "Affinity"
     AIRTABLE = "Airtable"
+    AMPLITUDE = "Amplitude"
     ASANA = "Asana"
     ATTIO = "Attio"
     BOX = "Box"
@@ -97,11 +98,15 @@ class McpServerName(str, enum.Enum):
     JOTFORM = "Jotform"
     HONEYCOMB = "Honeycomb"
     ZOHO_MAIL = "Zoho Mail"
+    SHARESIGHT = "Sharesight"
+    WEIGHTS_AND_BIASES = "Weights and Biases"
+    INSTAGRAM = "Instagram"
 
     def visit(
         self,
         affinity: typing.Callable[[], T_Result],
         airtable: typing.Callable[[], T_Result],
+        amplitude: typing.Callable[[], T_Result],
         asana: typing.Callable[[], T_Result],
         attio: typing.Callable[[], T_Result],
         box: typing.Callable[[], T_Result],
@@ -190,11 +195,16 @@ class McpServerName(str, enum.Enum):
         jotform: typing.Callable[[], T_Result],
         honeycomb: typing.Callable[[], T_Result],
         zoho_mail: typing.Callable[[], T_Result],
+        sharesight: typing.Callable[[], T_Result],
+        weights_and_biases: typing.Callable[[], T_Result],
+        instagram: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
         if self is McpServerName.AIRTABLE:
             return airtable()
+        if self is McpServerName.AMPLITUDE:
+            return amplitude()
         if self is McpServerName.ASANA:
             return asana()
         if self is McpServerName.ATTIO:
@@ -371,3 +381,9 @@ class McpServerName(str, enum.Enum):
             return honeycomb()
         if self is McpServerName.ZOHO_MAIL:
             return zoho_mail()
+        if self is McpServerName.SHARESIGHT:
+            return sharesight()
+        if self is McpServerName.WEIGHTS_AND_BIASES:
+            return weights_and_biases()
+        if self is McpServerName.INSTAGRAM:
+            return instagram()

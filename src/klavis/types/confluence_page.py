@@ -19,9 +19,9 @@ class ConfluencePage(UniversalBaseModel):
     Page title
     """
 
-    body: str = pydantic.Field()
+    content: str = pydantic.Field()
     """
-    Page content (storage format)
+    Page content
     """
 
     children: typing.Optional[typing.List["ConfluencePage"]] = pydantic.Field(default=None)

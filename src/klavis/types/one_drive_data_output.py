@@ -13,9 +13,9 @@ class OneDriveDataOutput(UniversalBaseModel):
     Complete OneDrive sandbox data structure
     """
 
-    root: "OneDriveFolder" = pydantic.Field()
+    root: typing.List["OneDriveFolder"] = pydantic.Field()
     """
-    Root folder containing all subfolders and files
+    List containing root folder (should contain only one element)
     """
 
     if IS_PYDANTIC_V2:

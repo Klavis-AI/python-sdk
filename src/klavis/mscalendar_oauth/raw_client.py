@@ -10,6 +10,7 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.bad_request_error import BadRequestError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.azure_ado_auth_error_response import AzureAdoAuthErrorResponse
 from ..types.azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
 from ..types.http_validation_error import HttpValidationError
 
@@ -128,9 +129,9 @@ class RawMscalendarOauthClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        AzureAdoAuthErrorResponse,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=AzureAdoAuthErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -266,9 +267,9 @@ class AsyncRawMscalendarOauthClient:
                 raise BadRequestError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        typing.Optional[typing.Any],
+                        AzureAdoAuthErrorResponse,
                         parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
+                            type_=AzureAdoAuthErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

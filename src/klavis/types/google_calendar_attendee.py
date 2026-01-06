@@ -3,7 +3,9 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.serialization import FieldMetadata
 
 
 class GoogleCalendarAttendee(UniversalBaseModel):
@@ -16,9 +18,21 @@ class GoogleCalendarAttendee(UniversalBaseModel):
     Attendee email address (required)
     """
 
-    optional: typing.Optional[bool] = pydantic.Field(default=None)
+    name: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Attendee display name
+    """
+
+    is_optional: typing_extensions.Annotated[typing.Optional[bool], FieldMetadata(alias="isOptional")] = pydantic.Field(
+        default=None
+    )
     """
     Whether attendance is optional
+    """
+
+    comment: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Attendee's response comment
     """
 
     if IS_PYDANTIC_V2:

@@ -13,12 +13,12 @@ class MsTeamsDataOutput(UniversalBaseModel):
     Complete Microsoft Teams sandbox data structure
     """
 
-    channels: typing.Optional[typing.List[TeamsChannel]] = pydantic.Field(default=None)
+    team_channels: typing.Optional[typing.List[TeamsChannel]] = pydantic.Field(default=None)
     """
     List of team channels
     """
 
-    chats: typing.Optional[typing.List[TeamsChat]] = pydantic.Field(default=None)
+    team_chats: typing.Optional[typing.List[TeamsChat]] = pydantic.Field(default=None)
     """
     List of one-on-one chats
     """

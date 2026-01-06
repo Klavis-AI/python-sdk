@@ -26,7 +26,7 @@ class SnowflakeColumn(UniversalBaseModel):
     Whether the column can be NULL
     """
 
-    default: typing.Optional[str] = pydantic.Field(default=None)
+    default_value: typing.Optional[str] = pydantic.Field(default=None)
     """
     Default value for the column
     """

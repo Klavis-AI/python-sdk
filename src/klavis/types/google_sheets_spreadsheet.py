@@ -5,7 +5,6 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .google_sheets_sheet import GoogleSheetsSheet
-from .google_sheets_spreadsheet_properties import GoogleSheetsSpreadsheetProperties
 
 
 class GoogleSheetsSpreadsheet(UniversalBaseModel):
@@ -13,9 +12,9 @@ class GoogleSheetsSpreadsheet(UniversalBaseModel):
     Google Sheets spreadsheet object
     """
 
-    properties: GoogleSheetsSpreadsheetProperties = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Spreadsheet properties including title (required)
+    Spreadsheet title
     """
 
     sheets: typing.Optional[typing.List[GoogleSheetsSheet]] = pydantic.Field(default=None)

@@ -18,12 +18,12 @@ class OutlookMailMessage(UniversalBaseModel):
     Message ID (read-only, set by Outlook)
     """
 
-    subject: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
     Email subject
     """
 
-    body: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    content: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     Email body with content and contentType
     """
@@ -35,12 +35,12 @@ class OutlookMailMessage(UniversalBaseModel):
     From address with emailAddress object
     """
 
-    to_recipients: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    to_addresses: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     List of recipient email addresses
     """
 
-    cc_recipients: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    cc_addresses: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     List of CC recipient email addresses
     """

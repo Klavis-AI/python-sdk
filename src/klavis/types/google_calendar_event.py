@@ -7,7 +7,6 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 from .google_calendar_attendee import GoogleCalendarAttendee
-from .google_calendar_event_date_time import GoogleCalendarEventDateTime
 
 
 class GoogleCalendarEvent(UniversalBaseModel):
@@ -15,19 +14,42 @@ class GoogleCalendarEvent(UniversalBaseModel):
     Google Calendar event object
     """
 
-    summary: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
     Event title/summary (required)
     """
 
-    start: GoogleCalendarEventDateTime = pydantic.Field()
+    start_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="startTime")] = pydantic.Field(
+        default=None
+    )
     """
-    Event start time (required)
+    RFC3339 timestamp for timed events (e.g., 2025-12-01T09:00:00-07:00)
     """
 
-    end: GoogleCalendarEventDateTime = pydantic.Field()
+    end_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="endTime")] = pydantic.Field(
+        default=None
+    )
     """
-    Event end time (required)
+    RFC3339 timestamp for timed events
+    """
+
+    start_date: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="startDate")] = pydantic.Field(
+        default=None
+    )
+    """
+    All-day event start date in YYYY-MM-DD format
+    """
+
+    end_date: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="endDate")] = pydantic.Field(
+        default=None
+    )
+    """
+    All-day event end date in YYYY-MM-DD format
+    """
+
+    timezone: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    IANA timezone (e.g., America/Los_Angeles)
     """
 
     description: typing.Optional[str] = pydantic.Field(default=None)
@@ -40,26 +62,19 @@ class GoogleCalendarEvent(UniversalBaseModel):
     Event location
     """
 
-    attendees: typing.Optional[typing.List[GoogleCalendarAttendee]] = pydantic.Field(default=None)
-    """
-    List of event attendees
-    """
-
-    color_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="colorId")] = pydantic.Field(
-        default=None
-    )
-    """
-    Event color (1-11)
-    """
-
     visibility: typing.Optional[str] = pydantic.Field(default=None)
     """
     Visibility (default, public, private, confidential)
     """
 
-    transparency: typing.Optional[str] = pydantic.Field(default=None)
+    recurrence: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
-    Transparency (opaque, transparent)
+    Recurrence rules (RRULE format)
+    """
+
+    attendees: typing.Optional[typing.List[GoogleCalendarAttendee]] = pydantic.Field(default=None)
+    """
+    List of event attendees
     """
 
     if IS_PYDANTIC_V2:

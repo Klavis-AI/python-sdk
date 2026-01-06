@@ -11,12 +11,12 @@ class TeamsMessage(UniversalBaseModel):
     Teams Message object
     """
 
-    id: typing.Optional[str] = pydantic.Field(default=None)
+    message_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Message ID (read-only, set by Teams)
     """
 
-    body: str = pydantic.Field()
+    content: str = pydantic.Field()
     """
     Message content
     """

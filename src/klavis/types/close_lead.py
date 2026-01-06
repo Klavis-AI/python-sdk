@@ -19,7 +19,7 @@ class CloseLead(UniversalBaseModel):
     Lead name/company name
     """
 
-    status_label: typing.Optional[str] = pydantic.Field(default=None)
+    status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Lead status
     """

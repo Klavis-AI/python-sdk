@@ -13,9 +13,9 @@ class ConfluenceSpace(UniversalBaseModel):
     Confluence Space object
     """
 
-    key: str = pydantic.Field()
+    identifier: str = pydantic.Field()
     """
-    Space key (e.g., DS)
+    Space identifier
     """
 
     name: str = pydantic.Field()

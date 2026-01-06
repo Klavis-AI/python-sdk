@@ -10,7 +10,6 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
-from ..types.mcpo_auth_success_response import McpoAuthSuccessResponse
 
 
 class RawJotformOauthClient:
@@ -85,62 +84,6 @@ class RawJotformOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def refresh_jotform_oauth_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[McpoAuthSuccessResponse]:
-        """
-        Refresh OAuth token for an MCP connection.
-
-        This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-        The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the MCP connection
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[McpoAuthSuccessResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "oauth/jotform/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    McpoAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=McpoAuthSuccessResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
 
 class AsyncRawJotformOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -194,62 +137,6 @@ class AsyncRawJotformOauthClient:
                     typing.Optional[typing.Any],
                     parse_obj_as(
                         type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def refresh_jotform_oauth_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[McpoAuthSuccessResponse]:
-        """
-        Refresh OAuth token for an MCP connection.
-
-        This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-        The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-
-        Parameters
-        ----------
-        instance_id : str
-            Unique identifier for the MCP connection
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[McpoAuthSuccessResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "oauth/jotform/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    McpoAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=McpoAuthSuccessResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -9,11 +9,13 @@ from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .environment import KlavisEnvironment
 
 if typing.TYPE_CHECKING:
+    from .amplitude_oauth.client import AmplitudeOauthClient, AsyncAmplitudeOauthClient
     from .clockwise_oauth.client import AsyncClockwiseOauthClient, ClockwiseOauthClient
     from .google_cloud_oauth.client import AsyncGoogleCloudOauthClient, GoogleCloudOauthClient
     from .google_forms_oauth.client import AsyncGoogleFormsOauthClient, GoogleFormsOauthClient
     from .honeycomb_oauth.client import AsyncHoneycombOauthClient, HoneycombOauthClient
     from .huggingface_oauth.client import AsyncHuggingfaceOauthClient, HuggingfaceOauthClient
+    from .instagram_oauth.client import AsyncInstagramOauthClient, InstagramOauthClient
     from .intercom_oauth.client import AsyncIntercomOauthClient, IntercomOauthClient
     from .jotform_oauth.client import AsyncJotformOauthClient, JotformOauthClient
     from .mcp_server.client import AsyncMcpServerClient, McpServerClient
@@ -30,6 +32,7 @@ if typing.TYPE_CHECKING:
     from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
     from .user.client import AsyncUserClient, UserClient
     from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
+    from .youtube_oauth.client import AsyncYoutubeOauthClient, YoutubeOauthClient
     from .zoho_mail_oauth.client import AsyncZohoMailOauthClient, ZohoMailOauthClient
     from .zoom_oauth.client import AsyncZoomOauthClient, ZoomOauthClient
 
@@ -112,6 +115,8 @@ class Klavis:
         self._zoom_oauth: typing.Optional[ZoomOauthClient] = None
         self._zoho_mail_oauth: typing.Optional[ZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[SharesightOauthClient] = None
+        self._instagram_oauth: typing.Optional[InstagramOauthClient] = None
+        self._youtube_oauth: typing.Optional[YoutubeOauthClient] = None
         self._intercom_oauth: typing.Optional[IntercomOauthClient] = None
         self._paypal_oauth: typing.Optional[PaypalOauthClient] = None
         self._sentry_oauth: typing.Optional[SentryOauthClient] = None
@@ -121,6 +126,7 @@ class Klavis:
         self._clockwise_oauth: typing.Optional[ClockwiseOauthClient] = None
         self._jotform_oauth: typing.Optional[JotformOauthClient] = None
         self._honeycomb_oauth: typing.Optional[HoneycombOauthClient] = None
+        self._amplitude_oauth: typing.Optional[AmplitudeOauthClient] = None
         self._sandbox: typing.Optional[SandboxClient] = None
 
     @property
@@ -228,6 +234,22 @@ class Klavis:
         return self._sharesight_oauth
 
     @property
+    def instagram_oauth(self):
+        if self._instagram_oauth is None:
+            from .instagram_oauth.client import InstagramOauthClient  # noqa: E402
+
+            self._instagram_oauth = InstagramOauthClient(client_wrapper=self._client_wrapper)
+        return self._instagram_oauth
+
+    @property
+    def youtube_oauth(self):
+        if self._youtube_oauth is None:
+            from .youtube_oauth.client import YoutubeOauthClient  # noqa: E402
+
+            self._youtube_oauth = YoutubeOauthClient(client_wrapper=self._client_wrapper)
+        return self._youtube_oauth
+
+    @property
     def intercom_oauth(self):
         if self._intercom_oauth is None:
             from .intercom_oauth.client import IntercomOauthClient  # noqa: E402
@@ -298,6 +320,14 @@ class Klavis:
 
             self._honeycomb_oauth = HoneycombOauthClient(client_wrapper=self._client_wrapper)
         return self._honeycomb_oauth
+
+    @property
+    def amplitude_oauth(self):
+        if self._amplitude_oauth is None:
+            from .amplitude_oauth.client import AmplitudeOauthClient  # noqa: E402
+
+            self._amplitude_oauth = AmplitudeOauthClient(client_wrapper=self._client_wrapper)
+        return self._amplitude_oauth
 
     @property
     def sandbox(self):
@@ -386,6 +416,8 @@ class AsyncKlavis:
         self._zoom_oauth: typing.Optional[AsyncZoomOauthClient] = None
         self._zoho_mail_oauth: typing.Optional[AsyncZohoMailOauthClient] = None
         self._sharesight_oauth: typing.Optional[AsyncSharesightOauthClient] = None
+        self._instagram_oauth: typing.Optional[AsyncInstagramOauthClient] = None
+        self._youtube_oauth: typing.Optional[AsyncYoutubeOauthClient] = None
         self._intercom_oauth: typing.Optional[AsyncIntercomOauthClient] = None
         self._paypal_oauth: typing.Optional[AsyncPaypalOauthClient] = None
         self._sentry_oauth: typing.Optional[AsyncSentryOauthClient] = None
@@ -395,6 +427,7 @@ class AsyncKlavis:
         self._clockwise_oauth: typing.Optional[AsyncClockwiseOauthClient] = None
         self._jotform_oauth: typing.Optional[AsyncJotformOauthClient] = None
         self._honeycomb_oauth: typing.Optional[AsyncHoneycombOauthClient] = None
+        self._amplitude_oauth: typing.Optional[AsyncAmplitudeOauthClient] = None
         self._sandbox: typing.Optional[AsyncSandboxClient] = None
 
     @property
@@ -502,6 +535,22 @@ class AsyncKlavis:
         return self._sharesight_oauth
 
     @property
+    def instagram_oauth(self):
+        if self._instagram_oauth is None:
+            from .instagram_oauth.client import AsyncInstagramOauthClient  # noqa: E402
+
+            self._instagram_oauth = AsyncInstagramOauthClient(client_wrapper=self._client_wrapper)
+        return self._instagram_oauth
+
+    @property
+    def youtube_oauth(self):
+        if self._youtube_oauth is None:
+            from .youtube_oauth.client import AsyncYoutubeOauthClient  # noqa: E402
+
+            self._youtube_oauth = AsyncYoutubeOauthClient(client_wrapper=self._client_wrapper)
+        return self._youtube_oauth
+
+    @property
     def intercom_oauth(self):
         if self._intercom_oauth is None:
             from .intercom_oauth.client import AsyncIntercomOauthClient  # noqa: E402
@@ -572,6 +621,14 @@ class AsyncKlavis:
 
             self._honeycomb_oauth = AsyncHoneycombOauthClient(client_wrapper=self._client_wrapper)
         return self._honeycomb_oauth
+
+    @property
+    def amplitude_oauth(self):
+        if self._amplitude_oauth is None:
+            from .amplitude_oauth.client import AsyncAmplitudeOauthClient  # noqa: E402
+
+            self._amplitude_oauth = AsyncAmplitudeOauthClient(client_wrapper=self._client_wrapper)
+        return self._amplitude_oauth
 
     @property
     def sandbox(self):

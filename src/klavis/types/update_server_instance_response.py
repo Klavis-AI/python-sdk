@@ -8,26 +8,20 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 
 
-class GoogleSheetsSheetProperties(UniversalBaseModel):
+class UpdateServerInstanceResponse(UniversalBaseModel):
+    instance_id: typing_extensions.Annotated[str, FieldMetadata(alias="instanceId")] = pydantic.Field()
     """
-    Properties for a sheet within a spreadsheet
-    """
-
-    title: str = pydantic.Field()
-    """
-    Sheet title (required)
+    The unique identifier of the updated connection integration instance.
     """
 
-    index: typing.Optional[int] = pydantic.Field(default=None)
+    is_read_only: typing_extensions.Annotated[bool, FieldMetadata(alias="isReadOnly")] = pydantic.Field()
     """
-    Sheet index position
+    The current read-only status of the connection.
     """
 
-    grid_properties: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="gridProperties")
-    ] = pydantic.Field(default=None)
+    message: str = pydantic.Field()
     """
-    Grid properties (rowCount, columnCount)
+    A message indicating the result of the update operation.
     """
 
     if IS_PYDANTIC_V2:

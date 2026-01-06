@@ -11,32 +11,32 @@ class OutlookCalendarEvent(UniversalBaseModel):
     Outlook Calendar Event object
     """
 
-    id: typing.Optional[str] = pydantic.Field(default=None)
+    event_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Event ID (read-only, set by Outlook)
     """
 
-    subject: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
     Event subject/title
     """
 
-    start: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    start_time: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     Start time with dateTime and timeZone
     """
 
-    end: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    end_time: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     End time with dateTime and timeZone
     """
 
-    location: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    event_location: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Location object with displayName
+    Location name
     """
 
-    attendees: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    event_attendees: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
     """
     List of attendee email addresses (e.g., ['user@example.com'])
     """

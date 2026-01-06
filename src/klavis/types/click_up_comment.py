@@ -11,9 +11,9 @@ class ClickUpComment(UniversalBaseModel):
     ClickUp Comment object
     """
 
-    comment_text: str = pydantic.Field()
+    body: str = pydantic.Field()
     """
-    Comment text content
+    Comment body content
     """
 
     if IS_PYDANTIC_V2:

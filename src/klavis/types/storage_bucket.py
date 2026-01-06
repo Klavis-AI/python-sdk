@@ -3,16 +3,13 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
-from .storage_bucket_lifecycle import StorageBucketLifecycle
-from .storage_bucket_versioning import StorageBucketVersioning
+from .lifecycle_rule import LifecycleRule
 
 
 class StorageBucket(UniversalBaseModel):
     """
-    Cloud Storage bucket object - matches API format
+    Cloud Storage bucket
     """
 
     name: str = pydantic.Field()
@@ -25,31 +22,27 @@ class StorageBucket(UniversalBaseModel):
     Bucket location
     """
 
-    storage_class: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="storageClass")] = (
-        pydantic.Field(default=None)
-    )
+    storage_class: typing.Optional[str] = pydantic.Field(default=None)
     """
     Storage class
     """
 
-    versioning: typing.Optional[StorageBucketVersioning] = pydantic.Field(default=None)
+    versioning_enabled: typing.Optional[bool] = pydantic.Field(default=None)
     """
-    Versioning configuration
-    """
-
-    lifecycle: typing.Optional[StorageBucketLifecycle] = pydantic.Field(default=None)
-    """
-    Lifecycle configuration
+    Whether versioning is enabled
     """
 
-    time_created: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="timeCreated")] = (
-        pydantic.Field(default=None)
-    )
+    lifecycle_rules: typing.Optional[typing.List[LifecycleRule]] = pydantic.Field(default=None)
+    """
+    Lifecycle rules
+    """
+
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Creation timestamp
     """
 
-    updated: typing.Optional[str] = pydantic.Field(default=None)
+    updated_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Last update timestamp
     """

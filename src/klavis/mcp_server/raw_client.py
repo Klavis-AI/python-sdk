@@ -31,6 +31,7 @@ from ..types.strata_get_auth_response import StrataGetAuthResponse
 from ..types.strata_get_response import StrataGetResponse
 from ..types.strata_raw_actions_response import StrataRawActionsResponse
 from ..types.tool_format import ToolFormat
+from ..types.update_server_instance_response import UpdateServerInstanceResponse
 from .types.authdata import Authdata
 from .types.delete_servers_from_strata_mcp_server_strata_strata_id_servers_delete_request_servers_item import (
     DeleteServersFromStrataMcpServerStrataStrataIdServersDeleteRequestServersItem,
@@ -747,6 +748,7 @@ class RawMcpServerClient:
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         legacy: typing.Optional[bool] = OMIT,
+        is_read_only: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[CreateServerResponse]:
         """
@@ -773,6 +775,9 @@ class RawMcpServerClient:
         legacy : typing.Optional[bool]
             Whether to use the legacy server. Default is False.
 
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted. Default is False.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -790,6 +795,7 @@ class RawMcpServerClient:
                 "platformName": platform_name,
                 "connectionType": connection_type,
                 "legacy": legacy,
+                "isReadOnly": is_read_only,
             },
             headers={
                 "content-type": "application/json",
@@ -970,6 +976,71 @@ class RawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_server_instance(
+        self,
+        instance_id: str,
+        *,
+        is_read_only: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[UpdateServerInstanceResponse]:
+        """
+        Updates the settings of a specific server connection instance.
+        Currently supports updating the read-only status of the connection.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to update.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[UpdateServerInstanceResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
+            method="PATCH",
+            json={
+                "isReadOnly": is_read_only,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    UpdateServerInstanceResponse,
+                    parse_obj_as(
+                        type_=UpdateServerInstanceResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2046,6 +2117,7 @@ class AsyncRawMcpServerClient:
         platform_name: typing.Optional[str] = OMIT,
         connection_type: typing.Optional[ConnectionType] = OMIT,
         legacy: typing.Optional[bool] = OMIT,
+        is_read_only: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[CreateServerResponse]:
         """
@@ -2072,6 +2144,9 @@ class AsyncRawMcpServerClient:
         legacy : typing.Optional[bool]
             Whether to use the legacy server. Default is False.
 
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted. Default is False.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -2089,6 +2164,7 @@ class AsyncRawMcpServerClient:
                 "platformName": platform_name,
                 "connectionType": connection_type,
                 "legacy": legacy,
+                "isReadOnly": is_read_only,
             },
             headers={
                 "content-type": "application/json",
@@ -2269,6 +2345,71 @@ class AsyncRawMcpServerClient:
                     StatusResponse,
                     parse_obj_as(
                         type_=StatusResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_server_instance(
+        self,
+        instance_id: str,
+        *,
+        is_read_only: typing.Optional[bool] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[UpdateServerInstanceResponse]:
+        """
+        Updates the settings of a specific server connection instance.
+        Currently supports updating the read-only status of the connection.
+
+        Parameters
+        ----------
+        instance_id : str
+            The ID of the connection integration instance to update.
+
+        is_read_only : typing.Optional[bool]
+            Whether the MCP server connection is read-only. When true, write operations will be restricted.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[UpdateServerInstanceResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"mcp-server/instance/{jsonable_encoder(instance_id)}",
+            method="PATCH",
+            json={
+                "isReadOnly": is_read_only,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    UpdateServerInstanceResponse,
+                    parse_obj_as(
+                        type_=UpdateServerInstanceResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

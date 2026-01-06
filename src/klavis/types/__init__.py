@@ -6,6 +6,8 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .account import Account
+    from .address import Address
     from .airtable_data_output import AirtableDataOutput
     from .airtable_field import AirtableField
     from .airtable_record import AirtableRecord
@@ -18,15 +20,14 @@ if typing.TYPE_CHECKING:
     from .azure_ado_auth_error_response import AzureAdoAuthErrorResponse
     from .azure_ado_auth_success_response import AzureAdoAuthSuccessResponse
     from .big_query_dataset import BigQueryDataset
-    from .big_query_dataset_reference import BigQueryDatasetReference
+    from .big_query_field import BigQueryField
     from .big_query_table import BigQueryTable
-    from .big_query_table_field_schema import BigQueryTableFieldSchema
-    from .big_query_table_reference import BigQueryTableReference
-    from .big_query_table_schema import BigQueryTableSchema
     from .calcom_data_output import CalcomDataOutput
     from .calcom_schedule import CalcomSchedule
     from .call_tool_response import CallToolResponse
     from .call_tool_result import CallToolResult
+    from .campaign import Campaign
+    from .case import Case
     from .click_up_comment import ClickUpComment
     from .click_up_data_output import ClickUpDataOutput
     from .click_up_folder import ClickUpFolder
@@ -45,6 +46,7 @@ if typing.TYPE_CHECKING:
     from .confluence_page_output import ConfluencePageOutput
     from .confluence_space import ConfluenceSpace
     from .connection_type import ConnectionType
+    from .contact import Contact
     from .create_sandbox_response import CreateSandboxResponse
     from .create_self_hosted_server_response import CreateSelfHostedServerResponse
     from .create_server_response import CreateServerResponse
@@ -114,27 +116,26 @@ if typing.TYPE_CHECKING:
     from .google_calendar_attendee import GoogleCalendarAttendee
     from .google_calendar_data_output import GoogleCalendarDataOutput
     from .google_calendar_event import GoogleCalendarEvent
-    from .google_calendar_event_date_time import GoogleCalendarEventDateTime
     from .google_cloud_data_output import GoogleCloudDataOutput
     from .google_docs_data import GoogleDocsData
     from .google_docs_document import GoogleDocsDocument
     from .google_drive_data import GoogleDriveData
     from .google_drive_file import GoogleDriveFile
+    from .google_forms_choice_option import GoogleFormsChoiceOption
     from .google_forms_data_output import GoogleFormsDataOutput
     from .google_forms_form import GoogleFormsForm
-    from .google_forms_form_settings import GoogleFormsFormSettings
-    from .google_forms_info import GoogleFormsInfo
     from .google_forms_item import GoogleFormsItem
-    from .google_forms_quiz_settings import GoogleFormsQuizSettings
-    from .google_sheets_cell_value import GoogleSheetsCellValue
+    from .google_forms_item_input_item_type import GoogleFormsItemInputItemType
+    from .google_forms_item_output_item_type import GoogleFormsItemOutputItemType
+    from .google_forms_question import GoogleFormsQuestion
+    from .google_forms_question_question_type import GoogleFormsQuestionQuestionType
+    from .google_forms_section_header import GoogleFormsSectionHeader
+    from .google_sheets_cell import GoogleSheetsCell
     from .google_sheets_data_output import GoogleSheetsDataOutput
     from .google_sheets_grid_data_input import GoogleSheetsGridDataInput
     from .google_sheets_grid_data_output import GoogleSheetsGridDataOutput
-    from .google_sheets_row_data import GoogleSheetsRowData
     from .google_sheets_sheet import GoogleSheetsSheet
-    from .google_sheets_sheet_properties import GoogleSheetsSheetProperties
     from .google_sheets_spreadsheet import GoogleSheetsSpreadsheet
-    from .google_sheets_spreadsheet_properties import GoogleSheetsSpreadsheetProperties
     from .http_validation_error import HttpValidationError
     from .hub_spot_company import HubSpotCompany
     from .hub_spot_contact import HubSpotContact
@@ -150,6 +151,8 @@ if typing.TYPE_CHECKING:
     from .jira_issue import JiraIssue
     from .jira_project import JiraProject
     from .jira_sprint import JiraSprint
+    from .lead import Lead
+    from .lifecycle_rule import LifecycleRule
     from .linear_comment import LinearComment
     from .linear_data_output import LinearDataOutput
     from .linear_issue import LinearIssue
@@ -160,7 +163,6 @@ if typing.TYPE_CHECKING:
     from .log_sink import LogSink
     from .mcp_server import McpServer
     from .mcp_server_name import McpServerName
-    from .mcpo_auth_success_response import McpoAuthSuccessResponse
     from .mem0data_output import Mem0DataOutput
     from .mem0memory import Mem0Memory
     from .mem0message import Mem0Message
@@ -195,6 +197,7 @@ if typing.TYPE_CHECKING:
     from .one_drive_data_output import OneDriveDataOutput
     from .one_drive_file import OneDriveFile
     from .one_drive_folder import OneDriveFolder
+    from .opportunity import Opportunity
     from .outlook_calendar_data import OutlookCalendarData
     from .outlook_calendar_event import OutlookCalendarEvent
     from .outlook_mail_data import OutlookMailData
@@ -209,19 +212,11 @@ if typing.TYPE_CHECKING:
     from .resend_email import ResendEmail
     from .resend_segment import ResendSegment
     from .reset_sandbox_response import ResetSandboxResponse
-    from .salesforce_account import SalesforceAccount
-    from .salesforce_campaign import SalesforceCampaign
-    from .salesforce_case import SalesforceCase
-    from .salesforce_contact import SalesforceContact
-    from .salesforce_data import SalesforceData
-    from .salesforce_lead import SalesforceLead
-    from .salesforce_opportunity import SalesforceOpportunity
+    from .salesforce_data_output import SalesforceDataOutput
     from .sandbox_info import SandboxInfo
     from .sandbox_mcp_server import SandboxMcpServer
     from .sandbox_status import SandboxStatus
     from .server_tool import ServerTool
-    from .sharesight_o_auth_error_response import SharesightOAuthErrorResponse
-    from .sharesight_o_auth_success_response import SharesightOAuthSuccessResponse
     from .shopify_address import ShopifyAddress
     from .shopify_customer import ShopifyCustomer
     from .shopify_data_output import ShopifyDataOutput
@@ -240,11 +235,6 @@ if typing.TYPE_CHECKING:
     from .snowflake_table import SnowflakeTable
     from .status_response import StatusResponse
     from .storage_bucket import StorageBucket
-    from .storage_bucket_lifecycle import StorageBucketLifecycle
-    from .storage_bucket_lifecycle_rule import StorageBucketLifecycleRule
-    from .storage_bucket_lifecycle_rule_action import StorageBucketLifecycleRuleAction
-    from .storage_bucket_lifecycle_rule_condition import StorageBucketLifecycleRuleCondition
-    from .storage_bucket_versioning import StorageBucketVersioning
     from .storage_object import StorageObject
     from .strata_add_servers_response import StrataAddServersResponse
     from .strata_create_response import StrataCreateResponse
@@ -261,15 +251,17 @@ if typing.TYPE_CHECKING:
     from .teams_message import TeamsMessage
     from .time_slot import TimeSlot
     from .tool_format import ToolFormat
+    from .update_server_instance_response import UpdateServerInstanceResponse
     from .user_info import UserInfo
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
+    from .value import Value
     from .white_labeling_response import WhiteLabelingResponse
     from .word_press_data import WordPressData
     from .word_press_post import WordPressPost
-    from .zoom_o_auth_error_response import ZoomOAuthErrorResponse
-    from .zoom_o_auth_success_response import ZoomOAuthSuccessResponse
 _dynamic_imports: typing.Dict[str, str] = {
+    "Account": ".account",
+    "Address": ".address",
     "AirtableDataOutput": ".airtable_data_output",
     "AirtableField": ".airtable_field",
     "AirtableRecord": ".airtable_record",
@@ -282,15 +274,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AzureAdoAuthErrorResponse": ".azure_ado_auth_error_response",
     "AzureAdoAuthSuccessResponse": ".azure_ado_auth_success_response",
     "BigQueryDataset": ".big_query_dataset",
-    "BigQueryDatasetReference": ".big_query_dataset_reference",
+    "BigQueryField": ".big_query_field",
     "BigQueryTable": ".big_query_table",
-    "BigQueryTableFieldSchema": ".big_query_table_field_schema",
-    "BigQueryTableReference": ".big_query_table_reference",
-    "BigQueryTableSchema": ".big_query_table_schema",
     "CalcomDataOutput": ".calcom_data_output",
     "CalcomSchedule": ".calcom_schedule",
     "CallToolResponse": ".call_tool_response",
     "CallToolResult": ".call_tool_result",
+    "Campaign": ".campaign",
+    "Case": ".case",
     "ClickUpComment": ".click_up_comment",
     "ClickUpDataOutput": ".click_up_data_output",
     "ClickUpFolder": ".click_up_folder",
@@ -309,6 +300,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConfluencePageOutput": ".confluence_page_output",
     "ConfluenceSpace": ".confluence_space",
     "ConnectionType": ".connection_type",
+    "Contact": ".contact",
     "CreateSandboxResponse": ".create_sandbox_response",
     "CreateSelfHostedServerResponse": ".create_self_hosted_server_response",
     "CreateServerResponse": ".create_server_response",
@@ -378,27 +370,26 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GoogleCalendarAttendee": ".google_calendar_attendee",
     "GoogleCalendarDataOutput": ".google_calendar_data_output",
     "GoogleCalendarEvent": ".google_calendar_event",
-    "GoogleCalendarEventDateTime": ".google_calendar_event_date_time",
     "GoogleCloudDataOutput": ".google_cloud_data_output",
     "GoogleDocsData": ".google_docs_data",
     "GoogleDocsDocument": ".google_docs_document",
     "GoogleDriveData": ".google_drive_data",
     "GoogleDriveFile": ".google_drive_file",
+    "GoogleFormsChoiceOption": ".google_forms_choice_option",
     "GoogleFormsDataOutput": ".google_forms_data_output",
     "GoogleFormsForm": ".google_forms_form",
-    "GoogleFormsFormSettings": ".google_forms_form_settings",
-    "GoogleFormsInfo": ".google_forms_info",
     "GoogleFormsItem": ".google_forms_item",
-    "GoogleFormsQuizSettings": ".google_forms_quiz_settings",
-    "GoogleSheetsCellValue": ".google_sheets_cell_value",
+    "GoogleFormsItemInputItemType": ".google_forms_item_input_item_type",
+    "GoogleFormsItemOutputItemType": ".google_forms_item_output_item_type",
+    "GoogleFormsQuestion": ".google_forms_question",
+    "GoogleFormsQuestionQuestionType": ".google_forms_question_question_type",
+    "GoogleFormsSectionHeader": ".google_forms_section_header",
+    "GoogleSheetsCell": ".google_sheets_cell",
     "GoogleSheetsDataOutput": ".google_sheets_data_output",
     "GoogleSheetsGridDataInput": ".google_sheets_grid_data_input",
     "GoogleSheetsGridDataOutput": ".google_sheets_grid_data_output",
-    "GoogleSheetsRowData": ".google_sheets_row_data",
     "GoogleSheetsSheet": ".google_sheets_sheet",
-    "GoogleSheetsSheetProperties": ".google_sheets_sheet_properties",
     "GoogleSheetsSpreadsheet": ".google_sheets_spreadsheet",
-    "GoogleSheetsSpreadsheetProperties": ".google_sheets_spreadsheet_properties",
     "HttpValidationError": ".http_validation_error",
     "HubSpotCompany": ".hub_spot_company",
     "HubSpotContact": ".hub_spot_contact",
@@ -414,6 +405,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "JiraIssue": ".jira_issue",
     "JiraProject": ".jira_project",
     "JiraSprint": ".jira_sprint",
+    "Lead": ".lead",
+    "LifecycleRule": ".lifecycle_rule",
     "LinearComment": ".linear_comment",
     "LinearDataOutput": ".linear_data_output",
     "LinearIssue": ".linear_issue",
@@ -424,7 +417,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LogSink": ".log_sink",
     "McpServer": ".mcp_server",
     "McpServerName": ".mcp_server_name",
-    "McpoAuthSuccessResponse": ".mcpo_auth_success_response",
     "Mem0DataOutput": ".mem0data_output",
     "Mem0Memory": ".mem0memory",
     "Mem0Message": ".mem0message",
@@ -459,6 +451,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OneDriveDataOutput": ".one_drive_data_output",
     "OneDriveFile": ".one_drive_file",
     "OneDriveFolder": ".one_drive_folder",
+    "Opportunity": ".opportunity",
     "OutlookCalendarData": ".outlook_calendar_data",
     "OutlookCalendarEvent": ".outlook_calendar_event",
     "OutlookMailData": ".outlook_mail_data",
@@ -473,19 +466,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ResendEmail": ".resend_email",
     "ResendSegment": ".resend_segment",
     "ResetSandboxResponse": ".reset_sandbox_response",
-    "SalesforceAccount": ".salesforce_account",
-    "SalesforceCampaign": ".salesforce_campaign",
-    "SalesforceCase": ".salesforce_case",
-    "SalesforceContact": ".salesforce_contact",
-    "SalesforceData": ".salesforce_data",
-    "SalesforceLead": ".salesforce_lead",
-    "SalesforceOpportunity": ".salesforce_opportunity",
+    "SalesforceDataOutput": ".salesforce_data_output",
     "SandboxInfo": ".sandbox_info",
     "SandboxMcpServer": ".sandbox_mcp_server",
     "SandboxStatus": ".sandbox_status",
     "ServerTool": ".server_tool",
-    "SharesightOAuthErrorResponse": ".sharesight_o_auth_error_response",
-    "SharesightOAuthSuccessResponse": ".sharesight_o_auth_success_response",
     "ShopifyAddress": ".shopify_address",
     "ShopifyCustomer": ".shopify_customer",
     "ShopifyDataOutput": ".shopify_data_output",
@@ -504,11 +489,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SnowflakeTable": ".snowflake_table",
     "StatusResponse": ".status_response",
     "StorageBucket": ".storage_bucket",
-    "StorageBucketLifecycle": ".storage_bucket_lifecycle",
-    "StorageBucketLifecycleRule": ".storage_bucket_lifecycle_rule",
-    "StorageBucketLifecycleRuleAction": ".storage_bucket_lifecycle_rule_action",
-    "StorageBucketLifecycleRuleCondition": ".storage_bucket_lifecycle_rule_condition",
-    "StorageBucketVersioning": ".storage_bucket_versioning",
     "StorageObject": ".storage_object",
     "StrataAddServersResponse": ".strata_add_servers_response",
     "StrataCreateResponse": ".strata_create_response",
@@ -525,14 +505,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TeamsMessage": ".teams_message",
     "TimeSlot": ".time_slot",
     "ToolFormat": ".tool_format",
+    "UpdateServerInstanceResponse": ".update_server_instance_response",
     "UserInfo": ".user_info",
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
+    "Value": ".value",
     "WhiteLabelingResponse": ".white_labeling_response",
     "WordPressData": ".word_press_data",
     "WordPressPost": ".word_press_post",
-    "ZoomOAuthErrorResponse": ".zoom_o_auth_error_response",
-    "ZoomOAuthSuccessResponse": ".zoom_o_auth_success_response",
 }
 
 
@@ -558,6 +538,8 @@ def __dir__():
 
 
 __all__ = [
+    "Account",
+    "Address",
     "AirtableDataOutput",
     "AirtableField",
     "AirtableRecord",
@@ -570,15 +552,14 @@ __all__ = [
     "AzureAdoAuthErrorResponse",
     "AzureAdoAuthSuccessResponse",
     "BigQueryDataset",
-    "BigQueryDatasetReference",
+    "BigQueryField",
     "BigQueryTable",
-    "BigQueryTableFieldSchema",
-    "BigQueryTableReference",
-    "BigQueryTableSchema",
     "CalcomDataOutput",
     "CalcomSchedule",
     "CallToolResponse",
     "CallToolResult",
+    "Campaign",
+    "Case",
     "ClickUpComment",
     "ClickUpDataOutput",
     "ClickUpFolder",
@@ -597,6 +578,7 @@ __all__ = [
     "ConfluencePageOutput",
     "ConfluenceSpace",
     "ConnectionType",
+    "Contact",
     "CreateSandboxResponse",
     "CreateSelfHostedServerResponse",
     "CreateServerResponse",
@@ -666,27 +648,26 @@ __all__ = [
     "GoogleCalendarAttendee",
     "GoogleCalendarDataOutput",
     "GoogleCalendarEvent",
-    "GoogleCalendarEventDateTime",
     "GoogleCloudDataOutput",
     "GoogleDocsData",
     "GoogleDocsDocument",
     "GoogleDriveData",
     "GoogleDriveFile",
+    "GoogleFormsChoiceOption",
     "GoogleFormsDataOutput",
     "GoogleFormsForm",
-    "GoogleFormsFormSettings",
-    "GoogleFormsInfo",
     "GoogleFormsItem",
-    "GoogleFormsQuizSettings",
-    "GoogleSheetsCellValue",
+    "GoogleFormsItemInputItemType",
+    "GoogleFormsItemOutputItemType",
+    "GoogleFormsQuestion",
+    "GoogleFormsQuestionQuestionType",
+    "GoogleFormsSectionHeader",
+    "GoogleSheetsCell",
     "GoogleSheetsDataOutput",
     "GoogleSheetsGridDataInput",
     "GoogleSheetsGridDataOutput",
-    "GoogleSheetsRowData",
     "GoogleSheetsSheet",
-    "GoogleSheetsSheetProperties",
     "GoogleSheetsSpreadsheet",
-    "GoogleSheetsSpreadsheetProperties",
     "HttpValidationError",
     "HubSpotCompany",
     "HubSpotContact",
@@ -702,6 +683,8 @@ __all__ = [
     "JiraIssue",
     "JiraProject",
     "JiraSprint",
+    "Lead",
+    "LifecycleRule",
     "LinearComment",
     "LinearDataOutput",
     "LinearIssue",
@@ -712,7 +695,6 @@ __all__ = [
     "LogSink",
     "McpServer",
     "McpServerName",
-    "McpoAuthSuccessResponse",
     "Mem0DataOutput",
     "Mem0Memory",
     "Mem0Message",
@@ -747,6 +729,7 @@ __all__ = [
     "OneDriveDataOutput",
     "OneDriveFile",
     "OneDriveFolder",
+    "Opportunity",
     "OutlookCalendarData",
     "OutlookCalendarEvent",
     "OutlookMailData",
@@ -761,19 +744,11 @@ __all__ = [
     "ResendEmail",
     "ResendSegment",
     "ResetSandboxResponse",
-    "SalesforceAccount",
-    "SalesforceCampaign",
-    "SalesforceCase",
-    "SalesforceContact",
-    "SalesforceData",
-    "SalesforceLead",
-    "SalesforceOpportunity",
+    "SalesforceDataOutput",
     "SandboxInfo",
     "SandboxMcpServer",
     "SandboxStatus",
     "ServerTool",
-    "SharesightOAuthErrorResponse",
-    "SharesightOAuthSuccessResponse",
     "ShopifyAddress",
     "ShopifyCustomer",
     "ShopifyDataOutput",
@@ -792,11 +767,6 @@ __all__ = [
     "SnowflakeTable",
     "StatusResponse",
     "StorageBucket",
-    "StorageBucketLifecycle",
-    "StorageBucketLifecycleRule",
-    "StorageBucketLifecycleRuleAction",
-    "StorageBucketLifecycleRuleCondition",
-    "StorageBucketVersioning",
     "StorageObject",
     "StrataAddServersResponse",
     "StrataCreateResponse",
@@ -813,12 +783,12 @@ __all__ = [
     "TeamsMessage",
     "TimeSlot",
     "ToolFormat",
+    "UpdateServerInstanceResponse",
     "UserInfo",
     "ValidationError",
     "ValidationErrorLocItem",
+    "Value",
     "WhiteLabelingResponse",
     "WordPressData",
     "WordPressPost",
-    "ZoomOAuthErrorResponse",
-    "ZoomOAuthSuccessResponse",
 ]

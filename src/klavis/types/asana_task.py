@@ -22,9 +22,9 @@ class AsanaTask(UniversalBaseModel):
     Task name
     """
 
-    notes: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Task notes/description
+    Task description
     """
 
     completed: typing.Optional[bool] = pydantic.Field(default=None)
@@ -37,17 +37,17 @@ class AsanaTask(UniversalBaseModel):
     User GID assigned to task
     """
 
-    due_on: typing.Optional[str] = pydantic.Field(default=None)
+    due_date: typing.Optional[str] = pydantic.Field(default=None)
     """
     Due date (YYYY-MM-DD)
     """
 
-    due_at: typing.Optional[str] = pydantic.Field(default=None)
+    due_datetime: typing.Optional[str] = pydantic.Field(default=None)
     """
     Due datetime (ISO 8601)
     """
 
-    start_on: typing.Optional[str] = pydantic.Field(default=None)
+    start_date: typing.Optional[str] = pydantic.Field(default=None)
     """
     Start date (YYYY-MM-DD)
     """

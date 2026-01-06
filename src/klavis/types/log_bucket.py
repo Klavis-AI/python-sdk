@@ -3,14 +3,12 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class LogBucket(UniversalBaseModel):
     """
-    Cloud Logging bucket - matches API format
+    Cloud Logging bucket
     """
 
     name: str = pydantic.Field()
@@ -23,9 +21,7 @@ class LogBucket(UniversalBaseModel):
     Bucket location
     """
 
-    retention_days: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="retentionDays")] = (
-        pydantic.Field(default=None)
-    )
+    retention_days: typing.Optional[int] = pydantic.Field(default=None)
     """
     Retention period in days
     """
@@ -35,16 +31,12 @@ class LogBucket(UniversalBaseModel):
     Bucket description
     """
 
-    create_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="createTime")] = pydantic.Field(
-        default=None
-    )
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Creation timestamp
     """
 
-    update_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="updateTime")] = pydantic.Field(
-        default=None
-    )
+    updated_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Update timestamp
     """

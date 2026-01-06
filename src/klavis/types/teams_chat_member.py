@@ -3,9 +3,7 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class TeamsChatMember(UniversalBaseModel):
@@ -13,19 +11,17 @@ class TeamsChatMember(UniversalBaseModel):
     Teams Chat Member object
     """
 
-    id: typing.Optional[str] = pydantic.Field(default=None)
+    member_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Member ID (read-only, set by Teams)
     """
 
-    display_name: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="displayName")] = (
-        pydantic.Field(default=None)
-    )
+    member_name: typing.Optional[str] = pydantic.Field(default=None)
     """
     Member display name
     """
 
-    email: typing.Optional[str] = pydantic.Field(default=None)
+    member_email: typing.Optional[str] = pydantic.Field(default=None)
     """
     User email for creating chats
     """

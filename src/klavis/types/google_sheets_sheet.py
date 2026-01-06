@@ -3,24 +3,44 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .google_sheets_grid_data_output import GoogleSheetsGridDataOutput
-from .google_sheets_sheet_properties import GoogleSheetsSheetProperties
+from ..core.serialization import FieldMetadata
+from .google_sheets_cell import GoogleSheetsCell
 
 
 class GoogleSheetsSheet(UniversalBaseModel):
     """
-    A sheet within a Google Sheets spreadsheet
+    A sheet within a spreadsheet
     """
 
-    properties: GoogleSheetsSheetProperties = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Sheet properties (required)
+    Sheet title
     """
 
-    data: typing.Optional[typing.List[GoogleSheetsGridDataOutput]] = pydantic.Field(default=None)
+    index: typing.Optional[int] = pydantic.Field(default=None)
     """
-    Grid data for the sheet
+    Sheet index position
+    """
+
+    row_count: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="rowCount")] = pydantic.Field(
+        default=None
+    )
+    """
+    Number of rows in the sheet
+    """
+
+    column_count: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="columnCount")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Number of columns in the sheet
+    """
+
+    cells: typing.Optional[typing.List[GoogleSheetsCell]] = pydantic.Field(default=None)
+    """
+    List of cells with data
     """
 
     if IS_PYDANTIC_V2:

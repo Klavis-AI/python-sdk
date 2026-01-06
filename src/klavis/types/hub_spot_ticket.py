@@ -12,14 +12,14 @@ class HubSpotTicket(UniversalBaseModel):
     Can be associated with: Contacts, Companies.
     """
 
-    subject: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Ticket subject
+    Ticket title
     """
 
-    content: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Ticket content/description
+    Ticket description/details
     """
 
     pipeline: typing.Optional[str] = pydantic.Field(default=None)
@@ -27,12 +27,12 @@ class HubSpotTicket(UniversalBaseModel):
     Ticket pipeline
     """
 
-    pipeline_stage: typing.Optional[str] = pydantic.Field(default=None)
+    workflow_stage: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Ticket pipeline stage
+    Ticket workflow stage
     """
 
-    priority: typing.Optional[str] = pydantic.Field(default=None)
+    priority_level: typing.Optional[str] = pydantic.Field(default=None)
     """
     Ticket priority (HIGH, MEDIUM, LOW)
     """

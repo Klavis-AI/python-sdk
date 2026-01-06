@@ -6,15 +6,14 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class ZoomOAuthErrorResponse(UniversalBaseModel):
-    error: str = pydantic.Field()
+class GoogleFormsChoiceOption(UniversalBaseModel):
     """
-    Error message from the OAuth process
+    A single choice option for choice-based questions
     """
 
-    message: typing.Optional[str] = pydantic.Field(default=None)
+    value: str = pydantic.Field()
     """
-    Additional error message
+    The text value of the choice option
     """
 
     if IS_PYDANTIC_V2:

@@ -26,9 +26,9 @@ class CloseOpportunity(UniversalBaseModel):
     Confidence percentage (0-100)
     """
 
-    value_period: typing.Optional[str] = pydantic.Field(default=None)
+    period: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Value period (e.g., 'one_time', 'monthly', 'annual')
+    Billing period (e.g., 'one_time', 'monthly', 'annual')
     """
 
     if IS_PYDANTIC_V2:

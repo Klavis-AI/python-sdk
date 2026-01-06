@@ -11,9 +11,9 @@ class ConfluenceComment(UniversalBaseModel):
     Confluence Comment object
     """
 
-    body: str = pydantic.Field()
+    content: str = pydantic.Field()
     """
-    Comment text content (storage format)
+    Comment text content
     """
 
     if IS_PYDANTIC_V2:

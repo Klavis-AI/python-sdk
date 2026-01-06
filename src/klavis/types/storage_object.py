@@ -10,12 +10,7 @@ from ..core.serialization import FieldMetadata
 
 class StorageObject(UniversalBaseModel):
     """
-    Cloud Storage object (blob) - matches API format
-    """
-
-    name: str = pydantic.Field()
-    """
-    Object name
+    Cloud Storage object (blob)
     """
 
     bucket: str = pydantic.Field()
@@ -23,50 +18,41 @@ class StorageObject(UniversalBaseModel):
     Bucket name
     """
 
+    name: str = pydantic.Field()
+    """
+    Object name/path
+    """
+
+    content_type: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Content type
+    """
+
     size: typing.Optional[str] = pydantic.Field(default=None)
     """
     Object size in bytes
     """
 
-    content_type: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="contentType")] = (
-        pydantic.Field(default=None)
-    )
+    content: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Content type
+    Object content (for initialization)
     """
 
-    time_created: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="timeCreated")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Creation timestamp
-    """
-
-    updated: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Last update timestamp
-    """
-
-    generation: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Object generation
-    """
-
-    metageneration: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Metadata generation
-    """
-
-    md5hash: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="md5Hash")] = pydantic.Field(
+    md5hash: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="md5_hash")] = pydantic.Field(
         default=None
     )
     """
     MD5 hash
     """
 
-    content: typing.Optional[str] = pydantic.Field(default=None)
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Object content (text or base64 encoded)
+    Creation timestamp
+    """
+
+    updated_at: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Last update timestamp
     """
 
     if IS_PYDANTIC_V2:

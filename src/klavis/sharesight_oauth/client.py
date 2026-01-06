@@ -4,7 +4,6 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.sharesight_o_auth_success_response import SharesightOAuthSuccessResponse
 from .raw_client import AsyncRawSharesightOauthClient, RawSharesightOauthClient
 
 
@@ -76,37 +75,6 @@ class SharesightOauthClient:
             redirect_url=redirect_url,
             request_options=request_options,
         )
-        return _response.data
-
-    def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SharesightOAuthSuccessResponse:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SharesightOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        from klavis import Klavis
-
-        client = Klavis(
-            api_key="YOUR_API_KEY",
-        )
-        client.sharesight_oauth.refresh_token(
-            instance_id="instance_id",
-        )
-        """
-        _response = self._raw_client.refresh_token(instance_id=instance_id, request_options=request_options)
         return _response.data
 
 
@@ -186,43 +154,4 @@ class AsyncSharesightOauthClient:
             redirect_url=redirect_url,
             request_options=request_options,
         )
-        return _response.data
-
-    async def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SharesightOAuthSuccessResponse:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SharesightOAuthSuccessResponse
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from klavis import AsyncKlavis
-
-        client = AsyncKlavis(
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.sharesight_oauth.refresh_token(
-                instance_id="instance_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.refresh_token(instance_id=instance_id, request_options=request_options)
         return _response.data

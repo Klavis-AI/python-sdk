@@ -3,9 +3,7 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 from .teams_message import TeamsMessage
 
 
@@ -14,22 +12,22 @@ class TeamsChannel(UniversalBaseModel):
     Teams Channel object
     """
 
-    id: typing.Optional[str] = pydantic.Field(default=None)
+    channel_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Channel ID (read-only, set by Teams)
     """
 
-    display_name: typing_extensions.Annotated[str, FieldMetadata(alias="displayName")] = pydantic.Field()
+    name: str = pydantic.Field()
     """
     Channel display name
     """
 
-    description: typing.Optional[str] = pydantic.Field(default=None)
+    channel_description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Channel description
     """
 
-    messages: typing.Optional[typing.List[TeamsMessage]] = pydantic.Field(default=None)
+    channel_messages: typing.Optional[typing.List[TeamsMessage]] = pydantic.Field(default=None)
     """
     List of messages in the channel
     """

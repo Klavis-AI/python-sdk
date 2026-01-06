@@ -8,10 +8,8 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
-from ..errors.bad_request_error import BadRequestError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
-from ..types.zoom_o_auth_success_response import ZoomOAuthSuccessResponse
 
 
 class RawZoomOauthClient:
@@ -89,68 +87,6 @@ class RawZoomOauthClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[ZoomOAuthSuccessResponse]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[ZoomOAuthSuccessResponse]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "oauth/zoom/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    ZoomOAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=ZoomOAuthSuccessResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
 
 class AsyncRawZoomOauthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -211,68 +147,6 @@ class AsyncRawZoomOauthClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 422:
-                raise UnprocessableEntityError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        HttpValidationError,
-                        parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def refresh_token(
-        self, *, instance_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ZoomOAuthSuccessResponse]:
-        """
-        Parameters
-        ----------
-        instance_id : str
-            Instance ID for which to refresh the token
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[ZoomOAuthSuccessResponse]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "oauth/zoom/refresh_token",
-            method="POST",
-            params={
-                "instance_id": instance_id,
-            },
-            request_options=request_options,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    ZoomOAuthSuccessResponse,
-                    parse_obj_as(
-                        type_=ZoomOAuthSuccessResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise BadRequestError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        typing.Optional[typing.Any],
-                        parse_obj_as(
-                            type_=typing.Optional[typing.Any],  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),

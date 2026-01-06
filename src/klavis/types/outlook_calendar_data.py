@@ -12,7 +12,7 @@ class OutlookCalendarData(UniversalBaseModel):
     Complete Outlook Calendar sandbox data structure
     """
 
-    events: typing.Optional[typing.List[OutlookCalendarEvent]] = pydantic.Field(default=None)
+    calendar_events: typing.Optional[typing.List[OutlookCalendarEvent]] = pydantic.Field(default=None)
     """
     List of calendar events
     """

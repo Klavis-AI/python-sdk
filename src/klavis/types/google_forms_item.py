@@ -3,73 +3,30 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
+from .google_forms_item_output_item_type import GoogleFormsItemOutputItemType
+from .google_forms_question import GoogleFormsQuestion
+from .google_forms_section_header import GoogleFormsSectionHeader
 
 
 class GoogleFormsItem(UniversalBaseModel):
     """
-    Form item - matches API Item object. Uses Dict for flexibility to match API structure.
+    A single item in a form - can be a question or section header
     """
 
-    item_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="itemId")] = pydantic.Field(
-        default=None
-    )
+    item_type: GoogleFormsItemOutputItemType = pydantic.Field()
     """
-    The item ID
+    Type of form item
     """
 
-    title: typing.Optional[str] = pydantic.Field(default=None)
+    question: typing.Optional[GoogleFormsQuestion] = pydantic.Field(default=None)
     """
-    The title of the item
-    """
-
-    description: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    The description of the item
+    Question details (when item_type is 'question')
     """
 
-    question_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="questionItem")
-    ] = pydantic.Field(default=None)
+    section_header: typing.Optional[GoogleFormsSectionHeader] = pydantic.Field(default=None)
     """
-    Poses a question to the user
-    """
-
-    question_group_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="questionGroupItem")
-    ] = pydantic.Field(default=None)
-    """
-    Poses one or more questions with a single major prompt
-    """
-
-    page_break_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="pageBreakItem")
-    ] = pydantic.Field(default=None)
-    """
-    Starts a new page with a title
-    """
-
-    text_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="textItem")
-    ] = pydantic.Field(default=None)
-    """
-    Displays a title and description on the page
-    """
-
-    image_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="imageItem")
-    ] = pydantic.Field(default=None)
-    """
-    Displays an image on the page
-    """
-
-    video_item: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="videoItem")
-    ] = pydantic.Field(default=None)
-    """
-    Displays a video on the page
+    Section header details (when item_type is 'section_header')
     """
 
     if IS_PYDANTIC_V2:

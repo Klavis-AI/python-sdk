@@ -3,14 +3,12 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class LogSink(UniversalBaseModel):
     """
-    Cloud Logging sink - matches API format
+    Cloud Logging sink
     """
 
     name: str = pydantic.Field()
@@ -20,7 +18,7 @@ class LogSink(UniversalBaseModel):
 
     filter: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Log filter
+    Log filter expression
     """
 
     description: typing.Optional[str] = pydantic.Field(default=None)
@@ -28,16 +26,12 @@ class LogSink(UniversalBaseModel):
     Sink description
     """
 
-    create_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="createTime")] = pydantic.Field(
-        default=None
-    )
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Creation timestamp
     """
 
-    update_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="updateTime")] = pydantic.Field(
-        default=None
-    )
+    updated_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Update timestamp
     """

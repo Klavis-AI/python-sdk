@@ -3,31 +3,25 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 
 
 class LogEntry(UniversalBaseModel):
     """
-    Cloud Logging log entry - matches API format
+    Cloud Logging log entry
     """
 
-    log_name: typing_extensions.Annotated[str, FieldMetadata(alias="logName")] = pydantic.Field()
+    log_name: str = pydantic.Field()
     """
     Log name
     """
 
-    text_payload: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="textPayload")] = (
-        pydantic.Field(default=None)
-    )
+    message: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Text payload
+    Text message payload
     """
 
-    json_payload: typing_extensions.Annotated[
-        typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]], FieldMetadata(alias="jsonPayload")
-    ] = pydantic.Field(default=None)
+    json_data: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     JSON payload
     """
@@ -42,16 +36,14 @@ class LogEntry(UniversalBaseModel):
     Entry timestamp
     """
 
-    insert_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="insertId")] = pydantic.Field(
-        default=None
-    )
+    resource_type: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Unique insert ID
+    Resource type (e.g., gce_instance, cloud_function)
     """
 
-    resource: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    resource_labels: typing.Optional[typing.Dict[str, typing.Optional[str]]] = pydantic.Field(default=None)
     """
-    Monitored resource
+    Resource labels
     """
 
     if IS_PYDANTIC_V2:

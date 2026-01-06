@@ -3,22 +3,17 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
-from .big_query_dataset_reference import BigQueryDatasetReference
 
 
 class BigQueryDataset(UniversalBaseModel):
     """
-    BigQuery dataset object - matches API format
+    BigQuery dataset
     """
 
-    dataset_reference: typing_extensions.Annotated[
-        BigQueryDatasetReference, FieldMetadata(alias="datasetReference")
-    ] = pydantic.Field()
+    id: str = pydantic.Field()
     """
-    Dataset reference
+    Dataset ID
     """
 
     description: typing.Optional[str] = pydantic.Field(default=None)
@@ -31,16 +26,12 @@ class BigQueryDataset(UniversalBaseModel):
     Dataset location
     """
 
-    creation_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="creationTime")] = (
-        pydantic.Field(default=None)
-    )
+    created_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Creation timestamp
     """
 
-    last_modified_time: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="lastModifiedTime")] = (
-        pydantic.Field(default=None)
-    )
+    updated_at: typing.Optional[str] = pydantic.Field(default=None)
     """
     Last modified timestamp
     """

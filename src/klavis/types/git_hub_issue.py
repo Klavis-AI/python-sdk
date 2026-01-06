@@ -16,17 +16,17 @@ class GitHubIssue(UniversalBaseModel):
     Issue ID (read-only, set by GitHub)
     """
 
-    title: str = pydantic.Field()
+    issue_title: str = pydantic.Field()
     """
     Issue title
     """
 
-    body: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Issue description/body
     """
 
-    state: typing.Optional[str] = pydantic.Field(default=None)
+    status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Issue state: open or closed
     """

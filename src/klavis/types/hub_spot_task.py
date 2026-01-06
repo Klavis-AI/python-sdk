@@ -12,29 +12,29 @@ class HubSpotTask(UniversalBaseModel):
     Can be associated with: Contacts, Companies, Deals, Tickets.
     """
 
-    subject: str = pydantic.Field()
+    title: str = pydantic.Field()
     """
-    Task subject/title
-    """
-
-    body: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Task body/description
+    Task title
     """
 
-    status: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Task description/details
+    """
+
+    task_status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Task status (NOT_STARTED, IN_PROGRESS, COMPLETED, WAITING, DEFERRED)
     """
 
-    priority: typing.Optional[str] = pydantic.Field(default=None)
+    priority_level: typing.Optional[str] = pydantic.Field(default=None)
     """
     Task priority (HIGH, MEDIUM, LOW)
     """
 
-    due_date: typing.Optional[str] = pydantic.Field(default=None)
+    deadline: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Task due date (ISO 8601 format)
+    Task deadline (ISO 8601 format)
     """
 
     if IS_PYDANTIC_V2:

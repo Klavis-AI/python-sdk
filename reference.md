@@ -994,6 +994,14 @@ client.mcp_server.create_server_instance(
 <dl>
 <dd>
 
+**is_read_only:** `typing.Optional[bool]` — Whether the MCP server connection is read-only. When true, write operations will be restricted. Default is False.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -1212,6 +1220,85 @@ client.mcp_server.delete_server_instance(
 <dd>
 
 **instance_id:** `str` — The ID of the connection instance to delete.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.mcp_server.<a href="src/klavis/mcp_server/client.py">update_server_instance</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the settings of a specific server connection instance.
+Currently supports updating the read-only status of the connection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.mcp_server.update_server_instance(
+    instance_id="instanceId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — The ID of the connection integration instance to update.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_read_only:** `typing.Optional[bool]` — Whether the MCP server connection is read-only. When true, write operations will be restricted.
     
 </dd>
 </dl>
@@ -7355,62 +7442,6 @@ client.zoom_oauth.authorize_zoom(
 </dl>
 </details>
 
-<details><summary><code>client.zoom_oauth.<a href="src/klavis/zoom_oauth/client.py">refresh_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.zoom_oauth.refresh_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Instance ID for which to refresh the token
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## ZohoMailOauth
 <details><summary><code>client.zoho_mail_oauth.<a href="src/klavis/zoho_mail_oauth/client.py">authorize_zoho_mail</a>(...)</code></summary>
 <dl>
@@ -7599,7 +7630,8 @@ client.sharesight_oauth.authorize_sharesight(
 </dl>
 </details>
 
-<details><summary><code>client.sharesight_oauth.<a href="src/klavis/sharesight_oauth/client.py">refresh_token</a>(...)</code></summary>
+## InstagramOauth
+<details><summary><code>client.instagram_oauth.<a href="src/klavis/instagram_oauth/client.py">authorize_instagram</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7617,8 +7649,11 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.sharesight_oauth.refresh_token(
+client.instagram_oauth.authorize_instagram(
     instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
 )
 
 ```
@@ -7635,7 +7670,135 @@ client.sharesight_oauth.refresh_token(
 <dl>
 <dd>
 
-**instance_id:** `str` — Instance ID for which to refresh the token
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## YoutubeOauth
+<details><summary><code>client.youtube_oauth.<a href="src/klavis/youtube_oauth/client.py">authorize_you_tube</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start YouTube OAuth flow
+
+Parameters:
+- instance_id: Identifier for the instance requesting authorization
+- client_id: Optional client ID for white labeling
+- scope: Optional scopes to request (comma-separated)
+- redirect_url: Optional URL to redirect to after authorization completes
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from klavis import Klavis
+
+client = Klavis(
+    api_key="YOUR_API_KEY",
+)
+client.youtube_oauth.authorize_you_tube(
+    instance_id="instance_id",
+    client_id="client_id",
+    scope="scope",
+    redirect_url="redirect_url",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**instance_id:** `str` — Unique identifier for the client instance requesting authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Client ID for white labeling, if not provided will use default credentials
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `typing.Optional[str]` — Optional OAuth scopes to request (comma-separated string)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization completes
     
 </dd>
 </dl>
@@ -7744,79 +7907,6 @@ client.intercom_oauth.authorizeintercom_oauth(
 </dl>
 </details>
 
-<details><summary><code>client.intercom_oauth.<a href="src/klavis/intercom_oauth/client.py">refresh_intercom_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.intercom_oauth.refresh_intercom_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## PaypalOauth
 <details><summary><code>client.paypal_oauth.<a href="src/klavis/paypal_oauth/client.py">authorizepaypal_oauth</a>(...)</code></summary>
 <dl>
@@ -7887,79 +7977,6 @@ client.paypal_oauth.authorizepaypal_oauth(
 <dd>
 
 **force_refresh:** `typing.Optional[bool]` — Force re-authorization even if valid tokens exist
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.paypal_oauth.<a href="src/klavis/paypal_oauth/client.py">refresh_paypal_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.paypal_oauth.refresh_paypal_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
     
 </dd>
 </dl>
@@ -8068,79 +8085,6 @@ client.sentry_oauth.authorizesentry_oauth(
 </dl>
 </details>
 
-<details><summary><code>client.sentry_oauth.<a href="src/klavis/sentry_oauth/client.py">refresh_sentry_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.sentry_oauth.refresh_sentry_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## NetlifyOauth
 <details><summary><code>client.netlify_oauth.<a href="src/klavis/netlify_oauth/client.py">authorizenetlify_oauth</a>(...)</code></summary>
 <dl>
@@ -8211,79 +8155,6 @@ client.netlify_oauth.authorizenetlify_oauth(
 <dd>
 
 **force_refresh:** `typing.Optional[bool]` — Force re-authorization even if valid tokens exist
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.netlify_oauth.<a href="src/klavis/netlify_oauth/client.py">refresh_netlify_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.netlify_oauth.refresh_netlify_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
     
 </dd>
 </dl>
@@ -8392,79 +8263,6 @@ client.huggingface_oauth.authorizehuggingface_oauth(
 </dl>
 </details>
 
-<details><summary><code>client.huggingface_oauth.<a href="src/klavis/huggingface_oauth/client.py">refresh_huggingface_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.huggingface_oauth.refresh_huggingface_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## SquareOauth
 <details><summary><code>client.square_oauth.<a href="src/klavis/square_oauth/client.py">authorizesquare_oauth</a>(...)</code></summary>
 <dl>
@@ -8535,79 +8333,6 @@ client.square_oauth.authorizesquare_oauth(
 <dd>
 
 **force_refresh:** `typing.Optional[bool]` — Force re-authorization even if valid tokens exist
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.square_oauth.<a href="src/klavis/square_oauth/client.py">refresh_square_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.square_oauth.refresh_square_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
     
 </dd>
 </dl>
@@ -8716,79 +8441,6 @@ client.clockwise_oauth.authorizeclockwise_oauth(
 </dl>
 </details>
 
-<details><summary><code>client.clockwise_oauth.<a href="src/klavis/clockwise_oauth/client.py">refresh_clockwise_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.clockwise_oauth.refresh_clockwise_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## JotformOauth
 <details><summary><code>client.jotform_oauth.<a href="src/klavis/jotform_oauth/client.py">authorizejotform_oauth</a>(...)</code></summary>
 <dl>
@@ -8859,79 +8511,6 @@ client.jotform_oauth.authorizejotform_oauth(
 <dd>
 
 **force_refresh:** `typing.Optional[bool]` — Force re-authorization even if valid tokens exist
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.jotform_oauth.<a href="src/klavis/jotform_oauth/client.py">refresh_jotform_oauth_token</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from klavis import Klavis
-
-client = Klavis(
-    api_key="YOUR_API_KEY",
-)
-client.jotform_oauth.refresh_jotform_oauth_token(
-    instance_id="instance_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**instance_id:** `str` — Unique identifier for the MCP connection
     
 </dd>
 </dl>
@@ -9040,7 +8619,8 @@ client.honeycomb_oauth.authorizehoneycomb_oauth(
 </dl>
 </details>
 
-<details><summary><code>client.honeycomb_oauth.<a href="src/klavis/honeycomb_oauth/client.py">refresh_honeycomb_oauth_token</a>(...)</code></summary>
+## AmplitudeOauth
+<details><summary><code>client.amplitude_oauth.<a href="src/klavis/amplitude_oauth/client.py">authorizeamplitude_oauth</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -9052,10 +8632,7 @@ client.honeycomb_oauth.authorizehoneycomb_oauth(
 <dl>
 <dd>
 
-Refresh OAuth token for an MCP connection.
-
-This endpoint triggers a token refresh by making a list_tools request to the MCP server.
-The MCP SDK will automatically detect if the token is expired and refresh it if a refresh_token is available.
+Start OAuth flow and redirect to authorization page.
 </dd>
 </dl>
 </dd>
@@ -9075,8 +8652,10 @@ from klavis import Klavis
 client = Klavis(
     api_key="YOUR_API_KEY",
 )
-client.honeycomb_oauth.refresh_honeycomb_oauth_token(
+client.amplitude_oauth.authorizeamplitude_oauth(
     instance_id="instance_id",
+    redirect_url="redirect_url",
+    force_refresh=True,
 )
 
 ```
@@ -9094,6 +8673,22 @@ client.honeycomb_oauth.refresh_honeycomb_oauth_token(
 <dd>
 
 **instance_id:** `str` — Unique identifier for the MCP connection
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_url:** `typing.Optional[str]` — Optional URL to redirect to after authorization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**force_refresh:** `typing.Optional[bool]` — Force re-authorization even if valid tokens exist
     
 </dd>
 </dl>
@@ -9126,7 +8721,7 @@ client.honeycomb_oauth.refresh_honeycomb_oauth_token(
 <dl>
 <dd>
 
-Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'.
+Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'. Optionally specify a test_account_email to acquire a specific test account.
 </dd>
 </dl>
 </dd>
@@ -9165,6 +8760,14 @@ client.sandbox.create_sandbox(
 <dd>
 
 **server_name:** `SandboxMcpServer` — The MCP server name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**test_account_email:** `typing.Optional[str]` — Optional email of a specific test account to acquire. If provided, the system will attempt to acquire the sandbox associated with this test account email instead of a random idle sandbox.
     
 </dd>
 </dl>
@@ -10539,7 +10142,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**accounts:** `typing.Optional[typing.Sequence[SalesforceAccount]]` — List of Salesforce accounts
+**accounts:** `typing.Optional[typing.Sequence[Account]]` 
     
 </dd>
 </dl>
@@ -10547,7 +10150,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**contacts:** `typing.Optional[typing.Sequence[SalesforceContact]]` — List of Salesforce contacts
+**contacts:** `typing.Optional[typing.Sequence[Contact]]` 
     
 </dd>
 </dl>
@@ -10555,7 +10158,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**opportunities:** `typing.Optional[typing.Sequence[SalesforceOpportunity]]` — List of Salesforce opportunities
+**opportunities:** `typing.Optional[typing.Sequence[Opportunity]]` 
     
 </dd>
 </dl>
@@ -10563,7 +10166,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**leads:** `typing.Optional[typing.Sequence[SalesforceLead]]` — List of Salesforce leads
+**leads:** `typing.Optional[typing.Sequence[Lead]]` 
     
 </dd>
 </dl>
@@ -10571,7 +10174,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**cases:** `typing.Optional[typing.Sequence[SalesforceCase]]` — List of Salesforce cases
+**cases:** `typing.Optional[typing.Sequence[Case]]` 
     
 </dd>
 </dl>
@@ -10579,7 +10182,7 @@ client.sandbox.initialize_salesforce_sandbox(
 <dl>
 <dd>
 
-**campaigns:** `typing.Optional[typing.Sequence[SalesforceCampaign]]` — List of Salesforce campaigns
+**campaigns:** `typing.Optional[typing.Sequence[Campaign]]` 
     
 </dd>
 </dl>
@@ -10703,9 +10306,11 @@ client = Klavis(
 )
 client.sandbox.initialize_onedrive_sandbox(
     sandbox_id="sandbox_id",
-    root=OneDriveFolder(
-        name="name",
-    ),
+    root=[
+        OneDriveFolder(
+            name="name",
+        )
+    ],
 )
 
 ```
@@ -10730,7 +10335,7 @@ client.sandbox.initialize_onedrive_sandbox(
 <dl>
 <dd>
 
-**root:** `OneDriveFolder` — Root folder containing all subfolders and files
+**root:** `typing.Sequence[OneDriveFolder]` — List containing root folder (should contain only one element)
     
 </dd>
 </dl>
@@ -10878,7 +10483,7 @@ client.sandbox.initialize_microsoft_teams_sandbox(
 <dl>
 <dd>
 
-**channels:** `typing.Optional[typing.Sequence[TeamsChannel]]` — List of team channels
+**team_channels:** `typing.Optional[typing.Sequence[TeamsChannel]]` — List of team channels
     
 </dd>
 </dl>
@@ -10886,7 +10491,7 @@ client.sandbox.initialize_microsoft_teams_sandbox(
 <dl>
 <dd>
 
-**chats:** `typing.Optional[typing.Sequence[TeamsChat]]` — List of one-on-one chats
+**team_chats:** `typing.Optional[typing.Sequence[TeamsChat]]` — List of one-on-one chats
     
 </dd>
 </dl>
@@ -12190,7 +11795,7 @@ client.sandbox.initialize_outlook_calendar_sandbox(
 <dl>
 <dd>
 
-**events:** `typing.Optional[typing.Sequence[OutlookCalendarEvent]]` — List of calendar events
+**calendar_events:** `typing.Optional[typing.Sequence[OutlookCalendarEvent]]` — List of calendar events
     
 </dd>
 </dl>
@@ -13094,7 +12699,7 @@ client.sandbox.initialize_mem0sandbox(
 <dl>
 <dd>
 
-**memories:** `typing.Optional[typing.Sequence[Mem0Memory]]` — List of memories
+**memory_list:** `typing.Optional[typing.Sequence[Mem0Memory]]` — List of memories
     
 </dd>
 </dl>

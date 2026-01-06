@@ -4,15 +4,19 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.account import Account
 from ..types.airtable_table import AirtableTable
 from ..types.asana_project import AsanaProject
 from ..types.big_query_dataset import BigQueryDataset
 from ..types.big_query_table import BigQueryTable
 from ..types.calcom_schedule import CalcomSchedule
+from ..types.campaign import Campaign
+from ..types.case import Case
 from ..types.click_up_space import ClickUpSpace
 from ..types.close_lead import CloseLead
 from ..types.compute_instance import ComputeInstance
 from ..types.confluence_space import ConfluenceSpace
+from ..types.contact import Contact
 from ..types.create_sandbox_response import CreateSandboxResponse
 from ..types.discord_channel import DiscordChannel
 from ..types.dropbox_file import DropboxFile
@@ -69,6 +73,7 @@ from ..types.initialize_sandbox_response import InitializeSandboxResponse
 from ..types.jira_board import JiraBoard
 from ..types.jira_project import JiraProject
 from ..types.jira_sprint import JiraSprint
+from ..types.lead import Lead
 from ..types.linear_project import LinearProject
 from ..types.log_bucket import LogBucket
 from ..types.log_entry import LogEntry
@@ -86,6 +91,7 @@ from ..types.motion_workspace import MotionWorkspace
 from ..types.notion_database import NotionDatabase
 from ..types.notion_page import NotionPage
 from ..types.one_drive_folder import OneDriveFolder
+from ..types.opportunity import Opportunity
 from ..types.outlook_calendar_event import OutlookCalendarEvent
 from ..types.outlook_mail_message import OutlookMailMessage
 from ..types.release_sandbox_response import ReleaseSandboxResponse
@@ -93,12 +99,6 @@ from ..types.resend_contact import ResendContact
 from ..types.resend_email import ResendEmail
 from ..types.resend_segment import ResendSegment
 from ..types.reset_sandbox_response import ResetSandboxResponse
-from ..types.salesforce_account import SalesforceAccount
-from ..types.salesforce_campaign import SalesforceCampaign
-from ..types.salesforce_case import SalesforceCase
-from ..types.salesforce_contact import SalesforceContact
-from ..types.salesforce_lead import SalesforceLead
-from ..types.salesforce_opportunity import SalesforceOpportunity
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
 from ..types.shopify_customer import ShopifyCustomer
@@ -133,15 +133,22 @@ class SandboxClient:
         return self._raw_client
 
     def create_sandbox(
-        self, server_name: SandboxMcpServer, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        server_name: SandboxMcpServer,
+        *,
+        test_account_email: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateSandboxResponse:
         """
-        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'.
+        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'. Optionally specify a test_account_email to acquire a specific test account.
 
         Parameters
         ----------
         server_name : SandboxMcpServer
             The MCP server name
+
+        test_account_email : typing.Optional[str]
+            Optional email of a specific test account to acquire. If provided, the system will attempt to acquire the sandbox associated with this test account email instead of a random idle sandbox.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -162,7 +169,9 @@ class SandboxClient:
             server_name=SandboxMcpServer.JIRA,
         )
         """
-        _response = self._raw_client.create_sandbox(server_name, request_options=request_options)
+        _response = self._raw_client.create_sandbox(
+            server_name, test_account_email=test_account_email, request_options=request_options
+        )
         return _response.data
 
     def get_sandbox(
@@ -817,12 +826,12 @@ class SandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -833,23 +842,17 @@ class SandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
-            List of Salesforce accounts
+        accounts : typing.Optional[typing.Sequence[Account]]
 
-        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
-            List of Salesforce contacts
+        contacts : typing.Optional[typing.Sequence[Contact]]
 
-        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
-            List of Salesforce opportunities
+        opportunities : typing.Optional[typing.Sequence[Opportunity]]
 
-        leads : typing.Optional[typing.Sequence[SalesforceLead]]
-            List of Salesforce leads
+        leads : typing.Optional[typing.Sequence[Lead]]
 
-        cases : typing.Optional[typing.Sequence[SalesforceCase]]
-            List of Salesforce cases
+        cases : typing.Optional[typing.Sequence[Case]]
 
-        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
-            List of Salesforce campaigns
+        campaigns : typing.Optional[typing.Sequence[Campaign]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -916,7 +919,11 @@ class SandboxClient:
         return _response.data
 
     def initialize_onedrive_sandbox(
-        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+        self,
+        sandbox_id: str,
+        *,
+        root: typing.Sequence[OneDriveFolder],
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
         Initialize the sandbox with onedrive-specific data following the defined schema.
@@ -926,8 +933,8 @@ class SandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : OneDriveFolder
-            Root folder containing all subfolders and files
+        root : typing.Sequence[OneDriveFolder]
+            List containing root folder (should contain only one element)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -946,9 +953,11 @@ class SandboxClient:
         )
         client.sandbox.initialize_onedrive_sandbox(
             sandbox_id="sandbox_id",
-            root=OneDriveFolder(
-                name="name",
-            ),
+            root=[
+                OneDriveFolder(
+                    name="name",
+                )
+            ],
         )
         """
         _response = self._raw_client.initialize_onedrive_sandbox(sandbox_id, root=root, request_options=request_options)
@@ -991,8 +1000,8 @@ class SandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -1003,10 +1012,10 @@ class SandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
             List of team channels
 
-        chats : typing.Optional[typing.Sequence[TeamsChat]]
+        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
             List of one-on-one chats
 
         request_options : typing.Optional[RequestOptions]
@@ -1029,7 +1038,7 @@ class SandboxClient:
         )
         """
         _response = self._raw_client.initialize_microsoft_teams_sandbox(
-            sandbox_id, channels=channels, chats=chats, request_options=request_options
+            sandbox_id, team_channels=team_channels, team_chats=team_chats, request_options=request_options
         )
         return _response.data
 
@@ -1674,7 +1683,7 @@ class SandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -1685,7 +1694,7 @@ class SandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
             List of calendar events
 
         request_options : typing.Optional[RequestOptions]
@@ -1708,7 +1717,7 @@ class SandboxClient:
         )
         """
         _response = self._raw_client.initialize_outlook_calendar_sandbox(
-            sandbox_id, events=events, request_options=request_options
+            sandbox_id, calendar_events=calendar_events, request_options=request_options
         )
         return _response.data
 
@@ -2130,7 +2139,7 @@ class SandboxClient:
         self,
         sandbox_id: str,
         *,
-        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -2141,7 +2150,7 @@ class SandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
             List of memories
 
         request_options : typing.Optional[RequestOptions]
@@ -2164,7 +2173,7 @@ class SandboxClient:
         )
         """
         _response = self._raw_client.initialize_mem0sandbox(
-            sandbox_id, memories=memories, request_options=request_options
+            sandbox_id, memory_list=memory_list, request_options=request_options
         )
         return _response.data
 
@@ -3161,15 +3170,22 @@ class AsyncSandboxClient:
         return self._raw_client
 
     async def create_sandbox(
-        self, server_name: SandboxMcpServer, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        server_name: SandboxMcpServer,
+        *,
+        test_account_email: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> CreateSandboxResponse:
         """
-        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'.
+        Acquire an idle sandbox instance for a specific MCP server. The sandbox will be marked as 'occupied'. Optionally specify a test_account_email to acquire a specific test account.
 
         Parameters
         ----------
         server_name : SandboxMcpServer
             The MCP server name
+
+        test_account_email : typing.Optional[str]
+            Optional email of a specific test account to acquire. If provided, the system will attempt to acquire the sandbox associated with this test account email instead of a random idle sandbox.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3198,7 +3214,9 @@ class AsyncSandboxClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.create_sandbox(server_name, request_options=request_options)
+        _response = await self._raw_client.create_sandbox(
+            server_name, test_account_email=test_account_email, request_options=request_options
+        )
         return _response.data
 
     async def get_sandbox(
@@ -3989,12 +4007,12 @@ class AsyncSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[SalesforceAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[SalesforceContact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[SalesforceOpportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[SalesforceLead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[SalesforceCase]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[SalesforceCampaign]] = OMIT,
+        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
+        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
+        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
+        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
+        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
+        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -4005,23 +4023,17 @@ class AsyncSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[SalesforceAccount]]
-            List of Salesforce accounts
+        accounts : typing.Optional[typing.Sequence[Account]]
 
-        contacts : typing.Optional[typing.Sequence[SalesforceContact]]
-            List of Salesforce contacts
+        contacts : typing.Optional[typing.Sequence[Contact]]
 
-        opportunities : typing.Optional[typing.Sequence[SalesforceOpportunity]]
-            List of Salesforce opportunities
+        opportunities : typing.Optional[typing.Sequence[Opportunity]]
 
-        leads : typing.Optional[typing.Sequence[SalesforceLead]]
-            List of Salesforce leads
+        leads : typing.Optional[typing.Sequence[Lead]]
 
-        cases : typing.Optional[typing.Sequence[SalesforceCase]]
-            List of Salesforce cases
+        cases : typing.Optional[typing.Sequence[Case]]
 
-        campaigns : typing.Optional[typing.Sequence[SalesforceCampaign]]
-            List of Salesforce campaigns
+        campaigns : typing.Optional[typing.Sequence[Campaign]]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4104,7 +4116,11 @@ class AsyncSandboxClient:
         return _response.data
 
     async def initialize_onedrive_sandbox(
-        self, sandbox_id: str, *, root: OneDriveFolder, request_options: typing.Optional[RequestOptions] = None
+        self,
+        sandbox_id: str,
+        *,
+        root: typing.Sequence[OneDriveFolder],
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
         Initialize the sandbox with onedrive-specific data following the defined schema.
@@ -4114,8 +4130,8 @@ class AsyncSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : OneDriveFolder
-            Root folder containing all subfolders and files
+        root : typing.Sequence[OneDriveFolder]
+            List containing root folder (should contain only one element)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4139,9 +4155,11 @@ class AsyncSandboxClient:
         async def main() -> None:
             await client.sandbox.initialize_onedrive_sandbox(
                 sandbox_id="sandbox_id",
-                root=OneDriveFolder(
-                    name="name",
-                ),
+                root=[
+                    OneDriveFolder(
+                        name="name",
+                    )
+                ],
             )
 
 
@@ -4197,8 +4215,8 @@ class AsyncSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
+        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -4209,10 +4227,10 @@ class AsyncSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[TeamsChannel]]
+        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
             List of team channels
 
-        chats : typing.Optional[typing.Sequence[TeamsChat]]
+        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
             List of one-on-one chats
 
         request_options : typing.Optional[RequestOptions]
@@ -4243,7 +4261,7 @@ class AsyncSandboxClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.initialize_microsoft_teams_sandbox(
-            sandbox_id, channels=channels, chats=chats, request_options=request_options
+            sandbox_id, team_channels=team_channels, team_chats=team_chats, request_options=request_options
         )
         return _response.data
 
@@ -5008,7 +5026,7 @@ class AsyncSandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -5019,7 +5037,7 @@ class AsyncSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
+        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
             List of calendar events
 
         request_options : typing.Optional[RequestOptions]
@@ -5050,7 +5068,7 @@ class AsyncSandboxClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.initialize_outlook_calendar_sandbox(
-            sandbox_id, events=events, request_options=request_options
+            sandbox_id, calendar_events=calendar_events, request_options=request_options
         )
         return _response.data
 
@@ -5562,7 +5580,7 @@ class AsyncSandboxClient:
         self,
         sandbox_id: str,
         *,
-        memories: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> InitializeSandboxResponse:
         """
@@ -5573,7 +5591,7 @@ class AsyncSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memories : typing.Optional[typing.Sequence[Mem0Memory]]
+        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
             List of memories
 
         request_options : typing.Optional[RequestOptions]
@@ -5604,7 +5622,7 @@ class AsyncSandboxClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.initialize_mem0sandbox(
-            sandbox_id, memories=memories, request_options=request_options
+            sandbox_id, memory_list=memory_list, request_options=request_options
         )
         return _response.data
 

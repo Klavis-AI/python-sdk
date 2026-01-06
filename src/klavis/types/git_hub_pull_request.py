@@ -16,27 +16,27 @@ class GitHubPullRequest(UniversalBaseModel):
     PR ID (read-only, set by GitHub)
     """
 
-    title: str = pydantic.Field()
+    pr_title: str = pydantic.Field()
     """
     Pull request title
     """
 
-    body: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Pull request description/body
     """
 
-    state: typing.Optional[str] = pydantic.Field(default=None)
+    status: typing.Optional[str] = pydantic.Field(default=None)
     """
     PR state: open, closed, or merged
     """
 
-    head: str = pydantic.Field()
+    source_branch: str = pydantic.Field()
     """
     Head branch name
     """
 
-    base: typing.Optional[str] = pydantic.Field(default=None)
+    target_branch: typing.Optional[str] = pydantic.Field(default=None)
     """
     Base branch name
     """

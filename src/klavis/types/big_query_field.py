@@ -8,9 +8,9 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
 
 
-class BigQueryTableFieldSchema(UniversalBaseModel):
+class BigQueryField(UniversalBaseModel):
     """
-    Schema for a BigQuery table field
+    Schema field for a BigQuery table
     """
 
     name: str = pydantic.Field()
@@ -33,7 +33,7 @@ class BigQueryTableFieldSchema(UniversalBaseModel):
     Field description
     """
 
-    fields: typing.Optional[typing.List["BigQueryTableFieldSchema"]] = pydantic.Field(default=None)
+    fields: typing.Optional[typing.List["BigQueryField"]] = pydantic.Field(default=None)
     """
     Nested fields for RECORD type
     """
@@ -48,4 +48,4 @@ class BigQueryTableFieldSchema(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
-update_forward_refs(BigQueryTableFieldSchema)
+update_forward_refs(BigQueryField)
