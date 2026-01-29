@@ -3,6 +3,7 @@
 import typing
 from json.decoder import JSONDecodeError
 
+from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
@@ -11,25 +12,16 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.account import Account
-from ..types.airtable_table import AirtableTable
-from ..types.asana_project import AsanaProject
-from ..types.big_query_dataset import BigQueryDataset
-from ..types.big_query_table import BigQueryTable
-from ..types.calcom_schedule import CalcomSchedule
-from ..types.campaign import Campaign
-from ..types.case import Case
-from ..types.click_up_space import ClickUpSpace
-from ..types.close_lead import CloseLead
-from ..types.compute_instance import ComputeInstance
-from ..types.confluence_space import ConfluenceSpace
-from ..types.contact import Contact
+from ..types.airtable_data_input import AirtableDataInput
+from ..types.asana_data_input import AsanaDataInput
+from ..types.click_up_data_input import ClickUpDataInput
+from ..types.close_data_input import CloseDataInput
+from ..types.confluence_data_input import ConfluenceDataInput
 from ..types.create_sandbox_response import CreateSandboxResponse
-from ..types.discord_channel import DiscordChannel
-from ..types.dropbox_file import DropboxFile
+from ..types.discord_data_input import DiscordDataInput
+from ..types.dropbox_data import DropboxData
 from ..types.dump_sandbox_response_airtable_data import DumpSandboxResponseAirtableData
 from ..types.dump_sandbox_response_asana_data import DumpSandboxResponseAsanaData
-from ..types.dump_sandbox_response_calcom_data import DumpSandboxResponseCalcomData
 from ..types.dump_sandbox_response_click_up_data import DumpSandboxResponseClickUpData
 from ..types.dump_sandbox_response_close_data import DumpSandboxResponseCloseData
 from ..types.dump_sandbox_response_confluence_data import DumpSandboxResponseConfluenceData
@@ -46,6 +38,7 @@ from ..types.dump_sandbox_response_google_sheets_data import DumpSandboxResponse
 from ..types.dump_sandbox_response_hub_spot_data import DumpSandboxResponseHubSpotData
 from ..types.dump_sandbox_response_jira_data import DumpSandboxResponseJiraData
 from ..types.dump_sandbox_response_linear_data import DumpSandboxResponseLinearData
+from ..types.dump_sandbox_response_local_memory_data import DumpSandboxResponseLocalMemoryData
 from ..types.dump_sandbox_response_mem0data import DumpSandboxResponseMem0Data
 from ..types.dump_sandbox_response_monday_data import DumpSandboxResponseMondayData
 from ..types.dump_sandbox_response_moneybird_data import DumpSandboxResponseMoneybirdData
@@ -63,62 +56,41 @@ from ..types.dump_sandbox_response_slack_data import DumpSandboxResponseSlackDat
 from ..types.dump_sandbox_response_snowflake_data import DumpSandboxResponseSnowflakeData
 from ..types.dump_sandbox_response_supabase_data import DumpSandboxResponseSupabaseData
 from ..types.dump_sandbox_response_word_press_data import DumpSandboxResponseWordPressData
-from ..types.git_hub_repo import GitHubRepo
-from ..types.gmail_draft import GmailDraft
-from ..types.gmail_message import GmailMessage
-from ..types.google_calendar_event import GoogleCalendarEvent
-from ..types.google_docs_document import GoogleDocsDocument
-from ..types.google_drive_file import GoogleDriveFile
-from ..types.google_forms_form import GoogleFormsForm
-from ..types.google_sheets_spreadsheet import GoogleSheetsSpreadsheet
+from ..types.git_hub_data_input import GitHubDataInput
+from ..types.gmail_data import GmailData
+from ..types.google_calendar_data_input import GoogleCalendarDataInput
+from ..types.google_cloud_data_input import GoogleCloudDataInput
+from ..types.google_docs_data import GoogleDocsData
+from ..types.google_drive_data import GoogleDriveData
+from ..types.google_forms_data_input import GoogleFormsDataInput
+from ..types.google_sheets_data_input import GoogleSheetsDataInput
 from ..types.http_validation_error import HttpValidationError
-from ..types.hub_spot_company import HubSpotCompany
-from ..types.hub_spot_contact import HubSpotContact
-from ..types.hub_spot_deal import HubSpotDeal
-from ..types.hub_spot_task import HubSpotTask
-from ..types.hub_spot_ticket import HubSpotTicket
+from ..types.hub_spot_data_input import HubSpotDataInput
 from ..types.initialize_sandbox_response import InitializeSandboxResponse
-from ..types.jira_board import JiraBoard
-from ..types.jira_project import JiraProject
-from ..types.jira_sprint import JiraSprint
-from ..types.lead import Lead
-from ..types.linear_project import LinearProject
-from ..types.log_bucket import LogBucket
-from ..types.log_entry import LogEntry
-from ..types.log_sink import LogSink
-from ..types.mem0memory import Mem0Memory
-from ..types.monday_board import MondayBoard
-from ..types.monday_workspace import MondayWorkspace
-from ..types.moneybird_contact import MoneybirdContact
-from ..types.moneybird_ledger_account import MoneybirdLedgerAccount
-from ..types.moneybird_product import MoneybirdProduct
-from ..types.moneybird_project import MoneybirdProject
-from ..types.moneybird_sales_invoice import MoneybirdSalesInvoice
-from ..types.moneybird_time_entry import MoneybirdTimeEntry
-from ..types.motion_workspace import MotionWorkspace
-from ..types.notion_database import NotionDatabase
-from ..types.notion_page import NotionPage
-from ..types.one_drive_folder import OneDriveFolder
-from ..types.opportunity import Opportunity
-from ..types.outlook_calendar_event import OutlookCalendarEvent
-from ..types.outlook_mail_message import OutlookMailMessage
+from ..types.jira_data_input import JiraDataInput
+from ..types.linear_data_input import LinearDataInput
+from ..types.local_memory_data import LocalMemoryData
+from ..types.mem0data_input import Mem0DataInput
+from ..types.monday_data_input import MondayDataInput
+from ..types.moneybird_data_input import MoneybirdDataInput
+from ..types.motion_data_input import MotionDataInput
+from ..types.ms_teams_data_input import MsTeamsDataInput
+from ..types.notion_data_input import NotionDataInput
+from ..types.one_drive_data_input import OneDriveDataInput
+from ..types.outlook_calendar_data import OutlookCalendarData
+from ..types.outlook_mail_data import OutlookMailData
+from ..types.quick_books_data import QuickBooksData
 from ..types.release_sandbox_response import ReleaseSandboxResponse
-from ..types.resend_contact import ResendContact
-from ..types.resend_email import ResendEmail
-from ..types.resend_segment import ResendSegment
+from ..types.resend_data_input import ResendDataInput
 from ..types.reset_sandbox_response import ResetSandboxResponse
+from ..types.salesforce_data_input import SalesforceDataInput
 from ..types.sandbox_info import SandboxInfo
 from ..types.sandbox_mcp_server import SandboxMcpServer
-from ..types.shopify_customer import ShopifyCustomer
-from ..types.shopify_product import ShopifyProduct
-from ..types.slack_channel import SlackChannel
-from ..types.snowflake_database import SnowflakeDatabase
-from ..types.storage_bucket import StorageBucket
-from ..types.storage_object import StorageObject
-from ..types.supabase_project import SupabaseProject
-from ..types.teams_channel import TeamsChannel
-from ..types.teams_chat import TeamsChat
-from ..types.word_press_post import WordPressPost
+from ..types.shopify_data_input import ShopifyDataInput
+from ..types.slack_data_input import SlackDataInput
+from ..types.snowflake_data_input import SnowflakeDataInput
+from ..types.supabase_data_input import SupabaseDataInput
+from ..types.word_press_data import WordPressData
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -351,13 +323,123 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def initialize_local_dev(
+        self, sandbox_id: str, *, files: typing.List[core.File], request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[InitializeSandboxResponse]:
+        """
+        Upload files to the local dev workspace at /workspace.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.List[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/local_dev/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            data={},
+            files={
+                "files": files,
+            },
+            request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_local_dev(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        """
+        Download all files from local dev as a tar archive.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/local_dev/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def initialize_jira_sandbox(
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
-        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
-        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[JiraDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -368,14 +450,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[JiraProject]]
-            List of projects with their issues
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        boards : typing.Optional[typing.Sequence[JiraBoard]]
-            List of boards
-
-        sprints : typing.Optional[typing.Sequence[JiraSprint]]
-            List of sprints
+        request : typing.Optional[JiraDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -388,17 +466,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/jira/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[JiraProject], direction="write"
-                ),
-                "boards": convert_and_respect_annotation_metadata(
-                    object_=boards, annotation=typing.Sequence[JiraBoard], direction="write"
-                ),
-                "sprints": convert_and_respect_annotation_metadata(
-                    object_=sprints, annotation=typing.Sequence[JiraSprint], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=JiraDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -485,7 +556,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleCalendarDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -496,8 +568,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
-            List of Google Calendar events
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleCalendarDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -510,11 +584,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "events": convert_and_respect_annotation_metadata(
-                    object_=events, annotation=typing.Sequence[GoogleCalendarEvent], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleCalendarDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -601,8 +676,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
-        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GmailData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -613,11 +688,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        messages : typing.Optional[typing.Sequence[GmailMessage]]
-            List of Gmail messages to send
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        drafts : typing.Optional[typing.Sequence[GmailDraft]]
-            List of Gmail drafts to create
+        request : typing.Optional[GmailData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -630,14 +704,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[GmailMessage], direction="write"
-                ),
-                "drafts": convert_and_respect_annotation_metadata(
-                    object_=drafts, annotation=typing.Sequence[GmailDraft], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=GmailData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -724,7 +794,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleDocsData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -735,8 +806,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
-            List of Google Docs documents
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleDocsData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -749,11 +822,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "documents": convert_and_respect_annotation_metadata(
-                    object_=documents, annotation=typing.Sequence[GoogleDocsDocument], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=GoogleDocsData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -840,7 +912,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleDriveData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -851,8 +924,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
-            List of Google Drive files and folders
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleDriveData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -865,11 +940,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "files": convert_and_respect_annotation_metadata(
-                    object_=files, annotation=typing.Sequence[GoogleDriveFile], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleDriveData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -956,7 +1032,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleFormsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -967,8 +1044,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
-            List of Google Forms
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleFormsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -981,11 +1060,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "forms": convert_and_respect_annotation_metadata(
-                    object_=forms, annotation=typing.Sequence[GoogleFormsForm], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleFormsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1072,7 +1152,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleSheetsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1083,8 +1164,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
-            List of Google Sheets spreadsheets
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleSheetsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1097,11 +1180,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spreadsheets": convert_and_respect_annotation_metadata(
-                    object_=spreadsheets, annotation=typing.Sequence[GoogleSheetsSpreadsheet], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleSheetsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1188,12 +1272,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SalesforceDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1204,17 +1284,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[Account]]
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[Contact]]
-
-        opportunities : typing.Optional[typing.Sequence[Opportunity]]
-
-        leads : typing.Optional[typing.Sequence[Lead]]
-
-        cases : typing.Optional[typing.Sequence[Case]]
-
-        campaigns : typing.Optional[typing.Sequence[Campaign]]
+        request : typing.Optional[SalesforceDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1227,26 +1300,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "accounts": convert_and_respect_annotation_metadata(
-                    object_=accounts, annotation=typing.Sequence[Account], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[Contact], direction="write"
-                ),
-                "opportunities": convert_and_respect_annotation_metadata(
-                    object_=opportunities, annotation=typing.Sequence[Opportunity], direction="write"
-                ),
-                "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[Lead], direction="write"
-                ),
-                "cases": convert_and_respect_annotation_metadata(
-                    object_=cases, annotation=typing.Sequence[Case], direction="write"
-                ),
-                "campaigns": convert_and_respect_annotation_metadata(
-                    object_=campaigns, annotation=typing.Sequence[Campaign], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SalesforceDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1333,7 +1392,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        root: typing.Sequence[OneDriveFolder],
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OneDriveDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1344,8 +1404,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : typing.Sequence[OneDriveFolder]
-            List containing root folder (should contain only one element)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OneDriveDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1358,11 +1420,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "root": convert_and_respect_annotation_metadata(
-                    object_=root, annotation=typing.Sequence[OneDriveFolder], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OneDriveDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1449,8 +1512,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MsTeamsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1461,11 +1524,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
-            List of team channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
-            List of one-on-one chats
+        request : typing.Optional[MsTeamsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1478,14 +1540,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "team_channels": convert_and_respect_annotation_metadata(
-                    object_=team_channels, annotation=typing.Sequence[TeamsChannel], direction="write"
-                ),
-                "team_chats": convert_and_respect_annotation_metadata(
-                    object_=team_chats, annotation=typing.Sequence[TeamsChat], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MsTeamsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1572,7 +1632,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OutlookMailData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1583,8 +1644,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
-            List of mail messages
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OutlookMailData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1597,11 +1660,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[OutlookMailMessage], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OutlookMailData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1684,23 +1748,26 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def initialize_calcom_sandbox(
+    def initialize_sandbox(
         self,
         sandbox_id: str,
         *,
-        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[LocalMemoryData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
-        Initialize the sandbox with Cal.com-specific data following the defined schema.
+        Initialize the sandbox with localmemory-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
-            List of schedules to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[LocalMemoryData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1711,13 +1778,14 @@ class RawSandboxClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            f"sandbox/localmemory/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "schedules": convert_and_respect_annotation_metadata(
-                    object_=schedules, annotation=typing.Sequence[CalcomSchedule], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=LocalMemoryData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1750,9 +1818,9 @@ class RawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def dump_calcom_sandbox(
+    def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[DumpSandboxResponseCalcomData]:
+    ) -> HttpResponse[DumpSandboxResponseLocalMemoryData]:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -1766,20 +1834,20 @@ class RawSandboxClient:
 
         Returns
         -------
-        HttpResponse[DumpSandboxResponseCalcomData]
+        HttpResponse[DumpSandboxResponseLocalMemoryData]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            f"sandbox/localmemory/{jsonable_encoder(sandbox_id)}/dump",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    DumpSandboxResponseCalcomData,
+                    DumpSandboxResponseLocalMemoryData,
                     parse_obj_as(
-                        type_=DumpSandboxResponseCalcomData,  # type: ignore
+                        type_=DumpSandboxResponseLocalMemoryData,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1804,11 +1872,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
-        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
-        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
-        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[HubSpotDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1819,20 +1884,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
-            List of companies
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
-            List of contacts
-
-        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
-            List of deals
-
-        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
-            List of tickets
-
-        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
-            List of tasks
+        request : typing.Optional[HubSpotDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1845,23 +1900,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "companies": convert_and_respect_annotation_metadata(
-                    object_=companies, annotation=typing.Sequence[HubSpotCompany], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[HubSpotContact], direction="write"
-                ),
-                "deals": convert_and_respect_annotation_metadata(
-                    object_=deals, annotation=typing.Sequence[HubSpotDeal], direction="write"
-                ),
-                "tickets": convert_and_respect_annotation_metadata(
-                    object_=tickets, annotation=typing.Sequence[HubSpotTicket], direction="write"
-                ),
-                "tasks": convert_and_respect_annotation_metadata(
-                    object_=tasks, annotation=typing.Sequence[HubSpotTask], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=HubSpotDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -1948,11 +1992,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[QuickBooksData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -1963,20 +2004,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of accounts (input: minimal, output: full API objects)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of customers (input: minimal, output: full API objects)
-
-        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of vendors (input: minimal, output: full API objects)
-
-        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of invoices (input: minimal, output: full API objects)
-
-        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of payments (input: minimal, output: full API objects)
+        request : typing.Optional[QuickBooksData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1989,13 +2020,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "accounts": accounts,
-                "customers": customers,
-                "vendors": vendors,
-                "invoices": invoices,
-                "payments": payments,
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=QuickBooksData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -2082,12 +2110,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
-        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
-        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
-        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
-        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MoneybirdDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2098,23 +2122,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
-            List of ledger accounts to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
-            List of contacts to create
-
-        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
-            List of products to create
-
-        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
-            List of projects to create
-
-        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
-            List of time entries to create
-
-        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
-            List of sales invoices to create
+        request : typing.Optional[MoneybirdDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2127,26 +2138,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "ledger_accounts": convert_and_respect_annotation_metadata(
-                    object_=ledger_accounts, annotation=typing.Sequence[MoneybirdLedgerAccount], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[MoneybirdContact], direction="write"
-                ),
-                "products": convert_and_respect_annotation_metadata(
-                    object_=products, annotation=typing.Sequence[MoneybirdProduct], direction="write"
-                ),
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[MoneybirdProject], direction="write"
-                ),
-                "time_entries": convert_and_respect_annotation_metadata(
-                    object_=time_entries, annotation=typing.Sequence[MoneybirdTimeEntry], direction="write"
-                ),
-                "sales_invoices": convert_and_respect_annotation_metadata(
-                    object_=sales_invoices, annotation=typing.Sequence[MoneybirdSalesInvoice], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MoneybirdDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -2233,8 +2230,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        folders: typing.Optional[typing.Sequence[str]] = OMIT,
-        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[DropboxData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2245,11 +2242,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        folders : typing.Optional[typing.Sequence[str]]
-            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        files : typing.Optional[typing.Sequence[DropboxFile]]
-            List of files to create with their content
+        request : typing.Optional[DropboxData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2262,12 +2258,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "folders": folders,
-                "files": convert_and_respect_annotation_metadata(
-                    object_=files, annotation=typing.Sequence[DropboxFile], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=DropboxData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -2354,8 +2348,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
-        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ShopifyDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2366,11 +2360,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        products : typing.Optional[typing.Sequence[ShopifyProduct]]
-            List of products to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
-            List of customers to create
+        request : typing.Optional[ShopifyDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2383,14 +2376,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "products": convert_and_respect_annotation_metadata(
-                    object_=products, annotation=typing.Sequence[ShopifyProduct], direction="write"
-                ),
-                "customers": convert_and_respect_annotation_metadata(
-                    object_=customers, annotation=typing.Sequence[ShopifyCustomer], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ShopifyDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -2477,7 +2468,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OutlookCalendarData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2488,8 +2480,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
-            List of calendar events
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OutlookCalendarData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2502,11 +2496,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "calendar_events": convert_and_respect_annotation_metadata(
-                    object_=calendar_events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OutlookCalendarData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -2593,7 +2588,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ClickUpDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2604,8 +2600,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
-            List of spaces with nested objects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[ClickUpDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2618,11 +2616,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spaces": convert_and_respect_annotation_metadata(
-                    object_=spaces, annotation=typing.Sequence[ClickUpSpace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ClickUpDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -2709,7 +2708,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[CloseDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2720,8 +2720,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        leads : typing.Optional[typing.Sequence[CloseLead]]
-            List of leads with nested objects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[CloseDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2734,11 +2736,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/close/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[CloseLead], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=CloseDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -2825,9 +2826,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
-        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ResendDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2838,14 +2838,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        emails : typing.Optional[typing.Sequence[ResendEmail]]
-            List of standalone transactional emails
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[ResendContact]]
-            List of standalone contacts
-
-        segments : typing.Optional[typing.Sequence[ResendSegment]]
-            List of segments with nested broadcasts
+        request : typing.Optional[ResendDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2858,17 +2854,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/resend/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "emails": convert_and_respect_annotation_metadata(
-                    object_=emails, annotation=typing.Sequence[ResendEmail], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[ResendContact], direction="write"
-                ),
-                "segments": convert_and_respect_annotation_metadata(
-                    object_=segments, annotation=typing.Sequence[ResendSegment], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ResendDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -2955,7 +2946,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[WordPressData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -2966,8 +2958,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        posts : typing.Optional[typing.Sequence[WordPressPost]]
-            List of WordPress posts to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[WordPressData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -2980,11 +2974,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "posts": convert_and_respect_annotation_metadata(
-                    object_=posts, annotation=typing.Sequence[WordPressPost], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=WordPressData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -3071,7 +3064,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[AsanaDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3082,8 +3076,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[AsanaProject]]
-            List of projects with nested tasks and stories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[AsanaDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3096,11 +3092,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/asana/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[AsanaProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=AsanaDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -3187,7 +3182,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[Mem0DataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3198,8 +3194,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
-            List of memories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[Mem0DataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3212,11 +3210,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "memory_list": convert_and_respect_annotation_metadata(
-                    object_=memory_list, annotation=typing.Sequence[Mem0Memory], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=Mem0DataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -3303,7 +3300,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SupabaseDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3314,8 +3312,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[SupabaseProject]]
-            List of Supabase projects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SupabaseDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3328,11 +3328,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[SupabaseProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SupabaseDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -3419,7 +3420,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GitHubDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3430,8 +3432,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        repos : typing.Optional[typing.Sequence[GitHubRepo]]
-            List of repositories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GitHubDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3444,11 +3448,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/github/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "repos": convert_and_respect_annotation_metadata(
-                    object_=repos, annotation=typing.Sequence[GitHubRepo], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GitHubDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -3535,7 +3540,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[LinearDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3546,8 +3552,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[LinearProject]]
-            List of projects with their issues. At most 50 projects can be included.
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[LinearDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3560,11 +3568,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/linear/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[LinearProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=LinearDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -3651,8 +3660,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
-        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[NotionDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3663,11 +3672,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[NotionDatabase]]
-            List of databases with their data sources and pages
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        pages : typing.Optional[typing.Sequence[NotionPage]]
-            List of standalone pages (not in databases)
+        request : typing.Optional[NotionDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3680,14 +3688,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/notion/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[NotionDatabase], direction="write"
-                ),
-                "pages": convert_and_respect_annotation_metadata(
-                    object_=pages, annotation=typing.Sequence[NotionPage], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=NotionDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -3774,7 +3780,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SlackDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3785,8 +3792,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[SlackChannel]]
-            List of channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SlackDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3799,11 +3808,10 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/slack/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[SlackChannel], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=SlackDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -3890,7 +3898,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ConfluenceDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -3901,8 +3910,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
-            List of spaces
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[ConfluenceDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -3915,11 +3926,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spaces": convert_and_respect_annotation_metadata(
-                    object_=spaces, annotation=typing.Sequence[ConfluenceSpace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ConfluenceDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4006,7 +4018,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[DiscordDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4017,8 +4030,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[DiscordChannel]]
-            List of channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[DiscordDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4031,11 +4046,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/discord/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[DiscordChannel], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=DiscordDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4122,7 +4138,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[AirtableDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4133,8 +4150,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        tables : typing.Optional[typing.Sequence[AirtableTable]]
-            List of tables (simplified, assumes single base)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[AirtableDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4147,11 +4166,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "tables": convert_and_respect_annotation_metadata(
-                    object_=tables, annotation=typing.Sequence[AirtableTable], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=AirtableDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4238,7 +4258,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SnowflakeDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4249,8 +4270,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SnowflakeDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4263,11 +4286,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SnowflakeDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4354,14 +4378,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
-        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
-        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
-        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
-        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
-        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
-        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
-        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleCloudDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4372,29 +4390,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
-            BigQuery datasets
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        tables : typing.Optional[typing.Sequence[BigQueryTable]]
-            BigQuery tables
-
-        buckets : typing.Optional[typing.Sequence[StorageBucket]]
-            Cloud Storage buckets
-
-        objects : typing.Optional[typing.Sequence[StorageObject]]
-            Cloud Storage objects
-
-        log_entries : typing.Optional[typing.Sequence[LogEntry]]
-            Log entries
-
-        log_sinks : typing.Optional[typing.Sequence[LogSink]]
-            Log sinks
-
-        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
-            Log buckets
-
-        instances : typing.Optional[typing.Sequence[ComputeInstance]]
-            Compute Engine instances
+        request : typing.Optional[GoogleCloudDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4407,32 +4406,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "datasets": convert_and_respect_annotation_metadata(
-                    object_=datasets, annotation=typing.Sequence[BigQueryDataset], direction="write"
-                ),
-                "tables": convert_and_respect_annotation_metadata(
-                    object_=tables, annotation=typing.Sequence[BigQueryTable], direction="write"
-                ),
-                "buckets": convert_and_respect_annotation_metadata(
-                    object_=buckets, annotation=typing.Sequence[StorageBucket], direction="write"
-                ),
-                "objects": convert_and_respect_annotation_metadata(
-                    object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
-                ),
-                "log_entries": convert_and_respect_annotation_metadata(
-                    object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
-                ),
-                "log_sinks": convert_and_respect_annotation_metadata(
-                    object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
-                ),
-                "log_buckets": convert_and_respect_annotation_metadata(
-                    object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
-                ),
-                "instances": convert_and_respect_annotation_metadata(
-                    object_=instances, annotation=typing.Sequence[ComputeInstance], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleCloudDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4519,8 +4498,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
-        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MondayDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4531,11 +4510,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
-            List of workspaces
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        boards : typing.Optional[typing.Sequence[MondayBoard]]
-            List of boards with their groups and items
+        request : typing.Optional[MondayDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4548,14 +4526,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/monday/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "workspaces": convert_and_respect_annotation_metadata(
-                    object_=workspaces, annotation=typing.Sequence[MondayWorkspace], direction="write"
-                ),
-                "boards": convert_and_respect_annotation_metadata(
-                    object_=boards, annotation=typing.Sequence[MondayBoard], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MondayDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4642,7 +4618,8 @@ class RawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MotionDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[InitializeSandboxResponse]:
         """
@@ -4653,8 +4630,10 @@ class RawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
-            List of workspaces with their projects and tasks
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[MotionDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -4667,11 +4646,12 @@ class RawSandboxClient:
         _response = self._client_wrapper.httpx_client.request(
             f"sandbox/motion/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "workspaces": convert_and_respect_annotation_metadata(
-                    object_=workspaces, annotation=typing.Sequence[MotionWorkspace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MotionDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -4749,6 +4729,62 @@ class RawSandboxClient:
                         ),
                     ),
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[None]:
+        """
+        Parameters
+        ----------
+        sandbox_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[None]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return HttpResponse(response=_response, data=None)
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def initialize_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[None]:
+        """
+        Parameters
+        ----------
+        sandbox_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[None]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return HttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -4982,13 +5018,123 @@ class AsyncRawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    async def initialize_local_dev(
+        self, sandbox_id: str, *, files: typing.List[core.File], request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[InitializeSandboxResponse]:
+        """
+        Upload files to the local dev workspace at /workspace.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        files : typing.List[core.File]
+            See core.File for more documentation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InitializeSandboxResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/local_dev/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            data={},
+            files={
+                "files": files,
+            },
+            request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InitializeSandboxResponse,
+                    parse_obj_as(
+                        type_=InitializeSandboxResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_local_dev(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        """
+        Download all files from local dev as a tar archive.
+
+        Parameters
+        ----------
+        sandbox_id : str
+            The unique sandbox identifier
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Optional[typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/local_dev/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Optional[typing.Any],
+                    parse_obj_as(
+                        type_=typing.Optional[typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def initialize_jira_sandbox(
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[JiraProject]] = OMIT,
-        boards: typing.Optional[typing.Sequence[JiraBoard]] = OMIT,
-        sprints: typing.Optional[typing.Sequence[JiraSprint]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[JiraDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -4999,14 +5145,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[JiraProject]]
-            List of projects with their issues
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        boards : typing.Optional[typing.Sequence[JiraBoard]]
-            List of boards
-
-        sprints : typing.Optional[typing.Sequence[JiraSprint]]
-            List of sprints
+        request : typing.Optional[JiraDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5019,17 +5161,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/jira/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[JiraProject], direction="write"
-                ),
-                "boards": convert_and_respect_annotation_metadata(
-                    object_=boards, annotation=typing.Sequence[JiraBoard], direction="write"
-                ),
-                "sprints": convert_and_respect_annotation_metadata(
-                    object_=sprints, annotation=typing.Sequence[JiraSprint], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=JiraDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -5116,7 +5251,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        events: typing.Optional[typing.Sequence[GoogleCalendarEvent]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleCalendarDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5127,8 +5263,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        events : typing.Optional[typing.Sequence[GoogleCalendarEvent]]
-            List of Google Calendar events
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleCalendarDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5141,11 +5279,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "events": convert_and_respect_annotation_metadata(
-                    object_=events, annotation=typing.Sequence[GoogleCalendarEvent], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleCalendarDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -5232,8 +5371,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        messages: typing.Optional[typing.Sequence[GmailMessage]] = OMIT,
-        drafts: typing.Optional[typing.Sequence[GmailDraft]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GmailData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5244,11 +5383,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        messages : typing.Optional[typing.Sequence[GmailMessage]]
-            List of Gmail messages to send
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        drafts : typing.Optional[typing.Sequence[GmailDraft]]
-            List of Gmail drafts to create
+        request : typing.Optional[GmailData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5261,14 +5399,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/gmail/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[GmailMessage], direction="write"
-                ),
-                "drafts": convert_and_respect_annotation_metadata(
-                    object_=drafts, annotation=typing.Sequence[GmailDraft], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=GmailData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -5355,7 +5489,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        documents: typing.Optional[typing.Sequence[GoogleDocsDocument]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleDocsData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5366,8 +5501,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        documents : typing.Optional[typing.Sequence[GoogleDocsDocument]]
-            List of Google Docs documents
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleDocsData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5380,11 +5517,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_docs/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "documents": convert_and_respect_annotation_metadata(
-                    object_=documents, annotation=typing.Sequence[GoogleDocsDocument], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=GoogleDocsData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -5471,7 +5607,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        files: typing.Optional[typing.Sequence[GoogleDriveFile]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleDriveData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5482,8 +5619,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        files : typing.Optional[typing.Sequence[GoogleDriveFile]]
-            List of Google Drive files and folders
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleDriveData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5496,11 +5635,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_drive/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "files": convert_and_respect_annotation_metadata(
-                    object_=files, annotation=typing.Sequence[GoogleDriveFile], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleDriveData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -5587,7 +5727,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        forms: typing.Optional[typing.Sequence[GoogleFormsForm]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleFormsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5598,8 +5739,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        forms : typing.Optional[typing.Sequence[GoogleFormsForm]]
-            List of Google Forms
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleFormsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5612,11 +5755,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_forms/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "forms": convert_and_respect_annotation_metadata(
-                    object_=forms, annotation=typing.Sequence[GoogleFormsForm], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleFormsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -5703,7 +5847,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spreadsheets: typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleSheetsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5714,8 +5859,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spreadsheets : typing.Optional[typing.Sequence[GoogleSheetsSpreadsheet]]
-            List of Google Sheets spreadsheets
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GoogleSheetsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5728,11 +5875,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_sheets/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spreadsheets": convert_and_respect_annotation_metadata(
-                    object_=spreadsheets, annotation=typing.Sequence[GoogleSheetsSpreadsheet], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleSheetsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -5819,12 +5967,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[Account]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[Contact]] = OMIT,
-        opportunities: typing.Optional[typing.Sequence[Opportunity]] = OMIT,
-        leads: typing.Optional[typing.Sequence[Lead]] = OMIT,
-        cases: typing.Optional[typing.Sequence[Case]] = OMIT,
-        campaigns: typing.Optional[typing.Sequence[Campaign]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SalesforceDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5835,17 +5979,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[Account]]
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[Contact]]
-
-        opportunities : typing.Optional[typing.Sequence[Opportunity]]
-
-        leads : typing.Optional[typing.Sequence[Lead]]
-
-        cases : typing.Optional[typing.Sequence[Case]]
-
-        campaigns : typing.Optional[typing.Sequence[Campaign]]
+        request : typing.Optional[SalesforceDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5858,26 +5995,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/salesforce/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "accounts": convert_and_respect_annotation_metadata(
-                    object_=accounts, annotation=typing.Sequence[Account], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[Contact], direction="write"
-                ),
-                "opportunities": convert_and_respect_annotation_metadata(
-                    object_=opportunities, annotation=typing.Sequence[Opportunity], direction="write"
-                ),
-                "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[Lead], direction="write"
-                ),
-                "cases": convert_and_respect_annotation_metadata(
-                    object_=cases, annotation=typing.Sequence[Case], direction="write"
-                ),
-                "campaigns": convert_and_respect_annotation_metadata(
-                    object_=campaigns, annotation=typing.Sequence[Campaign], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SalesforceDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -5964,7 +6087,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        root: typing.Sequence[OneDriveFolder],
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OneDriveDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -5975,8 +6099,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        root : typing.Sequence[OneDriveFolder]
-            List containing root folder (should contain only one element)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OneDriveDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -5989,11 +6115,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/onedrive/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "root": convert_and_respect_annotation_metadata(
-                    object_=root, annotation=typing.Sequence[OneDriveFolder], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OneDriveDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6080,8 +6207,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        team_channels: typing.Optional[typing.Sequence[TeamsChannel]] = OMIT,
-        team_chats: typing.Optional[typing.Sequence[TeamsChat]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MsTeamsDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6092,11 +6219,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        team_channels : typing.Optional[typing.Sequence[TeamsChannel]]
-            List of team channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        team_chats : typing.Optional[typing.Sequence[TeamsChat]]
-            List of one-on-one chats
+        request : typing.Optional[MsTeamsDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6109,14 +6235,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/microsoft_teams/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "team_channels": convert_and_respect_annotation_metadata(
-                    object_=team_channels, annotation=typing.Sequence[TeamsChannel], direction="write"
-                ),
-                "team_chats": convert_and_respect_annotation_metadata(
-                    object_=team_chats, annotation=typing.Sequence[TeamsChat], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MsTeamsDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6203,7 +6327,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        messages: typing.Optional[typing.Sequence[OutlookMailMessage]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OutlookMailData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6214,8 +6339,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        messages : typing.Optional[typing.Sequence[OutlookMailMessage]]
-            List of mail messages
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OutlookMailData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6228,11 +6355,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/outlook_mail/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "messages": convert_and_respect_annotation_metadata(
-                    object_=messages, annotation=typing.Sequence[OutlookMailMessage], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OutlookMailData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6315,23 +6443,26 @@ class AsyncRawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def initialize_calcom_sandbox(
+    async def initialize_sandbox(
         self,
         sandbox_id: str,
         *,
-        schedules: typing.Optional[typing.Sequence[CalcomSchedule]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[LocalMemoryData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
-        Initialize the sandbox with Cal.com-specific data following the defined schema.
+        Initialize the sandbox with localmemory-specific data following the defined schema.
 
         Parameters
         ----------
         sandbox_id : str
             The unique sandbox identifier
 
-        schedules : typing.Optional[typing.Sequence[CalcomSchedule]]
-            List of schedules to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[LocalMemoryData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6342,13 +6473,14 @@ class AsyncRawSandboxClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            f"sandbox/localmemory/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "schedules": convert_and_respect_annotation_metadata(
-                    object_=schedules, annotation=typing.Sequence[CalcomSchedule], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=LocalMemoryData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6381,9 +6513,9 @@ class AsyncRawSandboxClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def dump_calcom_sandbox(
+    async def dump_sandbox(
         self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[DumpSandboxResponseCalcomData]:
+    ) -> AsyncHttpResponse[DumpSandboxResponseLocalMemoryData]:
         """
         Export all data from the sandbox in the same format used for initialization.
 
@@ -6397,20 +6529,20 @@ class AsyncRawSandboxClient:
 
         Returns
         -------
-        AsyncHttpResponse[DumpSandboxResponseCalcomData]
+        AsyncHttpResponse[DumpSandboxResponseLocalMemoryData]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            f"sandbox/localmemory/{jsonable_encoder(sandbox_id)}/dump",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    DumpSandboxResponseCalcomData,
+                    DumpSandboxResponseLocalMemoryData,
                     parse_obj_as(
-                        type_=DumpSandboxResponseCalcomData,  # type: ignore
+                        type_=DumpSandboxResponseLocalMemoryData,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -6435,11 +6567,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        companies: typing.Optional[typing.Sequence[HubSpotCompany]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[HubSpotContact]] = OMIT,
-        deals: typing.Optional[typing.Sequence[HubSpotDeal]] = OMIT,
-        tickets: typing.Optional[typing.Sequence[HubSpotTicket]] = OMIT,
-        tasks: typing.Optional[typing.Sequence[HubSpotTask]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[HubSpotDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6450,20 +6579,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        companies : typing.Optional[typing.Sequence[HubSpotCompany]]
-            List of companies
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[HubSpotContact]]
-            List of contacts
-
-        deals : typing.Optional[typing.Sequence[HubSpotDeal]]
-            List of deals
-
-        tickets : typing.Optional[typing.Sequence[HubSpotTicket]]
-            List of tickets
-
-        tasks : typing.Optional[typing.Sequence[HubSpotTask]]
-            List of tasks
+        request : typing.Optional[HubSpotDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6476,23 +6595,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/hubspot/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "companies": convert_and_respect_annotation_metadata(
-                    object_=companies, annotation=typing.Sequence[HubSpotCompany], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[HubSpotContact], direction="write"
-                ),
-                "deals": convert_and_respect_annotation_metadata(
-                    object_=deals, annotation=typing.Sequence[HubSpotDeal], direction="write"
-                ),
-                "tickets": convert_and_respect_annotation_metadata(
-                    object_=tickets, annotation=typing.Sequence[HubSpotTicket], direction="write"
-                ),
-                "tasks": convert_and_respect_annotation_metadata(
-                    object_=tasks, annotation=typing.Sequence[HubSpotTask], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=HubSpotDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6579,11 +6687,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        accounts: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        customers: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        vendors: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        invoices: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
-        payments: typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[QuickBooksData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6594,20 +6699,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        accounts : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of accounts (input: minimal, output: full API objects)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        customers : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of customers (input: minimal, output: full API objects)
-
-        vendors : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of vendors (input: minimal, output: full API objects)
-
-        invoices : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of invoices (input: minimal, output: full API objects)
-
-        payments : typing.Optional[typing.Sequence[typing.Dict[str, typing.Optional[typing.Any]]]]
-            List of payments (input: minimal, output: full API objects)
+        request : typing.Optional[QuickBooksData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6620,13 +6715,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/quickbooks/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "accounts": accounts,
-                "customers": customers,
-                "vendors": vendors,
-                "invoices": invoices,
-                "payments": payments,
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=QuickBooksData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -6713,12 +6805,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        ledger_accounts: typing.Optional[typing.Sequence[MoneybirdLedgerAccount]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[MoneybirdContact]] = OMIT,
-        products: typing.Optional[typing.Sequence[MoneybirdProduct]] = OMIT,
-        projects: typing.Optional[typing.Sequence[MoneybirdProject]] = OMIT,
-        time_entries: typing.Optional[typing.Sequence[MoneybirdTimeEntry]] = OMIT,
-        sales_invoices: typing.Optional[typing.Sequence[MoneybirdSalesInvoice]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MoneybirdDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6729,23 +6817,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        ledger_accounts : typing.Optional[typing.Sequence[MoneybirdLedgerAccount]]
-            List of ledger accounts to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[MoneybirdContact]]
-            List of contacts to create
-
-        products : typing.Optional[typing.Sequence[MoneybirdProduct]]
-            List of products to create
-
-        projects : typing.Optional[typing.Sequence[MoneybirdProject]]
-            List of projects to create
-
-        time_entries : typing.Optional[typing.Sequence[MoneybirdTimeEntry]]
-            List of time entries to create
-
-        sales_invoices : typing.Optional[typing.Sequence[MoneybirdSalesInvoice]]
-            List of sales invoices to create
+        request : typing.Optional[MoneybirdDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6758,26 +6833,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/moneybird/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "ledger_accounts": convert_and_respect_annotation_metadata(
-                    object_=ledger_accounts, annotation=typing.Sequence[MoneybirdLedgerAccount], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[MoneybirdContact], direction="write"
-                ),
-                "products": convert_and_respect_annotation_metadata(
-                    object_=products, annotation=typing.Sequence[MoneybirdProduct], direction="write"
-                ),
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[MoneybirdProject], direction="write"
-                ),
-                "time_entries": convert_and_respect_annotation_metadata(
-                    object_=time_entries, annotation=typing.Sequence[MoneybirdTimeEntry], direction="write"
-                ),
-                "sales_invoices": convert_and_respect_annotation_metadata(
-                    object_=sales_invoices, annotation=typing.Sequence[MoneybirdSalesInvoice], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MoneybirdDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -6864,8 +6925,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        folders: typing.Optional[typing.Sequence[str]] = OMIT,
-        files: typing.Optional[typing.Sequence[DropboxFile]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[DropboxData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6876,11 +6937,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        folders : typing.Optional[typing.Sequence[str]]
-            List of folder paths to create (e.g., ['/SandboxTest', '/SandboxTest/Documents'])
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        files : typing.Optional[typing.Sequence[DropboxFile]]
-            List of files to create with their content
+        request : typing.Optional[DropboxData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -6893,12 +6953,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/dropbox/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "folders": folders,
-                "files": convert_and_respect_annotation_metadata(
-                    object_=files, annotation=typing.Sequence[DropboxFile], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=DropboxData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -6985,8 +7043,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        products: typing.Optional[typing.Sequence[ShopifyProduct]] = OMIT,
-        customers: typing.Optional[typing.Sequence[ShopifyCustomer]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ShopifyDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -6997,11 +7055,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        products : typing.Optional[typing.Sequence[ShopifyProduct]]
-            List of products to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        customers : typing.Optional[typing.Sequence[ShopifyCustomer]]
-            List of customers to create
+        request : typing.Optional[ShopifyDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7014,14 +7071,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/shopify/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "products": convert_and_respect_annotation_metadata(
-                    object_=products, annotation=typing.Sequence[ShopifyProduct], direction="write"
-                ),
-                "customers": convert_and_respect_annotation_metadata(
-                    object_=customers, annotation=typing.Sequence[ShopifyCustomer], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ShopifyDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -7108,7 +7163,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        calendar_events: typing.Optional[typing.Sequence[OutlookCalendarEvent]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[OutlookCalendarData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7119,8 +7175,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        calendar_events : typing.Optional[typing.Sequence[OutlookCalendarEvent]]
-            List of calendar events
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[OutlookCalendarData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7133,11 +7191,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/outlook_calendar/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "calendar_events": convert_and_respect_annotation_metadata(
-                    object_=calendar_events, annotation=typing.Sequence[OutlookCalendarEvent], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=OutlookCalendarData, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -7224,7 +7283,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spaces: typing.Optional[typing.Sequence[ClickUpSpace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ClickUpDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7235,8 +7295,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spaces : typing.Optional[typing.Sequence[ClickUpSpace]]
-            List of spaces with nested objects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[ClickUpDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7249,11 +7311,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/clickup/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spaces": convert_and_respect_annotation_metadata(
-                    object_=spaces, annotation=typing.Sequence[ClickUpSpace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ClickUpDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -7340,7 +7403,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        leads: typing.Optional[typing.Sequence[CloseLead]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[CloseDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7351,8 +7415,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        leads : typing.Optional[typing.Sequence[CloseLead]]
-            List of leads with nested objects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[CloseDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7365,11 +7431,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/close/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "leads": convert_and_respect_annotation_metadata(
-                    object_=leads, annotation=typing.Sequence[CloseLead], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=CloseDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -7456,9 +7521,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        emails: typing.Optional[typing.Sequence[ResendEmail]] = OMIT,
-        contacts: typing.Optional[typing.Sequence[ResendContact]] = OMIT,
-        segments: typing.Optional[typing.Sequence[ResendSegment]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ResendDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7469,14 +7533,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        emails : typing.Optional[typing.Sequence[ResendEmail]]
-            List of standalone transactional emails
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        contacts : typing.Optional[typing.Sequence[ResendContact]]
-            List of standalone contacts
-
-        segments : typing.Optional[typing.Sequence[ResendSegment]]
-            List of segments with nested broadcasts
+        request : typing.Optional[ResendDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7489,17 +7549,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/resend/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "emails": convert_and_respect_annotation_metadata(
-                    object_=emails, annotation=typing.Sequence[ResendEmail], direction="write"
-                ),
-                "contacts": convert_and_respect_annotation_metadata(
-                    object_=contacts, annotation=typing.Sequence[ResendContact], direction="write"
-                ),
-                "segments": convert_and_respect_annotation_metadata(
-                    object_=segments, annotation=typing.Sequence[ResendSegment], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ResendDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -7586,7 +7641,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        posts: typing.Optional[typing.Sequence[WordPressPost]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[WordPressData] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7597,8 +7653,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        posts : typing.Optional[typing.Sequence[WordPressPost]]
-            List of WordPress posts to create
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[WordPressData]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7611,11 +7669,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/wordpress/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "posts": convert_and_respect_annotation_metadata(
-                    object_=posts, annotation=typing.Sequence[WordPressPost], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=WordPressData, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -7702,7 +7759,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[AsanaProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[AsanaDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7713,8 +7771,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[AsanaProject]]
-            List of projects with nested tasks and stories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[AsanaDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7727,11 +7787,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/asana/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[AsanaProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=AsanaDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -7818,7 +7877,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        memory_list: typing.Optional[typing.Sequence[Mem0Memory]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[Mem0DataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7829,8 +7889,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        memory_list : typing.Optional[typing.Sequence[Mem0Memory]]
-            List of memories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[Mem0DataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7843,11 +7905,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/mem0/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "memory_list": convert_and_respect_annotation_metadata(
-                    object_=memory_list, annotation=typing.Sequence[Mem0Memory], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=Mem0DataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -7934,7 +7995,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[SupabaseProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SupabaseDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -7945,8 +8007,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[SupabaseProject]]
-            List of Supabase projects
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SupabaseDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -7959,11 +8023,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/supabase/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[SupabaseProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SupabaseDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8050,7 +8115,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        repos: typing.Optional[typing.Sequence[GitHubRepo]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GitHubDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8061,8 +8127,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        repos : typing.Optional[typing.Sequence[GitHubRepo]]
-            List of repositories
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[GitHubDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8075,11 +8143,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/github/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "repos": convert_and_respect_annotation_metadata(
-                    object_=repos, annotation=typing.Sequence[GitHubRepo], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GitHubDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8166,7 +8235,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        projects: typing.Optional[typing.Sequence[LinearProject]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[LinearDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8177,8 +8247,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        projects : typing.Optional[typing.Sequence[LinearProject]]
-            List of projects with their issues. At most 50 projects can be included.
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[LinearDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8191,11 +8263,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/linear/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "projects": convert_and_respect_annotation_metadata(
-                    object_=projects, annotation=typing.Sequence[LinearProject], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=LinearDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8282,8 +8355,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[NotionDatabase]] = OMIT,
-        pages: typing.Optional[typing.Sequence[NotionPage]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[NotionDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8294,11 +8367,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[NotionDatabase]]
-            List of databases with their data sources and pages
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        pages : typing.Optional[typing.Sequence[NotionPage]]
-            List of standalone pages (not in databases)
+        request : typing.Optional[NotionDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8311,14 +8383,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/notion/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[NotionDatabase], direction="write"
-                ),
-                "pages": convert_and_respect_annotation_metadata(
-                    object_=pages, annotation=typing.Sequence[NotionPage], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=NotionDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8405,7 +8475,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[SlackChannel]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SlackDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8416,8 +8487,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[SlackChannel]]
-            List of channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SlackDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8430,11 +8503,10 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/slack/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[SlackChannel], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(object_=request, annotation=SlackDataInput, direction="write"),
             headers={
                 "content-type": "application/json",
             },
@@ -8521,7 +8593,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        spaces: typing.Optional[typing.Sequence[ConfluenceSpace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[ConfluenceDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8532,8 +8605,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        spaces : typing.Optional[typing.Sequence[ConfluenceSpace]]
-            List of spaces
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[ConfluenceDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8546,11 +8621,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/confluence/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "spaces": convert_and_respect_annotation_metadata(
-                    object_=spaces, annotation=typing.Sequence[ConfluenceSpace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=ConfluenceDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8637,7 +8713,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        channels: typing.Optional[typing.Sequence[DiscordChannel]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[DiscordDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8648,8 +8725,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        channels : typing.Optional[typing.Sequence[DiscordChannel]]
-            List of channels
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[DiscordDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8662,11 +8741,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/discord/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "channels": convert_and_respect_annotation_metadata(
-                    object_=channels, annotation=typing.Sequence[DiscordChannel], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=DiscordDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8753,7 +8833,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        tables: typing.Optional[typing.Sequence[AirtableTable]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[AirtableDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8764,8 +8845,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        tables : typing.Optional[typing.Sequence[AirtableTable]]
-            List of tables (simplified, assumes single base)
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[AirtableDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8778,11 +8861,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/airtable/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "tables": convert_and_respect_annotation_metadata(
-                    object_=tables, annotation=typing.Sequence[AirtableTable], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=AirtableDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8869,7 +8953,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        databases: typing.Optional[typing.Sequence[SnowflakeDatabase]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[SnowflakeDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -8880,8 +8965,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        databases : typing.Optional[typing.Sequence[SnowflakeDatabase]]
-            List of databases with their schemas
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[SnowflakeDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -8894,11 +8981,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/snowflake/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "databases": convert_and_respect_annotation_metadata(
-                    object_=databases, annotation=typing.Sequence[SnowflakeDatabase], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=SnowflakeDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -8985,14 +9073,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        datasets: typing.Optional[typing.Sequence[BigQueryDataset]] = OMIT,
-        tables: typing.Optional[typing.Sequence[BigQueryTable]] = OMIT,
-        buckets: typing.Optional[typing.Sequence[StorageBucket]] = OMIT,
-        objects: typing.Optional[typing.Sequence[StorageObject]] = OMIT,
-        log_entries: typing.Optional[typing.Sequence[LogEntry]] = OMIT,
-        log_sinks: typing.Optional[typing.Sequence[LogSink]] = OMIT,
-        log_buckets: typing.Optional[typing.Sequence[LogBucket]] = OMIT,
-        instances: typing.Optional[typing.Sequence[ComputeInstance]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[GoogleCloudDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -9003,29 +9085,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        datasets : typing.Optional[typing.Sequence[BigQueryDataset]]
-            BigQuery datasets
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        tables : typing.Optional[typing.Sequence[BigQueryTable]]
-            BigQuery tables
-
-        buckets : typing.Optional[typing.Sequence[StorageBucket]]
-            Cloud Storage buckets
-
-        objects : typing.Optional[typing.Sequence[StorageObject]]
-            Cloud Storage objects
-
-        log_entries : typing.Optional[typing.Sequence[LogEntry]]
-            Log entries
-
-        log_sinks : typing.Optional[typing.Sequence[LogSink]]
-            Log sinks
-
-        log_buckets : typing.Optional[typing.Sequence[LogBucket]]
-            Log buckets
-
-        instances : typing.Optional[typing.Sequence[ComputeInstance]]
-            Compute Engine instances
+        request : typing.Optional[GoogleCloudDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -9038,32 +9101,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/google_cloud/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "datasets": convert_and_respect_annotation_metadata(
-                    object_=datasets, annotation=typing.Sequence[BigQueryDataset], direction="write"
-                ),
-                "tables": convert_and_respect_annotation_metadata(
-                    object_=tables, annotation=typing.Sequence[BigQueryTable], direction="write"
-                ),
-                "buckets": convert_and_respect_annotation_metadata(
-                    object_=buckets, annotation=typing.Sequence[StorageBucket], direction="write"
-                ),
-                "objects": convert_and_respect_annotation_metadata(
-                    object_=objects, annotation=typing.Sequence[StorageObject], direction="write"
-                ),
-                "log_entries": convert_and_respect_annotation_metadata(
-                    object_=log_entries, annotation=typing.Sequence[LogEntry], direction="write"
-                ),
-                "log_sinks": convert_and_respect_annotation_metadata(
-                    object_=log_sinks, annotation=typing.Sequence[LogSink], direction="write"
-                ),
-                "log_buckets": convert_and_respect_annotation_metadata(
-                    object_=log_buckets, annotation=typing.Sequence[LogBucket], direction="write"
-                ),
-                "instances": convert_and_respect_annotation_metadata(
-                    object_=instances, annotation=typing.Sequence[ComputeInstance], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=GoogleCloudDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -9150,8 +9193,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        workspaces: typing.Optional[typing.Sequence[MondayWorkspace]] = OMIT,
-        boards: typing.Optional[typing.Sequence[MondayBoard]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MondayDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -9162,11 +9205,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        workspaces : typing.Optional[typing.Sequence[MondayWorkspace]]
-            List of workspaces
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
 
-        boards : typing.Optional[typing.Sequence[MondayBoard]]
-            List of boards with their groups and items
+        request : typing.Optional[MondayDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -9179,14 +9221,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/monday/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "workspaces": convert_and_respect_annotation_metadata(
-                    object_=workspaces, annotation=typing.Sequence[MondayWorkspace], direction="write"
-                ),
-                "boards": convert_and_respect_annotation_metadata(
-                    object_=boards, annotation=typing.Sequence[MondayBoard], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MondayDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -9273,7 +9313,8 @@ class AsyncRawSandboxClient:
         self,
         sandbox_id: str,
         *,
-        workspaces: typing.Optional[typing.Sequence[MotionWorkspace]] = OMIT,
+        init_default_data: typing.Optional[bool] = None,
+        request: typing.Optional[MotionDataInput] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[InitializeSandboxResponse]:
         """
@@ -9284,8 +9325,10 @@ class AsyncRawSandboxClient:
         sandbox_id : str
             The unique sandbox identifier
 
-        workspaces : typing.Optional[typing.Sequence[MotionWorkspace]]
-            List of workspaces with their projects and tasks
+        init_default_data : typing.Optional[bool]
+            If true, use default test data for initialization
+
+        request : typing.Optional[MotionDataInput]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -9298,11 +9341,12 @@ class AsyncRawSandboxClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"sandbox/motion/{jsonable_encoder(sandbox_id)}/initialize",
             method="POST",
-            json={
-                "workspaces": convert_and_respect_annotation_metadata(
-                    object_=workspaces, annotation=typing.Sequence[MotionWorkspace], direction="write"
-                ),
+            params={
+                "init_default_data": init_default_data,
             },
+            json=convert_and_respect_annotation_metadata(
+                object_=request, annotation=MotionDataInput, direction="write"
+            ),
             headers={
                 "content-type": "application/json",
             },
@@ -9380,6 +9424,62 @@ class AsyncRawSandboxClient:
                         ),
                     ),
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def dump_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
+        """
+        Parameters
+        ----------
+        sandbox_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[None]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/dump",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return AsyncHttpResponse(response=_response, data=None)
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def initialize_calcom_sandbox(
+        self, sandbox_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[None]:
+        """
+        Parameters
+        ----------
+        sandbox_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[None]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"sandbox/Cal.com/{jsonable_encoder(sandbox_id)}/initialize",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return AsyncHttpResponse(response=_response, data=None)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)

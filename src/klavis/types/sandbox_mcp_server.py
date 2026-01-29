@@ -32,11 +32,12 @@ class SandboxMcpServer(str, enum.Enum):
     ONEDRIVE = "onedrive"
     MICROSOFT_TEAMS = "microsoft_teams"
     OUTLOOK_MAIL = "outlook_mail"
-    CAL_COM = "Cal.com"
+    CAL_COM = "cal.com"
     QUICKBOOKS = "quickbooks"
     MONEYBIRD = "moneybird"
     DROPBOX = "dropbox"
     SHOPIFY = "shopify"
+    WOOCOMMERCE = "woocommerce"
     OUTLOOK_CALENDAR = "outlook_calendar"
     RESEND = "resend"
     WORDPRESS = "wordpress"
@@ -47,6 +48,28 @@ class SandboxMcpServer(str, enum.Enum):
     DISCORD = "discord"
     SNOWFLAKE = "snowflake"
     GOOGLE_CLOUD = "google_cloud"
+    POSTGRES = "postgres"
+    MONGODB = "mongodb"
+    LOCAL_DEV = "local_dev"
+    LOCALMEMORY = "localmemory"
+    ARXIV_LATEX = "arxiv_latex"
+    CALCULATOR = "calculator"
+    CLINICALTRIALSGOV = "clinicaltrialsgov"
+    MET_MUSEUM = "met_museum"
+    OPEN_LIBRARY = "open_library"
+    OSM = "osm"
+    PUBMED = "pubmed"
+    US_WEATHER = "us_weather"
+    WHOIS = "whois"
+    WIKIPEDIA = "wikipedia"
+    WEATHER = "weather"
+    TWELVEDATA = "twelvedata"
+    NATIONAL_PARKS = "national_parks"
+    LARA_TRANSLATE = "lara_translate"
+    E2B = "e2b"
+    CONTEXT7 = "context7"
+    ALCHEMY = "alchemy"
+    WEIGHTS_AND_BIASES = "weights_and_biases"
 
     def visit(
         self,
@@ -76,6 +99,7 @@ class SandboxMcpServer(str, enum.Enum):
         moneybird: typing.Callable[[], T_Result],
         dropbox: typing.Callable[[], T_Result],
         shopify: typing.Callable[[], T_Result],
+        woocommerce: typing.Callable[[], T_Result],
         outlook_calendar: typing.Callable[[], T_Result],
         resend: typing.Callable[[], T_Result],
         wordpress: typing.Callable[[], T_Result],
@@ -86,6 +110,28 @@ class SandboxMcpServer(str, enum.Enum):
         discord: typing.Callable[[], T_Result],
         snowflake: typing.Callable[[], T_Result],
         google_cloud: typing.Callable[[], T_Result],
+        postgres: typing.Callable[[], T_Result],
+        mongodb: typing.Callable[[], T_Result],
+        local_dev: typing.Callable[[], T_Result],
+        localmemory: typing.Callable[[], T_Result],
+        arxiv_latex: typing.Callable[[], T_Result],
+        calculator: typing.Callable[[], T_Result],
+        clinicaltrialsgov: typing.Callable[[], T_Result],
+        met_museum: typing.Callable[[], T_Result],
+        open_library: typing.Callable[[], T_Result],
+        osm: typing.Callable[[], T_Result],
+        pubmed: typing.Callable[[], T_Result],
+        us_weather: typing.Callable[[], T_Result],
+        whois: typing.Callable[[], T_Result],
+        wikipedia: typing.Callable[[], T_Result],
+        weather: typing.Callable[[], T_Result],
+        twelvedata: typing.Callable[[], T_Result],
+        national_parks: typing.Callable[[], T_Result],
+        lara_translate: typing.Callable[[], T_Result],
+        e2b: typing.Callable[[], T_Result],
+        context7: typing.Callable[[], T_Result],
+        alchemy: typing.Callable[[], T_Result],
+        weights_and_biases: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is SandboxMcpServer.JIRA:
             return jira()
@@ -139,6 +185,8 @@ class SandboxMcpServer(str, enum.Enum):
             return dropbox()
         if self is SandboxMcpServer.SHOPIFY:
             return shopify()
+        if self is SandboxMcpServer.WOOCOMMERCE:
+            return woocommerce()
         if self is SandboxMcpServer.OUTLOOK_CALENDAR:
             return outlook_calendar()
         if self is SandboxMcpServer.RESEND:
@@ -159,3 +207,47 @@ class SandboxMcpServer(str, enum.Enum):
             return snowflake()
         if self is SandboxMcpServer.GOOGLE_CLOUD:
             return google_cloud()
+        if self is SandboxMcpServer.POSTGRES:
+            return postgres()
+        if self is SandboxMcpServer.MONGODB:
+            return mongodb()
+        if self is SandboxMcpServer.LOCAL_DEV:
+            return local_dev()
+        if self is SandboxMcpServer.LOCALMEMORY:
+            return localmemory()
+        if self is SandboxMcpServer.ARXIV_LATEX:
+            return arxiv_latex()
+        if self is SandboxMcpServer.CALCULATOR:
+            return calculator()
+        if self is SandboxMcpServer.CLINICALTRIALSGOV:
+            return clinicaltrialsgov()
+        if self is SandboxMcpServer.MET_MUSEUM:
+            return met_museum()
+        if self is SandboxMcpServer.OPEN_LIBRARY:
+            return open_library()
+        if self is SandboxMcpServer.OSM:
+            return osm()
+        if self is SandboxMcpServer.PUBMED:
+            return pubmed()
+        if self is SandboxMcpServer.US_WEATHER:
+            return us_weather()
+        if self is SandboxMcpServer.WHOIS:
+            return whois()
+        if self is SandboxMcpServer.WIKIPEDIA:
+            return wikipedia()
+        if self is SandboxMcpServer.WEATHER:
+            return weather()
+        if self is SandboxMcpServer.TWELVEDATA:
+            return twelvedata()
+        if self is SandboxMcpServer.NATIONAL_PARKS:
+            return national_parks()
+        if self is SandboxMcpServer.LARA_TRANSLATE:
+            return lara_translate()
+        if self is SandboxMcpServer.E2B:
+            return e2b()
+        if self is SandboxMcpServer.CONTEXT7:
+            return context7()
+        if self is SandboxMcpServer.ALCHEMY:
+            return alchemy()
+        if self is SandboxMcpServer.WEIGHTS_AND_BIASES:
+            return weights_and_biases()

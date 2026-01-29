@@ -19,17 +19,17 @@ class NotionPage(UniversalBaseModel):
     For pages in databases, properties should match the data source schema.
     """
 
-    title: str = pydantic.Field()
+    name: str = pydantic.Field()
     """
     Page title
     """
 
-    properties: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
+    attributes: typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]] = pydantic.Field(default=None)
     """
     Page properties (for database pages)
     """
 
-    blocks: typing.Optional[typing.List[NotionBlock]] = pydantic.Field(default=None)
+    content_blocks: typing.Optional[typing.List[NotionBlock]] = pydantic.Field(default=None)
     """
     Content blocks in this page
     """
@@ -39,7 +39,7 @@ class NotionPage(UniversalBaseModel):
     Comments on this page
     """
 
-    data_source_name: typing.Optional[str] = pydantic.Field(default=None)
+    parent_source: typing.Optional[str] = pydantic.Field(default=None)
     """
     Name of the data source this page belongs to (for initialization)
     """

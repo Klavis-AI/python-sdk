@@ -4,18 +4,20 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .shopify_address import ShopifyAddress
 
 
 class ShopifyCustomer(UniversalBaseModel):
     """
-    Shopify customer data
+    Simplified Shopify customer data with flattened address.
 
     Attributes:
-        email: Customer email address (optional - may not be present in API response)
-        first_name: Customer first name (optional - may not be present in API response)
-        last_name: Customer last name (optional - may not be present in API response)
-        addresses: List of customer addresses
+        email: Customer email address
+        name: Customer full name (will be split into first/last for API)
+        address: Street address
+        city: City name
+        state: State/province code
+        zip: Postal/ZIP code
+        country: Country code (e.g., 'US')
     """
 
     email: typing.Optional[str] = pydantic.Field(default=None)
@@ -23,19 +25,34 @@ class ShopifyCustomer(UniversalBaseModel):
     Customer email address
     """
 
-    first_name: typing.Optional[str] = pydantic.Field(default=None)
+    name: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Customer first name
-    """
-
-    last_name: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Customer last name
+    Customer full name
     """
 
-    addresses: typing.Optional[typing.List[ShopifyAddress]] = pydantic.Field(default=None)
+    address: typing.Optional[str] = pydantic.Field(default=None)
     """
-    List of customer addresses
+    Street address
+    """
+
+    city: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    City name
+    """
+
+    state: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    State/province code
+    """
+
+    zip: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Postal/ZIP code
+    """
+
+    country: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Country code (e.g., 'US')
     """
 
     if IS_PYDANTIC_V2:

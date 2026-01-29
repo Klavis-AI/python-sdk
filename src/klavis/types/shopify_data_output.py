@@ -5,15 +5,16 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .shopify_customer import ShopifyCustomer
+from .shopify_order import ShopifyOrder
 from .shopify_product import ShopifyProduct
 
 
 class ShopifyDataOutput(UniversalBaseModel):
     """
-    Complete Shopify sandbox data structure
+    Complete Shopify sandbox data structure.
 
-    Note: Orders are created automatically by the sandbox based on products and customers.
-    The initialize method will generate orders that link customers to products.
+    Orders reference customers and products by their index in the respective lists.
+    Products and customers are created first, then orders are created with proper references.
     """
 
     products: typing.Optional[typing.List[ShopifyProduct]] = pydantic.Field(default=None)
@@ -24,6 +25,11 @@ class ShopifyDataOutput(UniversalBaseModel):
     customers: typing.Optional[typing.List[ShopifyCustomer]] = pydantic.Field(default=None)
     """
     List of customers to create
+    """
+
+    orders: typing.Optional[typing.List[ShopifyOrder]] = pydantic.Field(default=None)
+    """
+    List of orders to create
     """
 
     if IS_PYDANTIC_V2:

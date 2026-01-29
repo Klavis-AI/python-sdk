@@ -18,9 +18,9 @@ class CreateSandboxResponse(UniversalBaseModel):
     Unique identifier for the acquired sandbox
     """
 
-    server_url: str = pydantic.Field()
+    server_urls: typing.Optional[typing.Dict[str, typing.Optional[str]]] = pydantic.Field(default=None)
     """
-    URL to connect to the MCP server
+    MCP server URLs keyed by server name
     """
 
     server_name: SandboxMcpServer = pydantic.Field()

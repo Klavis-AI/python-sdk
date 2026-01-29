@@ -4,31 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .postgres_schema import PostgresSchema
 
 
-class ShopifyProductVariant(UniversalBaseModel):
+class PostgresData(UniversalBaseModel):
     """
-    Product variant within a Shopify product
-
-    Attributes:
-        price: Product variant price
-        sku: Stock Keeping Unit identifier
-        inventory_quantity: Available inventory count
+    Complete Postgres sandbox data structure
     """
 
-    price: str = pydantic.Field()
+    schemas: typing.Optional[typing.List[PostgresSchema]] = pydantic.Field(default=None)
     """
-    Product variant price (e.g., '29.99')
-    """
-
-    sku: str = pydantic.Field()
-    """
-    Stock Keeping Unit identifier
-    """
-
-    inventory_quantity: int = pydantic.Field()
-    """
-    Available inventory count
+    List of Postgres schemas
     """
 
     if IS_PYDANTIC_V2:

@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .attendee_response_status import AttendeeResponseStatus
 
 
 class GoogleCalendarAttendee(UniversalBaseModel):
@@ -33,6 +34,11 @@ class GoogleCalendarAttendee(UniversalBaseModel):
     comment: typing.Optional[str] = pydantic.Field(default=None)
     """
     Attendee's response comment
+    """
+
+    accepted: typing.Optional[AttendeeResponseStatus] = pydantic.Field(default=None)
+    """
+    Response status
     """
 
     if IS_PYDANTIC_V2:

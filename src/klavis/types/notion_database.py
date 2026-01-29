@@ -15,22 +15,22 @@ class NotionDatabase(UniversalBaseModel):
     Each data source represents a table with its own schema.
     """
 
-    title: str = pydantic.Field()
+    name: str = pydantic.Field()
     """
     Database title
     """
 
-    description: typing.Optional[str] = pydantic.Field(default=None)
+    summary: typing.Optional[str] = pydantic.Field(default=None)
     """
     Database description
     """
 
-    icon: typing.Optional[str] = pydantic.Field(default=None)
+    display_icon: typing.Optional[str] = pydantic.Field(default=None)
     """
     Database icon (emoji or external URL)
     """
 
-    data_sources: typing.Optional[typing.List[NotionDataSource]] = pydantic.Field(default=None)
+    sources: typing.Optional[typing.List[NotionDataSource]] = pydantic.Field(default=None)
     """
     Data sources within this database
     """

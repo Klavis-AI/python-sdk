@@ -101,6 +101,7 @@ class McpServerName(str, enum.Enum):
     SHARESIGHT = "Sharesight"
     WEIGHTS_AND_BIASES = "Weights and Biases"
     INSTAGRAM = "Instagram"
+    MONGO_DB = "MongoDB"
 
     def visit(
         self,
@@ -198,6 +199,7 @@ class McpServerName(str, enum.Enum):
         sharesight: typing.Callable[[], T_Result],
         weights_and_biases: typing.Callable[[], T_Result],
         instagram: typing.Callable[[], T_Result],
+        mongo_db: typing.Callable[[], T_Result],
     ) -> T_Result:
         if self is McpServerName.AFFINITY:
             return affinity()
@@ -387,3 +389,5 @@ class McpServerName(str, enum.Enum):
             return weights_and_biases()
         if self is McpServerName.INSTAGRAM:
             return instagram()
+        if self is McpServerName.MONGO_DB:
+            return mongo_db()

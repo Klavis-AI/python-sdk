@@ -4,50 +4,64 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .shopify_product_variant import ShopifyProductVariant
 
 
 class ShopifyProduct(UniversalBaseModel):
     """
-    Shopify product data
+    Simplified Shopify product data.
+
+    Single-variant products are supported directly with price/sku/stock fields.
+    For multi-variant products, use the implementation's API directly.
 
     Attributes:
-        title: Product title/name
-        body_html: HTML description of the product
-        vendor: Product vendor/brand name
-        product_type: Category/type of product
+        title: Product name
+        description: Product description (plain text or HTML)
+        vendor: Brand or vendor name
+        category: Product category/type
+        price: Product price as string (e.g., '29.99')
+        sku: Stock Keeping Unit identifier
+        stock: Available inventory count
         status: Product status (active, draft, archived)
-        variants: List of product variants (at least one required)
     """
 
     title: str = pydantic.Field()
     """
-    Product title/name
+    Product name
     """
 
-    body_html: typing.Optional[str] = pydantic.Field(default=None)
+    description: typing.Optional[str] = pydantic.Field(default=None)
     """
-    HTML description of the product
+    Product description
     """
 
     vendor: str = pydantic.Field()
     """
-    Product vendor/brand name
+    Brand or vendor name
     """
 
-    product_type: str = pydantic.Field()
+    category: str = pydantic.Field()
     """
-    Category/type of product
+    Product category/type
+    """
+
+    price: str = pydantic.Field()
+    """
+    Product price (e.g., '29.99')
+    """
+
+    sku: str = pydantic.Field()
+    """
+    Stock Keeping Unit identifier
+    """
+
+    stock: typing.Optional[int] = pydantic.Field(default=None)
+    """
+    Available inventory count
     """
 
     status: typing.Optional[str] = pydantic.Field(default=None)
     """
     Product status (active, draft, archived)
-    """
-
-    variants: typing.List[ShopifyProductVariant] = pydantic.Field()
-    """
-    List of product variants
     """
 
     if IS_PYDANTIC_V2:

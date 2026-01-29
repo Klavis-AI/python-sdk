@@ -30,6 +30,7 @@ if typing.TYPE_CHECKING:
     from .sharesight_oauth.client import AsyncSharesightOauthClient, SharesightOauthClient
     from .square_oauth.client import AsyncSquareOauthClient, SquareOauthClient
     from .teams_oauth.client import AsyncTeamsOauthClient, TeamsOauthClient
+    from .universe.client import AsyncUniverseClient, UniverseClient
     from .user.client import AsyncUserClient, UserClient
     from .white_labeling.client import AsyncWhiteLabelingClient, WhiteLabelingClient
     from .youtube_oauth.client import AsyncYoutubeOauthClient, YoutubeOauthClient
@@ -128,6 +129,7 @@ class Klavis:
         self._honeycomb_oauth: typing.Optional[HoneycombOauthClient] = None
         self._amplitude_oauth: typing.Optional[AmplitudeOauthClient] = None
         self._sandbox: typing.Optional[SandboxClient] = None
+        self._universe: typing.Optional[UniverseClient] = None
 
     @property
     def mcp_server(self):
@@ -337,6 +339,14 @@ class Klavis:
             self._sandbox = SandboxClient(client_wrapper=self._client_wrapper)
         return self._sandbox
 
+    @property
+    def universe(self):
+        if self._universe is None:
+            from .universe.client import UniverseClient  # noqa: E402
+
+            self._universe = UniverseClient(client_wrapper=self._client_wrapper)
+        return self._universe
+
 
 class AsyncKlavis:
     """
@@ -429,6 +439,7 @@ class AsyncKlavis:
         self._honeycomb_oauth: typing.Optional[AsyncHoneycombOauthClient] = None
         self._amplitude_oauth: typing.Optional[AsyncAmplitudeOauthClient] = None
         self._sandbox: typing.Optional[AsyncSandboxClient] = None
+        self._universe: typing.Optional[AsyncUniverseClient] = None
 
     @property
     def mcp_server(self):
@@ -637,6 +648,14 @@ class AsyncKlavis:
 
             self._sandbox = AsyncSandboxClient(client_wrapper=self._client_wrapper)
         return self._sandbox
+
+    @property
+    def universe(self):
+        if self._universe is None:
+            from .universe.client import AsyncUniverseClient  # noqa: E402
+
+            self._universe = AsyncUniverseClient(client_wrapper=self._client_wrapper)
+        return self._universe
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: KlavisEnvironment) -> str:

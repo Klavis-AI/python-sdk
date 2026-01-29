@@ -14,7 +14,7 @@ class NotionBlock(UniversalBaseModel):
     numbered_list_item, to_do, toggle, code, quote, callout, etc.
     """
 
-    type: str = pydantic.Field()
+    block_type: str = pydantic.Field()
     """
     Block type (paragraph, heading_1, heading_2, etc.)
     """

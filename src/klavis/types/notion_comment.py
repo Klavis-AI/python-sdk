@@ -11,7 +11,7 @@ class NotionComment(UniversalBaseModel):
     Notion Comment object - can be attached to pages or blocks
     """
 
-    text: str = pydantic.Field()
+    content: str = pydantic.Field()
     """
     Comment text content (rich text)
     """
